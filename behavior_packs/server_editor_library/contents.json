@@ -1,0 +1,16 @@
+{
+    "content": [
+        {
+            "path": "manifest.json"
+        },
+        {
+            "path": "pack_icon.png"
+        },
+        {
+            "path": "scripts/minecraft-server-editor.0.1.0-beta.js"
+        },
+        {
+            "path": "scripts/minecraft-server-editor.0.1.0-beta.js.LICENSE.txt"
+        }
+    ]
+}

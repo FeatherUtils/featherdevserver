@@ -1,0 +1,5 @@
+//LTRB
+{
+    "base_size": [16, 16],
+    "nineslice_size": [3, 3, 3, 3]
+}

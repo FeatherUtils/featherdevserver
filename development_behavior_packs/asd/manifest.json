@@ -1,0 +1,55 @@
+{
+  "format_version": 2,
+  "metadata": {
+    "authors": [
+      "FruitKitty"
+    ]
+  },
+  "header": {
+    "name": "Feather Communications Testing",
+    "description": "Communications testing for Feather Essentials",
+    "min_engine_version": [
+      1,
+      20,
+      60
+    ],
+    "uuid": "5673aba8-e4b5-4fa1-bf33-103416af563d",
+    "version": [
+      1,
+      0,
+      0
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "4b08f52f-74ea-4669-b778-5ae4757f9d3e",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "uuid": "0071b0a9-aff5-40c7-959d-a3e1df94ab5d",
+      "entry": "scripts/index.js",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.2.0-beta"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.1.0-beta"
+    }
+  ]
+}

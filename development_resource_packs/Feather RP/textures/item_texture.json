@@ -1,0 +1,108 @@
+{
+  "resource_pack_name": "a",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "floating_text_spawn_egg": {
+      "textures": "textures/items/floating_text_spawn_egg"
+    },
+    "lock": {
+      "textures": "textures/items/lock"
+    },
+    "playershop": {
+      "textures": "textures/items/playershop"
+    },
+    "admin_ui": {
+      "textures": "textures/azalea_icons/Settings"
+    },
+    "wand1": {
+      "textures": "textures/items/pearl_wand"
+    },
+    "wand2": {
+      "textures": "textures/items/eye_wand"
+    },
+    "wand3": {
+      "textures": "textures/items/iron_wand"
+    },
+    "wand4": {
+      "textures": "textures/items/gold_wand"
+    },
+    "wand5": {
+      "textures": "textures/items/copper_wand"
+    },
+    "wand6": {
+      "textures": "textures/items/diamond_wand"
+    },
+    "wand7": {
+      "textures": "textures/items/amethyst_wand"
+    },
+    "wand8": {
+      "textures": "textures/items/emerald_wand"
+    },
+    "admin_menu": {
+      "textures": "textures/azalea_icons/icontextures/mf_items_bakery_misc_6"
+    },
+    "key": {
+      "textures": "textures/items/cobblestone_key"
+    },
+    "customizer": {
+      "textures": "textures/items/customizer"
+    },
+    "server": {
+      "textures": "textures/items/server"
+    },
+    "plunger": {
+      "textures": "textures/items/plunger"
+    },
+    "warps": {
+      "textures": "textures/items/warps"
+    },
+    "chunk_border": {
+      "textures": "textures/items/chunk_border"
+    },
+    "block_editor": {
+      "textures": "textures/items/block_editor"
+    },
+    "roquefort": {
+      "textures": "textures/azalea_icons/icontextures/roquefort"
+    },
+    "entity_editor": {
+      "textures": "textures/items/entity_editor"
+    },
+    "devtool": {
+      "textures": "textures/items/devtool"
+    },
+    "leaf:keycrate_spawnegg": {
+      "textures": "textures/items/crate_spawn_icon"
+    },
+    "leaf:key1": {
+      "textures": "textures/keys/1"
+    },
+    "leaf:key2": {
+      "textures": "textures/keys/2"
+    },
+    "leaf:key3": {
+      "textures": "textures/keys/3"
+    },
+    "leaf:key4": {
+      "textures": "textures/keys/4"
+    },
+    "leaf:key5": {
+      "textures": "textures/keys/5"
+    },
+    "leaf:key6": {
+      "textures": "textures/keys/6"
+    },
+    "leaf:key7": {
+      "textures": "textures/keys/7"
+    },
+    "leaf:key8": {
+      "textures": "textures/keys/8"
+    },
+    "leaf:key9": {
+      "textures": "textures/keys/9"
+    },
+    "leaf:key10": {
+      "textures": "textures/keys/10"
+    }
+  }
+}

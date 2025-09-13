@@ -1,0 +1,2422 @@
+{
+    "namespace": "server_form",
+    "tabbed_ui_bg": {
+        "type": "image",
+        "texture": "textures/ui/tabbed_ui_bg",
+        "layer": 2,
+        "$fill_alpha|default": 0.8,
+        "$dialog_background_texture|default": "textures/ui/control",
+        "variables": [
+            {
+                "requires": "$is_holographic",
+                "$fill_alpha": 1
+            }
+        ],
+        "controls": [
+            {
+                "control": {
+                    "type": "image",
+                    "texture": "$dialog_background_texture",
+                    "layer": 1,
+                    "$common_background_size|default": [
+                        "100% - 16px",
+                        "100%c - 27px"
+                    ],
+                    "$close_button_offset|default": [
+                        6,
+                        -21
+                    ],
+                    "size": "$common_background_size",
+                    "offset": [
+                        0,
+                        7
+                    ],
+                    "alpha": "$fill_alpha",
+                    "variables": [
+                        {
+                            "requires": "($show_close_button and $use_compact_close_button)",
+                            "$common_background_size": [
+                                "100% - 16px",
+                                "100%c - 19px"
+                            ],
+                            "$close_button_offset": [
+                                6,
+                                -13
+                            ]
+                        },
+                        {
+                            "requires": "(not $show_close_button)",
+                            "$common_background_size": [
+                                "100% - 16px",
+                                "100%c - 6px"
+                            ]
+                        }
+                    ],
+                    "controls": []
+                }
+            }
+        ]
+    },
+    "long_form_tabs@common_dialogs.main_panel_no_buttons": {
+        "$title_panel": "common_dialogs.standard_title_label",
+        "$title_size": [
+            "100% - 14px",
+            10
+        ],
+        "size": [
+            370,
+            200
+        ],
+        "$text_name": "#title_text",
+        "$custom_background": "server_form.tabbed_ui_bg",
+        "$title_text_binding_type": "none",
+        "$child_control": "server_form.long_form_panel_tabs",
+        "layer": 2
+    },
+    "long_form_panel_tabs": {
+        "type": "stack_panel",
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "orientation": "vertical",
+        "layer": 1,
+        "anchor_from": "top_left",
+        "anchor_to": "top_left",
+        "controls": [
+            {
+                "scrolling_panel@common.scrolling_panel": {
+                    "anchor_to": "top_left",
+                    "anchor_from": "top_left",
+                    "$show_background": false,
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "$scrolling_content": "server_form.long_form_scrolling_content_tabs",
+                    "$scroll_size": [
+                        5,
+                        "100% - 4px"
+                    ],
+                    "$scrolling_pane_size": [
+                        "100% - 4px",
+                        "100% - 2px"
+                    ],
+                    "$scrolling_pane_offset": [
+                        2,
+                        0
+                    ],
+                    "$scroll_bar_right_padding_size": [
+                        0,
+                        0
+                    ]
+                }
+            }
+        ]
+    },
+    "long_form_scrolling_content_tabs": {
+        "type": "stack_panel",
+        "size": [
+            "100% - 4px",
+            "100%c"
+        ],
+        "orientation": "vertical",
+        "anchor_from": "top_left",
+        "anchor_to": "top_left",
+        "controls": [
+            {
+                "label_offset_panel": {
+                    "type": "panel",
+                    "size": [
+                        "100%",
+                        "100%c"
+                    ],
+                    "controls": [
+                        {
+                            "main_label": {
+                                "type": "label",
+                                "offset": [
+                                    2,
+                                    2
+                                ],
+                                "color": "$main_header_text_color",
+                                "size": [
+                                    "100%",
+                                    "default"
+                                ],
+                                "anchor_from": "top_left",
+                                "anchor_to": "top_left",
+                                "text": "#form_text"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "padding": {
+                    "type": "panel",
+                    "size": [
+                        "100%",
+                        4
+                    ]
+                }
+            },
+            {
+                "wrapping_panel": {
+                    "type": "panel",
+                    "size": [
+                        "100%",
+                        "100%c"
+                    ],
+                    "controls": [
+                        {
+                            "long_form_dynamic_buttons_panel_tabs@server_form.long_form_dynamic_buttons_panel_tabs": {}
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "long_form_dynamic_buttons_panel_tabs": {
+        "type": "stack_panel",
+        "size": [
+            "100% - 4px",
+            "100%c"
+        ],
+        "offset": [
+            2,
+            0
+        ],
+        "orientation": "vertical",
+        "anchor_from": "top_middle",
+        "anchor_to": "top_middle",
+        "factory": {
+            "name": "buttons",
+            "control_name": "server_form.dynamic_button_tabs"
+        },
+        "collection_name": "form_buttons",
+        "bindings": [
+            {
+                "binding_name": "#form_button_length",
+                "binding_name_override": "#collection_length"
+            }
+        ]
+    },
+    "dynamic_button_tabs2": {
+        "type": "stack_panel",
+        "size": [
+            74,
+            20
+        ],
+        "layer": 0,
+        "orientation": "horizontal",
+        "bindings": [
+            {
+                "binding_name": "#form_button_text",
+                "binding_type": "collection",
+                "binding_collection_name": "form_buttons"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(not ((#form_button_text - '§t§a§b') = #form_button_text))",
+                "target_property_name": "#visible"
+            }
+        ],
+        "$condition": "(not ((#form_button_text - '§a§c§t§i§v§e') = #form_button_text))",
+        "controls": [
+            {
+                "panel_name": {
+                    "type": "panel",
+                    "size": [
+                        34,
+                        "100%c"
+                    ],
+                    "bindings": [
+                        {
+                            "binding_type": "view",
+                            "source_control_name": "image",
+                            "resolve_sibling_scope": true,
+                            "source_property_name": "(not (#texture = ''))",
+                            "target_property_name": "#visible"
+                        }
+                    ],
+                    "controls": [
+                        {
+                            "image": {
+                                "type": "image",
+                                "layer": 2,
+                                "size": [
+                                    20,
+                                    20
+                                ],
+                                "offset": [
+                                    -2,
+                                    0
+                                ],
+                                "bindings": [
+                                    {
+                                        "binding_name": "#form_button_texture",
+                                        "binding_name_override": "#texture",
+                                        "binding_type": "collection",
+                                        "binding_collection_name": "form_buttons"
+                                    },
+                                    {
+                                        "binding_name": "#form_button_texture_file_system",
+                                        "binding_name_override": "#texture_file_system",
+                                        "binding_type": "collection",
+                                        "binding_collection_name": "form_buttons"
+                                    },
+                                    {
+                                        "binding_type": "view",
+                                        "source_property_name": "(not ((#texture = '') or (#texture = 'loading')))",
+                                        "target_property_name": "#visible"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "progress@progress.progress_loading_bars": {
+                                "size": [
+                                    30,
+                                    4
+                                ],
+                                "offset": [
+                                    -2,
+                                    16
+                                ],
+                                "bindings": [
+                                    {
+                                        "binding_type": "view",
+                                        "source_control_name": "image",
+                                        "resolve_sibling_scope": true,
+                                        "source_property_name": "(#texture = 'loading')",
+                                        "target_property_name": "#visible"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "form_button@common_buttons.light_text_button": {
+                    "$pressed_button_name": "button.form_button_click",
+                    "anchor_from": "top_left",
+                    "anchor_to": "top_left",
+                    "size": [
+                        74,
+                        20
+                    ],
+                    "$button_text": "#form_button_text",
+                    "$button_text_binding_type": "collection",
+                    "$button_text_grid_collection_name": "form_buttons",
+                    "$button_text_max_size": [
+                        "100%",
+                        20
+                    ],
+                    "$default_button_texture": "textures/ui/tabs/colors/green/tab_active",
+                    "$hover_button_texture": "textures/ui/tabs/colors/green/tab_hover",
+                    "bindings": [
+                        {
+                            "binding_name": "#form_button_text",
+                            "binding_type": "collection",
+                            "binding_collection_name": "form_buttons"
+                        },
+                        {
+                            "binding_type": "collection_details",
+                            "binding_collection_name": "form_buttons"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "(not ((#form_button_text - '§a§c§t§i§v§e') = #form_button_text))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "form_button@common_buttons.light_text_button": {
+                    "$pressed_button_name": "button.form_button_click",
+                    "anchor_from": "top_left",
+                    "anchor_to": "top_left",
+                    "size": [
+                        74,
+                        20
+                    ],
+                    "$button_text": "#form_button_text",
+                    "$button_text_binding_type": "collection",
+                    "$button_text_grid_collection_name": "form_buttons",
+                    "$button_text_max_size": [
+                        "100%",
+                        20
+                    ],
+                    "$default_button_texture": "textures/ui/tabs/tab",
+                    "$hover_button_texture": "textures/ui/tabs/colors/green/tab_hover",
+                    "bindings": [
+                        {
+                            "binding_name": "#form_button_text",
+                            "binding_type": "collection",
+                            "binding_collection_name": "form_buttons"
+                        },
+                        {
+                            "binding_type": "collection_details",
+                            "binding_collection_name": "form_buttons"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "((#form_button_text - '§a§c§t§i§v§e') = #form_button_text)",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "dynamic_button_tabs": {
+        "type": "stack_panel",
+        "size": [
+            "100%",
+            32
+        ],
+        "orientation": "horizontal",
+        "bindings": [
+            {
+                "binding_name": "#form_button_text",
+                "binding_type": "collection",
+                "binding_collection_name": "form_buttons"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "((#form_button_text - '§t§a§b') = #form_button_text)",
+                "target_property_name": "#visible"
+            }
+        ],
+        "controls": [
+            {
+                "panel_name": {
+                    "type": "panel",
+                    "size": [
+                        34,
+                        "100%c"
+                    ],
+                    "bindings": [
+                        {
+                            "binding_type": "view",
+                            "source_control_name": "image",
+                            "resolve_sibling_scope": true,
+                            "source_property_name": "(not (#texture = ''))",
+                            "target_property_name": "#visible"
+                        }
+                    ],
+                    "controls": [
+                        {
+                            "image": {
+                                "type": "image",
+                                "layer": 2,
+                                "size": [
+                                    32,
+                                    32
+                                ],
+                                "offset": [
+                                    -2,
+                                    0
+                                ],
+                                "bindings": [
+                                    {
+                                        "binding_name": "#form_button_texture",
+                                        "binding_name_override": "#texture",
+                                        "binding_type": "collection",
+                                        "binding_collection_name": "form_buttons"
+                                    },
+                                    {
+                                        "binding_name": "#form_button_texture_file_system",
+                                        "binding_name_override": "#texture_file_system",
+                                        "binding_type": "collection",
+                                        "binding_collection_name": "form_buttons"
+                                    },
+                                    {
+                                        "binding_type": "view",
+                                        "source_property_name": "(not ((#texture = '') or (#texture = 'loading')))",
+                                        "target_property_name": "#visible"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "progress@progress.progress_loading_bars": {
+                                "size": [
+                                    30,
+                                    4
+                                ],
+                                "offset": [
+                                    -2,
+                                    16
+                                ],
+                                "bindings": [
+                                    {
+                                        "binding_type": "view",
+                                        "source_control_name": "image",
+                                        "resolve_sibling_scope": true,
+                                        "source_property_name": "(#texture = 'loading')",
+                                        "target_property_name": "#visible"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "form_button@common_buttons.light_text_button": {
+                    "$pressed_button_name": "button.form_button_click",
+                    "anchor_from": "top_left",
+                    "anchor_to": "top_left",
+                    "size": [
+                        "fill",
+                        32
+                    ],
+                    "$button_text": "#form_button_text",
+                    "$button_text_binding_type": "collection",
+                    "$button_text_grid_collection_name": "form_buttons",
+                    "$button_text_max_size": [
+                        "100%",
+                        20
+                    ],
+                    "bindings": [
+                        {
+                            "binding_type": "collection_details",
+                            "binding_collection_name": "form_buttons"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "header_buttons_factory@global.button_factory": {
+        "orientation": "horizontal",
+        "size": [
+            "100%c",
+            "100%"
+        ],
+        "$factory_item": "server_form.header_button"
+    },
+    "header_button@global.binding": {
+        "type": "stack_panel",
+        "orientation": "horizontal",
+        "size": [
+            "100%y + 1px",
+            "100%"
+        ],
+        "$key": "§p§4§0",
+        "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.common_button_style",
+        "controls": [
+            {
+                "button@starlib_pkg_button_templates.hover_button": {
+                    "$HOVER_BUTTON_size": [
+                        "fill",
+                        "100%"
+                    ],
+                    "$BUTTON_STYLE_default_texture": "textures/example/button",
+                    "$HOVER_BUTTON_hover_control": "server_form.hover",
+                    "$HOVER_BUTTON_image_size": [
+                        13,
+                        13
+                    ]
+                }
+            },
+            {
+                "padding": {
+                    "type": "panel",
+                    "size": [
+                        1,
+                        0
+                    ]
+                }
+            }
+        ]
+    },
+    "header_default@style.image": {
+        "texture": "textures/example/header"
+    },
+    "header_ocean@style.image": {
+        "texture": "textures/example/headerocean"
+    },
+    "header_batch08@style.image": {
+        "texture": "textures/example/headerbatch08"
+    },
+    "header_uwu1@style.image": {
+        "texture": "textures/example/headeruwu1"
+    },
+    "header_blossom_essentials@style.image": {
+        "texture": "textures/example/headerblossomessentials"
+    },
+    "header_grass@style.image": {
+        "texture": "textures/example/headergrass"
+    },
+    "header_dogshit@style.image": {
+        "texture": "textures/example/dogshit"
+    },
+    "header_pink_orchid@style.image": {
+        "texture": "textures/example/headerpinkorchid"
+    },
+    "header_verdant_bloom@style.image": {
+        "texture": "textures/example/headerverdantbloom"
+    },
+    "header_frosted_petals@style.image": {
+        "texture": "textures/example/headerfrostedpetals"
+    },
+    "header_cottonsky@style.image": {
+        "texture": "textures/example/headercottonsky"
+    },
+    "header_candy@style.image": {
+        "texture": "textures/example/headercandy"
+    },
+    "header_purple1@style.image": {
+        "texture": "textures/example/headerpurple1"
+    },
+    "header_blue1@style.image": {
+        "texture": "textures/example/headerblue1"
+    },
+    "header_redpurple@style.image": {
+        "texture": "textures/example/headerredpurple"
+    },
+    "header_default2@style.image": {
+        "texture": "textures/example/headercherry"
+    },
+    "header_default3@style.image": {
+        "texture": "textures/example/headernut"
+    },
+    "header_default4@style.image": {
+        "texture": "textures/example/headeryes"
+    },
+    "header_default5@style.image": {
+        "texture": "textures/example/headersunset"
+    },
+    "header_default6@style.image": {
+        "texture": "textures/example/headerbluegreen"
+    },
+    "header_default7@style.image": {
+        "texture": "textures/example/headerpinkblue"
+    },
+    "header_default8@style.image": {
+        "texture": "textures/example/headerpurple2"
+    },
+    "header_default9@style.image": {
+        "texture": "textures/example/headeralec"
+    },
+    "header": {
+        "type": "panel",
+        "controls": [
+            {
+                "yes@global.reverse_title_binding": {
+                    "$key": "§t§h§e§m§0§1",
+                    "$control": "server_form.header_default"
+                }
+            },
+            {
+                "yes@global.reverse_title_binding": {
+                    "$key": "§t§h§e§m§0§1",
+                    "$control": "server_form.header_default"
+                }
+            },
+            {
+                "yes2@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§o§c§e§a§n",
+                    "$control": "server_form.header_ocean"
+                }
+            },
+            {
+                "yes3@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§b§t§0§8",
+                    "$control": "server_form.header_batch08"
+                }
+            },
+            {
+                "yes3@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§u§w§u§1",
+                    "$control": "server_form.header_uwu1"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§b§l§o§s§1",
+                    "$control": "server_form.header_blossom_essentials"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§p§o§1",
+                    "$control": "server_form.header_pink_orchid"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§c§s§1",
+                    "$control": "server_form.header_cottonsky"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§f§p§1",
+                    "$control": "server_form.header_frosted_petals"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§v§b§1",
+                    "$control": "server_form.header_verdant_bloom"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§d§s§1",
+                    "$control": "server_form.header_dogshit"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§g§r§1",
+                    "$control": "server_form.header_grass"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§b§l§1",
+                    "$control": "server_form.header_blue1"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§p§r§1",
+                    "$control": "server_form.header_purple1"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§c§d§1",
+                    "$control": "server_form.header_candy"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§p§1",
+                    "$control": "server_form.header_redpurple"
+                }
+            },
+            {
+                "cherry@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§c§h§1",
+                    "$control": "server_form.header_cherry"
+                }
+            },
+            {
+                "nut@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§n§u§t§1",
+                    "$control": "server_form.header_nut"
+                }
+            },
+            {
+                "yes@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§y§e§s§1",
+                    "$control": "server_form.header_yes"
+                }
+            },
+            {
+                "sunset@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§s§u§n§s§e§t",
+                    "$control": "server_form.header_sunset"
+                }
+            },
+            {
+                "headerbluegreen@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§b§g§1",
+                    "$control": "server_form.header_headerbluegreen"
+                }
+            },
+            {
+                "pink_blue@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§p§b§1",
+                    "$control": "server_form.header_pink_blue"
+                }
+            },
+            {
+                "purple_2@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§p§r§2",
+                    "$control": "server_form.header_purple_2"
+                }
+            },
+            {
+                "alec's_theme_:3@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§1",
+                    "$control": "server_form.header_alec's_theme_:3"
+                }
+            },
+            {
+                "lemon_lime@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§l§l§o§1",
+                    "$control": "server_form.header_lemon_lime"
+                }
+            },
+            {
+                "uwu_#2@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§u§w§u§2",
+                    "$control": "server_form.header_uwu_#2"
+                }
+            },
+            {
+                "leaf_essentials_v3.0@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§l§f§3§0",
+                    "$control": "server_form.header_leaf_essentials_v3.0"
+                }
+            },
+            {
+                "feather@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§f§t§1",
+                    "$control": "server_form.header_feather"
+                }
+            },
+            {
+                "twilight_bloom@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§t§b§1",
+                    "$control": "server_form.header_twilight_bloom"
+                }
+            },
+            {
+                "random_theme_1@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§1",
+                    "$control": "server_form.header_random_theme_1"
+                }
+            },
+            {
+                "random_theme_2@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§2",
+                    "$control": "server_form.header_random_theme_2"
+                }
+            },
+            {
+                "random_theme_3@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§3",
+                    "$control": "server_form.header_random_theme_3"
+                }
+            },
+            {
+                "random_theme_4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§4",
+                    "$control": "server_form.header_random_theme_4"
+                }
+            },
+            {
+                "random_theme_5@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§5",
+                    "$control": "server_form.header_random_theme_5"
+                }
+            },
+            {
+                "random_theme_6@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§6",
+                    "$control": "server_form.header_random_theme_6"
+                }
+            },
+            {
+                "random_theme_7@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§7",
+                    "$control": "server_form.header_random_theme_7"
+                }
+            },
+            {
+                "random_theme_8@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§8",
+                    "$control": "server_form.header_random_theme_8"
+                }
+            },
+            {
+                "random_theme_9@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§9",
+                    "$control": "server_form.header_random_theme_9"
+                }
+            },
+            {
+                "random_theme_10@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§a",
+                    "$control": "server_form.header_random_theme_10"
+                }
+            },
+            {
+                "random_theme_11@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§b",
+                    "$control": "server_form.header_random_theme_11"
+                }
+            },
+            {
+                "random_theme_12@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§c",
+                    "$control": "server_form.header_random_theme_12"
+                }
+            },
+            {
+                "random_theme_13@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§d",
+                    "$control": "server_form.header_random_theme_13"
+                }
+            },
+            {
+                "random_theme_14@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§e",
+                    "$control": "server_form.header_random_theme_14"
+                }
+            },
+            {
+                "random_theme_15@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§f",
+                    "$control": "server_form.header_random_theme_15"
+                }
+            },
+            {
+                "random_theme_16@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§g",
+                    "$control": "server_form.header_random_theme_16"
+                }
+            },
+            {
+                "random_theme_17@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§h",
+                    "$control": "server_form.header_random_theme_17"
+                }
+            },
+            {
+                "random_theme_18@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§i",
+                    "$control": "server_form.header_random_theme_18"
+                }
+            },
+            {
+                "random_theme_19@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§j",
+                    "$control": "server_form.header_random_theme_19"
+                }
+            },
+            {
+                "random_theme_20@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§k",
+                    "$control": "server_form.header_random_theme_20"
+                }
+            },
+            {
+                "random_theme_21@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§l",
+                    "$control": "server_form.header_random_theme_21"
+                }
+            },
+            {
+                "random_theme_22@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§m",
+                    "$control": "server_form.header_random_theme_22"
+                }
+            },
+            {
+                "random_theme_23@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§n",
+                    "$control": "server_form.header_random_theme_23"
+                }
+            },
+            {
+                "random_theme_24@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§o",
+                    "$control": "server_form.header_random_theme_24"
+                }
+            },
+            {
+                "random_theme_25@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§p",
+                    "$control": "server_form.header_random_theme_25"
+                }
+            },
+            {
+                "basic@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§b§s§0§1",
+                    "$control": "server_form.header_basic"
+                }
+            },
+            {
+                "pride@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§g§a§1",
+                    "$control": "server_form.header_pride"
+                }
+            },
+            {
+                "pride_-_trans@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§g§a§2",
+                    "$control": "server_form.header_pride_-_trans"
+                }
+            },
+            {
+                "alec2@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§2",
+                    "$control": "server_form.header_:v"
+                }
+            },
+            {
+                "alec3@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§3",
+                    "$control": "server_form.header_:b"
+                }
+            },
+            {
+                "alec4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§4",
+                    "$control": "server_form.header_:3"
+                }
+            },
+            {
+                "owo@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§5",
+                    "$control": "server_form.header_owo"
+                }
+            },
+            {
+                "alec5@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§6",
+                    "$control": "server_form.header_alec5"
+                }
+            },
+            {
+                "alec6@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§7",
+                    "$control": "server_form.header_alec6"
+                }
+            },
+            {
+                "uwo@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§8",
+                    "$control": "server_form.header_uwo"
+                }
+            },
+            {
+                "owu@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§9",
+                    "$control": "server_form.header_owu"
+                }
+            }
+        ]
+    },
+    "close_button@starlib_pkg_screen_common.async_close_button": {
+        "$CLOSE_BUTTON_size": [
+            "100%y",
+            "100%"
+        ],
+        "$CLOSE_BUTTON_icon_size": [
+            15,
+            15
+        ],
+        "$CLOSE_BUTTON_icon_texture": "textures/ui/close_button_default_light",
+        "$CLOSE_BUTTON_default_control": "server_form.close_button_default",
+        "$CLOSE_BUTTON_hover_control": "server_form.hover",
+        "$CLOSE_BUTTON_pressed_control": "server_form.hover"
+    },
+    "close_button_light@starlib_pkg_screen_common.async_close_button": {
+        "$CLOSE_BUTTON_size": [
+            "100%y",
+            "100%"
+        ],
+        "$CLOSE_BUTTON_icon_size": [
+            15,
+            15
+        ],
+        "$CLOSE_BUTTON_icon_texture": "textures/ui/close_button_default_light",
+        "$CLOSE_BUTTON_default_control": "server_form.close_button_light_default",
+        "$CLOSE_BUTTON_hover_control": "server_form.hover",
+        "$CLOSE_BUTTON_pressed_control": "server_form.hover"
+    },
+    "hover@style.image": {
+        "texture": "textures/example/button_hover",
+        "size": [
+            "100% + 2px",
+            "100% + 2px"
+        ]
+    },
+    "hover_light@style.image": {
+        "texture": "textures/example/light/button_hover",
+        "size": [
+            "100% + 2px",
+            "100% + 2px"
+        ]
+    },
+    "advanced_button@starlib_pkg_button_templates.horizontal_button_template": {
+        "$BUTTON_STYLE_default_variable_controls": [
+            {
+                "default_defaultb@starlib_pkg_button_style.reverse_style_variable": {
+                    "texture": "textures/example/button",
+                    "$key": "§a§l§t§b§t§n"
+                }
+            },
+            {
+                "alt_defaulta@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/header",
+                    "$key": "§a§l§t§b§t§n"
+                }
+            },
+            {
+                "alt_default9@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerocean",
+                    "$key": "§a§l§t§b§t§n§o§c§e§a§n"
+                }
+            },
+            {
+                "alt_default8@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headercandy",
+                    "$key": "§a§l§t§b§t§n§c§d§1"
+                }
+            },
+            {
+                "alt_default7@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerblue1",
+                    "$key": "§a§l§t§b§t§n§b§l§1"
+                }
+            },
+            {
+                "alt_default6@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerpurple1",
+                    "$key": "§a§l§t§b§t§n§p§r§1"
+                }
+            },
+            {
+                "alt_default5@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerredpurple",
+                    "$key": "§a§l§t§b§t§n§r§p§1"
+                }
+            },
+            {
+                "alt_default4@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerbatch08",
+                    "$key": "§a§l§t§b§t§n§b§t§0§8"
+                }
+            },
+            {
+                "alt_default3@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headeruwu1",
+                    "$key": "§a§l§t§b§t§n§u§w§u§1"
+                }
+            },
+            {
+                "alt_default2@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerblossomessentials",
+                    "$key": "§a§l§t§b§t§n§b§l§o§s§1"
+                }
+            },
+            {
+                "alt_default1@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headergrass",
+                    "$key": "§a§l§t§b§t§n§g§r§1"
+                }
+            },
+            {
+                "outlined@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/button_outline",
+                    "$key": "§o§1"
+                }
+            },
+            {
+                "cherryColor@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/buttoncherry",
+                    "$key": "§c§h§e§1"
+                }
+            },
+            {
+                "leafColor@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/buttonleaf",
+                    "$key": "§l§e§f§1"
+                }
+            },
+            {
+                "alt_defaultz@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerpinkorchid",
+                    "$key": "§a§l§t§b§t§n§p§o§1"
+                }
+            },
+            {
+                "alt_defaultzz@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headercottonsky",
+                    "$key": "§a§l§t§b§t§n§c§s§1"
+                }
+            },
+            {
+                "alt_defaultzzz@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerfrostedpetals",
+                    "$key": "§a§l§t§b§t§n§f§p§1"
+                }
+            },
+            {
+                "alt_defaultzzzz@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerverdantbloom",
+                    "$key": "§a§l§t§b§t§n§v§b§1"
+                }
+            },
+            {
+                "alt_defaultzzzzz@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/dogshit",
+                    "$key": "§a§l§t§b§t§n§d§s§1"
+                }
+            },
+            {
+                "cherry_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headercherry",
+                    "$key": "§a§l§t§b§t§n§c§h§1"
+                }
+            },
+            {
+                "nut_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headernut",
+                    "$key": "§a§l§t§b§t§n§n§u§t§1"
+                }
+            },
+            {
+                "yes_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headeryes",
+                    "$key": "§a§l§t§b§t§n§y§e§s§1"
+                }
+            },
+            {
+                "sunset_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headersunset",
+                    "$key": "§a§l§t§b§t§n§s§u§n§s§e§t"
+                }
+            },
+            {
+                "headerbluegreen_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerbluegreen",
+                    "$key": "§a§l§t§b§t§n§b§g§1"
+                }
+            },
+            {
+                "pink_blue_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerpinkblue",
+                    "$key": "§a§l§t§b§t§n§p§b§1"
+                }
+            },
+            {
+                "purple_2_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerpurple2",
+                    "$key": "§a§l§t§b§t§n§p§r§2"
+                }
+            },
+            {
+                "alecs_theme__default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headeralec",
+                    "$key": "§a§l§t§b§t§n§a§l§1"
+                }
+            },
+            {
+                "lemon_lime_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerlemonlime",
+                    "$key": "§a§l§t§b§t§n§l§l§o§1"
+                }
+            },
+            {
+                "uwu_2_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headeruwu2",
+                    "$key": "§a§l§t§b§t§n§u§w§u§2"
+                }
+            },
+            {
+                "leaf_essentials_v3.0_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/leafess3",
+                    "$key": "§a§l§t§b§t§n§l§f§3§0"
+                }
+            },
+            {
+                "feather_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/featherCherryThemes/headerfeather",
+                    "$key": "§a§l§t§b§t§n§f§t§1"
+                }
+            },
+            {
+                "twilight_bloom_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headertwilightbloom",
+                    "$key": "§a§l§t§b§t§n§t§b§1"
+                }
+            },
+            {
+                "random_theme_1_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom1",
+                    "$key": "§a§l§t§b§t§n§r§t§1"
+                }
+            },
+            {
+                "random_theme_2_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom2",
+                    "$key": "§a§l§t§b§t§n§r§t§2"
+                }
+            },
+            {
+                "random_theme_3_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom3",
+                    "$key": "§a§l§t§b§t§n§r§t§3"
+                }
+            },
+            {
+                "random_theme_4_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom4",
+                    "$key": "§a§l§t§b§t§n§r§t§4"
+                }
+            },
+            {
+                "random_theme_5_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom5",
+                    "$key": "§a§l§t§b§t§n§r§t§5"
+                }
+            },
+            {
+                "random_theme_6_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom6",
+                    "$key": "§a§l§t§b§t§n§r§t§6"
+                }
+            },
+            {
+                "random_theme_7_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom7",
+                    "$key": "§a§l§t§b§t§n§r§t§7"
+                }
+            },
+            {
+                "random_theme_8_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom8",
+                    "$key": "§a§l§t§b§t§n§r§t§8"
+                }
+            },
+            {
+                "random_theme_9_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom9",
+                    "$key": "§a§l§t§b§t§n§r§t§9"
+                }
+            },
+            {
+                "random_theme_10_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom10",
+                    "$key": "§a§l§t§b§t§n§r§t§a"
+                }
+            },
+            {
+                "random_theme_11_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom11",
+                    "$key": "§a§l§t§b§t§n§r§t§b"
+                }
+            },
+            {
+                "random_theme_12_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom12",
+                    "$key": "§a§l§t§b§t§n§r§t§c"
+                }
+            },
+            {
+                "random_theme_13_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom13",
+                    "$key": "§a§l§t§b§t§n§r§t§d"
+                }
+            },
+            {
+                "random_theme_14_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom14",
+                    "$key": "§a§l§t§b§t§n§r§t§e"
+                }
+            },
+            {
+                "random_theme_15_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom15",
+                    "$key": "§a§l§t§b§t§n§r§t§f"
+                }
+            },
+            {
+                "random_theme_16_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom16",
+                    "$key": "§a§l§t§b§t§n§r§t§g"
+                }
+            },
+            {
+                "random_theme_17_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom17",
+                    "$key": "§a§l§t§b§t§n§r§t§h"
+                }
+            },
+            {
+                "random_theme_18_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom18",
+                    "$key": "§a§l§t§b§t§n§r§t§i"
+                }
+            },
+            {
+                "random_theme_19_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom19",
+                    "$key": "§a§l§t§b§t§n§r§t§j"
+                }
+            },
+            {
+                "random_theme_20_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom20",
+                    "$key": "§a§l§t§b§t§n§r§t§k"
+                }
+            },
+            {
+                "random_theme_21_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom21",
+                    "$key": "§a§l§t§b§t§n§r§t§l"
+                }
+            },
+            {
+                "random_theme_22_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom22",
+                    "$key": "§a§l§t§b§t§n§r§t§m"
+                }
+            },
+            {
+                "random_theme_23_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom23",
+                    "$key": "§a§l§t§b§t§n§r§t§n"
+                }
+            },
+            {
+                "random_theme_24_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom24",
+                    "$key": "§a§l§t§b§t§n§r§t§o"
+                }
+            },
+            {
+                "random_theme_25_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom25",
+                    "$key": "§a§l§t§b§t§n§r§t§p"
+                }
+            },
+            {
+                "basic_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/button",
+                    "$key": "§a§l§t§b§t§n§b§s§0§1"
+                }
+            },
+            {
+                "pride_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerpride",
+                    "$key": "§a§l§t§b§t§n§g§a§1"
+                }
+            },
+            {
+                "pride_-_trans_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerpride2",
+                    "$key": "§a§l§t§b§t§n§g§a§2"
+                }
+            },
+            {
+                ":v_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/1",
+                    "$key": "§a§l§t§b§t§n§a§l§0§2"
+                }
+            },
+            {
+                ":b_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/2",
+                    "$key": "§a§l§t§b§t§n§a§l§0§3"
+                }
+            },
+            {
+                ":3_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/3",
+                    "$key": "§a§l§t§b§t§n§a§l§0§4"
+                }
+            },
+            {
+                "owo_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/4",
+                    "$key": "§a§l§t§b§t§n§a§l§0§5"
+                }
+            },
+            {
+                "^-^_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/5",
+                    "$key": "§a§l§t§b§t§n§a§l§0§6"
+                }
+            },
+            {
+                ":/_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/6",
+                    "$key": "§a§l§t§b§t§n§a§l§0§7"
+                }
+            },
+            {
+                "uwo_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/7",
+                    "$key": "§a§l§t§b§t§n§a§l§0§8"
+                }
+            },
+            {
+                "owu_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/8",
+                    "$key": "§a§l§t§b§t§n§a§l§0§9"
+                }
+            }
+        ]
+    },
+    "close_button_default@style.image": {
+        "texture": "textures/example/button"
+    },
+    "close_button_light_default@style.image": {
+        "texture": "textures/example/light/button"
+    },
+    "advanced_dynamic_label": {
+        "type": "panel",
+        "size": [
+            "100%",
+            "100%c"
+        ],
+        "controls": [
+            {
+                "dynamic_label@settings_common.option_group_spaced_label": {
+                    "$text": "#form_button_text",
+                    "$text_bindings": [
+                        {
+                            "binding_name": "#form_button_text",
+                            "binding_type": "collection",
+                            "binding_collection_name": "form_buttons"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "((#form_button_text - 'textures/leaf_dyn_images/') = #form_button_text)",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "dynamic_image": {
+                    "type": "image",
+                    "bilinear": true,
+                    "size": [
+                        "100%",
+                        75
+                    ],
+                    "fill": true,
+                    "keep_ratio": true,
+                    "texture": "#texture",
+                    "$fit_to_width": true,
+                    "bindings": [
+                        {
+                            "binding_name": "#form_button_text",
+                            "binding_type": "collection",
+                            "binding_collection_name": "form_buttons"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "#form_button_text",
+                            "target_property_name": "#texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "(not ((#form_button_text - 'textures/leaf_dyn_images/') = #form_button_text))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "advanced_dynamic_button@starlib_pkg_dynamic_structure.dynamic_item_template": {
+        "$DYNAMIC_ITEM_entry": "starlib_pkg_dynamic_sizer.common_auto_sizer",
+        "$VERTICAL_PROCESSING_output_control": "server_form.advanced_button",
+        "$VERTICAL_PROCESSING_sizer_template_control": "server_form.vertical_sizer",
+        "$COMMON_BUTTON_hover_control": "server_form.hover",
+        "$COMMON_BUTTON_panel_control": "starlib_pkg_button_common.disabled_variable_button_panel",
+        "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.disabled_variable_button_style",
+        "$BUTTON_STYLE_disabled_variable_key": "§p§3§0",
+        "$BUTTON_STYLE_default_variable_texture": "textures/example/button",
+        "$BUTTON_STYLE_disabled_variable_texture": "textures/example/button_disabled",
+        "$HORIZONTAL_BUTTON_image_background_texture": "textures/example/none",
+        "$BUTTON_SIZER_left_third": "§p§1§1",
+        "$BUTTON_SIZER_right_third": "§p§2§1",
+        "$BUTTON_SIZER_left_half": "§p§1§2",
+        "$BUTTON_SIZER_right_half": "§p§2§2",
+        "$VERTICAL_PROCESSING_no_height_key": "§p§0§0",
+        "bindings": [
+            {
+                "binding_collection_name": "form_buttons",
+                "binding_name": "#form_button_text",
+                "binding_type": "collection"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "((#form_button_text - '§p§4§0') = #form_button_text)",
+                "target_property_name": "#visible"
+            }
+        ]
+    },
+    "vertical_sizer@starlib_pkg_dynamic_structure.vertical_sizer_template": {},
+    "long_form": {
+        "type": "panel",
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "controls": [
+            {
+                "long_form@common_dialogs.main_panel_no_buttons": {
+                    "$title_panel": "common_dialogs.standard_title_label",
+                    "$title_size": [
+                        "100% - 14px",
+                        10
+                    ],
+                    "size": [
+                        225,
+                        200
+                    ],
+                    "$text_name": "#title_text",
+                    "$title_text_binding_type": "none",
+                    "$child_control": "server_form.long_form_panel",
+                    "layer": 2,
+                    "bindings": [
+                        {
+                            "binding_name": "#title_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "(((#title_text - '§c§h§e§s§t') = #title_text) and ((#title_text - '§f§u§l§l') = #title_text) and ((#title_text - '§g§r§i§d§u§i') = #title_text) and ((#title_text - '§t§e§s§t') = #title_text) and ((#title_text - '§l§i§g§h§t') = #title_text) and ((#title_text - '§t§a§b§b§e§d') = #title_text) and ((#title_text - '§f§0§0') = #title_text))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "long_form@starlib_pkg_screen_template.screen": {
+                    "bindings": [
+                        {
+                            "binding_name": "#title_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "(((#title_text - '§c§h§e§s§t') = #title_text) and ((#title_text - '§f§u§l§l') = #title_text) and ((#title_text - '§g§r§i§d§u§i') = #title_text) and ((#title_text - '§t§e§s§t') = #title_text) and ((#title_text - '§l§i§g§h§t') = #title_text) and ((#title_text - '§t§a§b§b§e§d') = #title_text) and (not ((#title_text - '§f§0§0') = #title_text)))",
+                            "target_property_name": "#visible"
+                        }
+                    ],
+                    "$forms_holder_controls": [
+                        {
+                            "nopaperdoll@global.reverse_title_binding": {
+                                "$SCREEN_TEMPLATE_fade_enabled": true,
+                                "$SCROLLING_CONTENT_main_control": "global.button_factory_2",
+                                "$FORM_TEMPLATE_header_control": "starlib_pkg_dynamic_common.common_dynamic_header",
+                                "$FORM_TEMPLATE_background_texture": "textures/example/border",
+                                "$FORM_TEMPLATE_content_size": [
+                                    "100% - 20px",
+                                    "100% - 16px"
+                                ],
+                                "$CONTENT_between_contents_padding_size": [
+                                    0,
+                                    0
+                                ],
+                                "$DYNAMIC_HEADER_background_control": "style.black",
+                                "$DYNAMIC_HEADER_style_control": "server_form.header",
+                                "$DYNAMIC_HEADER_close_button_control": "server_form.close_button",
+                                "$DYNAMIC_HEADER_header_contents_control": "server_form.header_buttons_factory",
+                                "$button_item_control": "server_form.advanced_dynamic_button",
+                                "$COMMON_BUTTON_hover_control": "server_form.hover",
+                                "$COMMON_BUTTON_panel_control": "starlib_pkg_button_common.disabled_variable_button_panel",
+                                "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.disabled_variable_button_style",
+                                "$BUTTON_STYLE_disabled_variable_key": "§p§3§0",
+                                "$BUTTON_STYLE_default_variable_texture": "textures/example/button",
+                                "$BUTTON_STYLE_disabled_variable_texture": "textures/example/button_disabled",
+                                "$HORIZONTAL_BUTTON_image_background_texture": "textures/example/none",
+                                "$BUTTON_SIZER_left_third": "§p§1§1",
+                                "$BUTTON_SIZER_right_third": "§p§2§1",
+                                "$BUTTON_SIZER_left_half": "§p§1§2",
+                                "$BUTTON_SIZER_right_half": "§p§2§2",
+                                "$VERTICAL_PROCESSING_no_height_key": "§p§0§0",
+                                "$DYNAMIC_ITEM_entry": "starlib_pkg_dynamic_sizer.common_auto_sizer",
+                                "$VERTICAL_PROCESSING_output_control": "server_form.advanced_button",
+                                "$control": "starlib_pkg_screen_template.form_template",
+                                "$key": "§p§l§0§1",
+                                "$form_size": [
+                                    300,
+                                    255
+                                ],
+                                "$DYNAMIC_ITEM_bindings": [
+                                    {
+                                        "binding_collection_name": "form_buttons",
+                                        "binding_name": "#form_button_text",
+                                        "binding_type": "collection"
+                                    },
+                                    {
+                                        "binding_type": "view",
+                                        "source_property_name": "((#form_button_text - '§p§4§0') = #form_button_text)",
+                                        "target_property_name": "#visible"
+                                    },
+                                    {
+                                        "binding_type": "view",
+                                        "source_property_name": "((#form_button_text - '§p§4§0') = #form_button_text)",
+                                        "target_property_name": "#enabled"
+                                    }
+                                ],
+                                "size": [
+                                    "100%c",
+                                    "100%c"
+                                ]
+                            }
+                        },
+                        {
+                            "paperdoll@global.title_binding": {
+                                "$SCREEN_TEMPLATE_fade_enabled": true,
+                                "$SCROLLING_CONTENT_main_control": "global.button_factory_2",
+                                "$FORM_TEMPLATE_header_control": "starlib_pkg_dynamic_common.common_dynamic_header",
+                                "$FORM_TEMPLATE_background_texture": "textures/example/border",
+                                "$FORM_TEMPLATE_content_size": [
+                                    "100% - 20px",
+                                    "100% - 16px"
+                                ],
+                                "$HORIZONTAL_BUTTON_size": [
+                                    "100% - 2px",
+                                    "100% - 2px"
+                                ],
+                                "$COMMON_PAPERDOLL_size": [
+                                    "33.3%",
+                                    "100%"
+                                ],
+                                "$CONTENT_enable_paperdoll": true,
+                                "$COMMON_PAPERDOLL_background_texture": "textures/example/paperdoll",
+                                "$PAPERDOLL_offset": [
+                                    0,
+                                    -30
+                                ],
+                                "$CONTENT_between_contents_padding_size": [
+                                    5,
+                                    0
+                                ],
+                                "$control": "starlib_pkg_screen_template.form_template",
+                                "$DYNAMIC_HEADER_background_control": "style.black",
+                                "$DYNAMIC_HEADER_style_control": "server_form.header",
+                                "$DYNAMIC_HEADER_close_button_control": "server_form.close_button",
+                                "$DYNAMIC_HEADER_header_contents_control": "server_form.header_buttons_factory",
+                                "$button_item_control": "server_form.advanced_dynamic_button",
+                                "$COMMON_BUTTON_hover_control": "server_form.hover",
+                                "$COMMON_BUTTON_panel_control": "starlib_pkg_button_common.disabled_variable_button_panel",
+                                "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.disabled_variable_button_style",
+                                "$BUTTON_STYLE_disabled_variable_key": "§p§3§0",
+                                "$BUTTON_STYLE_default_variable_texture": "textures/example/button",
+                                "$BUTTON_STYLE_disabled_variable_texture": "textures/example/button_disabled",
+                                "$HORIZONTAL_BUTTON_image_background_texture": "textures/example/none",
+                                "$BUTTON_SIZER_left_third": "§p§1§1",
+                                "$BUTTON_SIZER_right_third": "§p§2§1",
+                                "$BUTTON_SIZER_left_half": "§p§1§2",
+                                "$BUTTON_SIZER_right_half": "§p§2§2",
+                                "$VERTICAL_PROCESSING_no_height_key": "§p§0§0",
+                                "$DYNAMIC_ITEM_entry": "starlib_pkg_dynamic_sizer.common_auto_sizer",
+                                "$VERTICAL_PROCESSING_output_control": "server_form.advanced_button",
+                                "$key": "§p§l§0§1",
+                                "$form_size": [
+                                    420,
+                                    255
+                                ],
+                                "$DYNAMIC_ITEM_bindings": [
+                                    {
+                                        "binding_collection_name": "form_buttons",
+                                        "binding_name": "#form_button_text",
+                                        "binding_type": "collection"
+                                    },
+                                    {
+                                        "binding_type": "view",
+                                        "source_property_name": "((#form_button_text - '§p§4§0') = #form_button_text)",
+                                        "target_property_name": "#visible"
+                                    },
+                                    {
+                                        "binding_type": "view",
+                                        "source_property_name": "((#form_button_text - '§p§4§0') = #form_button_text)",
+                                        "target_property_name": "#enabled"
+                                    }
+                                ],
+                                "size": [
+                                    "100%c",
+                                    "100%c"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "long_form_test@common_dialogs.main_panel_no_buttons": {
+                    "$title_panel": "common_dialogs.standard_title_label",
+                    "$title_size": [
+                        "100% - 14px",
+                        10
+                    ],
+                    "size": [
+                        275,
+                        200
+                    ],
+                    "$text_name": "#title_text",
+                    "$title_text_binding_type": "none",
+                    "$child_control": "server_form_test.long_form_panel",
+                    "layer": 2,
+                    "bindings": [
+                        {
+                            "binding_name": "#title_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "(((#title_text - '§c§h§e§s§t') = #title_text) and ((#title_text - '§f§u§l§l') = #title_text) and ((#title_text - '§g§r§i§d§u§i') = #title_text) and (not ((#title_text - '§t§e§s§t') = #title_text)) and ((#title_text - '§l§i§g§h§t') = #title_text) and ((#title_text - '§t§a§b§b§e§d') = #title_text))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "long_form_light@common_dialogs.main_panel_no_buttons": {
+                    "ignored": true,
+                    "$title_panel": "common_dialogs.standard_title_label",
+                    "$title_size": [
+                        "100% - 14px",
+                        10
+                    ],
+                    "size": [
+                        225,
+                        200
+                    ],
+                    "$title_text_color": [
+                        0.3,
+                        0.3,
+                        0.3
+                    ],
+                    "$custom_background": "dialog_background_hollow_3_light",
+                    "$text_name": "#title_text",
+                    "$title_text_binding_type": "none",
+                    "$child_control": "server_form_light.long_form_panel",
+                    "layer": 2,
+                    "bindings": [
+                        {
+                            "binding_name": "#title_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "(((#title_text - '§c§h§e§s§t') = #title_text) and ((#title_text - '§f§u§l§l') = #title_text) and ((#title_text - '§g§r§i§d§u§i') = #title_text) and ((#title_text - '§t§e§s§t') = #title_text) and (not ((#title_text - '§l§i§g§h§t') = #title_text)) and ((#title_text - '§t§a§b§b§e§d') = #title_text))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "grid_long_form@common_dialogs.main_panel_no_buttons": {
+                    "$title_panel": "common_dialogs.standard_title_label",
+                    "$title_size": [
+                        "100% - 14px",
+                        10
+                    ],
+                    "size": [
+                        365,
+                        255
+                    ],
+                    "$text_name": "#title_text",
+                    "$title_text_binding_type": "none",
+                    "$child_control": "server_form_grid.long_form_panel",
+                    "layer": 2,
+                    "bindings": [
+                        {
+                            "binding_name": "#title_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "(((#title_text - '§c§h§e§s§t') = #title_text) and ((#title_text - '§f§u§l§l') = #title_text) and (not ((#title_text - '§g§r§i§d§u§i') = #title_text)) and ((#title_text - '§t§e§s§t') = #title_text) and ((#title_text - '§l§i§g§h§t') = #title_text) and ((#title_text - '§t§a§b§b§e§d') = #title_text))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "long_form_fullscreen@common_dialogs.main_panel_no_buttons": {
+                    "$title_panel": "common_dialogs.standard_title_label",
+                    "$custom_background": "fullscreen_background",
+                    "$title_size": [
+                        "100% - 14px",
+                        10
+                    ],
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "$text_name": "#title_text",
+                    "$title_text_binding_type": "none",
+                    "$child_control": "server_form_fullscreen.long_form_panel",
+                    "layer": 2,
+                    "bindings": [
+                        {
+                            "binding_name": "#title_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "(((#title_text - '§c§h§e§s§t') = #title_text) and ((#title_text - '§g§r§i§d§u§i') = #title_text) and (not ((#title_text - '§f§u§l§l') = #title_text)) and ((#title_text - '§t§e§s§t') = #title_text) and ((#title_text - '§t§a§b§b§e§d') = #title_text))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "chest_ui@chest_ui.chest_panel": {
+                    "layer": 2,
+                    "bindings": [
+                        {
+                            "binding_name": "#title_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "((not ((#title_text - '§c§h§e§s§t') = #title_text)))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "main_screen_contentfdssdf": {
+                    "ignored": true,
+                    "type": "stack_panel",
+                    "size": [
+                        370,
+                        220
+                    ],
+                    "anchor_from": "center",
+                    "anchor_to": "center",
+                    "orientation": "vertical",
+                    "controls": [
+                        {
+                            "long_form_dynamifgggc_buttons_panel": {
+                                "type": "stack_panel",
+                                "size": [
+                                    370,
+                                    20
+                                ],
+                                "offset": [
+                                    2,
+                                    0
+                                ],
+                                "orientation": "horizontal",
+                                "anchor_from": "top_left",
+                                "anchor_to": "top_left",
+                                "factory": {
+                                    "name": "buttons",
+                                    "control_name": "server_form.dynamic_button_tabs2"
+                                },
+                                "collection_name": "form_buttons",
+                                "bindings": [
+                                    {
+                                        "binding_name": "#form_button_length",
+                                        "binding_name_override": "#collection_length"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "afdefwefwefew": {
+                                "type": "panel",
+                                "size": [
+                                    370,
+                                    200
+                                ],
+                                "controls": [
+                                    {
+                                        "server_form_factory@server_form.long_form_tabs": {}
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "bindings": [
+                        {
+                            "binding_name": "#title_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "(((#title_text - '§c§h§e§s§t') = #title_text) and ((#title_text - '§f§u§l§l') = #title_text) and ((#title_text - '§g§r§i§d§u§i') = #title_text) and ((#title_text - '§t§e§s§t') = #title_text) and ((#title_text - '§l§i§g§h§t') = #title_text) and (not ((#title_text - '§t§a§b§b§e§d') = #title_text)))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "exit_wait": {
+        "anim_type": "offset",
+        "easing": "linear",
+        "duration": 1,
+        "from": [
+            0,
+            0
+        ],
+        "to": [
+            0,
+            0
+        ],
+        "play_event": "screen.exit_pop",
+        "end_event": "screen.exit_end"
+    },
+    "main_screen_content": {
+        "size": [
+            "100%",
+            "100%"
+        ]
+    },
+    "main_screen_content/server_form_factory": {
+        "control_ids": {
+            "custom_form": "@server_form.custom_form_switch"
+        }
+    },
+    "custom_form_switch": {
+        "type": "panel",
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "$flag_form_title": "Code Editor",
+        "$flag_light": "§c§h§e§r§r§y",
+        "controls": [
+            {
+                "custom_form@server_form.custom_form": {
+                    "bindings": [
+                        {
+                            "binding_name": "#title_text",
+                            "binding_type": "global"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "((#title_text - $flag_form_title = #title_text) and (#title_text - $flag_light = #title_text))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "custom_form@server_form_light.custom_form": {
+                    "bindings": [
+                        {
+                            "binding_name": "#title_text",
+                            "binding_type": "global"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "((#title_text - $flag_form_title = #title_text) and (not (#title_text - $flag_light = #title_text)))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "custom_multiline_form@server_form.custom_multiline_form": {
+                    "bindings": [
+                        {
+                            "binding_name": "#title_text",
+                            "binding_type": "global"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "(not (#title_text - $flag_form_title = #title_text))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "custom_multiline_form@common_dialogs.main_panel_no_buttons": {
+        "$title_panel": "common_dialogs.standard_title_label",
+        "$title_size": [
+            "100% - 14px",
+            10
+        ],
+        "size": [
+            "90% - 16px",
+            "100% - 31px"
+        ],
+        "$text_name": "#title_text",
+        "$title_text_binding_type": "none",
+        "$child_control": "server_form.custom_multiline_form_panel",
+        "layer": 2
+    },
+    "custom_multiline_form_panel": {
+        "type": "stack_panel",
+        "orientation": "vertical",
+        "anchor_to": "top_left",
+        "anchor_from": "top_left",
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "controls": [
+            {
+                "generated_contents": {
+                    "type": "stack_panel",
+                    "size": [
+                        "100%",
+                        "fill"
+                    ],
+                    "orientation": "vertical",
+                    "anchor_from": "top_left",
+                    "anchor_to": "top_left",
+                    "factory": {
+                        "name": "buttons",
+                        "control_ids": {
+                            "label": "@server_form.custom_label",
+                            "toggle": "@server_form.custom_toggle",
+                            "slider": "@server_form.custom_slider",
+                            "step_slider": "@server_form.custom_step_slider",
+                            "dropdown": "@server_form.custom_dropdown",
+                            "input": "@server_form.custom_multiline_input"
+                        }
+                    },
+                    "collection_name": "custom_form",
+                    "bindings": [
+                        {
+                            "binding_name": "#custom_form_length",
+                            "binding_name_override": "#collection_length"
+                        }
+                    ]
+                }
+            },
+            {
+                "submit_button@common_buttons.light_text_button": {
+                    "$pressed_button_name": "button.submit_custom_form",
+                    "anchor_from": "top_left",
+                    "anchor_to": "top_left",
+                    "size": [
+                        "100%",
+                        32
+                    ],
+                    "$button_text": "gui.submit",
+                    "bindings": [
+                        {
+                            "binding_name": "#submit_button_visible",
+                            "binding_name_override": "#visible"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "custom_multiline_input@server_form.option_multiline_text_edit": {
+        "$option_label": "#custom_text",
+        "$option_place_holder_text": "#custom_placeholder_text",
+        "$text_edit_box_placeholder_content_binding_name": "$option_place_holder_text",
+        "$text_edit_box_placeholder_content_binding_type": "collection",
+        "$text_edit_box_grid_collection_name": "custom_form",
+        "anchor_from": "top_left",
+        "anchor_to": "top_left",
+        "$max_text_edit_length": 32767,
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "$text_edit_box_content_binding_type": "collection",
+        "$text_edit_box_content_binding_name": "#custom_input_text",
+        "$option_binding_name": "#custom_input_text",
+        "$text_box_enabled_binding_name": "#custom_input_enabled",
+        "$text_box_name": "custom_input",
+        "$label_bindings": [
+            {
+                "binding_name": "#custom_text",
+                "binding_type": "collection",
+                "binding_collection_name": "custom_form"
+            }
+        ]
+    },
+    "option_multiline_text_edit@settings_common.option_generic": {
+        "$option_place_holder_text|default": "",
+        "$max_text_edit_length|default": 30,
+        "controls": [
+            {
+                "dialog_bubble": {
+                    "type": "image",
+                    "texture": "textures/ui/form_bubble",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "controls": [
+                        {
+                            "dialog_panel": {
+                                "type": "panel",
+                                "size": [
+                                    "100%",
+                                    "100%"
+                                ],
+                                "$virtual_keyboard_buffer_control": "text_scroll",
+                                "controls": [
+                                    {
+                                        "text_scroll@common.scrolling_panel": {
+                                            "size": [
+                                                "100% - 10px",
+                                                "100% - 11px"
+                                            ],
+                                            "$always_handle_scrolling": true,
+                                            "$jump_to_bottom_on_update": true,
+                                            "$scrolling_content": "server_form.multiline_dialog_text_edit",
+                                            "$scroll_box_visible_touch": false,
+                                            "$show_background": false,
+                                            "$scroll_bar_left_padding_size": [
+                                                0,
+                                                0
+                                            ],
+                                            "$scroll_bar_right_padding_size": [
+                                                0,
+                                                0
+                                            ],
+                                            "$scroll_size": [
+                                                5,
+                                                "100%"
+                                            ],
+                                            "$scroll_size_touch": "$scroll_size",
+                                            "offset": [
+                                                0,
+                                                -1
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "multiline_dialog_text_edit@npc_interact.multiline_text_edit_control": {
+        "size": [
+            "100%",
+            "100%cm"
+        ],
+        "anchor_from": "top_left",
+        "anchor_to": "top_left",
+        "$hide_hyphen": true,
+        "$text_background_default": "common.empty_panel",
+        "$text_background_hover": "common.empty_panel",
+        "$text_box_text_color": "$dialog_text_color",
+        "$color": "$dialog_text_color",
+        "$disabled_alpha": 1,
+        "max_length": "$max_text_edit_length",
+        "constrain_to_rect": false,
+        "$text_alpha": 1,
+        "$locked_text_alpha": "$disabled_alpha",
+        "$locked_color": "$color",
+        "$text_edit_box_content_binding_name": "$option_binding_name",
+        "$text_edit_box_binding_collection_name": "$option_binding_name",
+        "$text_edit_box_binding_type": "global",
+        "$text_box_enabled_binding_name": "$option_enabled_binding_name",
+        "enabled": "$enabled",
+        "$place_holder_text": "$option_place_holder_text",
+        "$text_box_tts_header": "$option_label",
+        "$tts_override_control_value|default": " ",
+        "tts_override_control_value": "$tts_override_control_value",
+        "variables": [
+            {
+                "requires": "(not $option_enabled_binding_name or not $enabled)",
+                "$text_box_enabled_binding_name": "#not_data_bound",
+                "$text_edit_box_enabled_binding_type": "none"
+            }
+        ],
+        "bindings": [],
+        "locked_control": "background",
+        "default_control": "background",
+        "hover_control": "background",
+        "pressed_control": "background",
+        "text_control": "label",
+        "place_holder_control": "place_holder",
+        "controls": [
+            {
+                "label@common.text_edit_box_label": {
+                    "layer": 1,
+                    "size": [
+                        "100%",
+                        "default"
+                    ],
+                    "anchor_from": "top_left",
+                    "anchor_to": "top_left"
+                }
+            },
+            {
+                "visibility_panel": {
+                    "type": "panel",
+                    "size": [
+                        "100%",
+                        "100%c"
+                    ],
+                    "anchor_from": "top_left",
+                    "anchor_to": "top_left",
+                    "controls": [
+                        {
+                            "place_holder@common.text_edit_box_place_holder_label": {
+                                "layer": 1,
+                                "size": [
+                                    "100%",
+                                    "default"
+                                ],
+                                "anchor_from": "top_left",
+                                "anchor_to": "top_left"
+                            }
+                        }
+                    ],
+                    "bindings": [
+                        {
+                            "binding_type": "view",
+                            "source_control_name": "label",
+                            "source_property_name": "(#item_name = '')",
+                            "target_property_name": "#visible",
+                            "resolve_sibling_scope": true
+                        }
+                    ]
+                }
+            },
+            {
+                "background@common.empty_panel": {
+                    "size": [
+                        "100%",
+                        "100%sm"
+                    ]
+                }
+            }
+        ]
+    },
+    "header_cherry@style.image": {
+        "texture": "textures/example/headercherry"
+    },
+    "header_nut@style.image": {
+        "texture": "textures/example/headernut"
+    },
+    "header_yes@style.image": {
+        "texture": "textures/example/headeryes"
+    },
+    "header_sunset@style.image": {
+        "texture": "textures/example/headersunset"
+    },
+    "header_headerbluegreen@style.image": {
+        "texture": "textures/example/headerbluegreen"
+    },
+    "header_pink_blue@style.image": {
+        "texture": "textures/example/headerpinkblue"
+    },
+    "header_purple_2@style.image": {
+        "texture": "textures/example/headerpurple2"
+    },
+    "header_alec's_theme_a@style.image": {
+        "texture": "textures/example/headeralec"
+    },
+    "header_lemon_lime@style.image": {
+        "texture": "textures/example/headerlemonlime"
+    },
+    "header_uwu_#2@style.image": {
+        "texture": "textures/example/headeruwu2"
+    },
+    "header_leaf_essentials_v3.0@style.image": {
+        "texture": "textures/example/leafess3"
+    },
+    "header_feather@style.image": {
+        "texture": "textures/featherCherryThemes/headerfeather"
+    },
+    "header_twilight_bloom@style.image": {
+        "texture": "textures/example/headertwilightbloom"
+    },
+    "header_random_theme_1@style.image": {
+        "texture": "textures/example/headerrandom1"
+    },
+    "header_random_theme_2@style.image": {
+        "texture": "textures/example/headerrandom2"
+    },
+    "header_random_theme_3@style.image": {
+        "texture": "textures/example/headerrandom3"
+    },
+    "header_random_theme_4@style.image": {
+        "texture": "textures/example/headerrandom4"
+    },
+    "header_random_theme_5@style.image": {
+        "texture": "textures/example/headerrandom5"
+    },
+    "header_random_theme_6@style.image": {
+        "texture": "textures/example/headerrandom6"
+    },
+    "header_random_theme_7@style.image": {
+        "texture": "textures/example/headerrandom7"
+    },
+    "header_random_theme_8@style.image": {
+        "texture": "textures/example/headerrandom8"
+    },
+    "header_random_theme_9@style.image": {
+        "texture": "textures/example/headerrandom9"
+    },
+    "header_random_theme_10@style.image": {
+        "texture": "textures/example/headerrandom10"
+    },
+    "header_random_theme_11@style.image": {
+        "texture": "textures/example/headerrandom11"
+    },
+    "header_random_theme_12@style.image": {
+        "texture": "textures/example/headerrandom12"
+    },
+    "header_random_theme_13@style.image": {
+        "texture": "textures/example/headerrandom13"
+    },
+    "header_random_theme_14@style.image": {
+        "texture": "textures/example/headerrandom14"
+    },
+    "header_random_theme_15@style.image": {
+        "texture": "textures/example/headerrandom15"
+    },
+    "header_random_theme_16@style.image": {
+        "texture": "textures/example/headerrandom16"
+    },
+    "header_random_theme_17@style.image": {
+        "texture": "textures/example/headerrandom17"
+    },
+    "header_random_theme_18@style.image": {
+        "texture": "textures/example/headerrandom18"
+    },
+    "header_random_theme_19@style.image": {
+        "texture": "textures/example/headerrandom19"
+    },
+    "header_random_theme_20@style.image": {
+        "texture": "textures/example/headerrandom20"
+    },
+    "header_random_theme_21@style.image": {
+        "texture": "textures/example/headerrandom21"
+    },
+    "header_random_theme_22@style.image": {
+        "texture": "textures/example/headerrandom22"
+    },
+    "header_random_theme_23@style.image": {
+        "texture": "textures/example/headerrandom23"
+    },
+    "header_random_theme_24@style.image": {
+        "texture": "textures/example/headerrandom24"
+    },
+    "header_random_theme_25@style.image": {
+        "texture": "textures/example/headerrandom25"
+    },
+    "header_basic@style.image": {
+        "texture": "textures/example/button"
+    },
+    "header_pride@style.image": {
+        "texture": "textures/example/headerpride"
+    },
+    "header_pride_-_trans@style.image": {
+        "texture": "textures/example/headerpride2"
+    },
+    "header_:v@style.image": {
+        "texture": "textures/example/alec/1"
+    },
+    "header_:b@style.image": {
+        "texture": "textures/example/alec/2"
+    },
+    "header_:3@style.image": {
+        "texture": "textures/example/alec/3"
+    },
+    "header_owo@style.image": {
+        "texture": "textures/example/alec/4"
+    },
+    "header_alec5@style.image": {
+        "texture": "textures/example/alec/5"
+    },
+    "header_alec6@style.image": {
+        "texture": "textures/example/alec/6"
+    },
+    "header_uwo@style.image": {
+        "texture": "textures/example/alec/7"
+    },
+    "header_owu@style.image": {
+        "texture": "textures/example/alec/8"
+    }
+}

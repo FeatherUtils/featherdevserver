@@ -1,0 +1,151 @@
+{
+  "namespace": "settings_common",
+
+  "dialog_titles": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "size": [ "100%", 15 ],
+    "offset": [ 2, 3.5 ],
+    "controls": [
+      {
+        "left_padding": {
+          "type": "panel",
+          "size": [ 18, "100%" ]
+        }
+      },
+      {
+        "dialog_title_label@settings_common.dialog_title_label": {
+          "size": [ "40% - 3px", "100%" ]
+        }
+      },
+      {
+        "center_padding": {
+          "type": "panel",
+          "size": [ 9, "100%" ]
+        }
+      },
+      {
+        "section_title_label@settings_common.section_title_label": {
+          "size": [ "fill", "100%" ]
+        }
+      },
+      {
+        "right_padding_is_always_right": {
+          "type": "panel",
+          "size": [ 22, "100%" ]
+        }
+      }
+    ]
+  },
+
+  "settings_content": {
+    "type": "panel",
+    "controls": [
+		{
+      "background": {
+        "$layer|default": -1,
+        "variables": [
+          {
+            "requires": "($is_realm_slot or $realm_no_world_edit)",
+            "$layer": -2
+          }
+        ],
+        "type": "image",
+        "texture": "textures/ui/White",
+        "keep_ratio": false,
+        "size": [ "100%", "100%sm" ],
+        "color": [ 0.1, 0.1, 0.1],
+        "alpha": "$settings_background_alpha",
+        "offset": [ 0, 0 ],
+        "layer": "$layer",
+        "anchor_from": "top_left",
+        "anchor_to": "top_left"
+      }
+		},
+    {
+      "stack_panel": {
+        "type": "stack_panel",
+        "size": [ "100%", "100%" ],
+        "controls": [
+          {
+            "content_panel": {
+              "type": "panel",
+              "size": [ "100%", "fill" ],
+
+              "controls": [
+                {
+                  "common_panel@common.fullscreen_header": {
+                    "$dialog_background": "dialog_background_hollow_3"
+                  }
+                },
+                {
+                  "container": {
+                    "type": "panel",
+                    "size": [ "100%", "100% - 4px" ],
+                    "controls": [
+                      { "$dialog_content@$dialog_content": {} }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "popup_dialog_factory": {
+        "type": "factory",
+        "control_ids": {
+          "purchase_failed": "@realms_create.popup_dialog__purchase_failed",
+          "purchase_in_progress": "@realms_create.popup_dialog__purchase_in_progress",
+          "share_by_link": "@realms_allowlist.popup_dialog__share_by_link",
+          "options_modal": "@realms_allowlist.popup_dialog__options",
+          "backups_modal": "@realms_settings.popup_dialog__backups"
+        }
+      }
+    }
+    ]
+  },
+  "option_toggle_control2@common.toggle": {
+    "layer": 2,
+    "$toggle_state_binding_name|default": "$option_binding_name",
+    "$toggle_enabled_binding_name|default": "$option_enabled_binding_name",
+    "$toggle_enabled_binding_type|default": "global",
+    "size": [ "100%", "100%c" ],
+    "$binding_type": "global",
+    "$binding_condition": "once",
+    "$unchecked_control": "server_form_light.option_toggle_off",
+    "$checked_control": "server_form_light.option_toggle_on",
+    "$unchecked_hover_control": "server_form_light.option_toggle_off_hover",
+    "$checked_hover_control": "server_form_light.option_toggle_on_hover",
+    "$unchecked_locked_control": "settings_common.option_toggle_off_locked",
+    "$unchecked_locked_hover_control": "settings_common.option_toggle_off_locked",
+    "$checked_locked_control": "settings_common.option_toggle_on_locked",
+    "$checked_locked_hover_control": "settings_common.option_toggle_on_locked",
+
+    "$enable_directional_toggling": false,
+
+    "enabled": "$enabled",
+    "variables": [
+      {
+        "requires": "(not $option_enabled_binding_name or not $enabled)",
+        "$toggle_enabled_binding_name": "#not_data_bound",
+        "$toggle_enabled_binding_type": "none"
+      }
+    ]
+  },
+  "option_toggle2@settings_common.option_generic": {
+    "$control_name": "settings_common.option_toggle_control2",
+    "$option_label|default": "",
+    "$toggle_tts_header": "$option_label",
+    "variables": [
+      {
+        "requires": "$desktop_screen",
+        "$one_line_layout": true
+      }
+    ]
+  }
+}

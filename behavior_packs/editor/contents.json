@@ -1,0 +1,31 @@
+{
+    "content": [
+        {
+            "path": "manifest.json"
+        },
+        {
+            "path": "pack_icon.png"
+        },
+        {
+            "path": "entities/location_pointer_idle.json"
+        },
+        {
+            "path": "entities/location_pointer_selected.json"
+        },
+        {
+            "path": "entities/map_marker.json"
+        },
+        {
+            "path": "entities/ruler_idle.json"
+        },
+        {
+            "path": "entities/ruler_pointer_selected.json"
+        },
+        {
+            "path": "scripts/Main.js"
+        },
+        {
+            "path": "scripts/Main.js.LICENSE.txt"
+        }
+    ]
+}
