@@ -1,4 +1,18 @@
 import { world, system, ScriptEventSource, Player } from '@minecraft/server'
+import communication from './communication'
+communication.register('feather:pushToConfig', ({ args }) => {
+    console.log(api.get().toString())
+    system.run(async () => {
+        await system.waitTicks(10)
+        console.log(args[0])
+        api.add(JSON.parse(args[0]))
+    })
+})
+communication.register('feather:test', ({args}) => {
+    system.run(() => {
+        world.sendMessage(args.join(" "))
+    })
+})
 import events from './Modules/events'
 import './UIs/index'
 import { prismarineDb } from './Libraries/prismarinedb'
@@ -17,6 +31,8 @@ import moderation from './Modules/moderation'
 import binding from './Modules/binding'
 import sidebarEditor from './Modules/sidebarEditor'
 import actionParser from './Modules/actionParser'
+import api from './UIs/config/api'
+
 
 Player.prototype.error = function (msg) {
     this.sendMessage(`§c§lERROR§8 >>§r§7 ${msg}`)
@@ -35,11 +51,30 @@ system.run(() => {
 })
 
 world.afterEvents.playerSpawn.subscribe(e => {
-    const ban = moderation.Database.findFirst({type:'BAN',id:e.player.id})
-    if(ban) {
+    if(!e.initialSpawn) return;
+    const ban = moderation.Database.findFirst({ type: 'BAN', player: e.player.id })
+    if (ban) {
         world.getDimension('minecraft:overworld').runCommand(`kick "${e.player.name}" You are banned for ${moment(ban.data.time).fromNow()}.\nReason:\n${ban}`)
     }
+    const warnings = moderation.Database.findDocuments({type:'WARNING',player:e.player.id})
+    let warningsformatted = [];
+    if(warnings.length > 0) {
+        warningsformatted.push('-=-=-=-WARNINGS-=-=-=-')
+        warningsformatted.push('')
+    }
+    let i = 0
+    for(const warning of warnings) {
+        i++
+        warningsformatted.push(`Warning ${i}: ${warning.data.reason}`)
+    }
+    if(warningsformatted.length > 0) {
+        e.player.sendMessage(warningsformatted.join('\n'))
+    }
 })
+
+let btns = [];
+
+
 
 world.beforeEvents.itemUse.subscribe(e => {
     for (const bind of binding.db.findDocuments()) {

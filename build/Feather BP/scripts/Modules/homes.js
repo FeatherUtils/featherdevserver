@@ -1,6 +1,7 @@
 import { prismarineDb } from "../Libraries/prismarinedb";
 import { system, world } from '@minecraft/server'
 import playerStorage from '../Libraries/playerStorage'
+import { SegmentedStoragePrismarine } from "../Libraries/Storage/segmented";
 
 async function timer(plr, sec, msg) {
     for (let i = sec; i > 0; i--) {
@@ -12,13 +13,24 @@ async function timer(plr, sec, msg) {
 class Homes {
     constructor() {
         system.run(async () => {
-            this.db = prismarineDb.table('Homes')
+            this.oldDb = prismarineDb.table('Homes')
+            this.db = prismarineDb.customStorage('Homes', SegmentedStoragePrismarine)
+            
             this.kv = await this.db.keyval('Settings')
-            if (!this.kv.get('maxHomes')) this.kv.set('maxHomes', 20)
+            if(!this.oldDb.findDocuments().length == 0) {
+                for(const doc of this.oldDb.findDocuments()) {
+                    this.db.insertDocument(doc.data)
+                    this.oldDb.deleteDocumentByID(doc.id)
+                }
+                this.kv.set('MIGRATION1', true)
+            }
+            if (!this.kv.get('maxHomes')) this.kv.set('maxHomes', 20);
+            if (!this.kv.get('teleportTime')) this.kv.set('teleportTime', 5)
         })
     }
     create(plr, name) {
-        if (this.db.findFirst({ plrid: plr.id, name })) return plr.error('You have hit the maximum amount of homes. Consider deleting a home.');
+        if (this.db.findDocuments({ plrid: plr.id }).length + 1 > this.kv.get('maxHomes')) return plr.error('You have hit the maximum amount of homes. Consider deleting a home.');
+        if(this.db.findFirst({plrid:plr.id,name})) return plr.error('You have a home with the same name as this home.')
         this.db.insertDocument({
             plrid: plr.id,
             name,
@@ -71,7 +83,7 @@ class Homes {
     async tp(plr, id) {
         let doc = this.db.getByID(id)
         if (!doc) return plr.sendMessage('Could not find home');
-        await timer(plr, 5, 'Teleporting in [s]..')
+        await timer(plr, this.kv.get('teleportTime'), 'Teleporting in [s]..')
         let dim = world.getDimension(`${doc.data.loc.dim}`)
         plr.teleport(doc.data.loc.pos, { dimension: dim })
     }

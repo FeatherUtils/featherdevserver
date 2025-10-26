@@ -758,6 +758,12 @@
                 }
             },
             {
+                "update_4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§u§p§d§4",
+                    "$control": "server_form.header_update_4"
+                }
+            },
+            {
                 "uwu_#2@global.title_binding": {
                     "$key": "§t§h§e§m§0§1§u§w§u§2",
                     "$control": "server_form.header_uwu_#2"
@@ -1209,6 +1215,12 @@
                 "lemon_lime_default@starlib_pkg_button_style.style_variable": {
                     "texture": "textures/example/headerlemonlime",
                     "$key": "§a§l§t§b§t§n§l§l§o§1"
+                }
+            },
+            {
+                "update_4_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/featherCherryThemes/headerupdate4",
+                    "$key": "§a§l§t§b§t§n§u§p§d§4"
                 }
             },
             {
@@ -2298,6 +2310,9 @@
     },
     "header_lemon_lime@style.image": {
         "texture": "textures/example/headerlemonlime"
+    },
+    "header_update_4@style.image": {
+        "texture": "textures/featherCherryThemes/headerupdate4"
     },
     "header_uwu_#2@style.image": {
         "texture": "textures/example/headeruwu2"

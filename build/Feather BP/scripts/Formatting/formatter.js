@@ -4,6 +4,7 @@ import ranks from "../Modules/ranks";
 import { getTPS } from "./format/tps";
 import { getPlayers } from "./format/online";
 import events from "../Modules/events";
+import modules from "../Modules/modules";
 
 class BlossomFormatting {
     #vars;
@@ -22,9 +23,16 @@ class BlossomFormatting {
         return varis.join(', ')
     }
     getName(player) {
+        let n = player.getDynamicProperty('nickname')
+        if(modules.get('nick') && n) {
+            return n;
+        }
         return player.name
     }
-    async format(text, player, msg = undefined) {
+    getRealName(player) {
+        return player.name
+    }
+    async format(text, player, msg = undefined, watchyoJET = false) {
         function extractBracketValue(line) {
             if (typeof line === 'string') {
                 const match = line.match(/{{(.*?)}}/);
@@ -39,17 +47,18 @@ class BlossomFormatting {
         let rs = ranks.getRanks(player);
         let rns = [];
         let nc, cc, bc;
-
-        for (const r of rs) {
-            rns.push(r.name);
-        }
-        if (rns.length === 0) {
-            rns.push(`§bMember`);
-        }
-        for (const r of rs) {
-            nc = r.nc;
-            cc = r.cc;
-            bc = r.bc;
+        if (!watchyoJET) {
+            for (const r of rs) {
+                rns.push(await this.format(r.name,player,undefined,true));
+            }
+            if (rns.length === 0) {
+                rns.push(`§bMember`);
+            }
+            for (const r of rs) {
+                nc = r.nc;
+                cc = r.cc;
+                bc = r.bc;
+            }
         }
         this.#vars.nc = () => nc;
         this.#vars.cc = () => cc;
@@ -57,6 +66,8 @@ class BlossomFormatting {
 
         this.#vars.arrow = () => '»'
 
+        
+        this.#vars.realname = this.getRealName;
         this.#vars.player = this.getName;
         this.#vars.name = this.getName;
         this.#vars.username = this.getName;
