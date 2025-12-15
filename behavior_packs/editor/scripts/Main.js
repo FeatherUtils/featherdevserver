@@ -1866,6 +1866,7 @@ var __webpack_exports__ = {};
         ["AudioSettingsProperty"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.AudioSettingsProperty,
         ["Axis"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.Axis,
         ["BlockMaskListType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.BlockMaskListType,
+        ["BlockPaletteItemType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.BlockPaletteItemType,
         ["BoolPropertyItemVariant"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.BoolPropertyItemVariant,
         ["BrushDirectionalPlacementMode"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.BrushDirectionalPlacementMode,
         ["ButtonPropertyItemVariant"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.ButtonPropertyItemVariant,
@@ -1888,10 +1889,12 @@ var __webpack_exports__ = {};
         ["FlattenMode"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.FlattenMode,
         ["GamePublishSetting"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.GamePublishSetting,
         ["GraphicsSettingsProperty"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.GraphicsSettingsProperty,
+        ["IBlockPaletteItem"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.IBlockPaletteItem,
         ["ImageResourceType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.ImageResourceType,
         ["InputModifier"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.InputModifier,
         ["KeyboardKey"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.KeyboardKey,
         ["LayoutAlignment"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.LayoutAlignment,
+        ["LayoutDirection"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.LayoutDirection,
         ["LogChannel"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.LogChannel,
         ["MouseActionType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.MouseActionType,
         ["MouseInputType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.MouseInputType,
@@ -1905,6 +1908,7 @@ var __webpack_exports__ = {};
         ["SpeedSettingsProperty"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.SpeedSettingsProperty,
         ["SplineType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.SplineType,
         ["StatusBarAlignment"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.StatusBarAlignment,
+        ["StructureSource"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.StructureSource,
         ["ThemeSettingsColorKey"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.ThemeSettingsColorKey,
         ["WidgetGizmoEventType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.WidgetGizmoEventType,
         ["WidgetGroupSelectionMode"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.WidgetGroupSelectionMode,
@@ -5180,6 +5184,7 @@ var __webpack_exports__ = {};
     var server_editor_private_bindings_y = x => () => x;
     const server_editor_private_bindings_namespaceObject = server_editor_private_bindings_x({
         ["EditorRealmsServiceAvailability"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.EditorRealmsServiceAvailability,
+        ["JigsawJsonType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.JigsawJsonType,
         ["ProjectRegionAvailabilityMode"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.ProjectRegionAvailabilityMode,
         ["RealmsWorldUploadResult"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.RealmsWorldUploadResult,
         ["editorInternal"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.editorInternal
@@ -5559,11 +5564,6 @@ var __webpack_exports__ = {};
             return this._vector3Map.entries();
         }
     }
-    var CursorTargetMode;
-    (function(CursorTargetMode) {
-        CursorTargetMode[CursorTargetMode["Block"] = 0] = "Block";
-        CursorTargetMode[CursorTargetMode["Face"] = 1] = "Face";
-    })(CursorTargetMode || (CursorTargetMode = {}));
     var BlockPointType;
     (function(BlockPointType) {
         BlockPointType[BlockPointType["Normal"] = 0] = "Normal";
@@ -5666,7 +5666,7 @@ var __webpack_exports__ = {};
         }
         applySurfaceContour() {
             const targetMode = this._requestCursorTargetMode();
-            const offset = targetMode === CursorTargetMode.Block ? 0 : 1;
+            const offset = targetMode === server_editor_namespaceObject.CursorTargetMode.Block ? 0 : 1;
             const elevation = this._requestGroundLevelAtLocation(this._location);
             if (elevation !== Infinity) {
                 this._plot = {
@@ -5776,23 +5776,22 @@ var __webpack_exports__ = {};
     (function(BlockLineType) {
         BlockLineType[BlockLineType["Direct"] = 0] = "Direct";
         BlockLineType[BlockLineType["Staggered"] = 1] = "Staggered";
-        BlockLineType[BlockLineType["DirectContour"] = 2] = "DirectContour";
-        BlockLineType[BlockLineType["StaggeredContour"] = 3] = "StaggeredContour";
     })(BlockLineType || (BlockLineType = {}));
-    class BlockLine {
-        constructor(start, end, requestCursorTargetMode, requestGroundLevelAtLocation, blockLineOptions) {
+    class BlockCurve {
+        constructor(start, end, requestCursorTargetMode, requestGroundLevelAtLocation, blockCurveCreationOptions) {
             this._start = start;
             this._end = end;
-            this._startData = blockLineOptions?.startData;
-            this._endData = blockLineOptions?.endData;
+            this._startData = blockCurveCreationOptions?.startData;
+            this._endData = blockCurveCreationOptions?.endData;
             this._requestCursorTargetMode = requestCursorTargetMode;
             this._requestGroundLevelAtLocation = requestGroundLevelAtLocation;
-            this._horizontalWeight = blockLineOptions?.horizontalWeight ?? 1;
-            this._verticalWeight = blockLineOptions?.verticalWeight ?? 1;
-            this._blockLineType = blockLineOptions?.blockLineType ?? BlockLineType.Direct;
-            this._linePlot = [];
-            this._lineData = new Vector3Map;
-            void this.generateLine();
+            this._horizontalWeight = blockCurveCreationOptions?.horizontalWeight ?? 1;
+            this._verticalWeight = blockCurveCreationOptions?.verticalWeight ?? 1;
+            this._contour = blockCurveCreationOptions?.contour ?? false;
+            this._curvePlot = [];
+            this._contourPlot = [];
+            this._curveData = new Vector3Map;
+            void this.generateCurve();
         }
         get start() {
             return this._start;
@@ -5806,28 +5805,21 @@ var __webpack_exports__ = {};
         get verticalWeight() {
             return this._verticalWeight;
         }
-        get blockLineType() {
-            return this._blockLineType;
+        get curveDataIterator() {
+            return this._curveData.values;
         }
-        get lineDataIterator() {
-            return this._lineData.values;
+        get curvePlot() {
+            return this._curvePlot;
         }
-        get linePlotIterator() {
-            return this._linePlot.values();
-        }
-        teardown() {
-            if (this._applyWeightsJobHandle !== undefined) {
-                server_namespaceObject.system.clearJob(this._applyWeightsJobHandle);
-            }
-            if (this._applyHorizontalWeightsJobHandle !== undefined) {
-                server_namespaceObject.system.clearJob(this._applyHorizontalWeightsJobHandle);
-            }
+        updateCurvePlot(points) {
+            this._curvePlot = points;
+            return Promise.resolve(this.generateCurve());
         }
         async setStart(newStart, startData = undefined) {
             if (!lib.Vector3Utils.equals(this._start, newStart) || this._startData !== startData) {
                 this._start = newStart;
                 this._startData = startData;
-                return this.generateLine();
+                return this.generateCurve();
             }
             return {
                 pointsAdded: [],
@@ -5838,14 +5830,14 @@ var __webpack_exports__ = {};
             if (!lib.Vector3Utils.equals(this._end, newEnd) || this._endData !== endData) {
                 this._end = newEnd;
                 this._endData = endData;
-                return this.generateLine();
+                return this.generateCurve();
             }
             return {
                 pointsAdded: [],
                 pointsRemoved: []
             };
         }
-        async translateLine(translationVector) {
+        async translatePoints(translationVector) {
             let changed = false;
             const newStart = lib.Vector3Utils.add(this._start, translationVector);
             const newEnd = lib.Vector3Utils.add(this._end, translationVector);
@@ -5858,7 +5850,7 @@ var __webpack_exports__ = {};
                 changed = true;
             }
             if (changed) {
-                return this.generateLine();
+                return this.generateCurve();
             }
             return {
                 pointsAdded: [],
@@ -5876,236 +5868,101 @@ var __webpack_exports__ = {};
                 changed = true;
             }
             if (changed) {
-                return this.generateLine();
+                return this.generateCurve();
             }
             return {
                 pointsAdded: [],
                 pointsRemoved: []
             };
         }
-        async setBlockLineType(newBlockLineType) {
-            if (newBlockLineType !== this._blockLineType) {
-                this._blockLineType = newBlockLineType;
-                return this.generateLine();
-            }
-            return {
-                pointsAdded: [],
-                pointsRemoved: []
-            };
-        }
-        async generateLine() {
+        async generateCurve() {
             this.updatePlot();
             return await this.applyThickness();
         }
         updatePlot() {
-            switch (this._blockLineType) {
-              case BlockLineType.Direct:
-                {
-                    this.plotBresenhamLine3D();
-                    break;
-                }
-
-              case BlockLineType.Staggered:
-                {
-                    this.plotManhattanLine3D();
-                    break;
-                }
-
-              case BlockLineType.DirectContour:
-                {
-                    this.plotBresenhamLine3D();
-                    this.applySurfaceContour();
-                    break;
-                }
-
-              case BlockLineType.StaggeredContour:
-                {
-                    this.plotManhattanLine3D();
-                    this.applySurfaceContour();
-                    break;
-                }
-
-              default:
-                break;
+            if (this._contour) {
+                this.applySurfaceContour();
             }
         }
-        plotBresenhamLine3D() {
-            this._linePlot.length = 0;
-            this._linePlot.push({
-                x: this._start.x,
-                y: this._start.y,
-                z: this._start.z
-            });
-            const dx = Math.abs(this._end.x - this._start.x);
-            const dy = Math.abs(this._end.y - this._start.y);
-            const dz = Math.abs(this._end.z - this._start.z);
-            const xs = this._end.x > this._start.x ? 1 : -1;
-            const ys = this._end.y > this._start.y ? 1 : -1;
-            const zs = this._end.z > this._start.z ? 1 : -1;
-            if (dx >= dy && dx >= dz) {
-                let p0 = 2 * dy - dx;
-                let p1 = 2 * dz - dx;
-                let x0 = this._start.x;
-                let y0 = this._start.y;
-                let z0 = this._start.z;
-                while (x0 !== this._end.x) {
-                    x0 += xs;
-                    if (p0 >= 0) {
-                        y0 += ys;
-                        p0 -= 2 * dx;
-                    }
-                    if (p1 >= 0) {
-                        z0 += zs;
-                        p1 -= 2 * dx;
-                    }
-                    p0 += 2 * dy;
-                    p1 += 2 * dz;
-                    this._linePlot.push({
-                        x: x0,
-                        y: y0,
-                        z: z0
-                    });
-                }
-            } else if (dy >= dx && dy >= dz) {
-                let p0 = 2 * dx - dy;
-                let p1 = 2 * dz - dy;
-                let y0 = this._start.y;
-                let x0 = this._start.x;
-                let z0 = this._start.z;
-                while (y0 !== this._end.y) {
-                    y0 += ys;
-                    if (p0 >= 0) {
-                        x0 += xs;
-                        p0 -= 2 * dy;
-                    }
-                    if (p1 >= 0) {
-                        z0 += zs;
-                        p1 -= 2 * dy;
-                    }
-                    p0 += 2 * dx;
-                    p1 += 2 * dz;
-                    this._linePlot.push({
-                        x: x0,
-                        y: y0,
-                        z: z0
-                    });
-                }
-            } else {
-                let p0 = 2 * dy - dz;
-                let p1 = 2 * dx - dz;
-                let z0 = this._start.z;
-                let x0 = this._start.x;
-                let y0 = this._start.y;
-                while (z0 !== this._end.z) {
-                    z0 += zs;
-                    if (p0 >= 0) {
-                        y0 += ys;
-                        p0 -= 2 * dz;
-                    }
-                    if (p1 >= 0) {
-                        x0 += xs;
-                        p1 -= 2 * dz;
-                    }
-                    p0 += 2 * dy;
-                    p1 += 2 * dx;
-                    this._linePlot.push({
-                        x: x0,
-                        y: y0,
-                        z: z0
-                    });
-                }
+        async setOptions(newOptions) {
+            if (newOptions.curveOptions?.contour !== this._contour) {
+                this._contour = newOptions.curveOptions?.contour ?? false;
+                return this.generateCurve();
             }
-        }
-        plotManhattanLine3D() {
-            this._linePlot.length = 0;
-            let x = this._start.x;
-            let y = this._start.y;
-            let z = this._start.z;
-            this._linePlot.push({
-                x: this._start.x,
-                y: this._start.y,
-                z: this._start.z
-            });
-            while (x !== this._end.x || y !== this._end.y || z !== this._end.z) {
-                if (x < this._end.x) {
-                    x++;
-                    this._linePlot.push({
-                        x,
-                        y,
-                        z
-                    });
-                } else if (x > this._end.x) {
-                    x--;
-                    this._linePlot.push({
-                        x,
-                        y,
-                        z
-                    });
-                }
-                if (y < this._end.y) {
-                    y++;
-                    this._linePlot.push({
-                        x,
-                        y,
-                        z
-                    });
-                } else if (y > this._end.y) {
-                    y--;
-                    this._linePlot.push({
-                        x,
-                        y,
-                        z
-                    });
-                }
-                if (z < this._end.z) {
-                    z++;
-                    this._linePlot.push({
-                        x,
-                        y,
-                        z
-                    });
-                } else if (z > this._end.z) {
-                    z--;
-                    this._linePlot.push({
-                        x,
-                        y,
-                        z
-                    });
-                }
-            }
+            return {
+                pointsAdded: [],
+                pointsRemoved: []
+            };
         }
         applySurfaceContour() {
             const contourResults = [];
             const visited = new Set;
             const targetMode = this._requestCursorTargetMode();
-            const offset = targetMode === CursorTargetMode.Block ? 0 : 1;
-            for (let i = 0; i < this._linePlot.length; i++) {
-                const key = `${this._linePlot[i].x},${this._linePlot[i].z}`;
+            const offset = targetMode === server_editor_namespaceObject.CursorTargetMode.Block ? 0 : 1;
+            for (let i = 0; i < this._curvePlot.length; i++) {
+                const key = `${this._curvePlot[i].x},${this._curvePlot[i].z}`;
                 if (!visited.has(key)) {
-                    const elevation = this._requestGroundLevelAtLocation(this._linePlot[i]);
+                    const elevation = this._requestGroundLevelAtLocation(this._curvePlot[i]);
                     if (elevation !== Infinity) {
                         contourResults.push({
-                            x: this._linePlot[i].x,
+                            x: this._curvePlot[i].x,
                             y: elevation + offset,
-                            z: this._linePlot[i].z
+                            z: this._curvePlot[i].z
                         });
                         visited.add(key);
                     }
                 }
             }
-            this._linePlot.length = 0;
-            this._linePlot.push(...contourResults);
+            this._contourPlot.length = 0;
+            this._contourPlot.push(...contourResults);
+        }
+        updateData(newData) {
+            const toAdd = [];
+            const toRemove = [];
+            const newKeys = new Set;
+            for (let i = 0; i < newData.length; i++) {
+                if (!this._curveData.has(newData[i])) {
+                    toAdd.push(newData[i]);
+                }
+                newKeys.add(`${newData[i].x},${newData[i].y},${newData[i].z}`);
+            }
+            for (const [dataKey, dataPoint] of this._curveData.entries) {
+                if (!newKeys.has(dataKey)) {
+                    toRemove.push(dataPoint);
+                }
+            }
+            for (let i = 0; i < toRemove.length; i++) {
+                this._curveData.remove(toRemove[i]);
+            }
+            for (let i = 0; i < toAdd.length; i++) {
+                this._curveData.add(toAdd[i]);
+            }
+            return {
+                pointsAdded: toAdd,
+                pointsRemoved: toRemove
+            };
+        }
+        getMidPoint() {
+            return this._curvePlot.at(this._curvePlot.length / 2);
         }
         async applyThickness() {
             if (this._horizontalWeight === 1 && this._verticalWeight === 1 && !this._startData && !this._endData) {
-                return this.updateData(this._linePlot);
+                let plot = this._curvePlot;
+                if (this._contour) {
+                    plot = this._contourPlot;
+                }
+                return this.updateData(plot);
             }
             const [verticalResults, horizontalWeightMap] = await this.applyVerticalThickness();
             const horizontalAndVerticalResults = await this.applyHorizontalThicknessToVerticalResults(verticalResults, horizontalWeightMap);
             return this.updateData(horizontalAndVerticalResults);
         }
         async applyVerticalThickness() {
-            const newPoints = new Vector3Map(this._linePlot);
+            let plot = this._curvePlot;
+            if (this._contour) {
+                plot = this._contourPlot;
+            }
+            const newPoints = new Vector3Map(plot);
             const pointHorizontalWeightMap = new Map;
             const contourOperation = (index, blockPos) => {
                 const [verticalWeight, horizontalWeight] = this.getWeightFromPointInLengthLinear(index);
@@ -6146,19 +6003,19 @@ var __webpack_exports__ = {};
                     }
                 }
             };
-            if (this._blockLineType === BlockLineType.DirectContour || this._blockLineType === BlockLineType.StaggeredContour) {
+            if (this._contour) {
                 await new Promise(((resolve, reject) => {
                     if (this._applyWeightsJobHandle) {
                         server_namespaceObject.system.clearJob(this._applyWeightsJobHandle);
                     }
-                    this._applyWeightsJobHandle = server_namespaceObject.system.runJob(workerGeneratorLine(resolve, reject, this._linePlot, contourOperation));
+                    this._applyWeightsJobHandle = server_namespaceObject.system.runJob(workerGeneratorLine(resolve, reject, this._curvePlot, contourOperation));
                 }));
             } else {
                 await new Promise(((resolve, reject) => {
                     if (this._applyWeightsJobHandle) {
                         server_namespaceObject.system.clearJob(this._applyWeightsJobHandle);
                     }
-                    this._applyWeightsJobHandle = server_namespaceObject.system.runJob(workerGeneratorLine(resolve, reject, this._linePlot, nonContourOperation));
+                    this._applyWeightsJobHandle = server_namespaceObject.system.runJob(workerGeneratorLine(resolve, reject, this._curvePlot, nonContourOperation));
                 }));
             }
             return [ newPoints, pointHorizontalWeightMap ];
@@ -6175,14 +6032,14 @@ var __webpack_exports__ = {};
                     verticalWeight = startVertWeight;
                 } else {
                     const vertSteps = Math.abs(startVertWeight - endVertWeight) + 1;
-                    const vertStep = Math.floor(pos / this._linePlot.length * vertSteps);
+                    const vertStep = Math.floor(pos / this._curvePlot.length * vertSteps);
                     verticalWeight = startVertWeight < endVertWeight ? startVertWeight + vertStep : startVertWeight - vertStep;
                 }
                 if (endHoriWeight === startHoriWeight) {
                     horizontalWeight = startHoriWeight;
                 } else {
                     const horiSteps = Math.abs(startHoriWeight - endHoriWeight) + 1;
-                    const horiStep = Math.floor(pos / this._linePlot.length * horiSteps);
+                    const horiStep = Math.floor(pos / this._curvePlot.length * horiSteps);
                     horizontalWeight = startHoriWeight < endHoriWeight ? startHoriWeight + horiStep : startHoriWeight - horiStep;
                 }
             }
@@ -6321,31 +6178,198 @@ var __webpack_exports__ = {};
             }
             return [ ...verticalResults.values, ...newPoints.values ];
         }
-        updateData(newData) {
-            const toAdd = [];
-            const toRemove = [];
-            const newKeys = new Set;
-            for (let i = 0; i < newData.length; i++) {
-                if (!this._lineData.has(newData[i])) {
-                    toAdd.push(newData[i]);
-                }
-                newKeys.add(`${newData[i].x},${newData[i].y},${newData[i].z}`);
+        teardown() {
+            if (this._applyWeightsJobHandle !== undefined) {
+                server_namespaceObject.system.clearJob(this._applyWeightsJobHandle);
             }
-            for (const [dataKey, dataPoint] of this._lineData.entries) {
-                if (!newKeys.has(dataKey)) {
-                    toRemove.push(dataPoint);
-                }
+            if (this._applyHorizontalWeightsJobHandle !== undefined) {
+                server_namespaceObject.system.clearJob(this._applyHorizontalWeightsJobHandle);
             }
-            for (let i = 0; i < toRemove.length; i++) {
-                this._lineData.remove(toRemove[i]);
-            }
-            for (let i = 0; i < toAdd.length; i++) {
-                this._lineData.add(toAdd[i]);
+        }
+    }
+    class BlockLine extends BlockCurve {
+        constructor(start, end, requestCursorTargetMode, requestGroundLevelAtLocation, blockLineCreationOptions) {
+            super(start, end, requestCursorTargetMode, requestGroundLevelAtLocation, blockLineCreationOptions?.curveOptions);
+            this._blockLineType = blockLineCreationOptions?.blockLineType ?? BlockLineType.Direct;
+            void this.generateCurve();
+        }
+        get blockLineType() {
+            return this._blockLineType;
+        }
+        async setOptions(newOptions) {
+            if (newOptions.blockLineType !== this._blockLineType) {
+                this._blockLineType = newOptions.blockLineType;
+                return await super.setOptions(newOptions);
             }
             return {
-                pointsAdded: toAdd,
-                pointsRemoved: toRemove
+                pointsAdded: [],
+                pointsRemoved: []
             };
+        }
+        updatePlot() {
+            switch (this._blockLineType) {
+              case BlockLineType.Direct:
+                {
+                    this.plotBresenhamLine3D();
+                    super.updatePlot();
+                    break;
+                }
+
+              case BlockLineType.Staggered:
+                {
+                    this.plotManhattanLine3D();
+                    super.updatePlot();
+                    break;
+                }
+
+              default:
+                break;
+            }
+        }
+        plotBresenhamLine3D() {
+            this._curvePlot.length = 0;
+            this._curvePlot.push({
+                x: this._start.x,
+                y: this._start.y,
+                z: this._start.z
+            });
+            const dx = Math.abs(this._end.x - this._start.x);
+            const dy = Math.abs(this._end.y - this._start.y);
+            const dz = Math.abs(this._end.z - this._start.z);
+            const xs = this._end.x > this._start.x ? 1 : -1;
+            const ys = this._end.y > this._start.y ? 1 : -1;
+            const zs = this._end.z > this._start.z ? 1 : -1;
+            if (dx >= dy && dx >= dz) {
+                let p0 = 2 * dy - dx;
+                let p1 = 2 * dz - dx;
+                let x0 = this._start.x;
+                let y0 = this._start.y;
+                let z0 = this._start.z;
+                while (x0 !== this._end.x) {
+                    x0 += xs;
+                    if (p0 >= 0) {
+                        y0 += ys;
+                        p0 -= 2 * dx;
+                    }
+                    if (p1 >= 0) {
+                        z0 += zs;
+                        p1 -= 2 * dx;
+                    }
+                    p0 += 2 * dy;
+                    p1 += 2 * dz;
+                    this._curvePlot.push({
+                        x: x0,
+                        y: y0,
+                        z: z0
+                    });
+                }
+            } else if (dy >= dx && dy >= dz) {
+                let p0 = 2 * dx - dy;
+                let p1 = 2 * dz - dy;
+                let y0 = this._start.y;
+                let x0 = this._start.x;
+                let z0 = this._start.z;
+                while (y0 !== this._end.y) {
+                    y0 += ys;
+                    if (p0 >= 0) {
+                        x0 += xs;
+                        p0 -= 2 * dy;
+                    }
+                    if (p1 >= 0) {
+                        z0 += zs;
+                        p1 -= 2 * dy;
+                    }
+                    p0 += 2 * dx;
+                    p1 += 2 * dz;
+                    this._curvePlot.push({
+                        x: x0,
+                        y: y0,
+                        z: z0
+                    });
+                }
+            } else {
+                let p0 = 2 * dy - dz;
+                let p1 = 2 * dx - dz;
+                let z0 = this._start.z;
+                let x0 = this._start.x;
+                let y0 = this._start.y;
+                while (z0 !== this._end.z) {
+                    z0 += zs;
+                    if (p0 >= 0) {
+                        y0 += ys;
+                        p0 -= 2 * dz;
+                    }
+                    if (p1 >= 0) {
+                        x0 += xs;
+                        p1 -= 2 * dz;
+                    }
+                    p0 += 2 * dy;
+                    p1 += 2 * dx;
+                    this._curvePlot.push({
+                        x: x0,
+                        y: y0,
+                        z: z0
+                    });
+                }
+            }
+        }
+        plotManhattanLine3D() {
+            this._curvePlot.length = 0;
+            let x = this._start.x;
+            let y = this._start.y;
+            let z = this._start.z;
+            this._curvePlot.push({
+                x: this._start.x,
+                y: this._start.y,
+                z: this._start.z
+            });
+            while (x !== this._end.x || y !== this._end.y || z !== this._end.z) {
+                if (x < this._end.x) {
+                    x++;
+                    this._curvePlot.push({
+                        x,
+                        y,
+                        z
+                    });
+                } else if (x > this._end.x) {
+                    x--;
+                    this._curvePlot.push({
+                        x,
+                        y,
+                        z
+                    });
+                }
+                if (y < this._end.y) {
+                    y++;
+                    this._curvePlot.push({
+                        x,
+                        y,
+                        z
+                    });
+                } else if (y > this._end.y) {
+                    y--;
+                    this._curvePlot.push({
+                        x,
+                        y,
+                        z
+                    });
+                }
+                if (z < this._end.z) {
+                    z++;
+                    this._curvePlot.push({
+                        x,
+                        y,
+                        z
+                    });
+                } else if (z > this._end.z) {
+                    z--;
+                    this._curvePlot.push({
+                        x,
+                        y,
+                        z
+                    });
+                }
+            }
         }
     }
     const MAX_WORKER_OPERATIONS = 1e3;
@@ -6678,8 +6702,11 @@ var __webpack_exports__ = {};
         }
         return hours * mcHoursPerTick + minutes * mcMinsPerTick;
     }
-    function getInputMarkup(id, prefix, suffix) {
-        let markupStart = "[*input|$id=" + id;
+    function getInputMarkup(id, prefix, suffix, showUnset = false) {
+        let markupStart = "[~*input|$id=" + id;
+        if (showUnset) {
+            markupStart = markupStart.concat("|showUnset");
+        }
         if (prefix) {
             markupStart = markupStart.concat("|$format=", prefix, "*input");
         } else {
@@ -6688,9 +6715,9 @@ var __webpack_exports__ = {};
         if (suffix) {
             markupStart = markupStart.concat(suffix);
         }
-        return markupStart.concat("]");
+        return markupStart.concat("~]");
     }
-    const newLineMarkup = "[*newLine]";
+    const newLineMarkup = "[~*newLine~]";
     class SharedControlImpl {
         constructor(session, parentTool, parentPropertyPane, controlName, localizationPrefix) {
             this._session = session;
@@ -7988,6 +8015,10 @@ var __webpack_exports__ = {};
             super.deactivateControl();
             this._destroyControlUI();
         }
+        forceTargetMode(value) {
+            this._cursorTargetMode.set(value);
+            this._updateCursorProperties(this.session, this._mouseControlMode.value, value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
+        }
         _destroyControlUI() {
             if (this._controlRootPane) {
                 this.propertyPane.removeSubPane(this._controlRootPane);
@@ -8996,6 +9027,8 @@ var __webpack_exports__ = {};
         TelemetrySource["Workbench"] = "WORKBENCH";
         TelemetrySource["RealmsUpload"] = "REALMS_UPLOAD";
         TelemetrySource["Pencil"] = "PENCIL";
+        TelemetrySource["Scale"] = "SCALE";
+        TelemetrySource["Jigsaw"] = "JIGSAW";
     })(TelemetrySource || (TelemetrySource = {}));
     function fireTelemetryEvent(player, source, eventName, properties = {}) {
         if (SHOULD_LOG_TELEMETRY) {
@@ -9016,6 +9049,235 @@ var __webpack_exports__ = {};
                 return;
             }
             fireTelemetryEvent(this._player, this._source, eventName, properties);
+        }
+    }
+    class ModalDialogConfirmation {
+        constructor(session, parentPane) {
+            this._message = makeObservable("");
+            this._session = session;
+            this._parentPane = parentPane;
+            this._pane = this._parentPane.createModalOverlayPane({
+                title: "editor.sharedUtils.modaldialogconfirmation.title"
+            });
+            this._pane.contentPane.addText(this._message, {
+                alignment: LayoutAlignment.Center
+            });
+            this._pane.contentPane.addText("", {
+                border: false,
+                alignment: LayoutAlignment.Center
+            });
+            this._pane.contentPane.addDivider();
+            this._pane.contentPane.addButton((() => {
+                this._pane.hide();
+                this._parentPane.setActiveModalOverlay("");
+                this._resolve?.();
+                this._reject = undefined;
+                this._resolve = undefined;
+            }), {
+                title: "editor.sharedUtils.modaldialogconfirmation.yes",
+                variant: ButtonPropertyItemVariant.Destructive
+            });
+            this._pane.contentPane.addButton((() => {
+                this._pane.hide();
+                this._parentPane.setActiveModalOverlay("");
+                this._reject?.(new Error("Cancelled"));
+                this._reject = undefined;
+                this._resolve = undefined;
+            }), {
+                title: "editor.sharedUtils.modaldialogconfirmation.cancel"
+            });
+            this._parentPane.onPropertyPaneVisibilityUpdated.subscribe((eventData => {
+                if (this._resolve !== undefined || this._reject !== undefined) {
+                    if (eventData.isVisible) {
+                        throw new Error("Something went wrong - dialog is being activated while promises are still pending");
+                    } else {
+                        if (this._resolve !== undefined || this._reject !== undefined) {
+                            this._reject?.(new Error("Parent pane closed while dialog was active"));
+                            this._reject = undefined;
+                            this._resolve = undefined;
+                        }
+                        this._pane.hide();
+                        this._parentPane.setActiveModalOverlay("");
+                    }
+                }
+            }));
+        }
+        async activate(message) {
+            if (this._parentPane.getActiveModalOverlayId() !== undefined) {
+                this._pane.hide();
+                throw new Error("Another modal overlay is already active");
+            }
+            this._message.set(message);
+            this._parentPane.setActiveModalOverlay(this._pane.id);
+            this._pane.show();
+            return new Promise(((resolve, reject) => {
+                this._resolve = resolve;
+                this._reject = reject;
+            }));
+        }
+    }
+    class ModalDialogStringInput {
+        get name() {
+            return this._name;
+        }
+        constructor(session, parentPane, validate) {
+            this._name = (0, server_editor_namespaceObject.makeObservable)("");
+            this._message = (0, server_editor_namespaceObject.makeObservable)("");
+            this._session = session;
+            this._parentPane = parentPane;
+            this._name.set("");
+            this._message.set("");
+            this._validate = validate;
+            this._pane = this._parentPane.createModalOverlayPane({});
+            this._pane.contentPane.addText(this._message);
+            this._pane.contentPane.addString(this._name, {
+                hiddenLabel: true
+            });
+            this._pane.contentPane.addText("", {
+                border: false,
+                alignment: server_editor_namespaceObject.LayoutAlignment.Center
+            });
+            this._pane.contentPane.addDivider();
+            this._pane.contentPane.addButton((() => {
+                if (this._validate && !this._validate(this._name.value)) {
+                    this._session.log.error("Invalid name provided");
+                    return;
+                }
+                this._pane.hide();
+                this._parentPane.setActiveModalOverlay("");
+                this._resolve?.(this._name.value);
+                this._reject = undefined;
+                this._resolve = undefined;
+            }), {
+                title: "editor.sharedUtils.modaldialogstringinput.ok"
+            });
+            this._pane.contentPane.addButton((() => {
+                this._pane.hide();
+                this._parentPane.setActiveModalOverlay("");
+                this._reject?.(new Error("Cancelled"));
+                this._reject = undefined;
+                this._resolve = undefined;
+            }), {
+                title: "editor.sharedUtils.modaldialogstringinput.cancel"
+            });
+            this._parentPane.onPropertyPaneVisibilityUpdated.subscribe((eventData => {
+                if (this._resolve !== undefined || this._reject !== undefined) {
+                    if (eventData.isVisible) {
+                        throw new Error("Something went wrong - dialog is being activated while promises are still pending");
+                    } else {
+                        if (this._resolve !== undefined || this._reject !== undefined) {
+                            this._reject?.(new Error("Parent pane closed while dialog was active"));
+                            this._parentPane.setActiveModalOverlay("");
+                            this._reject = undefined;
+                            this._resolve = undefined;
+                        }
+                        this._pane.hide();
+                    }
+                }
+            }));
+        }
+        async activate(initialInputString, title, message) {
+            if (this._parentPane.getActiveModalOverlayId() !== undefined) {
+                this._pane.hide();
+                throw new Error("Another modal overlay is already active");
+            }
+            this._name.set(initialInputString);
+            this._message.set(message);
+            this._pane.contentPane.setTitle(title);
+            this._parentPane.setActiveModalOverlay(this._pane.id);
+            this._pane.show();
+            return new Promise(((resolve, reject) => {
+                this._resolve = resolve;
+                this._reject = reject;
+            }));
+        }
+    }
+    const weatherChangeListeners = new Map;
+    const WeatherExtensionChangeEventPayloadId = "editor::core::WeatherChangeRequest";
+    var WeatherChangeMessageType;
+    (function(WeatherChangeMessageType) {
+        WeatherChangeMessageType[WeatherChangeMessageType["Change"] = 0] = "Change";
+        WeatherChangeMessageType[WeatherChangeMessageType["Restore"] = 1] = "Restore";
+    })(WeatherChangeMessageType || (WeatherChangeMessageType = {}));
+    function requestWeatherChange(uniqueId, weatherType) {
+        const payload = {
+            type: WeatherChangeMessageType.Change,
+            uniqueId,
+            WeatherType: weatherType
+        };
+        server_namespaceObject.system.sendScriptEvent(WeatherExtensionChangeEventPayloadId, JSON.stringify(payload));
+    }
+    function restoreWeatherChange(uniqueId) {
+        const payload = {
+            type: WeatherChangeMessageType.Restore,
+            uniqueId
+        };
+        server_namespaceObject.system.sendScriptEvent(WeatherExtensionChangeEventPayloadId, JSON.stringify(payload));
+    }
+    function subscribeWeatherChangeMessages(change, restore) {
+        const handle = guid();
+        const subscription = server_namespaceObject.system.afterEvents.scriptEventReceive.subscribe((e => {
+            if (e.id === WeatherExtensionChangeEventPayloadId) {
+                const payloadObject = JSON.parse(e.message);
+                if (payloadObject.type === WeatherChangeMessageType.Change) {
+                    change(payloadObject.uniqueId, payloadObject.WeatherType);
+                } else if (payloadObject.type === WeatherChangeMessageType.Restore) {
+                    restore(payloadObject.uniqueId);
+                }
+            }
+        }));
+        weatherChangeListeners.set(handle, subscription);
+        return handle;
+    }
+    function unsubscribeWeatherChangeMessages(handle) {
+        const subscription = weatherChangeListeners.get(handle);
+        if (subscription) {
+            system.afterEvents.scriptEventReceive.unsubscribe(subscription);
+            weatherChangeListeners.delete(handle);
+        }
+    }
+    const timeChangeListeners = new Map;
+    const TimeOfDayExtensionChangeEventPayloadId = "editor::core::TimeOfDayChangeRequest";
+    var TimeOfDayChangeMessageType;
+    (function(TimeOfDayChangeMessageType) {
+        TimeOfDayChangeMessageType[TimeOfDayChangeMessageType["Change"] = 0] = "Change";
+        TimeOfDayChangeMessageType[TimeOfDayChangeMessageType["Restore"] = 1] = "Restore";
+    })(TimeOfDayChangeMessageType || (TimeOfDayChangeMessageType = {}));
+    function requestTimeOfDayChange(uniqueId, timeOfDay) {
+        const payload = {
+            type: TimeOfDayChangeMessageType.Change,
+            uniqueId,
+            timeOfDay
+        };
+        server_namespaceObject.system.sendScriptEvent(TimeOfDayExtensionChangeEventPayloadId, JSON.stringify(payload));
+    }
+    function restoreTimeOfDayChange(uniqueId) {
+        const payload = {
+            type: TimeOfDayChangeMessageType.Restore,
+            uniqueId
+        };
+        server_namespaceObject.system.sendScriptEvent(TimeOfDayExtensionChangeEventPayloadId, JSON.stringify(payload));
+    }
+    function subscribeTimeOfDayChangeMessages(change, restore) {
+        const handle = guid();
+        const subscription = server_namespaceObject.system.afterEvents.scriptEventReceive.subscribe((e => {
+            if (e.id === TimeOfDayExtensionChangeEventPayloadId) {
+                const payloadObject = JSON.parse(e.message);
+                if (payloadObject.type === TimeOfDayChangeMessageType.Change) {
+                    change(payloadObject.uniqueId, payloadObject.timeOfDay);
+                } else if (payloadObject.type === TimeOfDayChangeMessageType.Restore) {
+                    restore(payloadObject.uniqueId);
+                }
+            }
+        }));
+        timeChangeListeners.set(handle, subscription);
+        return handle;
+    }
+    function unsubscribeTimeOfDayChangeMessages(handle) {
+        const subscription = timeChangeListeners.get(handle);
+        if (subscription) {
+            server_namespaceObject.system.afterEvents.scriptEventReceive.unsubscribe(subscription);
+            timeChangeListeners.delete(handle);
         }
     }
     class logInterface {
@@ -10128,6 +10390,15 @@ var __webpack_exports__ = {};
         LineTelemetry["Nudge"] = "Nudge";
         LineTelemetry["Move"] = "Move";
     })(LineTelemetry || (LineTelemetry = {}));
+    var CurveType;
+    (function(CurveType) {
+        CurveType[CurveType["None"] = 0] = "None";
+        CurveType[CurveType["Hermite"] = 1] = "Hermite";
+    })(CurveType || (CurveType = {}));
+    var EaseType;
+    (function(EaseType) {
+        EaseType[EaseType["Linear"] = 0] = "Linear";
+    })(EaseType || (EaseType = {}));
     class LinePreviewMap {
         constructor(uiSession) {
             this._uiSession = uiSession;
@@ -10163,7 +10434,7 @@ var __webpack_exports__ = {};
                 if (value !== undefined) {
                     if (value === 1) {
                         this._locationMapping.delete(key);
-                        removedPts.push(this.stringToVector3(key));
+                        removedPts.push(points[i]);
                     } else {
                         this._locationMapping.set(key, value - 1);
                     }
@@ -10266,6 +10537,9 @@ var __webpack_exports__ = {};
             });
             this._widget.addGuideComponent("position_guide");
         }
+        get widget() {
+            return this._widget;
+        }
         get isSeparate() {
             return this._isSeparate;
         }
@@ -10312,21 +10586,223 @@ var __webpack_exports__ = {};
             return results;
         }
         teardown() {
+            this.removeSplineComponent();
             this._widget?.delete();
+        }
+        getSplineComponentInterpPoints() {
+            if (this._splineComponent) {
+                let interpPoints = this._splineComponent.getInterpolatedPoints();
+                for (const pts of interpPoints) {
+                    pts.x = Math.floor(pts.x);
+                    pts.y = Math.floor(pts.y);
+                    pts.z = Math.floor(pts.z);
+                }
+                interpPoints = interpPoints.filter(((obj1, i, arr) => arr.findIndex((obj2 => lib.Vector3Utils.equals(obj2, obj1))) === i));
+                interpPoints.shift();
+                return interpPoints;
+            }
+            return [];
+        }
+        addSplineComponent(widgets) {
+            if (this._splineComponent) {
+                this.removeSplineComponent();
+            }
+            this._splineComponent = this._widget.addSplineComponent("spline", {
+                splineType: server_editor_namespaceObject.SplineType.Hermite,
+                controlPoints: widgets,
+                offset: {
+                    x: .5,
+                    y: .5,
+                    z: .5
+                },
+                visible: false
+            });
+        }
+        addControlPointsToSplineComponent(widgets) {
+            if (this._splineComponent) {
+                let prevWidgets = this._splineComponent.getControlPoints();
+                prevWidgets = prevWidgets.concat(widgets);
+                this._splineComponent.setControlPoints(prevWidgets);
+            }
+        }
+        removeControlPointsFromSplineComponent(widgets) {
+            if (this._splineComponent) {
+                const prevWidgets = this._splineComponent.getControlPoints();
+                const newWidgets = prevWidgets.filter((value => !widgets.includes(value)));
+                this._splineComponent.setControlPoints(newWidgets);
+            }
+        }
+        removeAllControlPointsFromSplineComponent() {
+            if (this._splineComponent) {
+                this._splineComponent.setControlPoints([]);
+            }
+        }
+        removeSplineComponent() {
+            if (this._splineComponent) {
+                this._widget.deleteComponent(this._splineComponent);
+                this._splineComponent = undefined;
+            }
         }
     }
     ControlPoint.MAP_MARKER_ENTITY_NAME = "editor:ruler_idle";
-    class LineSegment extends BlockLine {
-        constructor(uiSession, horizontalWeight, verticalWeight, blockLineTypeAlgorithm, linePreviewMap, requestCursorTargetMode, requestGroundLevelAtLocation, start, end, startData, endData) {
+    class SegmentSelector {
+        constructor(location, visible, curveType, easeType, widgetGroup, gizmoMovedEvent, gizmoGrabbedEvent, gizmoReleasedEvent) {
+            this._location = location;
+            this._visible = visible;
+            this._curveType = curveType;
+            this._easeType = easeType;
+            this._curveWithPrevSegment = false;
+            this._widget = widgetGroup.createWidget(location, {
+                selectable: visible,
+                snapToBlockLocation: true,
+                visible,
+                collisionOffset: {
+                    x: .5,
+                    y: .5,
+                    z: .5
+                },
+                collisionRadius: 0,
+                widgetName: "Line Tool - Segment Selector",
+                stateChangeEvent: data => {
+                    if (data.location !== undefined && !lib.Vector3Utils.equals(data.location, this._location)) {
+                        const textComponent = data.widget.getComponent("position_text");
+                        if (textComponent) {
+                            textComponent.label = lib.Vector3Utils.toString(data.location, {
+                                decimals: 1
+                            });
+                        }
+                    }
+                }
+            });
+            this._widget.addEntityComponent("marker", SegmentSelector.MAP_MARKER_ENTITY_NAME, {
+                isClickable: false,
+                visible: this._visible,
+                offset: {
+                    x: .5,
+                    y: .25,
+                    z: .5
+                }
+            });
+            this._widget.addTextComponent("position_text", lib.Vector3Utils.toString(location, {
+                decimals: 1
+            }), {
+                offset: {
+                    x: .5,
+                    y: 1,
+                    z: .5
+                },
+                visible: this._visible
+            });
+            this._movementGizmo = this._widget.addGizmoComponent("position_gizmo", {
+                offset: {
+                    x: .5,
+                    y: .5,
+                    z: .5
+                },
+                visible,
+                enablePlanes: true,
+                stateChangeEvent: data => {
+                    if (data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.CornerMoved || data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.OriginMoved) {
+                        if (!lib.Vector3Utils.equals(this._location, data.widget.location)) {
+                            gizmoMovedEvent(this._location, data.widget.location, data.widget, this);
+                        }
+                    } else if (data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.OriginGrabbed || data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.CornerGrabbed) {
+                        gizmoGrabbedEvent(data.widget.location);
+                    } else if (data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.OriginReleased || data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.CornerReleased) {
+                        gizmoReleasedEvent(data.widget.location);
+                    }
+                }
+            });
+            this._widget.addGuideComponent("position_guide");
+        }
+        get visible() {
+            return this._widget.visible;
+        }
+        set visible(value) {
+            this._widget.visible = value;
+        }
+        get isSelected() {
+            return this._widget.selected;
+        }
+        set isSelected(value) {
+            this._widget.selected = value;
+            this._movementGizmo.activated = value;
+        }
+        get curveType() {
+            return this._curveType;
+        }
+        get widget() {
+            return this._widget;
+        }
+        set curveType(curveType) {
+            this._curveType = curveType;
+        }
+        get easeType() {
+            return this._easeType;
+        }
+        set easeType(easeType) {
+            this._easeType = easeType;
+        }
+        get curveWithPrevSegment() {
+            return this._curveWithPrevSegment;
+        }
+        set curveWithPrevSegment(curvesWithPrev) {
+            this._curveWithPrevSegment = curvesWithPrev;
+        }
+        getSplineControlPoint() {
+            return this._splineComponentControlPoint;
+        }
+        setSplineControlPoint(controlPoint) {
+            this._splineComponentControlPoint = controlPoint;
+        }
+        getBaseSplineSegment() {
+            return this._baseSplineSegment;
+        }
+        setBaseSplineSegment(segment) {
+            this._baseSplineSegment = segment;
+        }
+        getLocation() {
+            return this._location;
+        }
+        moveSelector(location, start, end, moveWidget = false) {
+            if (moveWidget) {
+                this._widget.location = location;
+            }
+            this._location = location;
+            if (start) {
+                if (lib.Vector3Utils.equals(this._location, start)) {
+                    this._visible = false;
+                    this._widget.visible = false;
+                    return;
+                }
+            }
+            if (end) {
+                if (lib.Vector3Utils.equals(this._location, end)) {
+                    this._visible = false;
+                    this._widget.visible = false;
+                    return;
+                }
+            }
+            this._widget.visible = true;
+        }
+        teardown() {
+            this._widget?.delete();
+        }
+    }
+    SegmentSelector.MAP_MARKER_ENTITY_NAME = "editor:ruler_idle";
+    class CurveSegment extends BlockCurve {
+        constructor(uiSession, horizontalWeight, verticalWeight, linePreviewMap, requestCursorTargetMode, requestGroundLevelAtLocation, start, end, startData, endData) {
             super(start.location, end.location, requestCursorTargetMode, requestGroundLevelAtLocation, {
                 horizontalWeight,
                 verticalWeight,
-                blockLineType: blockLineTypeAlgorithm,
                 startData,
-                endData
+                endData,
+                contour: false
             });
+            this._startControlPoint = start;
+            this._endControlPoint = end;
             this._linePreviewMap = linePreviewMap;
-            this._visible = false;
+            this._visible = true;
         }
         get visible() {
             return this._visible;
@@ -10335,19 +10811,65 @@ var __webpack_exports__ = {};
             super.teardown();
         }
         set visible(newIsVisible) {
-            void this.generateLine().then((() => {
+            if (this._visible !== newIsVisible) {
+                if (newIsVisible) {
+                    this._linePreviewMap.addPoints([ ...this.curveDataIterator ]);
+                } else {
+                    this._linePreviewMap.removePoints([ ...this.curveDataIterator ]);
+                }
+                this._visible = newIsVisible;
+            }
+        }
+        getStartControlPoint() {
+            return this._startControlPoint;
+        }
+        getEndControlPoint() {
+            return this._endControlPoint;
+        }
+    }
+    class LineSegment extends BlockLine {
+        constructor(uiSession, horizontalWeight, verticalWeight, blockLineTypeAlgorithm, linePreviewMap, requestCursorTargetMode, requestGroundLevelAtLocation, start, end, startData, endData) {
+            const curveOptions = {
+                horizontalWeight,
+                verticalWeight,
+                startData,
+                endData
+            };
+            super(start.location, end.location, requestCursorTargetMode, requestGroundLevelAtLocation, {
+                curveOptions,
+                blockLineType: blockLineTypeAlgorithm
+            });
+            this._linePreviewMap = linePreviewMap;
+            this._visible = false;
+            this._startControlPoint = start;
+            this._endControlPoint = end;
+        }
+        get visible() {
+            return this._visible;
+        }
+        getStartControlPoint() {
+            return this._startControlPoint;
+        }
+        getEndControlPoint() {
+            return this._endControlPoint;
+        }
+        teardown() {
+            super.teardown();
+        }
+        set visible(newIsVisible) {
+            void this.generateCurve().then((() => {
                 if (this._visible !== newIsVisible) {
                     if (newIsVisible) {
-                        this._linePreviewMap.addPoints([ ...this.lineDataIterator ]);
+                        this._linePreviewMap.addPoints([ ...this.curveDataIterator ]);
                     } else {
-                        this._linePreviewMap.removePoints([ ...this.lineDataIterator ]);
+                        this._linePreviewMap.removePoints([ ...this.curveDataIterator ]);
                     }
                     this._visible = newIsVisible;
                 }
             }));
         }
     }
-    class LineManager {
+    class SegmentsManager {
         constructor(uiSession, blockLineTypeAlgorithm, horizontalWeight, verticalWeight, requestStartTransaction, requestCommitTransaction, requestCancelTransaction) {
             this.pointGizmoMovedEventHandler = (oldLocation, newLocation, widget) => {
                 const delta = lib.Vector3Utils.subtract(newLocation, oldLocation);
@@ -10356,6 +10878,27 @@ var __webpack_exports__ = {};
                         widget.location = oldLocation;
                     }
                 }
+            };
+            this.segmentSelectorMovedEventHandler = (oldLocation, newLocation, widget, segmentSelector) => {
+                const delta = lib.Vector3Utils.subtract(newLocation, oldLocation);
+                if (lib.Vector3Utils.magnitude(delta) !== 0) {
+                    if (!this.handleMoveSelector(segmentSelector, delta)) {
+                        widget.location = oldLocation;
+                    }
+                }
+            };
+            this.segmentSelectorGizmoGrabbedEventHandler = location => {
+                this._segmentGizmoGrabbedStartLocation = location;
+                this._requestStartTransaction("SegmentSelectorGizmoMove");
+            };
+            this.segmentSelectorGizmoReleasedEventHandler = location => {
+                if (this._segmentGizmoGrabbedStartLocation !== undefined && !lib.Vector3Utils.equals(location, this._segmentGizmoGrabbedStartLocation)) {
+                    this._requestCommitTransaction("SegmentSelectorGizmoMove");
+                } else {
+                    this._uiSession.log.debug("Canceling transaction - move gizmo was released but not moved.");
+                    this._requestCancelTransaction();
+                }
+                this._segmentGizmoGrabbedStartLocation = undefined;
             };
             this.pointGizmoGrabbedEventHandler = location => {
                 this._gizmoGrabbedStartLocation = location;
@@ -10395,10 +10938,49 @@ var __webpack_exports__ = {};
             this._linePreviewMap = new LinePreviewMap(this._uiSession);
             this._controlPoints = [];
             this._lineSegments = [];
+            this._segmentSelectors = [];
             this._gizmoGrabbedStartLocation = undefined;
         }
         get controlPoints() {
             return this._controlPoints;
+        }
+        get segmentSelectors() {
+            return this._segmentSelectors;
+        }
+        get selectedSegmentSelector() {
+            const selectors = [];
+            let index = 0;
+            for (let i = 0; i < this._segmentSelectors.length; ++i) {
+                if (this._segmentSelectors[i].isSelected) {
+                    index = i;
+                    selectors.push(this._segmentSelectors[i]);
+                }
+            }
+            if (selectors.length > 1 || selectors.length === 0) {
+                return undefined;
+            } else {
+                return this._segmentSelectors[index];
+            }
+        }
+        selectedSegmentSelectorHasCurveInPreviousSegment() {
+            const selector = this.selectedSegmentSelector;
+            if (!selector) {
+                return false;
+            }
+            if (this._segmentSelectors.length === 1) {
+                return false;
+            }
+            let currIndex = 0;
+            for (let i = 0; i < this._segmentSelectors.length; ++i) {
+                if (this._segmentSelectors[i] === selector) {
+                    currIndex = i;
+                    break;
+                }
+            }
+            if (currIndex === 0) {
+                return false;
+            }
+            return this._segmentSelectors[currIndex - 1].curveType === CurveType.Hermite;
         }
         get selectedPoints() {
             const points = [];
@@ -10420,7 +11002,12 @@ var __webpack_exports__ = {};
                     this.applyPreviewChangeResults(this._controlPoints[i].setBlockPointType(blockPointType));
                 }
                 for (let i = 0; i < this._lineSegments.length; i++) {
-                    this._lineSegments[i].setBlockLineType(newAlgorithm).then((result => {
+                    this._lineSegments[i].setOptions({
+                        blockLineType: newAlgorithm,
+                        curveOptions: {
+                            contour: newAlgorithm === BlockLineType.Staggered ? true : false
+                        }
+                    }).then((result => {
                         this.applyPreviewChangeResults(result);
                     })).catch((err => {
                         this._uiSession.log.error(err.message);
@@ -10428,8 +11015,9 @@ var __webpack_exports__ = {};
                 }
             }
         }
-        setState(state) {
+        setState(state, segmentSelectorStates) {
             this.clearAll();
+            let segmentSelectorIndex = 0;
             for (let i = 0; i < state.length; i++) {
                 const newPoint = new ControlPoint(state[i].location, state[i].separation, state[i].weightsOverridden, state[i].usingUniformValue, state[i].horizontalWeight, state[i].verticalWeight, this._blockLineTypeAlgorithm, this._linePreviewMap, this._widgetGroup, this.cursorTargetModeRequested, this.groundLevelAtLocationRequested, this.pointGizmoMovedEventHandler, this.pointGizmoGrabbedEventHandler, this.pointGizmoReleasedEventHandler);
                 this._controlPoints.push(newPoint);
@@ -10437,15 +11025,68 @@ var __webpack_exports__ = {};
                 newPoint.visible = true;
                 if (i > 0 && !state[i].separation) {
                     const startPoint = this._controlPoints[i - 1];
-                    const newLineSegment = new LineSegment(this._uiSession, this._horizontalWeight, this._verticalWeight, this._blockLineTypeAlgorithm, this._linePreviewMap, this.cursorTargetModeRequested, this.groundLevelAtLocationRequested, this._controlPoints[i - 1], this._controlPoints[i], startPoint.isWeightsOverridden ? {
-                        horizontalWeight: startPoint.horizontalWeight,
-                        verticalWeight: startPoint.verticalWeight
-                    } : undefined, newPoint.isWeightsOverridden ? {
-                        horizontalWeight: newPoint.horizontalWeight,
-                        verticalWeight: newPoint.verticalWeight
-                    } : undefined);
-                    this._lineSegments.push(newLineSegment);
-                    newLineSegment.visible = true;
+                    const oldSegmentSelector = segmentSelectorStates[segmentSelectorIndex];
+                    segmentSelectorIndex++;
+                    const newSegmentSelector = new SegmentSelector(oldSegmentSelector.location, !lib.Vector3Utils.equals(oldSegmentSelector.location, startPoint.location) || !lib.Vector3Utils.equals(oldSegmentSelector.location, newPoint.location), oldSegmentSelector.curveType, oldSegmentSelector.easeType, this._widgetGroup, this.segmentSelectorMovedEventHandler, this.segmentSelectorGizmoGrabbedEventHandler, this.segmentSelectorGizmoReleasedEventHandler);
+                    newSegmentSelector.isSelected = oldSegmentSelector.isSelected;
+                    newSegmentSelector.curveWithPrevSegment = oldSegmentSelector.mergeWithPreviousCurve;
+                    this._segmentSelectors.push(newSegmentSelector);
+                    if (newSegmentSelector.curveType === CurveType.None) {
+                        const newLineSegment = new LineSegment(this._uiSession, this._horizontalWeight, this._verticalWeight, this._blockLineTypeAlgorithm, this._linePreviewMap, this.cursorTargetModeRequested, this.groundLevelAtLocationRequested, this._controlPoints[i - 1], this._controlPoints[i], startPoint.isWeightsOverridden ? {
+                            horizontalWeight: startPoint.horizontalWeight,
+                            verticalWeight: startPoint.verticalWeight
+                        } : undefined, newPoint.isWeightsOverridden ? {
+                            horizontalWeight: newPoint.horizontalWeight,
+                            verticalWeight: newPoint.verticalWeight
+                        } : undefined);
+                        this._lineSegments.push(newLineSegment);
+                        newLineSegment.visible = true;
+                    } else {
+                        const newCurveSegment = new CurveSegment(this._uiSession, this._horizontalWeight, this._verticalWeight, this._linePreviewMap, this.cursorTargetModeRequested, this.groundLevelAtLocationRequested, startPoint, newPoint, startPoint.isWeightsOverridden ? {
+                            horizontalWeight: startPoint.horizontalWeight,
+                            verticalWeight: startPoint.verticalWeight
+                        } : undefined, newPoint.isWeightsOverridden ? {
+                            horizontalWeight: newPoint.horizontalWeight,
+                            verticalWeight: newPoint.verticalWeight
+                        } : undefined);
+                        this._lineSegments.push(newCurveSegment);
+                        const widgets = [ newSegmentSelector.widget, newPoint.widget ];
+                        startPoint.addSplineComponent(widgets);
+                        const index = this._lineSegments.length - 1;
+                        let findIndex = index - 1;
+                        while (findIndex >= 0 && this._segmentSelectors[findIndex].curveType !== CurveType.None && this._segmentSelectors[findIndex].curveWithPrevSegment) {
+                            findIndex--;
+                        }
+                        if (newSegmentSelector.curveWithPrevSegment) {
+                            const startPoint = this._lineSegments[findIndex].getStartControlPoint();
+                            const startSegment = this._lineSegments[findIndex];
+                            startSegment.visible = false;
+                            let addedWidgets = [ this._segmentSelectors[findIndex].widget, startSegment.getEndControlPoint().widget ];
+                            for (let i = findIndex + 1; i <= index; i++) {
+                                addedWidgets = addedWidgets.concat([ this._segmentSelectors[i].widget, this._lineSegments[i].getEndControlPoint().widget ]);
+                                this._lineSegments[i].visible = false;
+                                void this._lineSegments[i].updateCurvePlot([]);
+                                this._segmentSelectors[i].setSplineControlPoint(startPoint);
+                                this._segmentSelectors[i].setBaseSplineSegment(startSegment);
+                            }
+                            startPoint.removeAllControlPointsFromSplineComponent();
+                            startPoint.addControlPointsToSplineComponent(addedWidgets);
+                            const interpPoints = startPoint.getSplineComponentInterpPoints();
+                            startSegment.updateCurvePlot(interpPoints).then((() => {
+                                startSegment.visible = true;
+                            })).catch((err => {
+                                this._uiSession.log.error(err.message);
+                            }));
+                        } else {
+                            newCurveSegment.visible = false;
+                            const interpPoints = startPoint.getSplineComponentInterpPoints();
+                            newCurveSegment.updateCurvePlot(interpPoints).then((() => {
+                                newCurveSegment.visible = true;
+                            })).catch((err => {
+                                this._uiSession.log.error(err.message);
+                            }));
+                        }
+                    }
                 }
             }
         }
@@ -10456,7 +11097,7 @@ var __webpack_exports__ = {};
             const newPoint = new ControlPoint(targetLocation, isSeparate, false, false, this._horizontalWeight, this._verticalWeight, this._blockLineTypeAlgorithm, this._linePreviewMap, this._widgetGroup, this.cursorTargetModeRequested, this.groundLevelAtLocationRequested, this.pointGizmoMovedEventHandler, this.pointGizmoGrabbedEventHandler, this.pointGizmoReleasedEventHandler);
             this._controlPoints.push(newPoint);
             newPoint.isSelected = true;
-            newPoint.visible = this._blockLineTypeAlgorithm !== BlockLineType.DirectContour && this._blockLineTypeAlgorithm !== BlockLineType.StaggeredContour;
+            newPoint.visible = true;
             if (this._controlPoints.length > 1 && !isSeparate) {
                 const previousControlPoint = this._controlPoints[this._controlPoints.length - 2];
                 const newLineSegment = new LineSegment(this._uiSession, this._horizontalWeight, this._verticalWeight, this._blockLineTypeAlgorithm, this._linePreviewMap, this.cursorTargetModeRequested, this.groundLevelAtLocationRequested, previousControlPoint, newPoint, previousControlPoint.isWeightsOverridden ? {
@@ -10467,15 +11108,85 @@ var __webpack_exports__ = {};
                     verticalWeight: newPoint.verticalWeight
                 } : undefined);
                 this._lineSegments.push(newLineSegment);
-                newLineSegment.visible = true;
+                const midPointRes = newLineSegment.getMidPoint();
+                const midPoint = {
+                    ...previousControlPoint.location
+                };
+                if (midPointRes) {
+                    midPoint.x = Math.round(midPointRes.x);
+                    midPoint.y = Math.round(midPointRes.y);
+                    midPoint.z = Math.round(midPointRes.z);
+                }
+                const newSegmentSelector = new SegmentSelector(midPoint, !lib.Vector3Utils.equals(midPoint, previousControlPoint.location) || !lib.Vector3Utils.equals(midPoint, newPoint.location), CurveType.None, EaseType.Linear, this._widgetGroup, this.segmentSelectorMovedEventHandler, this.segmentSelectorGizmoGrabbedEventHandler, this.segmentSelectorGizmoReleasedEventHandler);
+                if (!this._segmentSelectors.length) {
+                    newLineSegment.visible = true;
+                    this._segmentSelectors.push(newSegmentSelector);
+                    return;
+                }
+                const prevSegSelector = this._segmentSelectors[this._segmentSelectors.length - 1];
+                newSegmentSelector.curveType = prevSegSelector.curveType;
+                newSegmentSelector.easeType = prevSegSelector.easeType;
+                newSegmentSelector.curveWithPrevSegment = prevSegSelector.curveWithPrevSegment;
+                this._segmentSelectors.push(newSegmentSelector);
+                if (newSegmentSelector.curveType === CurveType.Hermite) {
+                    this._lineSegments[this._lineSegments.length - 1] = new CurveSegment(this._uiSession, this._horizontalWeight, this._verticalWeight, this._linePreviewMap, this.cursorTargetModeRequested, this.groundLevelAtLocationRequested, previousControlPoint, newPoint, previousControlPoint.isWeightsOverridden ? {
+                        horizontalWeight: previousControlPoint.horizontalWeight,
+                        verticalWeight: previousControlPoint.verticalWeight
+                    } : undefined, newPoint.isWeightsOverridden ? {
+                        horizontalWeight: newPoint.horizontalWeight,
+                        verticalWeight: newPoint.verticalWeight
+                    } : undefined);
+                    const widgets = [ newSegmentSelector.widget, newPoint.widget ];
+                    previousControlPoint.addSplineComponent(widgets);
+                    if (newSegmentSelector.curveWithPrevSegment) {
+                        let findIndex = this._segmentSelectors.length - 1;
+                        while (findIndex >= 0 && this._segmentSelectors[findIndex].curveType !== CurveType.None && this._segmentSelectors[findIndex].curveWithPrevSegment) {
+                            findIndex--;
+                        }
+                        const baseSplineSegment = this._lineSegments[findIndex];
+                        const baseSplineControlPoint = this._lineSegments[findIndex].getStartControlPoint();
+                        newSegmentSelector.setBaseSplineSegment(baseSplineSegment);
+                        newSegmentSelector.setSplineControlPoint(baseSplineControlPoint);
+                        baseSplineControlPoint.addControlPointsToSplineComponent([ newSegmentSelector.widget, newPoint.widget ]);
+                        const interpPoints = baseSplineControlPoint.getSplineComponentInterpPoints();
+                        baseSplineSegment.updateCurvePlot(interpPoints).then((res => {
+                            this.applyPreviewChangeResults(res);
+                        })).catch((err => {
+                            this._uiSession.log.error(err.message);
+                        }));
+                    } else {
+                        const interpPoints = previousControlPoint.getSplineComponentInterpPoints();
+                        this._lineSegments[this._lineSegments.length - 1].updateCurvePlot(interpPoints).then((res => {
+                            this.applyPreviewChangeResults(res);
+                        })).catch((err => {
+                            this._uiSession.log.error(err.message);
+                        }));
+                    }
+                } else {
+                    newLineSegment.visible = true;
+                }
             }
+        }
+        handleMoveSelector(segmentSelector, delta) {
+            const index = this._segmentSelectors.findIndex((value => value === segmentSelector));
+            const selector = this._segmentSelectors[index];
+            if (selector.curveType === CurveType.None) {
+                return false;
+            }
+            const segment = this._lineSegments[index];
+            this.moveSelector(selector, lib.Vector3Utils.add(selector.getLocation(), delta), segment.start, segment.end);
+            return true;
         }
         clearAll() {
             for (let i = 0; i < this._controlPoints.length; i++) {
                 this._controlPoints[i].teardown();
             }
+            for (let i = 0; i < this._segmentSelectors.length; i++) {
+                this._segmentSelectors[i].teardown();
+            }
             this._controlPoints.length = 0;
             this._lineSegments.length = 0;
+            this._segmentSelectors.length = 0;
             this._linePreviewMap.clear();
         }
         clearSelectedPoints() {
@@ -10487,21 +11198,25 @@ var __webpack_exports__ = {};
                 this.clearAll();
             } else {
                 for (let i = 0; i < pointsToRemove.length; i++) {
-                    const pointIdx = this._controlPoints.findIndex((point => lib.Vector3Utils.equals(point.location, pointsToRemove[i].location)));
-                    if (pointIdx !== -1) {
-                        this._controlPoints[pointIdx].visible = false;
-                        this._controlPoints[pointIdx].teardown();
-                        this._controlPoints.splice(pointIdx, 1);
-                    }
                     const prevSegIdx = this._lineSegments.findIndex((segment => lib.Vector3Utils.equals(segment.end, pointsToRemove[i].location)));
                     if (prevSegIdx !== -1) {
                         this._lineSegments[prevSegIdx].visible = false;
                         this._lineSegments.splice(prevSegIdx, 1);
+                        this._segmentSelectors[prevSegIdx].teardown();
+                        this._segmentSelectors.splice(prevSegIdx, 1);
                     }
                     const nextSegIdx = this._lineSegments.findIndex((segment => lib.Vector3Utils.equals(segment.start, pointsToRemove[i].location)));
                     if (nextSegIdx !== -1) {
                         this._lineSegments[nextSegIdx].visible = false;
                         this._lineSegments.splice(nextSegIdx, 1);
+                        this._segmentSelectors[nextSegIdx].teardown();
+                        this._segmentSelectors.splice(nextSegIdx, 1);
+                    }
+                    const pointIdx = this._controlPoints.findIndex((point => lib.Vector3Utils.equals(point.location, pointsToRemove[i].location)));
+                    if (pointIdx !== -1) {
+                        this._controlPoints[pointIdx].visible = false;
+                        this._controlPoints[pointIdx].teardown();
+                        this._controlPoints.splice(pointIdx, 1);
                     }
                 }
                 for (let i = 1; i < this._controlPoints.length; i++) {
@@ -10519,6 +11234,17 @@ var __webpack_exports__ = {};
                             } : undefined);
                             this._lineSegments.push(newLineSegment);
                             newLineSegment.visible = true;
+                            const midPointRes = newLineSegment.getMidPoint();
+                            const midPoint = {
+                                ...start.location
+                            };
+                            if (midPointRes) {
+                                midPoint.x = Math.round(midPointRes.x);
+                                midPoint.y = Math.round(midPointRes.y);
+                                midPoint.z = Math.round(midPointRes.z);
+                            }
+                            const newSegmentSelector = new SegmentSelector(midPoint, !lib.Vector3Utils.equals(midPoint, start.location) || !lib.Vector3Utils.equals(midPoint, end.location), CurveType.None, EaseType.Linear, this._widgetGroup, this.segmentSelectorMovedEventHandler, this.segmentSelectorGizmoGrabbedEventHandler, this.segmentSelectorGizmoReleasedEventHandler);
+                            this._segmentSelectors.push(newSegmentSelector);
                         }
                     }
                 }
@@ -10535,28 +11261,43 @@ var __webpack_exports__ = {};
             }
         }
         moveSelectedPoints(translationVector, moveGizmo = false) {
-            const selectedPoints = [];
+            const selectedPoints = this.selectedPoints;
             const restrictedLocations = new Set;
             for (let i = 0; i < this._controlPoints.length; i++) {
-                if (this._controlPoints[i].isSelected) {
-                    selectedPoints.push(this._controlPoints[i]);
-                } else {
-                    restrictedLocations.add(`${this._controlPoints[i].location.x},${this._controlPoints[i].location.y},${this._controlPoints[i].location.z}`);
-                }
+                restrictedLocations.add(`${this._controlPoints[i].location.x},${this._controlPoints[i].location.y},${this._controlPoints[i].location.z}`);
             }
             if (selectedPoints.length === this._controlPoints.length) {
-                for (let i = 0; i < this._lineSegments.length; i++) {
-                    this._lineSegments[i].translateLine(translationVector).then((result => this.applyPreviewChangeResults(result))).catch((err => {
-                        this._uiSession.log.error(err.message);
-                    }));
-                }
                 for (let i = 0; i < this._controlPoints.length; i++) {
                     this.applyPreviewChangeResults(this._controlPoints[i].move(lib.Vector3Utils.add(this._controlPoints[i].location, translationVector), moveGizmo));
+                }
+                const alreadyMoved = new Map;
+                for (let i = 0; i < this._lineSegments.length; i++) {
+                    if (this._segmentSelectors[i].curveType === CurveType.None) {
+                        this._lineSegments[i].translatePoints(translationVector).then((result => {
+                            this.applyPreviewChangeResults(result);
+                            this.moveSelector(this._segmentSelectors[i], this._lineSegments[i].getMidPoint() ?? lib.Vector3Utils.add(this._segmentSelectors[i].getLocation(), translationVector), this._lineSegments[i].start, this._lineSegments[i].end, true);
+                        })).catch((err => {
+                            this._uiSession.log.error(err.message);
+                        }));
+                    } else {
+                        const startPoint = this._segmentSelectors[i].getSplineControlPoint() ?? this._lineSegments[i].getStartControlPoint();
+                        const segment = this._segmentSelectors[i].getBaseSplineSegment() ?? this._lineSegments[i];
+                        if (alreadyMoved.get(segment)) {
+                            continue;
+                        }
+                        alreadyMoved.set(segment, true);
+                        const interpPoints = startPoint.getSplineComponentInterpPoints();
+                        segment.updateCurvePlot(interpPoints).then((res => {
+                            this.applyPreviewChangeResults(res);
+                        })).catch((err => {
+                            this._uiSession.log.error(err.message);
+                        }));
+                    }
                 }
             } else {
                 for (let i = 0; i < selectedPoints.length; i++) {
                     const newLocation = lib.Vector3Utils.add(selectedPoints[i].location, translationVector);
-                    if (restrictedLocations.has(`${newLocation.x},${newLocation.y},${newLocation.z}`)) {
+                    if (!lib.Vector3Utils.equals(lib.VECTOR3_ZERO, translationVector) && restrictedLocations.has(`${newLocation.x},${newLocation.y},${newLocation.z}`)) {
                         this._uiSession.log.warning(`Cannot overlap control points!`);
                         return false;
                     }
@@ -10588,6 +11329,18 @@ var __webpack_exports__ = {};
                             verticalWeight: selectedPoints[i].verticalWeight
                         } : undefined).then((result => {
                             this.applyPreviewChangeResults(result);
+                            if (this._segmentSelectors[prevSegIdx].curveType === CurveType.None) {
+                                this.moveSelector(this._segmentSelectors[prevSegIdx], this._lineSegments[prevSegIdx].getMidPoint() ?? lib.Vector3Utils.add(this._segmentSelectors[prevSegIdx].getLocation(), translationVector), this._lineSegments[prevSegIdx].start, this._lineSegments[prevSegIdx].end, true);
+                            } else {
+                                const startPoint = this._segmentSelectors[prevSegIdx].getSplineControlPoint() ?? this._lineSegments[prevSegIdx].getStartControlPoint();
+                                const segment = this._segmentSelectors[prevSegIdx].getBaseSplineSegment() ?? this._lineSegments[prevSegIdx];
+                                const interpPoints = startPoint.getSplineComponentInterpPoints();
+                                segment.updateCurvePlot(interpPoints).then((res => {
+                                    this.applyPreviewChangeResults(res);
+                                })).catch((err => {
+                                    this._uiSession.log.error(err.message);
+                                }));
+                            }
                         })).catch((err => {
                             this._uiSession.log.error(err.message);
                         }));
@@ -10599,6 +11352,18 @@ var __webpack_exports__ = {};
                             verticalWeight: selectedPoints[i].verticalWeight
                         } : undefined).then((results => {
                             this.applyPreviewChangeResults(results);
+                            if (this._segmentSelectors[nextSegIdx].curveType === CurveType.None) {
+                                this.moveSelector(this._segmentSelectors[nextSegIdx], this._lineSegments[nextSegIdx].getMidPoint() ?? lib.Vector3Utils.add(this._segmentSelectors[nextSegIdx].getLocation(), translationVector), this._lineSegments[nextSegIdx].start, this._lineSegments[nextSegIdx].end, true);
+                            } else {
+                                const startPoint = this._segmentSelectors[nextSegIdx].getSplineControlPoint() ?? this._lineSegments[nextSegIdx].getStartControlPoint();
+                                const segment = this._segmentSelectors[nextSegIdx].getBaseSplineSegment() ?? this._lineSegments[nextSegIdx];
+                                const interpPoints = startPoint.getSplineComponentInterpPoints();
+                                segment.updateCurvePlot(interpPoints).then((res => {
+                                    this.applyPreviewChangeResults(res);
+                                })).catch((err => {
+                                    this._uiSession.log.error(err.message);
+                                }));
+                            }
                         })).catch((err => {
                             this._uiSession.log.error(err.message);
                         }));
@@ -10643,6 +11408,226 @@ var __webpack_exports__ = {};
                 if (this.moveSelectedPoints(delta)) {
                     selectedPoint.move(pointPosition, true);
                 }
+            }
+        }
+        updateSegmentSelectorValues(knotPosition, curveType, curveWithPrevSegment, easeType) {
+            let updated = false;
+            const segmentSelector = this.selectedSegmentSelector;
+            if (!segmentSelector) {
+                this._uiSession.log.error(`Changing a segment selector when one isn't selected`, {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+                return;
+            }
+            const delta = lib.Vector3Utils.subtract(segmentSelector.getLocation(), knotPosition);
+            const curveTypeChanged = segmentSelector.curveType !== curveType;
+            const curveWithPrevChanged = segmentSelector.curveWithPrevSegment !== curveWithPrevSegment;
+            if (!lib.Vector3Utils.equals(segmentSelector.getLocation(), knotPosition) || curveTypeChanged || curveWithPrevChanged || segmentSelector.easeType !== easeType || lib.Vector3Utils.magnitude(delta) !== 0) {
+                updated = true;
+            }
+            if (updated) {
+                const index = this._segmentSelectors.findIndex((value => value === segmentSelector));
+                if (index === -1) {
+                    this._uiSession.log.error(`Associated segment selector has no associated line segment`, {
+                        channelMask: server_editor_namespaceObject.LogChannel.All
+                    });
+                    return;
+                }
+                const segment = this._lineSegments[index];
+                segmentSelector.curveType = curveType;
+                segmentSelector.easeType = easeType;
+                segmentSelector.curveWithPrevSegment = curveWithPrevSegment;
+                let findIndex = index - 1;
+                while (findIndex >= 0 && this._segmentSelectors[findIndex].curveType !== CurveType.None && this._segmentSelectors[findIndex].curveWithPrevSegment) {
+                    findIndex--;
+                }
+                let maxIndex = index + 1;
+                while (maxIndex < this._segmentSelectors.length && this._segmentSelectors[maxIndex].curveType !== CurveType.None && this._segmentSelectors[maxIndex].curveWithPrevSegment) {
+                    maxIndex++;
+                }
+                if (curveWithPrevChanged && index !== 0) {
+                    const baseSegment = segmentSelector.getBaseSplineSegment();
+                    if (baseSegment) {
+                        baseSegment.visible = false;
+                    }
+                    segment.visible = false;
+                    if (segmentSelector.curveWithPrevSegment) {
+                        void segment.updateCurvePlot([]);
+                        const startPoint = this._lineSegments[findIndex].getStartControlPoint();
+                        const startSegment = this._lineSegments[findIndex];
+                        startSegment.visible = false;
+                        let addedWidgets = [ this._segmentSelectors[findIndex].widget, startSegment.getEndControlPoint().widget ];
+                        for (let i = findIndex + 1; i < maxIndex; i++) {
+                            addedWidgets = addedWidgets.concat([ this._segmentSelectors[i].widget, this._lineSegments[i].getEndControlPoint().widget ]);
+                            this._lineSegments[i].visible = false;
+                            void this._lineSegments[i].updateCurvePlot([]);
+                            this._segmentSelectors[i].setSplineControlPoint(startPoint);
+                            this._segmentSelectors[i].setBaseSplineSegment(startSegment);
+                        }
+                        startPoint.removeAllControlPointsFromSplineComponent();
+                        startPoint.addControlPointsToSplineComponent(addedWidgets);
+                        const interpPoints = startPoint.getSplineComponentInterpPoints();
+                        startSegment.updateCurvePlot(interpPoints).then((() => {
+                            startSegment.visible = true;
+                        })).catch((err => {
+                            this._uiSession.log.error(err.message);
+                        }));
+                    } else {
+                        const baseSplineSegment = segmentSelector.getBaseSplineSegment();
+                        const baseSplineControlPoint = segmentSelector.getSplineControlPoint();
+                        if (!baseSplineSegment || !baseSplineControlPoint) {
+                            this._uiSession.log.error(`Expected switching from merged curve to non-merged to have an original base spline segment`);
+                        } else {
+                            baseSplineSegment.visible = false;
+                            let addedWidgets = [ this._segmentSelectors[findIndex].widget, baseSplineSegment.getEndControlPoint().widget ];
+                            for (let i = findIndex + 1; i < index; i++) {
+                                addedWidgets = addedWidgets.concat([ this._segmentSelectors[i].widget, this._lineSegments[i].getEndControlPoint().widget ]);
+                            }
+                            baseSplineControlPoint.removeAllControlPointsFromSplineComponent();
+                            baseSplineControlPoint.addControlPointsToSplineComponent(addedWidgets);
+                            baseSplineSegment.updateCurvePlot(baseSplineControlPoint.getSplineComponentInterpPoints()).then((() => {
+                                baseSplineSegment.visible = true;
+                            })).catch((err => {
+                                this._uiSession.log.error(err.message);
+                            }));
+                            const startPoint = segment.getStartControlPoint();
+                            addedWidgets = [ segmentSelector.widget, segment.getEndControlPoint().widget ];
+                            for (let i = index + 1; i < maxIndex; i++) {
+                                addedWidgets = addedWidgets.concat([ this._segmentSelectors[i].widget, this._lineSegments[i].getEndControlPoint().widget ]);
+                                this._lineSegments[i].visible = false;
+                                void this._lineSegments[i].updateCurvePlot([]);
+                                this._segmentSelectors[i].setSplineControlPoint(startPoint);
+                                this._segmentSelectors[i].setBaseSplineSegment(segment);
+                            }
+                            startPoint.removeAllControlPointsFromSplineComponent();
+                            startPoint.addControlPointsToSplineComponent(addedWidgets);
+                            segmentSelector.setBaseSplineSegment(undefined);
+                            segmentSelector.setSplineControlPoint(undefined);
+                            segment.updateCurvePlot(startPoint.getSplineComponentInterpPoints()).then((() => {
+                                segment.visible = true;
+                            })).catch((err => {
+                                this._uiSession.log.error(err.message);
+                            }));
+                        }
+                    }
+                }
+                if (curveTypeChanged) {
+                    const startPoint = segment.getStartControlPoint();
+                    const endPoint = segment.getEndControlPoint();
+                    this._lineSegments[index].visible = false;
+                    switch (segmentSelector.curveType) {
+                      case CurveType.Hermite:
+                        {
+                            this._lineSegments[index] = new CurveSegment(this._uiSession, this._horizontalWeight, this._verticalWeight, this._linePreviewMap, this.cursorTargetModeRequested, this.groundLevelAtLocationRequested, startPoint, endPoint, startPoint.isWeightsOverridden ? {
+                                horizontalWeight: startPoint.horizontalWeight,
+                                verticalWeight: startPoint.verticalWeight
+                            } : undefined, endPoint.isWeightsOverridden ? {
+                                horizontalWeight: endPoint.horizontalWeight,
+                                verticalWeight: endPoint.verticalWeight
+                            } : undefined);
+                            const widgets = [ segmentSelector.widget, endPoint.widget ];
+                            startPoint.addSplineComponent(widgets);
+                            const interpPoints = startPoint.getSplineComponentInterpPoints();
+                            this._lineSegments[index].updateCurvePlot(interpPoints).then((res => {
+                                this.applyPreviewChangeResults(res);
+                            })).catch((err => {
+                                this._uiSession.log.error(err.message);
+                            }));
+                            break;
+                        }
+
+                      case CurveType.None:
+                        {
+                            startPoint.removeSplineComponent();
+                            segmentSelector.curveWithPrevSegment = false;
+                            const baseSplineSegment = segmentSelector.getBaseSplineSegment();
+                            const baseSplineControlPoint = segmentSelector.getSplineControlPoint();
+                            if (baseSplineSegment && baseSplineControlPoint) {
+                                segment.visible = false;
+                                baseSplineSegment.visible = false;
+                                let addedWidgets = [ this._segmentSelectors[findIndex].widget, baseSplineSegment.getEndControlPoint().widget ];
+                                for (let i = findIndex + 1; i < index; i++) {
+                                    addedWidgets = addedWidgets.concat([ this._segmentSelectors[i].widget, this._lineSegments[i].getEndControlPoint().widget ]);
+                                }
+                                baseSplineControlPoint.removeAllControlPointsFromSplineComponent();
+                                baseSplineControlPoint.addControlPointsToSplineComponent(addedWidgets);
+                                baseSplineSegment.updateCurvePlot(baseSplineControlPoint.getSplineComponentInterpPoints()).then((() => {
+                                    baseSplineSegment.visible = true;
+                                })).catch((err => {
+                                    this._uiSession.log.error(err.message);
+                                }));
+                                const newStartSegment = this._lineSegments.at(index + 1) ?? this._lineSegments[index];
+                                const newHeadSegmentSelector = this._segmentSelectors.at(index + 1) ?? this._segmentSelectors[index];
+                                newHeadSegmentSelector.curveWithPrevSegment = false;
+                                newHeadSegmentSelector.setBaseSplineSegment(undefined);
+                                newHeadSegmentSelector.setSplineControlPoint(undefined);
+                                newStartSegment.visible = false;
+                                const newStartPoint = newStartSegment.getStartControlPoint();
+                                if (index + 1 < maxIndex - 1) {
+                                    addedWidgets = [ newHeadSegmentSelector.widget, newStartSegment.getEndControlPoint().widget ];
+                                    for (let i = index + 2; i < maxIndex; i++) {
+                                        addedWidgets = addedWidgets.concat([ this._segmentSelectors[i].widget, this._lineSegments[i].getEndControlPoint().widget ]);
+                                        this._lineSegments[i].visible = false;
+                                        void this._lineSegments[i].updateCurvePlot([]);
+                                        this._segmentSelectors[i].setSplineControlPoint(newStartPoint);
+                                        this._segmentSelectors[i].setBaseSplineSegment(newStartSegment);
+                                    }
+                                    newStartPoint.removeAllControlPointsFromSplineComponent();
+                                    newStartPoint.addControlPointsToSplineComponent(addedWidgets);
+                                }
+                                segmentSelector.setBaseSplineSegment(undefined);
+                                segmentSelector.setSplineControlPoint(undefined);
+                                newStartSegment.updateCurvePlot(newStartPoint.getSplineComponentInterpPoints()).then((() => {
+                                    newStartSegment.visible = true;
+                                })).catch((err => {
+                                    this._uiSession.log.error(err.message);
+                                }));
+                            }
+                            this._lineSegments[index] = new LineSegment(this._uiSession, this._horizontalWeight, this._verticalWeight, this._blockLineTypeAlgorithm, this._linePreviewMap, this.cursorTargetModeRequested, this.groundLevelAtLocationRequested, startPoint, endPoint, startPoint.isWeightsOverridden ? {
+                                horizontalWeight: startPoint.horizontalWeight,
+                                verticalWeight: startPoint.verticalWeight
+                            } : undefined, endPoint.isWeightsOverridden ? {
+                                horizontalWeight: endPoint.horizontalWeight,
+                                verticalWeight: endPoint.verticalWeight
+                            } : undefined);
+                            this._lineSegments[index].visible = true;
+                            const midPointRes = this._lineSegments[index].getMidPoint();
+                            const midPoint = {
+                                ...startPoint.location
+                            };
+                            if (midPointRes) {
+                                midPoint.x = Math.round(midPointRes.x);
+                                midPoint.y = Math.round(midPointRes.y);
+                                midPoint.z = Math.round(midPointRes.z);
+                            }
+                            this.moveSelector(this._segmentSelectors[index], midPoint, startPoint.location, endPoint.location, true);
+                            break;
+                        }
+                    }
+                }
+                if (lib.Vector3Utils.magnitude(delta) !== 0) {
+                    this.moveSelector(segmentSelector, knotPosition, segment.start, segment.end, true);
+                }
+            }
+        }
+        moveSelector(segmentSelector, knotPosition, start, end, moveWidget = false) {
+            segmentSelector.moveSelector(knotPosition, start, end, moveWidget);
+            const index = this._segmentSelectors.findIndex((value => value === segmentSelector));
+            if (index === -1) {
+                this._uiSession.log.error(`Associated segment selector has no associated line segment`, {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+                return;
+            }
+            if (segmentSelector.curveType === CurveType.Hermite) {
+                const startPoint = segmentSelector.getSplineControlPoint() ?? this._lineSegments[index].getStartControlPoint();
+                const segment = segmentSelector.getBaseSplineSegment() ?? this._lineSegments[index];
+                const interpPoints = startPoint.getSplineComponentInterpPoints();
+                segment.updateCurvePlot(interpPoints).then((res => {
+                    this.applyPreviewChangeResults(res);
+                })).catch((err => {
+                    this._uiSession.log.error(err.message);
+                }));
             }
         }
         updateLineWeights(horizontalWeight, verticalWeight) {
@@ -10703,6 +11688,17 @@ var __webpack_exports__ = {};
         QuickActionMode[QuickActionMode["ClearSelectedPoints"] = 4] = "ClearSelectedPoints";
         QuickActionMode[QuickActionMode["ClearAllPoints"] = 5] = "ClearAllPoints";
     })(QuickActionMode || (QuickActionMode = {}));
+    const curveTypeValues = [ {
+        label: "None",
+        value: CurveType.None
+    }, {
+        label: "Hermite",
+        value: CurveType.Hermite
+    } ];
+    const easeTypeValues = [ {
+        label: "Linear",
+        value: EaseType.Linear
+    } ];
     class LineBehavior {
         constructor(uiSession) {
             this.startTransactionRequestedEventHandler = name => {
@@ -10718,6 +11714,7 @@ var __webpack_exports__ = {};
             this._uiSession.log.debug(`Initializing ${LineBehavior.BEHAVIOR_NAME}`);
             this._updatePointAndLineValsOperationTickHandle = undefined;
             this._pointLinePropsDirty = false;
+            this._segmentSelectorPropsDirty = false;
             this._toolCursorProperties = {
                 outlineColor: LineBehavior.SELECTION_COLOR_LIGHT_BLUE,
                 controlMode: server_editor_namespaceObject.CursorControlMode.KeyboardAndMouse,
@@ -10752,8 +11749,19 @@ var __webpack_exports__ = {};
                 horizontalWeightPropertyItem: undefined,
                 verticalWeightPropertyItem: undefined
             };
+            this._segmentOptionProperties = {
+                segmentKnotPosition: (0, server_editor_namespaceObject.makeObservable)({
+                    x: 0,
+                    y: 0,
+                    z: 0
+                }),
+                curveType: (0, server_editor_namespaceObject.makeObservable)(CurveType.None),
+                mergeWithPreviousCurve: (0, server_editor_namespaceObject.makeObservable)(false),
+                easeType: (0, server_editor_namespaceObject.makeObservable)(EaseType.Linear),
+                knotPositionPropertyItem: undefined
+            };
             this._telemetryManager = new TelemetryManager(this._uiSession.extensionContext.player, TelemetrySource.Line);
-            this._lineSegmentsManager = new LineManager(this._uiSession, this._paneProperties.blockLineTypeAlgorithm.value, this._paneProperties.horizontalWeight.value, this._paneProperties.verticalWeight.value, this.startTransactionRequestedEventHandler, this.commitTransactionRequestedEventHandler, this.cancelTransactionRequestedEventHandler);
+            this._lineSegmentsManager = new SegmentsManager(this._uiSession, this._paneProperties.blockLineTypeAlgorithm.value, this._paneProperties.horizontalWeight.value, this._paneProperties.verticalWeight.value, this.startTransactionRequestedEventHandler, this.commitTransactionRequestedEventHandler, this.cancelTransactionRequestedEventHandler);
             this._transactionHandler = (0, server_editor_namespaceObject.registerUserDefinedTransactionHandler)(this._uiSession.extensionContext.transactionManager, (payload => {
                 const oldState = payload.oldState;
                 this.updateState(oldState);
@@ -10772,12 +11780,19 @@ var __webpack_exports__ = {};
             });
             this._cursorModeControl.initialize();
             this._controlPointWeightPane = this.createLineAndPointWeightsPanes(this._pane);
+            this._segmentOptionsPane = this.createSegmentOptionsPane(this._pane);
             this._pane.endConstruct();
             this._tool.bindPropertyPane(this._pane);
             this.registerMouseButtonInputs();
             this.registerKeyboardInputs();
             this._modeChangeEventSubscriptionHandle = this._uiSession.extensionContext.afterEvents.modeChange.subscribe((event => {
                 if (event.mode === server_editor_namespaceObject.EditorMode.Crosshair) {
+                    for (const controlPoint of this._lineSegmentsManager.controlPoints) {
+                        controlPoint.isSelected = false;
+                    }
+                    for (const selector of this._lineSegmentsManager.segmentSelectors) {
+                        selector.isSelected = false;
+                    }
                     this._lineSegmentsManager.toggleVisibility(false);
                 } else {
                     this._lineSegmentsManager.toggleVisibility(true);
@@ -10823,9 +11838,17 @@ var __webpack_exports__ = {};
                     this._uiSession.extensionContext.cursor.setProperties(this._toolCursorProperties);
                     this._updatePointAndLineValsOperationTickHandle = server_namespaceObject.system.runInterval((() => {
                         this.runUpdatePointAndLineValsOperation();
+                        this.runUpdateSegmentSelectorValsOperation();
                         this.toggleSelectedControlPointOp();
+                        this.toggleSelectedSegmentOptionsOp();
                     }), server_namespaceObject.TicksPerSecond);
                     this._lineSegmentsManager.toggleVisibility(true);
+                    for (const selector of this._lineSegmentsManager.segmentSelectors) {
+                        selector.isSelected = false;
+                    }
+                    for (const point of this._lineSegmentsManager.controlPoints) {
+                        point.isSelected = false;
+                    }
                 } else {
                     if (this._updatePointAndLineValsOperationTickHandle !== undefined) {
                         server_namespaceObject.system.clearRun(this._updatePointAndLineValsOperationTickHandle);
@@ -10860,7 +11883,7 @@ var __webpack_exports__ = {};
                     value: BlockLineType.Direct
                 }, {
                     label: "resourcePack.editor.toolRail.line.pane.algorithm.StaggeredContour",
-                    value: BlockLineType.StaggeredContour
+                    value: BlockLineType.Staggered
                 } ],
                 onChange: () => {
                     this.updateLineAlgorithm();
@@ -11149,6 +12172,79 @@ var __webpack_exports__ = {};
             controlPointPane.endConstruct();
             return controlPointPane;
         }
+        createSegmentOptionsPane(pane) {
+            const segmentOptionsPanes = pane.createSubPane({
+                title: "Segment Options",
+                hasExpander: false
+            });
+            segmentOptionsPanes.beginConstruct();
+            const segmentPointProperties = segmentOptionsPanes.createSubPane({
+                title: "resourcePack.editor.toolRail.line.pane.segment.properties.pane.title",
+                infoTooltip: {
+                    title: "resourcePack.editor.toolRail.line.pane.segment.properties.pane.title",
+                    description: [ "resourcePack.editor.toolRail.line.pane.segment.properties.pane.tooltip" ]
+                },
+                hasExpander: true,
+                hasMargins: false
+            });
+            segmentPointProperties.beginConstruct();
+            this._segmentOptionProperties.knotPositionPropertyItem = segmentPointProperties.addVector3(this._segmentOptionProperties.segmentKnotPosition, {
+                title: "resourcePack.editor.toolRail.line.pane.segment.properties.knot.position.title",
+                tooltip: "resourcePack.editor.toolRail.line.pane.segment.properties.knot.position.tooltip",
+                onChange: () => {
+                    this._segmentSelectorPropsDirty = true;
+                }
+            });
+            segmentPointProperties.endConstruct();
+            const segmentCurveOptions = segmentOptionsPanes.createSubPane({
+                title: "resourcePack.editor.toolRail.line.pane.segment.curve.properties.pane.title",
+                infoTooltip: {
+                    title: "resourcePack.editor.toolRail.line.pane.segment.curve.properties.pane.title",
+                    description: [ "resourcePack.editor.toolRail.line.pane.segment.curve.properties.pane.tooltip" ]
+                },
+                hasExpander: true,
+                hasMargins: false
+            });
+            segmentCurveOptions.beginConstruct();
+            this._segmentOptionProperties.mergeWithPrevPropertyItem = segmentCurveOptions.addBool(this._segmentOptionProperties.mergeWithPreviousCurve, {
+                title: "resourcePack.editor.toolRail.line.pane.segment.curve.properties.merge.title",
+                tooltip: "resourcePack.editor.toolRail.line.pane.segment.curve.properties.merge.tooltip",
+                enable: false,
+                onChange: () => {
+                    this._segmentSelectorPropsDirty = true;
+                }
+            });
+            segmentCurveOptions.addDropdown(this._segmentOptionProperties.curveType, {
+                title: "resourcePack.editor.toolRail.line.pane.segment.curve.properties.type.title",
+                tooltip: "resourcePack.editor.toolRail.line.pane.segment.curve.properties.type.tooltip",
+                entries: curveTypeValues,
+                onChange: () => {
+                    this._segmentSelectorPropsDirty = true;
+                }
+            });
+            segmentCurveOptions.endConstruct();
+            const segmentEaseOptions = segmentOptionsPanes.createSubPane({
+                title: "resourcePack.editor.toolRail.line.pane.segment.ease.properties.pane.title",
+                infoTooltip: {
+                    title: "resourcePack.editor.toolRail.line.pane.segment.ease.properties.pane.title",
+                    description: [ "resourcePack.editor.toolRail.line.pane.segment.ease.properties.pane.tooltip" ]
+                },
+                hasExpander: true,
+                hasMargins: false
+            });
+            segmentEaseOptions.beginConstruct();
+            segmentEaseOptions.addDropdown(this._segmentOptionProperties.easeType, {
+                title: "resourcePack.editor.toolRail.line.pane.segment.ease.properties.type.title",
+                tooltip: "resourcePack.editor.toolRail.line.pane.segment.ease.properties.type.tooltip",
+                entries: easeTypeValues,
+                onChange: () => {
+                    this._segmentSelectorPropsDirty = true;
+                }
+            });
+            segmentEaseOptions.endConstruct();
+            segmentOptionsPanes.endConstruct();
+            return segmentOptionsPanes;
+        }
         registerMouseButtonInputs() {
             const executeAction = this._uiSession.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.MouseRayCastAction,
@@ -11390,7 +12486,7 @@ var __webpack_exports__ = {};
             }
         }
         updateState(stateInfo) {
-            this._lineSegmentsManager.setState(stateInfo.pointStates);
+            this._lineSegmentsManager.setState(stateInfo.segmentStates, stateInfo.segmentSelectorStates);
             try {
                 this._uiSession.extensionContext.selectionManager.volume.set(stateInfo.selectionVolume);
             } catch (e) {
@@ -11404,9 +12500,9 @@ var __webpack_exports__ = {};
                 throw new Error("Cannot perform a transactionable operation while another transaction is active");
             }
             const lineToolName = `LineTool:${name}`;
-            const pointStates = [];
+            const segmentStates = [];
             for (let i = 0; i < this._lineSegmentsManager.controlPoints.length; i++) {
-                const lineState = {
+                const segmentState = {
                     location: this._lineSegmentsManager.controlPoints[i].location,
                     separation: this._lineSegmentsManager.controlPoints[i].isSeparate,
                     selection: this._lineSegmentsManager.controlPoints[i].isSelected,
@@ -11415,14 +12511,27 @@ var __webpack_exports__ = {};
                     horizontalWeight: this._lineSegmentsManager.controlPoints[i].horizontalWeight,
                     verticalWeight: this._lineSegmentsManager.controlPoints[i].verticalWeight
                 };
-                pointStates.push(lineState);
+                segmentStates.push(segmentState);
+            }
+            const segmentSelectorStates = [];
+            for (let i = 0; i < this._lineSegmentsManager.segmentSelectors.length; i++) {
+                const selectorState = {
+                    location: this._lineSegmentsManager.segmentSelectors[i].getLocation(),
+                    curveType: this._lineSegmentsManager.segmentSelectors[i].curveType,
+                    easeType: this._lineSegmentsManager.segmentSelectors[i].easeType,
+                    isSelected: this._lineSegmentsManager.segmentSelectors[i].isSelected,
+                    mergeWithPreviousCurve: this._lineSegmentsManager.segmentSelectors[i].curveWithPrevSegment
+                };
+                segmentSelectorStates.push(selectorState);
             }
             const oldState = {
-                pointStates,
+                segmentStates,
+                segmentSelectorStates,
                 selectionVolume: this._uiSession.extensionContext.selectionManager.volume.get()
             };
             const newState = {
-                pointStates: [],
+                segmentStates: [],
+                segmentSelectorStates: [],
                 selectionVolume: oldState.selectionVolume
             };
             this._tempTransactionData = {
@@ -11437,7 +12546,7 @@ var __webpack_exports__ = {};
                 const lineToolName = `LineTool:${name}`;
                 const newPointStates = [];
                 for (let i = 0; i < this._lineSegmentsManager.controlPoints.length; i++) {
-                    const lineState = {
+                    const segmentState = {
                         location: this._lineSegmentsManager.controlPoints[i].location,
                         separation: this._lineSegmentsManager.controlPoints[i].isSeparate,
                         selection: this._lineSegmentsManager.controlPoints[i].isSelected,
@@ -11446,10 +12555,22 @@ var __webpack_exports__ = {};
                         horizontalWeight: this._lineSegmentsManager.controlPoints[i].horizontalWeight,
                         verticalWeight: this._lineSegmentsManager.controlPoints[i].verticalWeight
                     };
-                    newPointStates.push(lineState);
+                    newPointStates.push(segmentState);
+                }
+                const newSegmentSelectorStates = [];
+                for (let i = 0; i < this._lineSegmentsManager.segmentSelectors.length; i++) {
+                    const selectorState = {
+                        location: this._lineSegmentsManager.segmentSelectors[i].getLocation(),
+                        curveType: this._lineSegmentsManager.segmentSelectors[i].curveType,
+                        easeType: this._lineSegmentsManager.segmentSelectors[i].easeType,
+                        isSelected: this._lineSegmentsManager.segmentSelectors[i].isSelected,
+                        mergeWithPreviousCurve: this._lineSegmentsManager.segmentSelectors[i].curveWithPrevSegment
+                    };
+                    newSegmentSelectorStates.push(selectorState);
                 }
                 this._tempTransactionData.newState = {
-                    pointStates: newPointStates,
+                    segmentStates: newPointStates,
+                    segmentSelectorStates: newSegmentSelectorStates,
                     selectionVolume: this._uiSession.extensionContext.selectionManager.volume.get()
                 };
                 this._transactionHandler.addUserDefinedOperation(this._tempTransactionData, lineToolName);
@@ -11675,6 +12796,15 @@ var __webpack_exports__ = {};
                 this._pointLinePropsDirty = false;
             }
         }
+        runUpdateSegmentSelectorValsOperation() {
+            if (this._segmentSelectorPropsDirty) {
+                this.updateSegmentSelectorValues();
+                this._segmentSelectorPropsDirty = false;
+            }
+        }
+        updateSegmentSelectorValues() {
+            void this._lineSegmentsManager.updateSegmentSelectorValues(this._segmentOptionProperties.segmentKnotPosition.value, this._segmentOptionProperties.curveType.value, this._segmentOptionProperties.mergeWithPreviousCurve.value, this._segmentOptionProperties.easeType.value);
+        }
         toggleSelectedControlPointOp() {
             const selectedPoints = this._lineSegmentsManager.selectedPoints;
             if (selectedPoints.length !== 1) {
@@ -11695,6 +12825,31 @@ var __webpack_exports__ = {};
             if (this._controlPointProperties.useGlobalLineWeight.value !== !selectedPoint.isWeightsOverridden) {
                 this._controlPointProperties.useGlobalLineWeight.set(!selectedPoint.isWeightsOverridden);
                 this.disableControlPointWeightSliders(!selectedPoint.isWeightsOverridden);
+            }
+        }
+        toggleSelectedSegmentOptionsOp() {
+            const selectedSelector = this._lineSegmentsManager.selectedSegmentSelector;
+            if (selectedSelector === undefined) {
+                this._segmentOptionsPane.hide();
+                return;
+            }
+            this.updateSelectedSelectorProps(selectedSelector);
+            this._segmentOptionsPane.show();
+        }
+        updateSelectedSelectorProps(segmentSelector) {
+            this._segmentOptionProperties.curveType.set(segmentSelector.curveType);
+            this._segmentOptionProperties.easeType.set(segmentSelector.easeType);
+            this._segmentOptionProperties.mergeWithPreviousCurve.set(segmentSelector.curveWithPrevSegment);
+            if (this._segmentOptionProperties.mergeWithPrevPropertyItem) {
+                this._segmentOptionProperties.mergeWithPrevPropertyItem.enable = this._lineSegmentsManager.selectedSegmentSelectorHasCurveInPreviousSegment() && segmentSelector.curveType === CurveType.Hermite;
+            }
+            this._segmentOptionProperties.segmentKnotPosition.set(segmentSelector.getLocation());
+            if (this._segmentOptionProperties.knotPositionPropertyItem) {
+                if (segmentSelector.curveType === CurveType.None) {
+                    this._segmentOptionProperties.knotPositionPropertyItem.enable = false;
+                } else {
+                    this._segmentOptionProperties.knotPositionPropertyItem.enable = true;
+                }
             }
         }
         isLocationValidForNewPoint(location) {
@@ -12909,6 +14064,7 @@ var __webpack_exports__ = {};
                 z: 1
             };
         }
+        applyImmediateSelection() {}
         onMouseClickAndDrag(_mouseRay, _mouseProps, _oneShot = false) {
             if (_mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton) {
                 if (_mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown) {
@@ -13443,6 +14599,14 @@ var __webpack_exports__ = {};
             this._popVolume();
             this._clearSelectionManager();
         }
+        applyImmediateSelection() {
+            if (this.parent.isTransactionOperationActive()) {
+                this.session.log.warning(`Freehand selection already active`);
+                return;
+            }
+            this.parent.beginTransactionableOperation("Freehand Volume Creation");
+            this._beginFreehandSelection(true);
+        }
         onMouseClickAndDrag(_mouseRay, _mouseProps, _oneShot = false) {
             if (_mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton) {
                 if (_mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown) {
@@ -13929,6 +15093,7 @@ var __webpack_exports__ = {};
             this._popVolume();
             this._clearSelectionManager();
         }
+        applyImmediateSelection() {}
         onMouseClickAndDrag(_mouseRay, _mouseProps, _oneShot = false) {
             if (_mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton) {
                 if (_mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown) {
@@ -14363,26 +15528,8 @@ var __webpack_exports__ = {};
                 const keySelectAction = uiSession.actionManager.createAction({
                     actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                     onExecute: () => {
-                        const blockLocation = uiSession.extensionContext.cursor.getPosition();
-                        const ray = {
-                            location: lib.VECTOR3_ZERO,
-                            direction: lib.VECTOR3_ZERO,
-                            cursorBlockLocation: blockLocation,
-                            rayHit: true
-                        };
-                        const mouseProps = {
-                            mouseAction: server_editor_namespaceObject.MouseActionType.LeftButton,
-                            inputType: server_editor_namespaceObject.MouseInputType.ButtonDown,
-                            modifiers: {
-                                shift: false,
-                                ctrl: false,
-                                alt: false
-                            }
-                        };
-                        const oneShot = true;
-                        this._activeModeImplementation?.onMouseClickAndDrag(ray, mouseProps, oneShot);
-                        mouseProps.inputType = server_editor_namespaceObject.MouseInputType.ButtonUp;
-                        this._activeModeImplementation?.onMouseClickAndDrag(ray, mouseProps, oneShot);
+                        this.uiSession.extensionContext.selectionManager.volume.clear();
+                        this._activeModeImplementation?.applyImmediateSelection();
                     }
                 });
                 this._registerToolKeyBinding(keySelectAction, {
@@ -14391,26 +15538,7 @@ var __webpack_exports__ = {};
                 const keySelectMultipleAction = uiSession.actionManager.createAction({
                     actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                     onExecute: () => {
-                        const blockLocation = uiSession.extensionContext.cursor.getPosition();
-                        const ray = {
-                            location: lib.VECTOR3_ZERO,
-                            direction: lib.VECTOR3_ZERO,
-                            cursorBlockLocation: blockLocation,
-                            rayHit: true
-                        };
-                        const mouseProps = {
-                            mouseAction: server_editor_namespaceObject.MouseActionType.LeftButton,
-                            inputType: server_editor_namespaceObject.MouseInputType.ButtonDown,
-                            modifiers: {
-                                shift: true,
-                                ctrl: false,
-                                alt: false
-                            }
-                        };
-                        const oneShot = true;
-                        this._activeModeImplementation?.onMouseClickAndDrag(ray, mouseProps, oneShot);
-                        mouseProps.inputType = server_editor_namespaceObject.MouseInputType.ButtonUp;
-                        this._activeModeImplementation?.onMouseClickAndDrag(ray, mouseProps, oneShot);
+                        this._activeModeImplementation?.applyImmediateSelection();
                     }
                 });
                 this._registerToolKeyBinding(keySelectMultipleAction, {
@@ -15622,6 +16750,16 @@ var __webpack_exports__ = {};
             this._nudgeActions = [];
             this._activeNudgeActions = new Set([]);
             this._isWidgetMoving = false;
+            this._entityOffset = (0, server_editor_namespaceObject.makeObservable)({
+                x: 0,
+                y: 0,
+                z: 0
+            });
+            this._entityGridAlignment = (0, server_editor_namespaceObject.makeObservable)({
+                x: 1,
+                y: 1,
+                z: 1
+            });
             this._session = session;
             this._cursorProperties = {
                 outlineColor: {
@@ -15655,15 +16793,31 @@ var __webpack_exports__ = {};
                 },
                 visible: true,
                 stateChangeEvent: data => {
-                    if (!this._selectedEntity || !data.widget.location) return;
+                    if (!this._selectedEntity || !data.widget.location) {
+                        return;
+                    }
+                    const widgetLocation = lib.Vector3Utils.subtract(data.widget.location, {
+                        x: 0,
+                        y: .5,
+                        z: 0
+                    });
+                    const entityLocation = {
+                        ...widgetLocation
+                    };
+                    const offset = this._entityOffset.value;
+                    const gridAlignment = this._entityGridAlignment.value;
+                    entityLocation.x = Math.round(entityLocation.x / gridAlignment.x) * gridAlignment.x;
+                    entityLocation.y = Math.round(entityLocation.y / gridAlignment.y) * gridAlignment.y;
+                    entityLocation.z = Math.round(entityLocation.z / gridAlignment.z) * gridAlignment.z;
+                    entityLocation.x += offset.x;
+                    entityLocation.y += offset.y;
+                    entityLocation.z += offset.z;
                     if ((data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.CornerMoved || data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.OriginMoved) && !this._isWidgetMoving) {
                         this._isWidgetMoving = true;
-                        this._widgetMoveStartLocation = {
-                            ...this._selectedEntity.location
-                        };
+                        this._widgetMoveStartLocation = entityLocation;
                     }
                     if (data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.CornerMoved || data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.OriginMoved) {
-                        this._selectedEntity.teleport(data.widget.location);
+                        this._selectedEntity.teleport(entityLocation);
                     }
                     if (this._isWidgetMoving && (data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.OriginReleased || data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.CornerReleased)) {
                         const manager = this._session.extensionContext.transactionManager;
@@ -15673,7 +16827,7 @@ var __webpack_exports__ = {};
                         });
                         try {
                             const oldLocation = this._widgetMoveStartLocation ?? this._selectedEntity.location;
-                            const newLocation = this._selectedEntity.location;
+                            const newLocation = entityLocation;
                             const transactionPayload = {
                                 entityID: this._selectedEntity.id,
                                 oldLocation,
@@ -15698,7 +16852,6 @@ var __webpack_exports__ = {};
                     }
                 }
             });
-            this._session.log.debug("hello");
             const activationAction = this._session.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
@@ -15953,6 +17106,39 @@ var __webpack_exports__ = {};
                     }
                 });
                 this._entityType = (0, server_editor_namespaceObject.makeObservable)(MinecraftEntityTypes.Pig);
+                this._pane.addVector3(this._entityOffset, {
+                    title: "resourcePack.editor.toolRail.summonTool.tool.Offset",
+                    tooltip: "resourcePack.editor.toolRail.summonTool.tool.Offset.tooltip",
+                    isInteger: false,
+                    min: {
+                        x: 0,
+                        y: 0,
+                        z: 0
+                    },
+                    max: {
+                        x: 8,
+                        y: 8,
+                        z: 8
+                    },
+                    onChange: () => {}
+                });
+                this._pane.addVector3(this._entityGridAlignment, {
+                    title: "resourcePack.editor.toolRail.summonTool.tool.GridSize",
+                    tooltip: "resourcePack.editor.toolRail.summonTool.tool.GridSize.tooltip",
+                    isInteger: true,
+                    min: {
+                        x: 1,
+                        y: 1,
+                        z: 1
+                    },
+                    max: {
+                        x: 8,
+                        y: 8,
+                        z: 8
+                    },
+                    onChange: () => {}
+                });
+                this._pane.addDivider();
                 this._pane.addNumber(this._rotation, {
                     title: "resourcePack.editor.toolRail.summonTool.tool.selectSubPane.rotation",
                     tooltip: "resourcePack.editor.toolRail.summonTool.tool.selectSubPane.rotation.tooltip",
@@ -16143,10 +17329,16 @@ var __webpack_exports__ = {};
         }
         handleBeginSummonMode(mouseRay) {
             const spawnLoc = {
-                x: mouseRay.cursorBlockLocation.x + .5,
-                y: mouseRay.cursorBlockLocation.y,
-                z: mouseRay.cursorBlockLocation.z + .5
+                ...mouseRay.cursorBlockLocation
             };
+            const offset = this._entityOffset.value;
+            const gridAlignment = this._entityGridAlignment.value;
+            spawnLoc.x = Math.round(spawnLoc.x / gridAlignment.x) * gridAlignment.x;
+            spawnLoc.y = Math.round(spawnLoc.y / gridAlignment.y) * gridAlignment.y;
+            spawnLoc.z = Math.round(spawnLoc.z / gridAlignment.z) * gridAlignment.z;
+            spawnLoc.x += offset.x;
+            spawnLoc.y += offset.y;
+            spawnLoc.z += offset.z;
             const player = this._session.extensionContext.player;
             const dimension = player.dimension;
             try {
@@ -16230,6 +17422,8 @@ var __webpack_exports__ = {};
             this._customTime = (0, server_editor_namespaceObject.makeObservable)(0);
             this._daylightCycle = (0, server_editor_namespaceObject.makeObservable)(server_editor_namespaceObject.DaylightCycle.LockTime);
             this._currentPreset = (0, server_editor_namespaceObject.makeObservable)(TODDropDown.None);
+            this._storedSettings = new Map;
+            this._messageSubscriptionHandle = undefined;
             this.openMenuAction = this._uiSession.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
@@ -16347,16 +17541,45 @@ var __webpack_exports__ = {};
                     }
                 }
             }), 3);
-            this._scriptEvent = server_namespaceObject.system.afterEvents.scriptEventReceive.subscribe((e => {
-                if (e.id === "editor:agfxPreview:timeChanged") {
-                    const newTime = parseInt(e.message);
+            this._messageSubscriptionHandle = subscribeTimeOfDayChangeMessages(((_id, _timeOfDayChange) => {
+                this._uiSession.log.info(`Time of day change requested by ${_id} to ${_timeOfDayChange}`);
+                this._storedSettings.set(_id, {
+                    currentPreset: this._currentPreset.value,
+                    currentTime: this._timeOfDayValue.value,
+                    daylightCycle: this._daylightCycle.value,
+                    customTime: this._customTime.value,
+                    controlEnabled: customTime.enable,
+                    controlVisible: customTime.visible
+                });
+                if (typeof _timeOfDayChange === "number") {
                     customTime.enable = true;
                     customTime.visible = true;
                     this._currentPreset.set(TODDropDown.None);
-                    this._timeOfDayValue.set(newTime);
-                    this.setDaylightCycle(server_editor_namespaceObject.DaylightCycle.LockTime, newTime, _uiSession);
+                    this._timeOfDayValue.set(_timeOfDayChange);
+                    this.setDaylightCycle(server_editor_namespaceObject.DaylightCycle.LockTime, _timeOfDayChange, _uiSession);
                     this._daylightCycle.set(server_editor_namespaceObject.DaylightCycle.LockTime);
-                    this._customTime.set(newTime);
+                    this._customTime.set(_timeOfDayChange);
+                } else if (_timeOfDayChange === TODDropDown.None) {
+                    customTime.enable = false;
+                    customTime.visible = false;
+                    this._currentPreset.set(_timeOfDayChange);
+                    this._timeOfDayValue.set(0);
+                    this.setDaylightCycle(server_editor_namespaceObject.DaylightCycle.Normal, 0, _uiSession);
+                    this._daylightCycle.set(server_editor_namespaceObject.DaylightCycle.Normal);
+                    this._customTime.set(0);
+                } else {
+                    throw new Error(`Invalid time of day change value: ${typeof _timeOfDayChange}`);
+                }
+            }), (_id => {
+                const stored = this._storedSettings.get(_id);
+                if (stored) {
+                    customTime.enable = stored.controlEnabled;
+                    customTime.visible = stored.controlVisible;
+                    this._currentPreset.set(stored.currentPreset);
+                    this._timeOfDayValue.set(stored.currentTime);
+                    this.setDaylightCycle(stored.daylightCycle, stored.currentTime, _uiSession);
+                    this._daylightCycle.set(stored.daylightCycle);
+                    this._customTime.set(stored.customTime);
                 }
             }));
         }
@@ -16387,8 +17610,8 @@ var __webpack_exports__ = {};
             if (this._updateHandle) {
                 server_namespaceObject.system.clearRun(this._updateHandle);
             }
-            if (this._scriptEvent) {
-                server_namespaceObject.system.afterEvents.scriptEventReceive.unsubscribe(this._scriptEvent);
+            if (this._messageSubscriptionHandle) {
+                unsubscribeTimeOfDayChangeMessages(this._messageSubscriptionHandle);
             }
         }
     }
@@ -17225,9 +18448,22 @@ var __webpack_exports__ = {};
             this.rainWeatherMenuItem = undefined;
             this.thunderWeatherMenuItem = undefined;
             this.weatherDuration = 1e6;
+            this._weatherChangeSubscriptionHandle = undefined;
+            this._weatherChangeMap = new Map;
             this.createWeatherMenu(parentMenu);
             this.setSubscriptionToWeatherChangeEvent(this.uiSession);
             this.updateMenuStates(this.getWeather());
+            this._weatherChangeSubscriptionHandle = subscribeWeatherChangeMessages(((id, weatherChange) => {
+                this.uiSession.log.info(`Weather change requested by ${id} to ${weatherChange}`);
+                this._weatherChangeMap.set(id, this.getWeather());
+                this.setWeatherAndLog(weatherChange);
+            }), (id => {
+                this.uiSession.log.info(`Weather restore requested by ${id}`);
+                const previousWeather = this._weatherChangeMap.get(id);
+                if (previousWeather !== undefined) {
+                    this.setWeatherAndLog(previousWeather);
+                }
+            }));
         }
         createWeatherMenu(parentMenu) {
             const weatherClearAction = this.uiSession.actionManager.createAction({
@@ -18864,6 +20100,32 @@ var __webpack_exports__ = {};
         RulerTelemetry["SelectAllWidgets"] = "SelectAllWidgets";
         RulerTelemetry["DeselectAllWidgets"] = "DeselectAllWidgets";
     })(RulerTelemetry || (RulerTelemetry = {}));
+    var AxisLockState;
+    (function(AxisLockState) {
+        AxisLockState["None"] = "none";
+        AxisLockState["X"] = "x";
+        AxisLockState["Y"] = "y";
+        AxisLockState["Z"] = "z";
+    })(AxisLockState || (AxisLockState = {}));
+    var RulerOperation;
+    (function(RulerOperation) {
+        RulerOperation["CreateRuler"] = "createRuler";
+        RulerOperation["CompleteRuler"] = "completeRuler";
+        RulerOperation["ClearAll"] = "clearAll";
+        RulerOperation["PositionChange"] = "positionChange";
+    })(RulerOperation || (RulerOperation = {}));
+    const TRANSACTION_NAMES = {
+        [RulerOperation.CreateRuler]: "RulerTool:PlaceStartPoint",
+        [RulerOperation.CompleteRuler]: "RulerTool:PlaceEndPoint",
+        [RulerOperation.ClearAll]: "RulerTool:ClearRuler",
+        [RulerOperation.PositionChange]: "RulerTool:PositionChange"
+    };
+    var RulerMode;
+    (function(RulerMode) {
+        RulerMode["Idle"] = "idle";
+        RulerMode["WaitingForStartPosition"] = "waitingForStartPosition";
+        RulerMode["WaitingForEndPosition"] = "waitingForEndPosition";
+    })(RulerMode || (RulerMode = {}));
     class Midpoint {
         constructor(start, end, group, uiSession) {
             this._start = start;
@@ -18888,7 +20150,6 @@ var __webpack_exports__ = {};
                 collisionRadius: 0,
                 widgetName: "Ruler Tool - Midpoint"
             });
-            this._textComponent = this._widget.addTextComponent("length_text", `${this._length.toFixed(1)}`, {});
         }
         calculateDeltaAndLength() {
             this._delta = lib.Vector3Utils.subtract(this._end.location, this._start.location);
@@ -18910,7 +20171,6 @@ var __webpack_exports__ = {};
                 z: .5
             });
             this._location = lib.Vector3Utils.add(lib.Vector3Utils.scale(lib.Vector3Utils.subtract(endCenter, startCenter), .5), startCenter);
-            this._textComponent.label = this._length.toFixed(1);
             this._widget.location = this._location;
         }
         destroy() {
@@ -18920,6 +20180,7 @@ var __webpack_exports__ = {};
     class MeasuringMark {
         constructor(other, position, widgetGroup, updater, uiSession, rulerToolId, onSelectionChanged) {
             this._location = position;
+            this._lastKnownPosition = position;
             this._other = other;
             this._onSelectionChanged = onSelectionChanged;
             this._uiSession = uiSession;
@@ -18958,6 +20219,32 @@ var __webpack_exports__ = {};
                             this._selectionIndicator.location = data.location;
                         }
                         updater();
+                    }
+                    if (data.selected !== undefined) {
+                        uiSession.log.debug(`[RulerTool] Widget selection changed to: ${data.selected}`);
+                        if (data.selected && !this._selectionIndicator) {
+                            this._selectionIndicator = widgetGroup.createWidget(this._location, {
+                                selectable: false,
+                                snapToBlockLocation: false,
+                                visible: true,
+                                collisionRadius: 0,
+                                widgetName: `Ruler Tool - Selection Indicator - ${Date.now()}`
+                            });
+                            this._selectionIndicator.addGizmoComponent("selection_gizmo", {
+                                offset: {
+                                    x: .5,
+                                    y: .1,
+                                    z: .5
+                                },
+                                visible: true
+                            });
+                        } else if (!data.selected && this._selectionIndicator) {
+                            this._selectionIndicator.delete();
+                            this._selectionIndicator = undefined;
+                        }
+                        if (this._onSelectionChanged) {
+                            this._onSelectionChanged(data.selected);
+                        }
                     }
                 }
             });
@@ -19060,6 +20347,7 @@ var __webpack_exports__ = {};
             if (this._selectionIndicator) {
                 this._selectionIndicator.location = newLocation;
             }
+            this._lastKnownPosition = newLocation;
         }
     }
     class RulerToolBehavior {
@@ -19072,6 +20360,10 @@ var __webpack_exports__ = {};
             this._startPointSelected = false;
             this._endPointSelected = false;
             this._isDragging = false;
+            this._axisLocks = new Set;
+            this._lockXAxis = (0, server_editor_namespaceObject.makeObservable)(false);
+            this._lockYAxis = (0, server_editor_namespaceObject.makeObservable)(false);
+            this._lockZAxis = (0, server_editor_namespaceObject.makeObservable)(false);
             this._startPointVector = (0, server_editor_namespaceObject.makeObservable)({
                 x: 0,
                 y: 0,
@@ -19085,6 +20377,9 @@ var __webpack_exports__ = {};
             this._infoText = (0, server_editor_namespaceObject.makeObservable)(EMPTY_INFO);
             this._distanceText = (0, server_editor_namespaceObject.makeObservable)("0.0 blocks");
             this._isManualInput = false;
+            this._isRestoringFromTransaction = false;
+            this._lastCapturedPositions = [];
+            this._isCreatingRuler = false;
             this.telemetryManager = new TelemetryManager(uiSession.extensionContext.player, TelemetrySource.Ruler);
             this._widgetGroup = uiSession.extensionContext.widgetManager.createGroup({
                 groupSelectionMode: server_editor_namespaceObject.WidgetGroupSelectionMode.Multiple,
@@ -19104,7 +20399,7 @@ var __webpack_exports__ = {};
             this._cursorProperties.targetMode = server_editor_namespaceObject.CursorTargetMode.Face;
             this._cursorProperties.visible = true;
             this._tool = this.addTool(uiSession);
-            uiSession.inputManager.registerKeyBinding(server_editor_namespaceObject.EditorInputContext.GlobalToolMode, uiSession.actionManager.createAction({
+            this._tool.registerKeyBinding(uiSession.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => this.toggleSelectAllWidgets()
             }), {
@@ -19115,7 +20410,7 @@ var __webpack_exports__ = {};
                 label: "resourcePack.editor.toolRail.rulerTool.keyBinding.toggleSelectAll.label",
                 tooltip: "resourcePack.editor.toolRail.rulerTool.keyBinding.toggleSelectAll.tooltip"
             });
-            uiSession.inputManager.registerKeyBinding(server_editor_namespaceObject.EditorInputContext.GlobalToolMode, uiSession.actionManager.createAction({
+            this._tool.registerKeyBinding(uiSession.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
                     this.deleteSelectedRulerLine();
@@ -19127,11 +20422,56 @@ var __webpack_exports__ = {};
                 label: "resourcePack.editor.toolRail.rulerTool.keyBinding.deleteRulerLine.label",
                 tooltip: "resourcePack.editor.toolRail.rulerTool.keyBinding.deleteRulerLine.tooltip"
             });
+            this._tool.registerKeyBinding(uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    this.uiSession.log.info(`[RulerTool] X-axis lock key pressed`);
+                    this.toggleAxisLock(AxisLockState.X);
+                }
+            }), {
+                key: server_editor_namespaceObject.KeyboardKey.KEY_X
+            }, {
+                uniqueId: "editor:rulerTool:toggleXAxis",
+                label: "resourcePack.editor.toolRail.rulerTool.keyBinding.toggleXAxisLock.label",
+                tooltip: "resourcePack.editor.toolRail.rulerTool.keyBinding.toggleXAxisLock.tooltip"
+            });
+            this._tool.registerKeyBinding(uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    this.uiSession.log.info(`[RulerTool] Y-axis lock key pressed`);
+                    this.toggleAxisLock(AxisLockState.Y);
+                }
+            }), {
+                key: server_editor_namespaceObject.KeyboardKey.KEY_Y
+            }, {
+                uniqueId: "editor:rulerTool:toggleYAxis",
+                label: "resourcePack.editor.toolRail.rulerTool.keyBinding.toggleYAxisLock.label",
+                tooltip: "resourcePack.editor.toolRail.rulerTool.keyBinding.toggleYAxisLock.tooltip"
+            });
+            this._tool.registerKeyBinding(uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    this.uiSession.log.info(`[RulerTool] Z-axis lock key pressed`);
+                    this.toggleAxisLock(AxisLockState.Z);
+                }
+            }), {
+                key: server_editor_namespaceObject.KeyboardKey.KEY_Z
+            }, {
+                uniqueId: "editor:rulerTool:toggleZAxis",
+                label: "resourcePack.editor.toolRail.rulerTool.keyBinding.toggleZAxisLock.label",
+                tooltip: "resourcePack.editor.toolRail.rulerTool.keyBinding.toggleZAxisLock.tooltip"
+            });
             this._tool.onModalToolActivation.subscribe((eventData => {
                 if (eventData.isActiveTool) {
                     this._backedUpColors = backupColors(uiSession.extensionContext);
                     uiSession.extensionContext.cursor.setProperties(this._cursorProperties);
                 } else {
+                    if (this._tempTransactionData) {
+                        this.cancelTransaction();
+                    }
+                    this._axisLocks.clear();
+                    this._axisLockStartPosition = undefined;
+                    this.updateAxisLockUI();
                     if (this._backedUpColors) {
                         restoreBackedUpColors(uiSession.extensionContext, this._backedUpColors);
                         this._backedUpColors = undefined;
@@ -19166,6 +20506,25 @@ var __webpack_exports__ = {};
                 }
             });
             pane.addDivider();
+            pane.addBool(this._lockXAxis, {
+                title: "resourcePack.editor.toolRail.rulerTool.lockXAxis.title",
+                onChange: newValue => {
+                    this.onAxisLockCheckboxChanged(AxisLockState.X, newValue);
+                }
+            });
+            pane.addBool(this._lockYAxis, {
+                title: "resourcePack.editor.toolRail.rulerTool.lockYAxis.title",
+                onChange: newValue => {
+                    this.onAxisLockCheckboxChanged(AxisLockState.Y, newValue);
+                }
+            });
+            pane.addBool(this._lockZAxis, {
+                title: "resourcePack.editor.toolRail.rulerTool.lockZAxis.title",
+                onChange: newValue => {
+                    this.onAxisLockCheckboxChanged(AxisLockState.Z, newValue);
+                }
+            });
+            pane.addDivider();
             pane.addButton(uiSession.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
@@ -19175,6 +20534,434 @@ var __webpack_exports__ = {};
                 title: "resourcePack.editor.toolRail.rulerTool.clearRuler.title"
             });
             this._tool.bindPropertyPane(pane);
+            this._transactionHandler = (0, server_editor_namespaceObject.registerUserDefinedTransactionHandler)(this.uiSession.extensionContext.transactionManager, (payload => {
+                this.restoreFromTransaction(payload, false);
+            }), (payload => {
+                this.restoreFromTransaction(payload, true);
+            }));
+            this.updateAxisLockUI();
+        }
+        toggleAxisLock(axis) {
+            if (this.uiSession.toolRail.getSelectedToolId() !== this._tool.id) {
+                return;
+            }
+            if (this._axisLocks.has(axis)) {
+                this._axisLocks.delete(axis);
+            } else {
+                this._axisLocks.add(axis);
+            }
+            this.updateAxisLockUI();
+            this.updateGizmoAxisVisibility();
+        }
+        onAxisLockCheckboxChanged(axis, enabled) {
+            if (enabled) {
+                this._axisLocks.add(axis);
+            } else {
+                this._axisLocks.delete(axis);
+            }
+            this.updateGizmoAxisVisibility();
+        }
+        updateAxisLockUI() {
+            this._lockXAxis.set(this._axisLocks.has(AxisLockState.X));
+            this._lockYAxis.set(this._axisLocks.has(AxisLockState.Y));
+            this._lockZAxis.set(this._axisLocks.has(AxisLockState.Z));
+        }
+        hasActiveAxisLocks() {
+            return this._axisLocks.size > 0;
+        }
+        getAxisConstrainedPosition(basePosition, targetPosition) {
+            if (!this.hasActiveAxisLocks()) {
+                return targetPosition;
+            }
+            const deltaX = Math.abs(targetPosition.x - basePosition.x);
+            const deltaY = Math.abs(targetPosition.y - basePosition.y);
+            const deltaZ = Math.abs(targetPosition.z - basePosition.z);
+            const constrainedPosition = {
+                ...basePosition
+            };
+            let maxDelta = 0;
+            let primaryAxis = undefined;
+            if (this._axisLocks.has(AxisLockState.X) && deltaX > maxDelta) {
+                maxDelta = deltaX;
+                primaryAxis = AxisLockState.X;
+            }
+            if (this._axisLocks.has(AxisLockState.Y) && deltaY > maxDelta) {
+                maxDelta = deltaY;
+                primaryAxis = AxisLockState.Y;
+            }
+            if (this._axisLocks.has(AxisLockState.Z) && deltaZ > maxDelta) {
+                maxDelta = deltaZ;
+                primaryAxis = AxisLockState.Z;
+            }
+            if (primaryAxis === AxisLockState.X) {
+                constrainedPosition.x = targetPosition.x;
+            } else if (primaryAxis === AxisLockState.Y) {
+                constrainedPosition.y = targetPosition.y;
+            } else if (primaryAxis === AxisLockState.Z) {
+                constrainedPosition.z = targetPosition.z;
+            }
+            return constrainedPosition;
+        }
+        getOneBlockOffsetForAxis(startPosition) {
+            if (!this.hasActiveAxisLocks()) {
+                return startPosition;
+            }
+            const offsetPosition = {
+                ...startPosition
+            };
+            if (this._axisLocks.has(AxisLockState.X)) {
+                offsetPosition.x += 1;
+            } else if (this._axisLocks.has(AxisLockState.Y)) {
+                offsetPosition.y += 1;
+            } else if (this._axisLocks.has(AxisLockState.Z)) {
+                offsetPosition.z += 1;
+            }
+            return offsetPosition;
+        }
+        updateGizmoAxisVisibility() {
+            const updateGizmo = gizmoComponent => {
+                if (!gizmoComponent) return;
+                if (this._axisLocks.size === 0) {
+                    gizmoComponent.enabledAxes = server_editor_namespaceObject.Axis.X | server_editor_namespaceObject.Axis.Y | server_editor_namespaceObject.Axis.Z;
+                } else {
+                    let enabledAxes = 0;
+                    if (this._axisLocks.has(AxisLockState.X)) {
+                        enabledAxes |= server_editor_namespaceObject.Axis.X;
+                    }
+                    if (this._axisLocks.has(AxisLockState.Y)) {
+                        enabledAxes |= server_editor_namespaceObject.Axis.Y;
+                    }
+                    if (this._axisLocks.has(AxisLockState.Z)) {
+                        enabledAxes |= server_editor_namespaceObject.Axis.Z;
+                    }
+                    gizmoComponent.enabledAxes = enabledAxes;
+                }
+            };
+            if (this._startPoint) {
+                const gizmoComponent = this._startPoint.widget.getComponent("position_gizmo");
+                updateGizmo(gizmoComponent);
+            }
+            if (this._endPoint) {
+                const gizmoComponent = this._endPoint.widget.getComponent("position_gizmo");
+                updateGizmo(gizmoComponent);
+            }
+            for (const ruler of this._rulers) {
+                if (ruler.startPoint) {
+                    const gizmoComponent = ruler.startPoint.widget.getComponent("position_gizmo");
+                    updateGizmo(gizmoComponent);
+                }
+                if (ruler.endPoint) {
+                    const gizmoComponent = ruler.endPoint.widget.getComponent("position_gizmo");
+                    updateGizmo(gizmoComponent);
+                }
+            }
+        }
+        formatErrorMessage(error) {
+            return String(error);
+        }
+        handleError(operation, error) {
+            const errorMessage = `Failed to ${operation}: ${this.formatErrorMessage(error)}`;
+            this.uiSession.log.warning(errorMessage);
+        }
+        startTransaction(operation) {
+            if (this._transactionHandler && !this._tempTransactionData) {
+                const oldState = {
+                    rulers: this.captureCurrentPositions(),
+                    currentStartMark: this._startPoint?.location,
+                    currentEndMark: this._endPoint?.location,
+                    mode: this.getCurrentMode()
+                };
+                const newState = {
+                    rulers: [],
+                    currentStartMark: undefined,
+                    currentEndMark: undefined,
+                    mode: RulerMode.Idle
+                };
+                this._tempTransactionData = {
+                    operationType: operation,
+                    oldState,
+                    newState,
+                    operationName: TRANSACTION_NAMES[operation]
+                };
+                this.uiSession.extensionContext.transactionManager.openTransaction(TRANSACTION_NAMES[operation]);
+            }
+        }
+        commitTransaction(operation) {
+            if (this._transactionHandler && this._tempTransactionData) {
+                try {
+                    const transactionName = TRANSACTION_NAMES[operation];
+                    this._tempTransactionData.newState = {
+                        rulers: this.captureCurrentPositions(),
+                        currentStartMark: this._startPoint?.location,
+                        currentEndMark: this._endPoint?.location,
+                        mode: this.getCurrentMode()
+                    };
+                    this._transactionHandler.addUserDefinedOperation(this._tempTransactionData, transactionName);
+                    this.uiSession.extensionContext.transactionManager.commitOpenTransaction();
+                    this._tempTransactionData = undefined;
+                    this.updateCapturedPositions();
+                } catch (error) {
+                    this.handleError("commit transaction", error);
+                    if (this._tempTransactionData) {
+                        this.cancelTransaction();
+                    }
+                }
+            } else {
+                this.uiSession.log.warning("There was no transaction data available to commit");
+            }
+        }
+        cancelTransaction() {
+            if (this._tempTransactionData) {
+                try {
+                    this.uiSession.extensionContext.transactionManager.discardOpenTransaction();
+                } catch (error) {
+                    this.handleError("cancel transaction", error);
+                } finally {
+                    this._tempTransactionData = undefined;
+                }
+            }
+        }
+        restoreFromTransaction(payload, isRedo = false) {
+            this._isRestoringFromTransaction = true;
+            try {
+                if (payload.operationType === RulerOperation.ClearAll) {
+                    this.clearRulerSilently();
+                    this.restoreRulersFromPayload(isRedo ? payload.newState : payload.oldState);
+                } else if (payload.operationType === RulerOperation.CreateRuler || payload.operationType === RulerOperation.CompleteRuler) {
+                    if (isRedo) {
+                        this.clearRulerSilently();
+                        this.restoreRulersFromPayload(payload.newState);
+                    } else {
+                        this.undoRulerOperation(payload);
+                    }
+                } else if (payload.operationType === RulerOperation.PositionChange) {
+                    this.clearRulerSilently();
+                    this.restoreRulersFromPayload(isRedo ? payload.newState : payload.oldState);
+                }
+            } finally {
+                this._isRestoringFromTransaction = false;
+            }
+        }
+        destroyRulerWidgets(ruler) {
+            this.safeDestroy(ruler.startPoint);
+            this.safeDestroy(ruler.endPoint);
+            this.safeDestroy(ruler.midPoint);
+        }
+        undoRulerOperation(payload) {
+            const oldRulers = payload.oldState.rulers;
+            const newRulers = payload.newState.rulers;
+            const addedRulers = newRulers.filter((newRuler => !oldRulers.some((oldRuler => this.areRulersEqual(oldRuler, newRuler)))));
+            for (const addedRuler of addedRulers) {
+                const indexToRemove = this._rulers.findIndex((ruler => ruler.startPoint?.location && addedRuler.startPoint && ruler.endPoint?.location && addedRuler.endPoint && this.areVector3Equal(ruler.startPoint.location, addedRuler.startPoint) && this.areVector3Equal(ruler.endPoint.location, addedRuler.endPoint)));
+                if (indexToRemove >= 0) {
+                    const ruler = this._rulers[indexToRemove];
+                    this.destroyRulerWidgets(ruler);
+                    this._rulers.splice(indexToRemove, 1);
+                    if (this._activeRulerIndex === indexToRemove) {
+                        this._activeRulerIndex = -1;
+                    } else if (this._activeRulerIndex > indexToRemove) {
+                        this._activeRulerIndex--;
+                    }
+                }
+            }
+            this.clearCurrentRulerSilently();
+            this.restoreCurrentRulerState(payload.oldState);
+            this.updateInputFieldsFromRuler();
+            this.updateInfoText();
+        }
+        areRulersEqual(ruler1, ruler2) {
+            return this.areVector3Equal(ruler1.startPoint, ruler2.startPoint) && this.areVector3Equal(ruler1.endPoint, ruler2.endPoint);
+        }
+        areVector3Equal(v1, v2) {
+            if (!v1 && !v2) return true;
+            if (!v1 || !v2) return false;
+            return lib.Vector3Utils.equals(v1, v2);
+        }
+        clearCurrentRulerSilently() {
+            this.destroyCurrentRulerWidgets();
+            this._startPoint = undefined;
+            this._endPoint = undefined;
+            this._midPoint = undefined;
+            this._startPointSelected = false;
+            this._endPointSelected = false;
+            this._activeRulerIndex = -1;
+            this._selectionState.resetState(MeasuringMarkSelectionState.NotSelected);
+        }
+        safeDestroy(widget) {
+            if (widget) {
+                try {
+                    widget.destroy();
+                } catch {}
+            }
+        }
+        destroyCurrentRulerWidgets() {
+            this.safeDestroy(this._startPoint);
+            this.safeDestroy(this._endPoint);
+            this.safeDestroy(this._midPoint);
+        }
+        restoreCurrentRulerState(state) {
+            if (state.currentStartMark && state.mode === RulerMode.WaitingForEndPosition) {
+                try {
+                    this._startPoint = this.createMeasuringMark(undefined, state.currentStartMark, (() => {
+                        this.updateInputFieldsFromRuler();
+                        this._midPoint?.update();
+                    }), (selected => {
+                        this._startPointSelected = selected;
+                    }));
+                    this._selectionState.resetState(MeasuringMarkSelectionState.StartPositionSelected);
+                } catch (_e) {
+                    this.handleError("restore ruler start point from transaction", _e);
+                }
+            }
+            if (state.currentEndMark && state.currentStartMark && this._startPoint) {
+                try {
+                    this._endPoint = this.createMeasuringMark(this._startPoint, state.currentEndMark, (() => {
+                        this.updateInputFieldsFromRuler();
+                        this._midPoint?.update();
+                    }), (selected => {
+                        this._endPointSelected = selected;
+                    }));
+                    this._midPoint = new Midpoint(this._startPoint, this._endPoint, this._widgetGroup, this.uiSession);
+                    this._selectionState.resetState(MeasuringMarkSelectionState.EndPositionSelected);
+                } catch (_e) {
+                    this._endPoint = undefined;
+                    this._midPoint = undefined;
+                }
+            }
+            this.updateInputFieldsFromRuler();
+            this.updateInfoText();
+        }
+        createMeasuringMarkUpdateCallback() {
+            return () => {
+                if (!this._isRestoringFromTransaction) {
+                    this.updateInputFieldsFromRuler();
+                    this._midPoint?.update();
+                }
+            };
+        }
+        restoreRulersFromPayload(state) {
+            this._isRestoringFromTransaction = true;
+            const updateCallback = this.createMeasuringMarkUpdateCallback();
+            for (const rulerData of state.rulers) {
+                const startPos = rulerData.startPoint;
+                const endPos = rulerData.endPoint;
+                if (startPos && endPos) {
+                    try {
+                        const startMark = this.createMeasuringMark(undefined, startPos, updateCallback);
+                        const endMark = this.createMeasuringMark(startMark, endPos, updateCallback);
+                        const midPoint = new Midpoint(startMark, endMark, this._widgetGroup, this.uiSession);
+                        this._rulers.push({
+                            startPoint: startMark,
+                            endPoint: endMark,
+                            midPoint,
+                            startPointSelected: false,
+                            endPointSelected: false
+                        });
+                    } catch (_e) {
+                        this.handleError("restore ruler from transaction", _e);
+                        continue;
+                    }
+                }
+            }
+            if (state.currentStartMark && state.mode === RulerMode.WaitingForEndPosition) {
+                try {
+                    this._startPoint = this.createMeasuringMark(undefined, state.currentStartMark, updateCallback, (selected => {
+                        this._startPointSelected = selected;
+                    }));
+                    this._selectionState.resetState(MeasuringMarkSelectionState.StartPositionSelected);
+                } catch {}
+            }
+            if (state.currentEndMark && state.currentStartMark && this._startPoint) {
+                try {
+                    this._endPoint = this.createMeasuringMark(this._startPoint, state.currentEndMark, updateCallback, (selected => {
+                        this._endPointSelected = selected;
+                    }));
+                    this._midPoint = new Midpoint(this._startPoint, this._endPoint, this._widgetGroup, this.uiSession);
+                    this._selectionState.resetState(MeasuringMarkSelectionState.EndPositionSelected);
+                } catch (_e) {
+                    this._endPoint = undefined;
+                    this._midPoint = undefined;
+                }
+            }
+            this._activeRulerIndex = this._rulers.length > 0 ? this._rulers.length - 1 : -1;
+            this._isRestoringFromTransaction = false;
+            this.updateInputFieldsFromRuler();
+            this.updateInfoText();
+            this.updateCapturedPositions();
+        }
+        captureCurrentPositions() {
+            return this._rulers.map((ruler => ({
+                startPoint: ruler.startPoint?.location,
+                endPoint: ruler.endPoint?.location
+            })));
+        }
+        hasPositionsChanged() {
+            const currentPositions = this.captureCurrentPositions();
+            if (currentPositions.length !== this._lastCapturedPositions.length) {
+                return true;
+            }
+            return currentPositions.some(((current, index) => {
+                const last = this._lastCapturedPositions[index];
+                if (!last) return true;
+                return !this.areVector3Equal(current.startPoint, last.startPoint) || !this.areVector3Equal(current.endPoint, last.endPoint);
+            }));
+        }
+        updateCapturedPositions() {
+            this._lastCapturedPositions = this.captureCurrentPositions();
+        }
+        createPositionChangeTransaction() {
+            if (!this._transactionHandler) {
+                return;
+            }
+            try {
+                const oldPositions = this._lastCapturedPositions;
+                const newPositions = this.captureCurrentPositions();
+                const payload = {
+                    operationType: RulerOperation.PositionChange,
+                    oldState: {
+                        rulers: oldPositions,
+                        currentStartMark: this._startPoint?.location,
+                        currentEndMark: this._endPoint?.location,
+                        mode: this.getCurrentMode()
+                    },
+                    newState: {
+                        rulers: newPositions,
+                        currentStartMark: this._startPoint?.location,
+                        currentEndMark: this._endPoint?.location,
+                        mode: this.getCurrentMode()
+                    },
+                    operationName: "RulerTool:PositionChange"
+                };
+                this.uiSession.extensionContext.transactionManager.openTransaction("RulerTool:PositionChange");
+                this._transactionHandler.addUserDefinedOperation(payload, "RulerTool:PositionChange");
+                this.uiSession.extensionContext.transactionManager.commitOpenTransaction();
+                this.updateCapturedPositions();
+            } catch (error) {
+                this.handleError("create position change transaction", error);
+            }
+        }
+        clearRulerSilently() {
+            this.destroyAllRulerWidgets();
+            this._rulers = [];
+            this._activeRulerIndex = -1;
+            this._startPoint = undefined;
+            this._endPoint = undefined;
+            this._midPoint = undefined;
+            this._startPointSelected = false;
+            this._endPointSelected = false;
+            this._endPointSelectionState = MeasuringMarkSelectionState.NotSelected;
+            this._selectionState.resetState(this._endPointSelectionState);
+            this._startPointVector.set({
+                x: 0,
+                y: 0,
+                z: 0
+            });
+            this._endPointVector.set({
+                x: 0,
+                y: 0,
+                z: 0
+            });
+            this._isManualInput = false;
         }
         onStartPointChanged(value) {
             this._isManualInput = true;
@@ -19239,6 +21026,7 @@ var __webpack_exports__ = {};
             this._isManualInput = false;
         }
         clearRuler() {
+            this.startTransaction(RulerOperation.ClearAll);
             this.telemetryManager.fireTelemetryEvent(RulerTelemetry.Reset);
             this._rulers.forEach((ruler => {
                 ruler.startPoint?.destroy();
@@ -19264,36 +21052,66 @@ var __webpack_exports__ = {};
                 y: 0,
                 z: 0
             });
+            this._axisLocks.clear();
+            this._axisLockStartPosition = undefined;
+            this.updateAxisLockUI();
             this._isManualInput = false;
             this.updateInfoText();
+            this.commitTransaction(RulerOperation.ClearAll);
+        }
+        formatRulerInfo(startPoint, endPoint) {
+            let text = `S(${lib.Vector3Utils.toString(startPoint, {
+                decimals: 1
+            })})`;
+            let distance = 0;
+            if (endPoint) {
+                text += ` -> E(${lib.Vector3Utils.toString(endPoint, {
+                    decimals: 1
+                })})`;
+                const delta = lib.Vector3Utils.subtract(endPoint, startPoint);
+                text += ` D(${lib.Vector3Utils.toString(delta, {
+                    decimals: 1
+                })})`;
+                const distanceX = Math.abs(delta.x) + (delta.x !== 0 ? 1 : 0);
+                const distanceY = Math.abs(delta.y) + (delta.y !== 0 ? 1 : 0);
+                const distanceZ = Math.abs(delta.z) + (delta.z !== 0 ? 1 : 0);
+                distance = Math.max(distanceX, distanceY, distanceZ);
+                text += ` L:${distance.toFixed(1)}`;
+            }
+            return {
+                text,
+                distance
+            };
         }
         updateInfoText() {
             let text = "";
             let distance = 0;
-            if (this._startPoint) {
-                text += `S(${lib.Vector3Utils.toString(this._startPoint.location, {
-                    decimals: 1
-                })})`;
-                if (this._endPoint) {
-                    text += ` -> E(${lib.Vector3Utils.toString(this._endPoint.location, {
-                        decimals: 1
-                    })})`;
-                    const delta = lib.Vector3Utils.subtract(this._endPoint.location, this._startPoint.location);
-                    text += ` D(${lib.Vector3Utils.toString(delta, {
-                        decimals: 1
-                    })})`;
-                    const blockCountX = Math.abs(delta.x) + (delta.x !== 0 ? 1 : 0);
-                    const blockCountY = Math.abs(delta.y) + (delta.y !== 0 ? 1 : 0);
-                    const blockCountZ = Math.abs(delta.z) + (delta.z !== 0 ? 1 : 0);
-                    distance = Math.max(blockCountX, blockCountY, blockCountZ);
-                    text += ` L:${distance.toFixed(1)}`;
+            if (this._startPoint && (!this._rulers.length || this._activeRulerIndex === -1)) {
+                const result = this.formatRulerInfo(this._startPoint.location, this._endPoint?.location);
+                text = result.text;
+                distance = result.distance;
+            } else if (this._activeRulerIndex >= 0 && this._activeRulerIndex < this._rulers.length) {
+                const activeRuler = this._rulers[this._activeRulerIndex];
+                if (activeRuler.startPoint) {
+                    const result = this.formatRulerInfo(activeRuler.startPoint.location, activeRuler.endPoint?.location);
+                    text = result.text;
+                    distance = result.distance;
                 }
+            } else if (this._startPoint) {
+                const result = this.formatRulerInfo(this._startPoint.location, this._endPoint?.location);
+                text = result.text;
+                distance = result.distance;
             }
-            if (this._rulers.length > 1) {
+            if (this._rulers.length > 1 && this._activeRulerIndex >= 0 && this._activeRulerIndex < this._rulers.length) {
                 text += ` [${this._activeRulerIndex + 1}/${this._rulers.length}]`;
             }
             this._infoText.set(text ? text : EMPTY_INFO);
             this._distanceText.set(distance > 0 ? `${distance.toFixed(2)} blocks` : "0.0 blocks");
+        }
+        updateRulerUI() {
+            this.updateInputFieldsFromRuler();
+            this.updateInfoText();
+            this._midPoint?.update();
         }
         createNewRuler() {
             const rulerData = {
@@ -19327,12 +21145,23 @@ var __webpack_exports__ = {};
                 ruler.endPointSelected = this._endPointSelected;
             }
         }
-        detectAxisLock(_uiSession) {
-            return undefined;
-        }
         createMeasuringMark(other, position, updater, onSelectionChanged) {
-            const mark = new MeasuringMark(other, position, this._widgetGroup, updater, this.uiSession, this._tool.id, onSelectionChanged);
+            const mark = new MeasuringMark(other, position, this._widgetGroup, (() => {
+                if (!this._isRestoringFromTransaction && !this._isManualInput && this.hasPositionsChanged()) {
+                    this.createPositionChangeTransaction();
+                }
+                updater();
+            }), this.uiSession, this._tool.id, onSelectionChanged);
             return mark;
+        }
+        getCurrentMode() {
+            if (this._startPoint && !this._endPoint) {
+                return RulerMode.WaitingForEndPosition;
+            } else if (this._startPoint && this._endPoint) {
+                return RulerMode.Idle;
+            } else {
+                return RulerMode.Idle;
+            }
         }
         updateInputFieldsFromRuler() {
             if (this._isManualInput) {
@@ -19340,18 +21169,40 @@ var __webpack_exports__ = {};
             }
             if (this._startPoint) {
                 this._startPointVector.set(this._startPoint.location);
+            } else {
+                this._startPointVector.set({
+                    x: 0,
+                    y: 0,
+                    z: 0
+                });
             }
             if (this._endPoint) {
                 this._endPointVector.set(this._endPoint.location);
+            } else {
+                this._endPointVector.set({
+                    x: 0,
+                    y: 0,
+                    z: 0
+                });
             }
         }
-        teardown() {
+        destroyAllRulerWidgets() {
             this._rulers.forEach((ruler => {
-                ruler.startPoint?.destroy();
-                ruler.endPoint?.destroy();
-                ruler.midPoint?.destroy();
+                this.destroyRulerWidgets(ruler);
             }));
-            this.uiSession.extensionContext.widgetManager.deleteGroup(this._widgetGroup);
+            this.destroyCurrentRulerWidgets();
+        }
+        teardown() {
+            if (this._tempTransactionData) {
+                this.cancelTransaction();
+            }
+            this.destroyAllRulerWidgets();
+            try {
+                this.uiSession.extensionContext.widgetManager.deleteGroup(this._widgetGroup);
+            } catch {}
+            if (this._transactionHandler) {
+                this._transactionHandler = undefined;
+            }
         }
         addTool(uiSession) {
             const toolToggleAction = uiSession.actionManager.createAction({
@@ -19389,11 +21240,13 @@ var __webpack_exports__ = {};
                         y: Math.floor(targetLocation.y),
                         z: Math.floor(targetLocation.z)
                     };
+                    const constrainedLocation = this.hasActiveAxisLocks() && this._axisLockStartPosition ? this.getAxisConstrainedPosition(this._axisLockStartPosition, roundedLocation) : roundedLocation;
                     if (mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton) {
                         this._isManualInput = false;
                         const isCtrlPressed = mouseProps.modifiers?.ctrl || false;
                         if (mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown) {
                             if (!this._startPoint || this._endPoint && isCtrlPressed) {
+                                this.startTransaction(RulerOperation.CreateRuler);
                                 if (this._endPoint && isCtrlPressed) {
                                     if (this._activeRulerIndex === -1 && this._startPoint && this._endPoint) {
                                         const newRulerData = {
@@ -19410,9 +21263,8 @@ var __webpack_exports__ = {};
                                     const newRulerIndex = this._rulers.length;
                                     this._rulers.push({
                                         ...newRulerPartial,
-                                        startPoint: this.createMeasuringMark(undefined, roundedLocation, (() => {
-                                            this.updateInputFieldsFromRuler();
-                                            this._midPoint?.update();
+                                        startPoint: this.createMeasuringMark(undefined, constrainedLocation, (() => {
+                                            this.updateRulerUI();
                                         }), (selected => {
                                             if (newRulerIndex < this._rulers.length) {
                                                 this._rulers[newRulerIndex].startPointSelected = selected;
@@ -19423,8 +21275,6 @@ var __webpack_exports__ = {};
                                         }))
                                     });
                                     this.setActiveRuler(this._rulers.length - 1);
-                                    this._selectionState.resetState(MeasuringMarkSelectionState.StartPositionSelected);
-                                    this.telemetryManager.fireTelemetryEvent(RulerTelemetry.StartPointSelected);
                                 } else {
                                     if (this._endPoint) {
                                         this.telemetryManager.fireTelemetryEvent(RulerTelemetry.Reset);
@@ -19440,45 +21290,55 @@ var __webpack_exports__ = {};
                                         this._midPoint = undefined;
                                         this._selectionState.resetState(MeasuringMarkSelectionState.NotSelected);
                                     }
-                                    this._startPoint = this.createMeasuringMark(undefined, roundedLocation, (() => {
-                                        this.updateInputFieldsFromRuler();
-                                        this._midPoint?.update();
+                                    this._startPoint = this.createMeasuringMark(undefined, constrainedLocation, (() => {
+                                        this.updateRulerUI();
                                     }), (selected => {
                                         this._startPointSelected = selected;
                                     }));
-                                    this._selectionState.resetState(MeasuringMarkSelectionState.StartPositionSelected);
-                                    this.telemetryManager.fireTelemetryEvent(RulerTelemetry.StartPointSelected);
+                                    if (this.hasActiveAxisLocks()) {
+                                        this._axisLockStartPosition = constrainedLocation;
+                                    }
                                 }
-                                this._dragStartLocation = roundedLocation;
+                                this._selectionState.resetState(MeasuringMarkSelectionState.StartPositionSelected);
+                                this.telemetryManager.fireTelemetryEvent(RulerTelemetry.StartPointSelected);
+                                this.commitTransaction(RulerOperation.CreateRuler);
+                                this._dragStartLocation = constrainedLocation;
                                 this.updateInputFieldsFromRuler();
+                                this.updateGizmoAxisVisibility();
                             }
                         } else if (mouseProps.inputType === server_editor_namespaceObject.MouseInputType.Drag && this._dragStartLocation && this._startPoint) {
                             if (!this._isDragging) {
                                 this._isDragging = true;
                                 this.telemetryManager.fireTelemetryEvent(RulerTelemetry.DragStart);
                             }
+                            let endpointLocation = constrainedLocation;
+                            if (this.hasActiveAxisLocks() && !this._endPoint) {
+                                endpointLocation = this.getOneBlockOffsetForAxis(this._startPoint.location);
+                            }
                             if (!this._endPoint) {
-                                this._endPoint = this.createMeasuringMark(this._startPoint, roundedLocation, (() => {
-                                    this.updateInputFieldsFromRuler();
-                                    this._midPoint?.update();
+                                this.startTransaction(RulerOperation.CompleteRuler);
+                                this._endPoint = this.createMeasuringMark(this._startPoint, endpointLocation, (() => {
+                                    this.updateRulerUI();
                                 }), (selected => {
                                     this._endPointSelected = selected;
                                 }));
                                 this._midPoint = new Midpoint(this._startPoint, this._endPoint, this._widgetGroup, uiSession);
                                 this._selectionState.resetState(MeasuringMarkSelectionState.EndPositionSelected);
+                                this.commitTransaction(RulerOperation.CompleteRuler);
                             } else {
-                                this._endPoint.updateLocation(roundedLocation);
+                                this._endPoint.updateLocation(endpointLocation);
                             }
                             this.updateInputFieldsFromRuler();
                             this.updateInfoText();
                             this._midPoint?.update();
+                            this.updateGizmoAxisVisibility();
                         } else if (mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonUp) {
                             if (this._isDragging) {
                                 this._isDragging = false;
                                 this._dragStartLocation = undefined;
                                 this.telemetryManager.fireTelemetryEvent(RulerTelemetry.DragEnd);
                                 if (this._endPoint) {
-                                    this._endPoint.updateLocation(roundedLocation);
+                                    this._endPoint.updateLocation(constrainedLocation);
                                     this.telemetryManager.fireTelemetryEvent(RulerTelemetry.EndPointSelected);
                                     if (this._activeRulerIndex === -1 && this._startPoint && this._endPoint) {
                                         const completedRuler = {
@@ -19499,13 +21359,14 @@ var __webpack_exports__ = {};
                                 }
                             } else {
                                 if (this._startPoint && !this._endPoint) {
-                                    if (this._dragStartLocation && lib.Vector3Utils.equals(this._dragStartLocation, roundedLocation)) {
+                                    if (this._dragStartLocation && lib.Vector3Utils.equals(this._dragStartLocation, constrainedLocation)) {
                                         this._dragStartLocation = undefined;
                                         return;
                                     }
-                                    this._endPoint = this.createMeasuringMark(this._startPoint, roundedLocation, (() => {
-                                        this.updateInputFieldsFromRuler();
-                                        this._midPoint?.update();
+                                    this.startTransaction(RulerOperation.CompleteRuler);
+                                    const endpointLocation = constrainedLocation;
+                                    this._endPoint = this.createMeasuringMark(this._startPoint, endpointLocation, (() => {
+                                        this.updateRulerUI();
                                     }), (selected => {
                                         this._endPointSelected = selected;
                                     }));
@@ -19528,6 +21389,8 @@ var __webpack_exports__ = {};
                                     this._dragStartLocation = undefined;
                                     this.updateInputFieldsFromRuler();
                                     this.updateInfoText();
+                                    this.updateGizmoAxisVisibility();
+                                    this.commitTransaction(RulerOperation.CompleteRuler);
                                 } else {
                                     this._dragStartLocation = undefined;
                                 }
@@ -19595,31 +21458,30 @@ var __webpack_exports__ = {};
                 }
             }
         }
+        syncWidgetSelectionToRulerState(widget, currentRulerState) {
+            if (widget?.selected) {
+                return true;
+            }
+            return currentRulerState;
+        }
         syncSelectionStates() {
             for (let i = 0; i < this._rulers.length; i++) {
                 const ruler = this._rulers[i];
-                if (ruler.startPoint) {
-                    ruler.startPointSelected = ruler.startPoint.widget.selected;
-                }
-                if (ruler.endPoint) {
-                    ruler.endPointSelected = ruler.endPoint.widget.selected;
-                }
+                ruler.startPointSelected = this.syncWidgetSelectionToRulerState(ruler.startPoint?.widget, ruler.startPointSelected);
+                ruler.endPointSelected = this.syncWidgetSelectionToRulerState(ruler.endPoint?.widget, ruler.endPointSelected);
             }
             if (this._activeRulerIndex >= 0 && this._activeRulerIndex < this._rulers.length) {
                 const activeRuler = this._rulers[this._activeRulerIndex];
                 this._startPointSelected = activeRuler.startPointSelected;
                 this._endPointSelected = activeRuler.endPointSelected;
             } else if (this._activeRulerIndex === -1) {
-                if (this._startPoint) {
-                    this._startPointSelected = this._startPoint.widget.selected;
-                }
-                if (this._endPoint) {
-                    this._endPointSelected = this._endPoint.widget.selected;
-                }
+                this._startPointSelected = this.syncWidgetSelectionToRulerState(this._startPoint?.widget, this._startPointSelected);
+                this._endPointSelected = this.syncWidgetSelectionToRulerState(this._endPoint?.widget, this._endPointSelected);
             }
         }
         deleteSelectedRulerLine() {
             if (this.uiSession.toolRail.getSelectedToolId() !== this._tool.id) {
+                this.uiSession.log.debug("[RulerTool] Delete attempted but ruler tool not active");
                 return;
             }
             this.syncSelectionStates();
@@ -19640,11 +21502,16 @@ var __webpack_exports__ = {};
                     hasActiveRulerSelected = true;
                 }
             }
+            this.uiSession.log.debug(`[RulerTool] Delete status: totalRulers=${totalRulers}, selectedRulers=${selectedRulers}, hasActiveRulerSelected=${hasActiveRulerSelected}`);
+            this.uiSession.log.debug(`[RulerTool] Active ruler index: ${this._activeRulerIndex}, start point exists: ${!!this._startPoint}, end point exists: ${!!this._endPoint}`);
+            this.uiSession.log.debug(`[RulerTool] Start selected: ${this._startPointSelected}, end selected: ${this._endPointSelected}`);
             if (totalRulers > 0 && selectedRulers === totalRulers) {
+                this.uiSession.log.debug("[RulerTool] All rulers selected - clearing everything");
                 this.clearRuler();
                 return;
             }
             if (selectedRulers === 0) {
+                this.uiSession.log.debug("[RulerTool] No rulers selected - nothing to delete");
                 return;
             }
             const rulersToDelete = [];
@@ -21599,39 +23466,137 @@ var __webpack_exports__ = {};
     })(TerrainTelemetry || (TerrainTelemetry = {}));
     class TerrainBehavior {
         constructor(session) {
-            this._terrainMode = (0, server_editor_namespaceObject.makeObservable)(TerrainBehavior.DEFAULT_TERRAIN_MODE);
-            this._flattenMode = (0, server_editor_namespaceObject.makeObservable)(TerrainBehavior.DEFAULT_FLATTEN_MODE);
-            this._paintMode = (0, server_editor_namespaceObject.makeObservable)(TerrainBehavior.DEFAULT_PAINT_MODE);
-            this._smoothRoughenIntensity = (0, server_editor_namespaceObject.makeObservable)(TerrainBehavior.DEFAULT_SMOOTH_ROUGHEN_INTENSITY);
-            this._flattenIntensity = (0, server_editor_namespaceObject.makeObservable)(TerrainBehavior.DEFAULT_FLATTEN_INTENSITY);
-            this._flattenSmoothing = (0, server_editor_namespaceObject.makeObservable)(TerrainBehavior.DEFAULT_FLATTEN_SMOOTHING);
-            this._floorBlockOverride = (0, server_editor_namespaceObject.makeObservable)(TerrainBehavior.DEFAULT_FLATTEN_FLOOR_OVERRIDE);
+            this.BEHAVIOR_NAME = "Terrain";
+            this.DEFAULT_CURSOR_PROPERTIES = {
+                outlineColor: {
+                    red: 0,
+                    green: .5,
+                    blue: .5,
+                    alpha: .2
+                },
+                controlMode: server_editor_namespaceObject.CursorControlMode.KeyboardAndMouse,
+                targetMode: server_editor_namespaceObject.CursorTargetMode.Block,
+                visible: true
+            };
+            this.FLATTEN_BRUSH_SHAPES = [ new server_editor_namespaceObject.CylinderBrushShape({
+                uniform: true,
+                height: 12,
+                radius: 10,
+                hideRotation: true
+            }) ];
+            this.SMOOTH_ROUGHEN_BRUSH_SHAPES = [ new server_editor_namespaceObject.EllipsoidBrushShape({
+                uniform: true,
+                radius: 8
+            }), new server_editor_namespaceObject.CuboidBrushShape, new server_editor_namespaceObject.CylinderBrushShape ];
+            this.DEFAULT_BRUSH_OFFSET = {
+                x: 0,
+                y: 0,
+                z: 0
+            };
+            this.TERRAIN_SETTINGS_MAP = {
+                [TerrainMode.FlattenMode]: {
+                    terrainMode: TerrainMode.FlattenMode,
+                    cursorProperties: this.DEFAULT_CURSOR_PROPERTIES,
+                    brushOffset: this.DEFAULT_BRUSH_OFFSET,
+                    brushShapes: this.FLATTEN_BRUSH_SHAPES,
+                    paintMode: server_editor_namespaceObject.PaintMode.Flatten
+                },
+                [TerrainMode.SmoothMode]: {
+                    terrainMode: TerrainMode.SmoothMode,
+                    cursorProperties: this.DEFAULT_CURSOR_PROPERTIES,
+                    brushOffset: this.DEFAULT_BRUSH_OFFSET,
+                    brushShapes: this.SMOOTH_ROUGHEN_BRUSH_SHAPES,
+                    paintMode: server_editor_namespaceObject.PaintMode.Smooth
+                },
+                [TerrainMode.RoughenMode]: {
+                    terrainMode: TerrainMode.RoughenMode,
+                    cursorProperties: this.DEFAULT_CURSOR_PROPERTIES,
+                    brushOffset: this.DEFAULT_BRUSH_OFFSET,
+                    brushShapes: this.SMOOTH_ROUGHEN_BRUSH_SHAPES,
+                    paintMode: server_editor_namespaceObject.PaintMode.Roughen
+                }
+            };
+            this.FLATTEN_SETTINGS_MAP = {
+                [server_editor_namespaceObject.FlattenMode.Both]: {
+                    flattenMode: server_editor_namespaceObject.FlattenMode.Both,
+                    brushOffset: {
+                        x: 0,
+                        y: -this.FLATTEN_BRUSH_SHAPES[0].height / 2,
+                        z: 0
+                    },
+                    targetMode: server_editor_namespaceObject.CursorTargetMode.Block
+                },
+                [server_editor_namespaceObject.FlattenMode.Down]: {
+                    flattenMode: server_editor_namespaceObject.FlattenMode.Down,
+                    brushOffset: {
+                        x: 0,
+                        y: 1,
+                        z: 0
+                    },
+                    targetMode: server_editor_namespaceObject.CursorTargetMode.Block
+                },
+                [server_editor_namespaceObject.FlattenMode.Up]: {
+                    flattenMode: server_editor_namespaceObject.FlattenMode.Up,
+                    brushOffset: {
+                        x: 0,
+                        y: -this.FLATTEN_BRUSH_SHAPES[0].height,
+                        z: 0
+                    },
+                    targetMode: server_editor_namespaceObject.CursorTargetMode.Block
+                }
+            };
+            this.MODE_ROTATION_MAP = {
+                [TerrainMode.FlattenMode]: TerrainMode.SmoothMode,
+                [TerrainMode.SmoothMode]: TerrainMode.RoughenMode,
+                [TerrainMode.RoughenMode]: TerrainMode.FlattenMode
+            };
+            this.FLATTEN_INTENSITY_MIN = 1;
+            this.FLATTEN_INTENSITY_MAX = 100;
+            this.FLATTEN_SMOOTHING_MIN = 0;
+            this.FLATTEN_SMOOTHING_MAX = 100;
+            this.SMOOTH_ROUGHEN_INTENSITY_MIN = 0;
+            this.SMOOTH_ROUGHEN_INTENSITY_MAX = 9;
+            this.DEFAULT_TERRAIN_MODE = TerrainMode.FlattenMode;
+            this.DEFAULT_FLATTEN_MODE = server_editor_namespaceObject.FlattenMode.Both;
+            this.DEFAULT_FLATTEN_INTENSITY = this.FLATTEN_INTENSITY_MAX;
+            this.DEFAULT_FLATTEN_SMOOTHING = this.FLATTEN_SMOOTHING_MIN;
+            this.DEFAULT_FLATTEN_FLOOR_OVERRIDE = false;
+            this.DEFAULT_SMOOTH_ROUGHEN_INTENSITY = this.SMOOTH_ROUGHEN_INTENSITY_MAX;
+            this._terrainMode = (0, server_editor_namespaceObject.makeObservable)(this.DEFAULT_TERRAIN_MODE);
+            this._flattenMode = (0, server_editor_namespaceObject.makeObservable)(this.DEFAULT_FLATTEN_MODE);
+            this._smoothRoughenIntensity = (0, server_editor_namespaceObject.makeObservable)(this.DEFAULT_SMOOTH_ROUGHEN_INTENSITY);
+            this._flattenIntensity = (0, server_editor_namespaceObject.makeObservable)(this.DEFAULT_FLATTEN_INTENSITY);
+            this._flattenSmoothing = (0, server_editor_namespaceObject.makeObservable)(this.DEFAULT_FLATTEN_SMOOTHING);
+            this._floorBlockOverride = (0, server_editor_namespaceObject.makeObservable)(this.DEFAULT_FLATTEN_FLOOR_OVERRIDE);
+            this._flattenProperties = [];
+            this._smoothenProperties = [];
+            this._roughenProperties = [];
             this._session = session;
             this._telemetryManager = new TelemetryManager(this._session.extensionContext.player, TelemetrySource.Terrain);
             this._tool = this._initTool();
             this._toolPane = this._initPane();
-            this._flattenPane = this._initFlattenPane();
-            this._smoothenPane = this._initSmoothenPane();
-            this._roughenPane = this._initRoughenPane();
+            this._cursorControl = this._initCursorControl(this.TERRAIN_SETTINGS_MAP[this.DEFAULT_TERRAIN_MODE].cursorProperties);
+            this._brushControl = this._initBrushControl(this.TERRAIN_SETTINGS_MAP[this.DEFAULT_TERRAIN_MODE].paintMode, this.TERRAIN_SETTINGS_MAP[this.DEFAULT_TERRAIN_MODE].brushShapes);
             this._tool.bindPropertyPane(this._toolPane);
-            this._cursorControl = this._initCursorControl();
-            this._brushControl = this._initBrushControl();
             this._registerMousePaintInputs();
             this._tool.onModalToolActivation.subscribe((data => {
                 if (data.isActiveTool) {
-                    this._switchToTerrainMode(this._terrainMode.value, this._terrainMode.value);
+                    this._backupBrushAndCursor();
+                    this._activateControls();
+                    this._onTerrainModeChanged();
                 } else {
                     this._deactivateControls();
-                    this._restoreBrushOffset();
+                    this._restoreBrushAndCursor();
                 }
             }));
             this._modeChangeEventSubscriptionHandle = this._session.extensionContext.afterEvents.modeChange.subscribe((_event => {
-                if (this._brushControl.isActive && this._isPainting) {
+                if (this._isPainting) {
                     this._endPainting();
                 }
             }));
             this._isPainting = false;
             this._brushOffsetBackup = this._session.extensionContext.brushShapeManager.getBrushShapeOffset();
+            this._cursorTargetBackup = this._session.extensionContext.cursor.getProperties().targetMode;
         }
         _initTool() {
             const activationAction = this._session.actionManager.createAction({
@@ -21644,7 +23609,10 @@ var __webpack_exports__ = {};
                 title: "resourcePack.editor.toolRail.Terrain.title",
                 icon: "pack://textures/editor/Terrain.png?filtering=point",
                 tooltip: {
-                    description: "resourcePack.editor.toolRail.Terrain.description",
+                    description: {
+                        id: "resourcePack.editor.toolRail.Terrain.description",
+                        props: [ getInputMarkup("editor:terrainToolKeybinding:switch", "[", "]") ]
+                    },
                     image: "pack://textures/editor/Terrain.gif"
                 },
                 action: activationAction
@@ -21660,7 +23628,11 @@ var __webpack_exports__ = {};
             tool.registerKeyBinding(this._session.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
-                    this._rotateTerrainMode();
+                    const newMode = this.MODE_ROTATION_MAP[this._terrainMode.value];
+                    if (this._terrainMode.value !== newMode) {
+                        this._terrainMode.set(newMode);
+                        this._onTerrainModeChanged();
+                    }
                 }
             }), {
                 key: server_editor_namespaceObject.KeyboardKey.KEY_T,
@@ -21673,9 +23645,7 @@ var __webpack_exports__ = {};
             tool.registerKeyBinding(this._session.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
-                    const oldMode = this._flattenMode.value;
-                    this._flattenMode.set(server_editor_namespaceObject.FlattenMode.Both);
-                    this._switchToFlattenMode(oldMode);
+                    this._switchToFlattenMode(server_editor_namespaceObject.FlattenMode.Both);
                 }
             }), {
                 key: server_editor_namespaceObject.KeyboardKey.KEY_F,
@@ -21688,9 +23658,7 @@ var __webpack_exports__ = {};
             tool.registerKeyBinding(this._session.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
-                    const oldMode = this._flattenMode.value;
-                    this._flattenMode.set(server_editor_namespaceObject.FlattenMode.Down);
-                    this._switchToFlattenMode(oldMode);
+                    this._switchToFlattenMode(server_editor_namespaceObject.FlattenMode.Down);
                 }
             }), {
                 key: server_editor_namespaceObject.KeyboardKey.KEY_D,
@@ -21703,9 +23671,7 @@ var __webpack_exports__ = {};
             tool.registerKeyBinding(this._session.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
-                    const oldMode = this._flattenMode.value;
-                    this._flattenMode.set(server_editor_namespaceObject.FlattenMode.Up);
-                    this._switchToFlattenMode(oldMode);
+                    this._switchToFlattenMode(server_editor_namespaceObject.FlattenMode.Up);
                 }
             }), {
                 key: server_editor_namespaceObject.KeyboardKey.KEY_U,
@@ -21721,12 +23687,16 @@ var __webpack_exports__ = {};
             const toolPane = this._session.createPropertyPane({
                 title: "resourcePack.editor.toolRail.Terrain.title",
                 infoTooltip: {
-                    description: [ "resourcePack.editor.toolRail.Terrain.description", {
+                    description: [ {
+                        id: "resourcePack.editor.toolRail.Terrain.description",
+                        props: [ getInputMarkup("editor:terrainToolKeybinding:switch", "[", "]") ]
+                    }, {
                         link: "https://aka.ms/BedrockEditorSmoothRoughen",
                         text: "resourcePack.editor.help.learnMore"
                     } ]
                 }
             });
+            toolPane.beginConstruct();
             toolPane.addToggleGroup(this._terrainMode, {
                 title: "resourcePack.editor.toolRail.Terrain.Mode.title",
                 tooltip: "resourcePack.editor.toolRail.Terrain.Mode.tooltip",
@@ -21771,19 +23741,11 @@ var __webpack_exports__ = {};
                         }
                     }
                 } ],
-                onChange: (newMode, oldMode) => {
-                    this._switchToTerrainMode(oldMode, newMode);
+                onChange: () => {
+                    this._onTerrainModeChanged();
                 }
             });
-            toolPane.addDivider();
-            return toolPane;
-        }
-        _initFlattenPane() {
-            const flattenPane = this._toolPane.createSubPane({
-                hasExpander: false
-            });
-            flattenPane.hide();
-            flattenPane.addToggleGroup(this._flattenMode, {
+            this._flattenProperties.push(toolPane.addToggleGroup(this._flattenMode, {
                 title: "resourcePack.editor.toolRail.Terrain.Mode.SubMode.Flatten.title",
                 tooltip: "resourcePack.editor.toolRail.Terrain.Mode.SubMode.Flatten.tooltip",
                 hiddenLabel: false,
@@ -21821,36 +23783,35 @@ var __webpack_exports__ = {};
                         props: [ newLineMarkup + newLineMarkup, getInputMarkup("editor:terrainToolKeybinding:switchToFlattenUp", "[", "]") ]
                     }
                 } ],
-                onChange: (newMode, oldMode) => {
-                    this._flattenMode.set(newMode);
-                    this._switchToFlattenMode(oldMode);
+                onChange: () => {
+                    this._onFlattenModeChanged();
                 }
-            });
-            flattenPane.addNumber(this._flattenIntensity, {
+            }));
+            this._flattenProperties.push(toolPane.addNumber(this._flattenIntensity, {
                 isInteger: true,
                 title: "resourcePack.editor.toolRail.Terrain.FlattenIntensity",
                 tooltip: "resourcePack.editor.toolRail.Terrain.FlattenIntensity.tooltip",
-                min: TerrainBehavior.FLATTEN_INTENSITY_MIN,
-                max: TerrainBehavior.FLATTEN_INTENSITY_MAX,
+                min: this.FLATTEN_INTENSITY_MIN,
+                max: this.FLATTEN_INTENSITY_MAX,
                 variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
                 onChange: newValue => {
                     this._flattenIntensity.set(newValue);
                     this._session.extensionContext.brushShapeManager.setTerrainStrength(newValue);
                 }
-            });
-            flattenPane.addNumber(this._flattenSmoothing, {
+            }));
+            this._flattenProperties.push(toolPane.addNumber(this._flattenSmoothing, {
                 isInteger: true,
                 title: "resourcePack.editor.toolRail.Terrain.FlattenSmoothing",
                 tooltip: "resourcePack.editor.toolRail.Terrain.FlattenSmoothing.tooltip",
-                min: TerrainBehavior.FLATTEN_SMOOTHING_MIN,
-                max: TerrainBehavior.FLATTEN_SMOOTHING_MAX,
+                min: this.FLATTEN_SMOOTHING_MIN,
+                max: this.FLATTEN_SMOOTHING_MAX,
                 variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
                 onChange: newValue => {
                     this._flattenSmoothing.set(newValue);
                     this._session.extensionContext.brushShapeManager.setFlattenSmoothing(newValue);
                 }
-            });
-            flattenPane.addBool(this._floorBlockOverride, {
+            }));
+            this._flattenProperties.push(toolPane.addBool(this._floorBlockOverride, {
                 title: "resourcePack.editor.toolRail.Terrain.FloorBlockOverride",
                 tooltip: "resourcePack.editor.toolRail.Terrain.FloorBlockOverride.tooltip",
                 variant: server_editor_namespaceObject.BoolPropertyItemVariant.Checkbox,
@@ -21858,56 +23819,44 @@ var __webpack_exports__ = {};
                     this._floorBlockOverride.set(newValue);
                     this._session.extensionContext.brushShapeManager.setFloorBlockOverride(newValue);
                 }
-            });
-            return flattenPane;
-        }
-        _initSmoothenPane() {
-            const smoothenPane = this._toolPane.createSubPane({
-                hasExpander: false
-            });
-            smoothenPane.hide();
-            smoothenPane.addNumber(this._smoothRoughenIntensity, {
+            }));
+            this._smoothenProperties.push(toolPane.addNumber(this._smoothRoughenIntensity, {
                 isInteger: true,
                 title: "resourcePack.editor.toolRail.Terrain.SmoothStrength",
                 tooltip: "resourcePack.editor.toolRail.Terrain.SmoothStrength.tooltip",
-                min: TerrainBehavior.SMOOTH_ROUGHEN_INTENSITY_MIN,
-                max: TerrainBehavior.SMOOTH_ROUGHEN_INTENSITY_MAX,
+                min: this.SMOOTH_ROUGHEN_INTENSITY_MIN,
+                max: this.SMOOTH_ROUGHEN_INTENSITY_MAX,
                 variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
                 onChange: newValue => {
                     this._smoothRoughenIntensity.set(newValue);
                     this._session.extensionContext.brushShapeManager.setTerrainStrength(newValue);
                 }
-            });
-            return smoothenPane;
-        }
-        _initRoughenPane() {
-            const roughenPane = this._toolPane.createSubPane({
-                hasExpander: false
-            });
-            roughenPane.hide();
-            roughenPane.addNumber(this._smoothRoughenIntensity, {
+            }));
+            this._roughenProperties.push(toolPane.addNumber(this._smoothRoughenIntensity, {
                 isInteger: true,
                 title: "resourcePack.editor.toolRail.Terrain.RoughenStrength",
                 tooltip: "resourcePack.editor.toolRail.Terrain.RoughenStrength.tooltip",
-                min: TerrainBehavior.SMOOTH_ROUGHEN_INTENSITY_MIN,
-                max: TerrainBehavior.SMOOTH_ROUGHEN_INTENSITY_MAX,
+                min: this.SMOOTH_ROUGHEN_INTENSITY_MIN,
+                max: this.SMOOTH_ROUGHEN_INTENSITY_MAX,
                 variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
                 onChange: newValue => {
                     this._smoothRoughenIntensity.set(newValue);
                     this._session.extensionContext.brushShapeManager.setTerrainStrength(newValue);
                 }
-            });
-            return roughenPane;
+            }));
+            toolPane.addDivider();
+            toolPane.endConstruct();
+            return toolPane;
         }
-        _initCursorControl() {
-            const cursorControl = new CursorModeControl(this._session, this._tool, this._toolPane, true, TerrainBehavior.CURSOR_PROPERTIES);
+        _initCursorControl(cursorProperties) {
+            const cursorControl = new CursorModeControl(this._session, this._tool, this._toolPane, true, cursorProperties);
             cursorControl.initialize();
             return cursorControl;
         }
-        _initBrushControl() {
+        _initBrushControl(paintMode, brushShapes) {
             const brushControl = new BrushPaintSharedControl(this._session, this._tool, this._toolPane, {
-                paintMode: TerrainBehavior.DEFAULT_PAINT_MODE
-            }, TerrainBehavior.BRUSH_SHAPE_MAP[TerrainBehavior.DEFAULT_TERRAIN_MODE]);
+                paintMode
+            }, brushShapes);
             brushControl.initialize();
             return brushControl;
         }
@@ -21952,122 +23901,60 @@ var __webpack_exports__ = {};
             });
             this._tool.registerMouseButtonBinding(action);
         }
-        _rotateTerrainMode() {
-            const oldMode = this._terrainMode.value;
-            const newMode = TerrainBehavior.MODE_ROTATION_MAP[oldMode];
-            this._switchToTerrainMode(oldMode, newMode);
+        _switchToFlattenMode(newMode) {
+            if (this._terrainMode.value !== TerrainMode.FlattenMode) {
+                this._flattenMode.set(newMode);
+                this._terrainMode.set(TerrainMode.FlattenMode);
+                this._onTerrainModeChanged();
+            } else if (this._flattenMode.value !== newMode) {
+                this._flattenMode.set(newMode);
+                this._onFlattenModeChanged();
+            }
         }
-        _switchToTerrainMode(oldMode, newMode) {
-            this._terrainMode.set(newMode);
-            this._onTerrainModeChanged(oldMode);
-        }
-        _onTerrainModeChanged(oldMode) {
+        _onTerrainModeChanged() {
+            if (this._toolPane.visible) {
+                this._toolPane.hide();
+            }
+            const terrainSettings = this.TERRAIN_SETTINGS_MAP[this._terrainMode.value];
+            this._brushControl.switchBrushPaintMode(terrainSettings.paintMode);
+            this._brushControl.updateBrushShapes(terrainSettings.brushShapes);
+            this._brushControl.session.extensionContext.brushShapeManager.setBrushShapeOffset(terrainSettings.brushOffset);
+            this._cursorControl.forceTargetMode(terrainSettings.cursorProperties.targetMode ?? server_editor_namespaceObject.CursorTargetMode.Block);
             if (this._terrainMode.value === TerrainMode.FlattenMode) {
-                if (oldMode !== TerrainMode.FlattenMode) {
-                    this._backupBrushOffset();
-                }
-                this._onFlattenModeChanged();
-            } else if (oldMode === TerrainMode.FlattenMode) {
-                this._restoreBrushOffset();
-            }
-            this._deactivateControls();
-            this._paintMode.set(TerrainBehavior.PAINT_MODE_MAP[this._terrainMode.value]);
-            switch (this._terrainMode.value) {
-              case TerrainMode.FlattenMode:
-                {
-                    this._toolPane.toggleSubPaneVisibility(this._flattenPane.id);
-                    break;
-                }
-
-              case TerrainMode.SmoothMode:
-                {
-                    this._toolPane.toggleSubPaneVisibility(this._smoothenPane.id);
-                    break;
-                }
-
-              case TerrainMode.RoughenMode:
-                {
-                    this._toolPane.toggleSubPaneVisibility(this._roughenPane.id);
-                    break;
-                }
-            }
-            this._updateBrushManagerSettings();
-            this._brushControl.switchBrushPaintMode(TerrainBehavior.PAINT_MODE_MAP[this._terrainMode.value]);
-            this._brushControl.updateBrushShapes(TerrainBehavior.BRUSH_SHAPE_MAP[this._terrainMode.value]);
-            this._activateControls();
-        }
-        _switchToFlattenMode(oldFlattenMode) {
-            const oldMode = this._terrainMode.value;
-            if (oldMode !== TerrainMode.FlattenMode) {
-                this._switchToTerrainMode(oldMode, TerrainMode.FlattenMode);
-            }
-            if (this._flattenMode.value !== oldFlattenMode) {
-                this._flattenMode.set(this._flattenMode.value);
                 this._onFlattenModeChanged();
             }
+            this._brushControl.session.extensionContext.brushShapeManager.setTerrainStrength(this._terrainMode.value === TerrainMode.FlattenMode ? this._flattenIntensity.value : this._smoothRoughenIntensity.value);
+            this._updatePropertyVisibilities();
+            this._toolPane.show();
         }
         _onFlattenModeChanged() {
-            switch (this._flattenMode.value) {
-              case server_editor_namespaceObject.FlattenMode.Both:
-                this._session.extensionContext.brushShapeManager.setBrushShapeOffset({
-                    x: 0,
-                    y: -TerrainBehavior.FLATTEN_BRUSH_SHAPES[0].height / 2,
-                    z: 0
-                });
-                TerrainBehavior.CURSOR_PROPERTIES.targetMode = server_editor_namespaceObject.CursorTargetMode.Block;
-                this._cursorControl.cursorProperties.targetMode = TerrainBehavior.CURSOR_PROPERTIES.targetMode;
-                break;
-
-              case server_editor_namespaceObject.FlattenMode.Down:
-                this._session.extensionContext.brushShapeManager.setBrushShapeOffset({
-                    x: 0,
-                    y: 1,
-                    z: 0
-                });
-                TerrainBehavior.CURSOR_PROPERTIES.targetMode = server_editor_namespaceObject.CursorTargetMode.Block;
-                this._cursorControl.cursorProperties.targetMode = TerrainBehavior.CURSOR_PROPERTIES.targetMode;
-                break;
-
-              case server_editor_namespaceObject.FlattenMode.Up:
-                this._session.extensionContext.brushShapeManager.setBrushShapeOffset({
-                    x: 0,
-                    y: -TerrainBehavior.FLATTEN_BRUSH_SHAPES[0].height,
-                    z: 0
-                });
-                TerrainBehavior.CURSOR_PROPERTIES.targetMode = server_editor_namespaceObject.CursorTargetMode.Face;
-                this._cursorControl.cursorProperties.targetMode = TerrainBehavior.CURSOR_PROPERTIES.targetMode;
-                break;
-            }
+            const flattenSettings = this.FLATTEN_SETTINGS_MAP[this._flattenMode.value];
+            this._brushControl.session.extensionContext.brushShapeManager.setBrushShapeOffset(flattenSettings.brushOffset);
+            this._cursorControl.forceTargetMode(flattenSettings.targetMode);
+            this._session.extensionContext.brushShapeManager.setFlattenSmoothing(this._flattenSmoothing.value);
+            this._session.extensionContext.brushShapeManager.setFloorBlockOverride(this._floorBlockOverride.value);
             this._session.extensionContext.brushShapeManager.setFlattenMode(this._flattenMode.value);
         }
-        _backupBrushOffset() {
+        _updatePropertyVisibilities() {
+            this._flattenProperties.forEach((item => {
+                item.visible = this._terrainMode.value === TerrainMode.FlattenMode;
+            }));
+            this._smoothenProperties.forEach((item => {
+                item.visible = this._terrainMode.value === TerrainMode.SmoothMode;
+            }));
+            this._roughenProperties.forEach((item => {
+                item.visible = this._terrainMode.value === TerrainMode.RoughenMode;
+            }));
+        }
+        _backupBrushAndCursor() {
             this._brushOffsetBackup = this._session.extensionContext.brushShapeManager.getBrushShapeOffset();
+            this._cursorTargetBackup = this._session.extensionContext.cursor.getProperties().targetMode;
         }
-        _restoreBrushOffset() {
+        _restoreBrushAndCursor() {
             this._session.extensionContext.brushShapeManager.setBrushShapeOffset(this._brushOffsetBackup);
-        }
-        _updateBrushManagerSettings() {
-            switch (this._terrainMode.value) {
-              case TerrainMode.FlattenMode:
-                {
-                    this._session.extensionContext.brushShapeManager.setTerrainStrength(this._flattenIntensity.value);
-                    this._session.extensionContext.brushShapeManager.setFlattenSmoothing(this._flattenSmoothing.value);
-                    this._session.extensionContext.brushShapeManager.setFloorBlockOverride(this._floorBlockOverride.value);
-                    break;
-                }
-
-              case TerrainMode.SmoothMode:
-                {
-                    this._session.extensionContext.brushShapeManager.setTerrainStrength(this._smoothRoughenIntensity.value);
-                    break;
-                }
-
-              case TerrainMode.RoughenMode:
-                {
-                    this._session.extensionContext.brushShapeManager.setTerrainStrength(this._smoothRoughenIntensity.value);
-                    break;
-                }
-            }
+            const cursorProps = this._session.extensionContext.cursor.getProperties();
+            cursorProps.targetMode = this._cursorTargetBackup;
+            this._session.extensionContext.cursor.setProperties(cursorProps);
         }
         _beginPainting() {
             if (this._isPainting || this._session.extensionContext.brushShapeManager.isBrushPaintBusy() || this._session.extensionContext.transactionManager.isBusy()) {
@@ -22075,8 +23962,7 @@ var __webpack_exports__ = {};
                 return;
             }
             this._isPainting = true;
-            this._updateBrushManagerSettings();
-            this._session.extensionContext.transactionManager.openTransaction("Terrain");
+            this._session.extensionContext.transactionManager.openTransaction(this.BEHAVIOR_NAME);
             this._session.extensionContext.brushShapeManager.beginPainting((state => {
                 if (state === server_editor_bindings_namespaceObject.PaintCompletionState.Success) {
                     this._session.extensionContext.transactionManager.commitOpenTransaction();
@@ -22108,8 +23994,8 @@ var __webpack_exports__ = {};
                 this._cursorControl.deactivateControl();
             }
             if (this._brushControl.isActive) {
-                this._brushControl.deactivateControl();
                 this._brushControl.deactivateVisualization();
+                this._brushControl.deactivateControl();
             }
         }
         teardown() {
@@ -22122,66 +24008,6 @@ var __webpack_exports__ = {};
             }
         }
     }
-    TerrainBehavior.BEHAVIOR_NAME = "Terrain";
-    TerrainBehavior.CURSOR_OUTLINE_COLOR = {
-        red: 0,
-        green: .5,
-        blue: .5,
-        alpha: .2
-    };
-    TerrainBehavior.CURSOR_PROPERTIES = {
-        outlineColor: {
-            red: TerrainBehavior.CURSOR_OUTLINE_COLOR.red,
-            green: TerrainBehavior.CURSOR_OUTLINE_COLOR.green,
-            blue: TerrainBehavior.CURSOR_OUTLINE_COLOR.blue,
-            alpha: TerrainBehavior.CURSOR_OUTLINE_COLOR.alpha
-        },
-        controlMode: server_editor_namespaceObject.CursorControlMode.KeyboardAndMouse,
-        targetMode: server_editor_namespaceObject.CursorTargetMode.Block,
-        visible: true
-    };
-    TerrainBehavior.FLATTEN_BRUSH_SHAPES = [ new server_editor_namespaceObject.CylinderBrushShape({
-        uniform: true,
-        height: 12,
-        radius: 10,
-        hideRotation: true
-    }) ];
-    TerrainBehavior.SMOOTH_BRUSH_SHAPES = [ new server_editor_namespaceObject.EllipsoidBrushShape({
-        uniform: true,
-        radius: 8
-    }), new server_editor_namespaceObject.CuboidBrushShape, new server_editor_namespaceObject.CylinderBrushShape ];
-    TerrainBehavior.ROUGHEN_BRUSH_SHAPES = [ new server_editor_namespaceObject.EllipsoidBrushShape({
-        uniform: true,
-        radius: 8
-    }), new server_editor_namespaceObject.CuboidBrushShape, new server_editor_namespaceObject.CylinderBrushShape ];
-    TerrainBehavior.BRUSH_SHAPE_MAP = {
-        [TerrainMode.FlattenMode]: TerrainBehavior.FLATTEN_BRUSH_SHAPES,
-        [TerrainMode.SmoothMode]: TerrainBehavior.SMOOTH_BRUSH_SHAPES,
-        [TerrainMode.RoughenMode]: TerrainBehavior.ROUGHEN_BRUSH_SHAPES
-    };
-    TerrainBehavior.PAINT_MODE_MAP = {
-        [TerrainMode.FlattenMode]: server_editor_namespaceObject.PaintMode.Flatten,
-        [TerrainMode.SmoothMode]: server_editor_namespaceObject.PaintMode.Smooth,
-        [TerrainMode.RoughenMode]: server_editor_namespaceObject.PaintMode.Roughen
-    };
-    TerrainBehavior.MODE_ROTATION_MAP = {
-        [TerrainMode.FlattenMode]: TerrainMode.SmoothMode,
-        [TerrainMode.SmoothMode]: TerrainMode.RoughenMode,
-        [TerrainMode.RoughenMode]: TerrainMode.FlattenMode
-    };
-    TerrainBehavior.FLATTEN_INTENSITY_MIN = 1;
-    TerrainBehavior.FLATTEN_INTENSITY_MAX = 100;
-    TerrainBehavior.FLATTEN_SMOOTHING_MIN = 0;
-    TerrainBehavior.FLATTEN_SMOOTHING_MAX = 100;
-    TerrainBehavior.SMOOTH_ROUGHEN_INTENSITY_MIN = 0;
-    TerrainBehavior.SMOOTH_ROUGHEN_INTENSITY_MAX = 9;
-    TerrainBehavior.DEFAULT_TERRAIN_MODE = TerrainMode.FlattenMode;
-    TerrainBehavior.DEFAULT_FLATTEN_MODE = server_editor_namespaceObject.FlattenMode.Both;
-    TerrainBehavior.DEFAULT_PAINT_MODE = server_editor_namespaceObject.PaintMode.Flatten;
-    TerrainBehavior.DEFAULT_FLATTEN_INTENSITY = TerrainBehavior.FLATTEN_INTENSITY_MAX;
-    TerrainBehavior.DEFAULT_FLATTEN_SMOOTHING = TerrainBehavior.FLATTEN_SMOOTHING_MIN;
-    TerrainBehavior.DEFAULT_FLATTEN_FLOOR_OVERRIDE = false;
-    TerrainBehavior.DEFAULT_SMOOTH_ROUGHEN_INTENSITY = TerrainBehavior.SMOOTH_ROUGHEN_INTENSITY_MAX;
     class ExtrudeTool_PreviewVolume {
         constructor(uiSession) {
             this._session = uiSession;
@@ -28038,55 +29864,66 @@ var __webpack_exports__ = {};
         PencilDrawType[PencilDrawType["Block"] = 0] = "Block";
         PencilDrawType[PencilDrawType["Object"] = 1] = "Object";
     })(PencilDrawType || (PencilDrawType = {}));
+    const drawTypeToggleBindingId = "editor:pencil:toggleDrawMode";
     class PencilDrawTypeSettings {
-        constructor(session) {
+        constructor(session, parent) {
             this._drawType = (0, server_editor_namespaceObject.makeObservable)(PencilDrawType.Block);
-            this._objectTypeToPlace = (0, server_editor_namespaceObject.makeObservable)(MinecraftItemTypes.AcaciaDoor);
+            this._objectTypeToPlace = (0, server_editor_namespaceObject.makeObservable)(ObjectDatabase.buildEncodedType(MinecraftItemTypes.AcaciaDoor));
             this._session = session;
+            this._parent = parent;
             this._database = new ObjectDatabase(session);
+            this.buildKeyboardShortcuts(parent.getTool());
         }
-        addToRootPanel(rootPane) {
-            const brushManager = this._session.extensionContext.brushShapeManager;
-            const onDrawTypeChange = newValue => {
-                if (newValue === PencilDrawType.Block) {
-                    brushManager.disableItemPlacement();
-                } else {
-                    this.enableItemPlacementFromEncodedType(this._objectTypeToPlace.value);
-                }
-                if (this._objectCombobox) {
-                    this._objectCombobox.visible = newValue === PencilDrawType.Object;
-                }
-            };
-            rootPane.addToggleGroup(this._drawType, {
+        addDrawModeToggle(pane) {
+            pane.addToggleGroup(this._drawType, {
                 title: "resourcePack.editor.pencil.drawtype.title",
                 tooltip: "resourcePack.editor.pencil.drawtype.tooltip",
                 hiddenLabel: false,
                 entries: [ {
                     value: PencilDrawType.Block,
-                    label: "resourcePack.editor.pencil.drawtype.blocks.title",
                     icon: "blocksIcon",
-                    tooltip: "resourcePack.editor.pencil.drawtype.blocks.tooltip"
+                    tooltip: {
+                        title: {
+                            id: "resourcePack.editor.pencil.drawtype.blocks.title",
+                            props: [ getInputMarkup(drawTypeToggleBindingId, "[", "]") ]
+                        },
+                        description: {
+                            id: "resourcePack.editor.pencil.drawtype.blocks.tooltip",
+                            props: [ newLineMarkup + newLineMarkup, getInputMarkup(drawTypeToggleBindingId, "[", "]") ]
+                        }
+                    }
                 }, {
                     value: PencilDrawType.Object,
-                    label: "resourcePack.editor.pencil.drawtype.objects.title",
                     icon: "pack://textures/editor/ObjectTool.png?filtering=point",
-                    tooltip: "resourcePack.editor.pencil.drawtype.objects.tooltip"
+                    tooltip: {
+                        title: {
+                            id: "resourcePack.editor.pencil.drawtype.objects.title",
+                            props: [ getInputMarkup(drawTypeToggleBindingId, "[", "]") ]
+                        },
+                        description: {
+                            id: "resourcePack.editor.pencil.drawtype.objects.tooltip",
+                            props: [ newLineMarkup + newLineMarkup, getInputMarkup(drawTypeToggleBindingId, "[", "]") ]
+                        }
+                    }
                 } ],
-                onChange: onDrawTypeChange
+                onChange: newValue => this.onDrawTypeChange(newValue)
             });
-            this._objectCombobox = rootPane.addComboBox(this._objectTypeToPlace, {
+        }
+        addObjectDropdown(pane) {
+            this._objectCombobox = pane.addComboBox(this._objectTypeToPlace, {
                 dataType: server_editor_namespaceObject.ComboBoxPropertyItemDataType.Custom,
                 title: "resourcePack.editor.pencil.drawtype.objectpicker.title",
                 tooltip: "resourcePack.editor.pencil.drawtype.objectpicker.tooltip",
                 entries: this._database.buildComboboxEntries(),
+                visible: this._drawType.value === PencilDrawType.Object,
                 defaultValue: ObjectDatabase.buildEncodedType(MinecraftItemTypes.AcaciaDoor),
                 onChange: newValue => {
                     if (this._drawType.value === PencilDrawType.Object) {
                         this.enableItemPlacementFromEncodedType(newValue);
                     }
+                    this._parent.saveSettings();
                 }
             });
-            onDrawTypeChange(this._drawType.value);
         }
         activate() {
             if (this._drawType.value === PencilDrawType.Object) {
@@ -28095,6 +29932,35 @@ var __webpack_exports__ = {};
         }
         deactivate() {
             this._session.extensionContext.brushShapeManager.disableItemPlacement();
+        }
+        setStorage(data) {
+            this._drawType.set(data.drawType);
+            this._objectTypeToPlace.set(data.objectTypeSelected);
+        }
+        getStorage() {
+            return {
+                drawType: this._drawType.value,
+                objectTypeSelected: this._objectTypeToPlace.value
+            };
+        }
+        getDrawType() {
+            return this._drawType.value;
+        }
+        getSelectedObjectBlock() {
+            const entry = this._database.getDataEntryFromComboboxValue(this._objectTypeToPlace.value);
+            return entry.itemId;
+        }
+        onDrawTypeChange(newValue) {
+            this._parent.onDrawTypeChanged();
+            if (newValue === PencilDrawType.Block) {
+                this._session.extensionContext.brushShapeManager.disableItemPlacement();
+            } else {
+                this.enableItemPlacementFromEncodedType(this._objectTypeToPlace.value);
+            }
+            if (this._objectCombobox) {
+                this._objectCombobox.visible = newValue === PencilDrawType.Object;
+            }
+            this._parent.saveSettings();
         }
         enableItemPlacementFromEncodedType(encodedType) {
             const entry = this._database.getDataEntryFromComboboxValue(encodedType);
@@ -28108,6 +29974,24 @@ var __webpack_exports__ = {};
                 this._session.extensionContext.brushShapeManager.enableItemPlacement(itemType);
             }
             return true;
+        }
+        buildKeyboardShortcuts(parentTool) {
+            const toggleDrawModeAction = this._session.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    const newDrawMode = this._drawType.value === PencilDrawType.Block ? PencilDrawType.Object : PencilDrawType.Block;
+                    this._drawType.set(newDrawMode);
+                    this.onDrawTypeChange(newDrawMode);
+                }
+            });
+            parentTool.registerKeyBinding(toggleDrawModeAction, {
+                key: server_editor_namespaceObject.KeyboardKey.KEY_D,
+                modifier: server_editor_namespaceObject.InputModifier.Shift
+            }, {
+                uniqueId: drawTypeToggleBindingId,
+                label: "resourcePack.editor.pencil.keybinding.toggledrawtype.title",
+                tooltip: "resourcePack.editor.pencil.keybinding.toggledrawtype.tooltip"
+            });
         }
     }
     class PencilBrush {
@@ -28207,8 +30091,10 @@ var __webpack_exports__ = {};
             }));
         }
         endPainting() {
+            if (this._paintingActive) {
+                this._session.extensionContext.brushShapeManager.endPainting(false);
+            }
             this._paintingActive = false;
-            this._session.extensionContext.brushShapeManager.endPainting(false);
         }
     }
     var PencilTelemetry;
@@ -28221,12 +30107,515 @@ var __webpack_exports__ = {};
         BrushEditMode[BrushEditMode["Draw"] = 0] = "Draw";
         BrushEditMode[BrushEditMode["Erase"] = 1] = "Erase";
     })(BrushEditMode || (BrushEditMode = {}));
+    var OrientationMode;
+    (function(OrientationMode) {
+        OrientationMode[OrientationMode["ByCamera"] = 0] = "ByCamera";
+        OrientationMode[OrientationMode["Manual"] = 1] = "Manual";
+        OrientationMode[OrientationMode["Default"] = 0] = "Default";
+    })(OrientationMode || (OrientationMode = {}));
+    const flipStates = [ "upside_down_bit", "minecraft:vertical_half" ];
+    const threeAxesStates = [ "pillar_axis" ];
+    function doesPermutationHaveAnyStates(permutation, queryStates) {
+        for (const stateName of queryStates) {
+            const stateValue = permutation.getState(stateName);
+            if (stateValue !== undefined) {
+                return stateName;
+            }
+        }
+        return undefined;
+    }
+    const orientationModeBindingId = "editor:pencil:toggleOrientationMode";
+    class OrientationSettings {
+        constructor(session, parent) {
+            this._orientationMode = (0, server_editor_namespaceObject.makeObservable)(OrientationMode.ByCamera);
+            this._frontFaceSetting = (0, server_editor_namespaceObject.makeObservable)(server_editor_namespaceObject.BrushDirectionalPlacementMode.NormalCamera);
+            this._flipSetting = (0, server_editor_namespaceObject.makeObservable)(false);
+            this._lastManualFrontFace = server_editor_namespaceObject.BrushDirectionalPlacementMode.FrontFacePosX;
+            this._lastCameraFrontFace = server_editor_namespaceObject.BrushDirectionalPlacementMode.NormalCamera;
+            this._session = session;
+            this._parent = parent;
+            this._blockPaletteEventHandle = this._session.extensionContext.afterEvents.blockPaletteSelectedItemChange.subscribe((_ => {
+                if (this._parent.isActive()) {
+                    this.onPlacementTypeChange(this._parent.getPlacementType());
+                }
+            }));
+            this.addShortcutKeyBindings(parent.getTool());
+        }
+        setStorage(data) {
+            this._orientationMode.set(data.orientationMode);
+            this._lastCameraFrontFace = data.frontFaceCamera;
+            this._lastManualFrontFace = data.frontFaceManual;
+            this._flipSetting.set(data.shouldFlip);
+            const activeSetting = this._orientationMode.value === OrientationMode.ByCamera ? this._lastCameraFrontFace : this._lastManualFrontFace;
+            this._frontFaceSetting.set(activeSetting);
+        }
+        getStorage() {
+            return {
+                orientationMode: this._orientationMode.value,
+                frontFaceManual: this._lastManualFrontFace,
+                frontFaceCamera: this._lastCameraFrontFace,
+                shouldFlip: this._flipSetting.value
+            };
+        }
+        activate() {
+            this.onPlacementTypeChange(this._parent.getPlacementType());
+        }
+        deactivate() {
+            const brush = this._session.extensionContext.brushShapeManager;
+            brush.clearBlockStateOverrides();
+            brush.setDirectionalPlacementMode(server_editor_namespaceObject.BrushDirectionalPlacementMode.IgnoreCamera);
+            brush.setBlockFacePlacementBasedOnCamera(false);
+        }
+        teardown() {
+            this._session.extensionContext.afterEvents.blockPaletteSelectedItemChange.unsubscribe(this._blockPaletteEventHandle);
+        }
+        setPlacementType(newType) {
+            this.onPlacementTypeChange(newType);
+        }
+        addOrientationToggleGroup(root) {
+            root.addToggleGroup(this._orientationMode, {
+                title: "resourcePack.editor.pencil.orientation.title",
+                tooltip: "resourcePack.editor.pencil.orientation.tooltip",
+                entries: [ {
+                    icon: "pack://textures/editor/Camera.png?filtering=point",
+                    value: OrientationMode.ByCamera,
+                    tooltip: {
+                        title: {
+                            id: "resourcePack.editor.pencil.orientation.camera.title",
+                            props: [ getInputMarkup(orientationModeBindingId, "[", "]") ]
+                        },
+                        description: {
+                            id: "resourcePack.editor.pencil.orientation.camera.tooltip",
+                            props: [ newLineMarkup + newLineMarkup, getInputMarkup(orientationModeBindingId, "[", "]", true) ]
+                        }
+                    }
+                }, {
+                    icon: "pack://textures/editor/Wrench-Angled.png?filtering=point",
+                    value: OrientationMode.Manual,
+                    tooltip: {
+                        title: {
+                            id: "resourcePack.editor.pencil.orientation.manual.title",
+                            props: [ getInputMarkup(orientationModeBindingId, "[", "]") ]
+                        },
+                        description: {
+                            id: "resourcePack.editor.pencil.orientation.manual.tooltip",
+                            props: [ newLineMarkup + newLineMarkup, getInputMarkup(orientationModeBindingId, "[", "]", true) ]
+                        }
+                    }
+                } ],
+                onChange: newValue => this.onOrientationModeChange(newValue)
+            });
+        }
+        addFrontFaceDropdownAndFlipCheckbox(pane) {
+            this._frontFaceDropdown = pane.addDropdown(this._frontFaceSetting, {
+                title: "resourcePack.editor.pencil.orientation.frontface.title",
+                tooltip: "resourcePack.editor.pencil.orientation.frontface.tooltip",
+                onChange: newValue => {
+                    if (this._orientationMode.value === OrientationMode.ByCamera) {
+                        this._lastCameraFrontFace = newValue;
+                    } else if (this._orientationMode.value === OrientationMode.Manual) {
+                        this._lastManualFrontFace = newValue;
+                    }
+                    if (this._parent.isActive()) {
+                        this.onSettingsChanged();
+                    }
+                }
+            });
+            this._flipCheckbox = pane.addBool(this._flipSetting, {
+                title: "resourcePack.editor.pencil.orientation.verticalflip.title",
+                tooltip: "resourcePack.editor.pencil.orientation.verticalflip.tooltip",
+                onChange: () => {
+                    if (!this._parent.isActive()) {
+                        return;
+                    }
+                    this.onSettingsChanged();
+                }
+            });
+            this.onOrientationModeChange(this._orientationMode.value);
+        }
+        static getDefaultFrontFaceValueFor(mode) {
+            return mode === OrientationMode.ByCamera ? server_editor_namespaceObject.BrushDirectionalPlacementMode.NormalCamera : server_editor_namespaceObject.BrushDirectionalPlacementMode.FrontFacePosX;
+        }
+        static isValueInDropdownEntries(list, value) {
+            for (const entry of list) {
+                if (entry.value === value) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        calculateNewFrontFaceValue(list) {
+            const orientationMode = this._orientationMode.value;
+            const naturalSelection = orientationMode === OrientationMode.ByCamera ? this._lastCameraFrontFace : this._lastManualFrontFace;
+            if (OrientationSettings.isValueInDropdownEntries(list, naturalSelection)) {
+                return naturalSelection;
+            }
+            if (naturalSelection === server_editor_namespaceObject.BrushDirectionalPlacementMode.Random2Axes && OrientationSettings.isValueInDropdownEntries(list, server_editor_namespaceObject.BrushDirectionalPlacementMode.Random3Axes)) {
+                return server_editor_namespaceObject.BrushDirectionalPlacementMode.Random3Axes;
+            } else if (naturalSelection === server_editor_namespaceObject.BrushDirectionalPlacementMode.Random3Axes && OrientationSettings.isValueInDropdownEntries(list, server_editor_namespaceObject.BrushDirectionalPlacementMode.Random2Axes)) {
+                return server_editor_namespaceObject.BrushDirectionalPlacementMode.Random2Axes;
+            } else {
+                return OrientationSettings.getDefaultFrontFaceValueFor(orientationMode);
+            }
+        }
+        onOrientationModeChange(newValue) {
+            if (this._frontFaceDropdown) {
+                const newEntries = newValue === OrientationMode.ByCamera ? this.buildCameraFrontFaceEntries() : this.buildManualFrontFaceEntries();
+                const newSelection = this.calculateNewFrontFaceValue(newEntries);
+                this._frontFaceDropdown.updateEntries(newEntries, newSelection);
+            }
+            if (this._parent.isActive()) {
+                this.onSettingsChanged();
+            }
+        }
+        buildCameraFrontFaceEntries() {
+            const uses3Axes = this._curPlacementConfig?.uses3Axes ?? false;
+            const entries = [ {
+                label: "resourcePack.editor.pencil.orientation.camera.normal",
+                value: server_editor_namespaceObject.BrushDirectionalPlacementMode.NormalCamera
+            }, {
+                label: "resourcePack.editor.pencil.orientation.camera.opposite",
+                value: server_editor_namespaceObject.BrushDirectionalPlacementMode.OppositeCamera
+            }, {
+                label: "resourcePack.editor.pencil.orientation.camera.left",
+                value: server_editor_namespaceObject.BrushDirectionalPlacementMode.CameraLeft
+            }, {
+                label: "resourcePack.editor.pencil.orientation.camera.right",
+                value: server_editor_namespaceObject.BrushDirectionalPlacementMode.CameraRight
+            } ];
+            if (uses3Axes) {
+                entries.push({
+                    label: "resourcePack.editor.pencil.orientation.camera.up",
+                    value: server_editor_namespaceObject.BrushDirectionalPlacementMode.CameraFromAbove
+                });
+                entries.push({
+                    label: "resourcePack.editor.pencil.orientation.camera.down",
+                    value: server_editor_namespaceObject.BrushDirectionalPlacementMode.CameraFromBelow
+                });
+                entries.push({
+                    label: "resourcePack.editor.pencil.orientation.camera.random",
+                    value: server_editor_namespaceObject.BrushDirectionalPlacementMode.Random3Axes
+                });
+            } else {
+                entries.push({
+                    label: "resourcePack.editor.pencil.orientation.camera.random",
+                    value: server_editor_namespaceObject.BrushDirectionalPlacementMode.Random2Axes
+                });
+            }
+            return entries;
+        }
+        buildManualFrontFaceEntries() {
+            const entries = [];
+            const uses3Axes = this._curPlacementConfig?.uses3Axes ?? false;
+            entries.push({
+                label: "resourcePack.editor.pencil.orientation.manual.positiveX",
+                value: server_editor_namespaceObject.BrushDirectionalPlacementMode.FrontFacePosX
+            });
+            if (uses3Axes) {
+                entries.push({
+                    label: "resourcePack.editor.pencil.orientation.manual.positiveY",
+                    value: server_editor_namespaceObject.BrushDirectionalPlacementMode.FrontFacePosY
+                });
+            }
+            entries.push({
+                label: "resourcePack.editor.pencil.orientation.manual.positiveZ",
+                value: server_editor_namespaceObject.BrushDirectionalPlacementMode.FrontFacePosZ
+            });
+            entries.push({
+                label: "resourcePack.editor.pencil.orientation.manual.negativeX",
+                value: server_editor_namespaceObject.BrushDirectionalPlacementMode.FrontFaceNegX
+            });
+            if (uses3Axes) {
+                entries.push({
+                    label: "resourcePack.editor.pencil.orientation.manual.negativeY",
+                    value: server_editor_namespaceObject.BrushDirectionalPlacementMode.FrontFaceNegY
+                });
+            }
+            entries.push({
+                label: "resourcePack.editor.pencil.orientation.manual.negativeZ",
+                value: server_editor_namespaceObject.BrushDirectionalPlacementMode.FrontFaceNegZ
+            });
+            if (uses3Axes) {
+                entries.push({
+                    label: "resourcePack.editor.pencil.orientation.manual.random",
+                    value: server_editor_namespaceObject.BrushDirectionalPlacementMode.Random3Axes
+                });
+            } else {
+                entries.push({
+                    label: "resourcePack.editor.pencil.orientation.manual.random",
+                    value: server_editor_namespaceObject.BrushDirectionalPlacementMode.Random2Axes
+                });
+            }
+            return entries;
+        }
+        onSettingsChanged() {
+            if (!this._parent.isActive()) {
+                return;
+            }
+            this._flipCheckbox.enable = this._curPlacementConfig.flipStateName.length > 0 && !this.randomIsSelected();
+            const brush = this._session.extensionContext.brushShapeManager;
+            brush.setDirectionalPlacementMode(this._frontFaceSetting.value);
+            brush.clearBlockStateOverrides();
+            if (this._curPlacementConfig.flipStateName.length > 0 && this._flipCheckbox.value && !this.randomIsSelected()) {
+                for (const stateName of this._curPlacementConfig.flipStateName) {
+                    const value = this.findFlipValue(stateName) ?? true;
+                    brush.pushBlockStateOverride(stateName, value);
+                }
+            }
+            brush.setBlockFacePlacementBasedOnCamera(this._curPlacementConfig.uses3Axes);
+            this._parent.saveSettings();
+        }
+        findFlipValue(stateName) {
+            switch (stateName) {
+              case "upside_down_bit":
+                return true;
+
+              case "minecraft:vertical_half":
+                return "top";
+
+              default:
+                return undefined;
+            }
+        }
+        buildConfigForPlacementType(placementType) {
+            if (placementType instanceof server_editor_namespaceObject.IBlockPaletteItem) {
+                return this.buildConfigForPaletteItem(placementType);
+            } else {
+                return {
+                    flipStateName: [],
+                    uses3Axes: false
+                };
+            }
+        }
+        buildConfigForPaletteItem(slotInfo) {
+            if (slotInfo.getType() === server_editor_namespaceObject.BlockPaletteItemType.Simple) {
+                const simpleBlock = slotInfo.getBlock();
+                if (simpleBlock) {
+                    return this.buildConfigForBlock(simpleBlock);
+                }
+            } else {
+                const probItem = slotInfo;
+                const allBlocks = probItem.getBlocks();
+                let has3Axes = true;
+                let hasFlip = true;
+                const flipStates = [];
+                for (const weightedBlock of allBlocks) {
+                    const nextConfig = this.buildConfigForBlock(weightedBlock.block);
+                    has3Axes = has3Axes && nextConfig.uses3Axes;
+                    hasFlip = hasFlip && nextConfig.flipStateName.length === 1;
+                    if (hasFlip) {
+                        const curState = nextConfig.flipStateName[0];
+                        if (!flipStates.includes(curState)) {
+                            flipStates.push(curState);
+                        }
+                    }
+                }
+                return {
+                    flipStateName: hasFlip ? flipStates : [],
+                    uses3Axes: has3Axes
+                };
+            }
+            return {
+                flipStateName: [],
+                uses3Axes: false
+            };
+        }
+        buildConfigForBlock(type) {
+            const config = {
+                flipStateName: [],
+                uses3Axes: false
+            };
+            const blockPerm = server_namespaceObject.BlockPermutation.resolve(type.id);
+            const flipState = doesPermutationHaveAnyStates(blockPerm, flipStates);
+            if (flipState) {
+                config.flipStateName = [ flipState ];
+            }
+            config.uses3Axes = doesPermutationHaveAnyStates(blockPerm, threeAxesStates) !== undefined;
+            return config;
+        }
+        onPlacementTypeChange(item) {
+            const oldConfig = this._curPlacementConfig;
+            this._curPlacementConfig = this.buildConfigForPlacementType(item);
+            if (this._orientationMode.value === OrientationMode.ByCamera) {
+                this._frontFaceDropdown.updateEntries(this.buildCameraFrontFaceEntries());
+            } else {
+                this._frontFaceDropdown.updateEntries(this.buildManualFrontFaceEntries());
+            }
+            if (oldConfig && oldConfig.uses3Axes !== this._curPlacementConfig.uses3Axes && this.randomIsSelected()) {
+                const newRandom = this._curPlacementConfig.uses3Axes ? server_editor_namespaceObject.BrushDirectionalPlacementMode.Random3Axes : server_editor_namespaceObject.BrushDirectionalPlacementMode.Random2Axes;
+                this._frontFaceSetting.set(newRandom);
+            } else if (this._frontFaceDropdown.getEntryByValue(this._frontFaceSetting.value) === undefined) {
+                this._frontFaceSetting.set(OrientationSettings.getDefaultFrontFaceValueFor(this._orientationMode.value));
+            } else {
+                this.onSettingsChanged();
+            }
+        }
+        randomIsSelected() {
+            return this._frontFaceSetting.value === server_editor_namespaceObject.BrushDirectionalPlacementMode.Random2Axes || this._frontFaceSetting.value === server_editor_namespaceObject.BrushDirectionalPlacementMode.Random3Axes;
+        }
+        addShortcutKeyBindings(parentTool) {
+            const toggleAction = this._session.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    const newOrientationMode = this._orientationMode.value === OrientationMode.ByCamera ? OrientationMode.Manual : OrientationMode.ByCamera;
+                    this._orientationMode.set(newOrientationMode);
+                    this.onOrientationModeChange(newOrientationMode);
+                }
+            });
+            parentTool.registerKeyBinding(toggleAction, {
+                key: server_editor_namespaceObject.KeyboardKey.UNDEFINED
+            }, {
+                uniqueId: orientationModeBindingId,
+                label: "resourcePack.editor.pencil.keybinding.toggleorientation.title",
+                tooltip: `resourcePack.editor.pencil.keybinding.toggleorientation.tooltip`
+            });
+        }
+    }
+    const editModeBindingId = "editor:pencil:toggleEditMode";
+    class PencilEditMode {
+        constructor(session, parent) {
+            this._editMode = (0, server_editor_namespaceObject.makeObservable)(BrushEditMode.Draw);
+            this._switchToFaceTargetModeAtEndOfErase = false;
+            this._isCtrlDown = false;
+            this._pencilParent = parent;
+            this._session = session;
+            this.buildEditModeKeyboardShortcuts(session, parent.getTool());
+            this.buildKeyBindingToEnsureErasingIsAlwaysDoneWithBlockTargetMode(session, parent.getTool());
+        }
+        addEditModeSetting(rootPane) {
+            rootPane.addToggleGroup(this._editMode, {
+                title: "resourcePack.editor.pencil.editmode.title",
+                tooltip: "resourcePack.editor.pencil.editmode.tooltip",
+                entries: [ {
+                    value: BrushEditMode.Draw,
+                    icon: "pack://textures/editor/Pencil.png?filtering=point",
+                    tooltip: {
+                        title: {
+                            id: "resourcePack.editor.pencil.editmode.draw.title",
+                            props: [ getInputMarkup(editModeBindingId, "[", "]") ]
+                        },
+                        description: {
+                            id: "resourcePack.editor.pencil.editmode.draw.tooltip",
+                            props: [ newLineMarkup + newLineMarkup, getInputMarkup(editModeBindingId, "[", "]", true) ]
+                        }
+                    }
+                }, {
+                    value: BrushEditMode.Erase,
+                    label: "resourcePack.editor.pencil.editmode.erase.title",
+                    icon: "pack://textures/editor/Erase.png?filtering=point",
+                    tooltip: {
+                        title: {
+                            id: "resourcePack.editor.pencil.editmode.erase.title",
+                            props: [ getInputMarkup(editModeBindingId, "[", "]") ]
+                        },
+                        description: {
+                            id: "resourcePack.editor.pencil.editmode.erase.tooltip",
+                            props: [ newLineMarkup + newLineMarkup, getInputMarkup(editModeBindingId, "[", "]", true) ]
+                        }
+                    }
+                } ],
+                onChange: () => this.onEditModeChange()
+            });
+        }
+        setStorage(editMode) {
+            this._editMode.set(editMode);
+        }
+        getStorage() {
+            return this._editMode.value;
+        }
+        activate() {
+            this.applyBrushSettings();
+        }
+        deactivate() {
+            this._session.extensionContext.brushShapeManager.setInverseEraseMode(false);
+            this._switchToFaceTargetModeAtEndOfErase = false;
+        }
+        applyBrushSettings() {
+            const eraseInversionMode = this._editMode.value === BrushEditMode.Erase;
+            this._session.extensionContext.brushShapeManager.setInverseEraseMode(eraseInversionMode);
+        }
+        onEditModeChange() {
+            this.applyBrushSettings();
+            this.onErasingChange();
+            this._pencilParent.saveSettings();
+        }
+        buildEditModeKeyboardShortcuts(session, tool) {
+            const toggleDrawModeAction = session.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    const newEditMode = this._editMode.value === BrushEditMode.Draw ? BrushEditMode.Erase : BrushEditMode.Draw;
+                    this._editMode.set(newEditMode);
+                    this.onEditModeChange();
+                }
+            });
+            tool.registerKeyBinding(toggleDrawModeAction, {
+                key: server_editor_namespaceObject.KeyboardKey.KEY_E,
+                modifier: server_editor_namespaceObject.InputModifier.Shift
+            }, {
+                uniqueId: editModeBindingId,
+                label: "resourcePack.editor.pencil.keybinding.togglemode.title",
+                tooltip: "resourcePack.editor.pencil.keybinding.togglemode.tooltip"
+            });
+        }
+        onErasingChange() {
+            const currentEditMode = this._editMode.value;
+            const isErasingNow = currentEditMode === BrushEditMode.Draw && this._isCtrlDown || currentEditMode === BrushEditMode.Erase && !this._isCtrlDown;
+            const isFaceSelectionMode = this._pencilParent.getCursorTargetMode() === server_editor_namespaceObject.CursorTargetMode.Face;
+            if (!isErasingNow && this._switchToFaceTargetModeAtEndOfErase) {
+                this._pencilParent.setCursorTargetMode(server_editor_namespaceObject.CursorTargetMode.Face);
+            }
+            if (isErasingNow && isFaceSelectionMode) {
+                this._pencilParent.setCursorTargetMode(server_editor_namespaceObject.CursorTargetMode.Block);
+                this._switchToFaceTargetModeAtEndOfErase = true;
+            }
+        }
+        buildKeyBindingToEnsureErasingIsAlwaysDoneWithBlockTargetMode(session, tool) {
+            const controlFunctor = buttonDown => {
+                if (this._pencilParent.isActive() === false) {
+                    return;
+                }
+                this._isCtrlDown = buttonDown;
+                this.onErasingChange();
+            };
+            const controlAction = session.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.StatefulAction,
+                onExecute: controlFunctor
+            });
+            tool.registerKeyBinding(controlAction, {
+                key: server_editor_namespaceObject.KeyboardKey.CTRL,
+                modifier: server_editor_namespaceObject.InputModifier.Any
+            });
+        }
+    }
+    class StorageUtil {
+        constructor(session, key) {
+            this._session = session;
+            this._key = key;
+        }
+        loadStorage(setter) {
+            const saveJsonStr = this._session.extensionContext.player.getDynamicProperty(this._key);
+            try {
+                if (saveJsonStr) {
+                    const saveState = JSON.parse(saveJsonStr);
+                    if (saveState !== undefined) {
+                        setter(saveState);
+                    }
+                }
+            } catch (err) {
+                this._session.log.error(`Failed to load settings: ${stringFromException(err)}`);
+            }
+        }
+        saveStorage(data) {
+            const jsonString = JSON.stringify(data);
+            this._session.extensionContext.player.setDynamicProperty(this._key, jsonString);
+        }
+    }
+    const pencilPersistenceKey = "editor:pencil";
     class PencilToolBehavior {
         constructor(_session, brushToolId) {
-            this._directionMode = (0, server_editor_namespaceObject.makeObservable)(server_editor_namespaceObject.BrushDirectionalPlacementMode.NormalCamera);
-            this._editMode = (0, server_editor_namespaceObject.makeObservable)(BrushEditMode.Draw);
+            this._isActive = false;
+            this._session = _session;
             this._telemetry = new TelemetryManager(_session.extensionContext.player, TelemetrySource.Pencil);
-            this._drawTypeSettings = new PencilDrawTypeSettings(_session);
             const spaceBinding = _session.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
@@ -28251,6 +30640,15 @@ var __webpack_exports__ = {};
                 },
                 action: spaceBinding
             });
+            this._drawTypeSettings = new PencilDrawTypeSettings(_session, this);
+            this._orientationSettings = new OrientationSettings(_session, this);
+            this._editMode = new PencilEditMode(_session, this);
+            this._storage = new StorageUtil(_session, pencilPersistenceKey);
+            this._storage.loadStorage((saveState => {
+                this._drawTypeSettings.setStorage(saveState.drawTypeSettings);
+                this._orientationSettings.setStorage(saveState.orientationSettings);
+                this._editMode.setStorage(saveState.editMode);
+            }));
             this._rootPane = _session.createPropertyPane({
                 title: "resourcePack.editor.pencil.tool.title",
                 infoTooltip: {
@@ -28264,47 +30662,32 @@ var __webpack_exports__ = {};
                 }
             });
             this._tool.bindPropertyPane(this._rootPane);
-            this._addEditModeSetting(this._rootPane);
-            this._addDirectionSetting(this._rootPane);
-            this._drawTypeSettings.addToRootPanel(this._rootPane);
+            const horizontalSubPane = this._rootPane.createSubPane({
+                direction: server_editor_namespaceObject.LayoutDirection.Horizontal,
+                hasExpander: false
+            });
+            this._drawTypeSettings.addDrawModeToggle(horizontalSubPane);
+            this._editMode.addEditModeSetting(horizontalSubPane);
+            this._drawTypeSettings.addObjectDropdown(this._rootPane);
+            this._orientationSettings.addOrientationToggleGroup(this._rootPane);
+            this._orientationSettings.addFrontFaceDropdownAndFlipCheckbox(this._rootPane);
             this._rootPane.addDivider();
-            const locMap = new Map;
-            locMap.set(BrushPaintControlStringKeys.OffsetTooltip, "resourcePack.editor.pencil.settings.offset.tooltip");
-            locMap.set(BrushPaintControlStringKeys.RootPaneTitle, "resourcePack.editor.pencil.settings.title");
-            locMap.set(BrushPaintControlStringKeys.RootPaneTooltip, "resourcePack.editor.pencil.settings.tooltip");
-            locMap.set(BrushPaintControlStringKeys.FillConstraintsTooltip, "resourcePack.editor.pencil.settings.fillConstraints.tooltip");
-            locMap.set(BrushPaintControlStringKeys.MaskModeTitle, "resourcePack.editor.pencil.settings.blockfilter.title");
-            const brushManager = _session.extensionContext.brushShapeManager;
+            const locMap = new Map([ [ BrushPaintControlStringKeys.OffsetTooltip, "resourcePack.editor.pencil.settings.offset.tooltip" ], [ BrushPaintControlStringKeys.RootPaneTitle, "resourcePack.editor.pencil.settings.title" ], [ BrushPaintControlStringKeys.RootPaneTooltip, "resourcePack.editor.pencil.settings.tooltip" ], [ BrushPaintControlStringKeys.FillConstraintsTooltip, "resourcePack.editor.pencil.settings.fillConstraints.tooltip" ], [ BrushPaintControlStringKeys.MaskModeTitle, "resourcePack.editor.pencil.settings.blockfilter.title" ] ]);
             this._brush = new PencilBrush(_session, "Pencil", this._tool, this._rootPane, {
                 paintMode: server_editor_namespaceObject.PaintMode.BlockPaint
             }, [ new server_editor_namespaceObject.SingleBlockBrushShape ], {
                 onStartPainting: () => {
                     this._telemetry.fireTelemetryEvent(PencilTelemetry.StartPaining);
-                    brushManager.setDirectionalPlacementMode(this._directionMode.value);
-                    const inverseEraseMode = this._editMode.value === BrushEditMode.Erase;
-                    brushManager.setInverseEraseMode(inverseEraseMode);
                 },
                 onEndPainting: () => {
                     this._telemetry.fireTelemetryEvent(PencilTelemetry.EndPainting, {
                         offset: _session.extensionContext.brushShapeManager.getBrushShapeOffset()
                     });
-                    brushManager.setDirectionalPlacementMode(server_editor_namespaceObject.BrushDirectionalPlacementMode.IgnoreCamera);
-                    brushManager.setInverseEraseMode(false);
                 },
                 locOverride: locMap
             });
             const bindManualControls = true;
-            this._cursorMode = new CursorModeControl(_session, this._tool, this._rootPane, bindManualControls, {
-                outlineColor: {
-                    red: 0,
-                    green: .5,
-                    blue: .5,
-                    alpha: .2
-                },
-                controlMode: server_editor_namespaceObject.CursorControlMode.KeyboardAndMouse,
-                targetMode: server_editor_namespaceObject.CursorTargetMode.Block,
-                visible: true
-            });
+            this._cursorMode = new CursorModeControl(_session, this._tool, this._rootPane, bindManualControls);
             this._cursorMode.initialize();
             _session.inputManager.registerKeyBinding(server_editor_namespaceObject.EditorInputContext.GlobalToolMode, spaceBinding, {
                 key: server_editor_namespaceObject.KeyboardKey.SPACE
@@ -28313,6 +30696,24 @@ var __webpack_exports__ = {};
                 label: "resourcePack.editor.pencil.keybinding.title",
                 tooltip: "resourcePack.editor.pencil.keybinding.tooltip"
             });
+        }
+        saveSettings() {
+            const newValues = {
+                drawTypeSettings: this._drawTypeSettings.getStorage(),
+                editMode: this._editMode.getStorage(),
+                orientationSettings: this._orientationSettings.getStorage()
+            };
+            this._storage.saveStorage(newValues);
+        }
+        getPlacementType() {
+            if (this._drawTypeSettings.getDrawType() === PencilDrawType.Block) {
+                return this._session.extensionContext.blockPalette.getSelectedItem();
+            } else {
+                return this._drawTypeSettings.getSelectedObjectBlock();
+            }
+        }
+        onDrawTypeChanged() {
+            this._orientationSettings.setPlacementType(this.getPlacementType());
         }
         _initTool(id, uiSession, behavior, toolConfig) {
             const tool = uiSession.toolRail.addTool(id, toolConfig);
@@ -28325,57 +30726,1431 @@ var __webpack_exports__ = {};
             }));
             return tool;
         }
+        isActive() {
+            return this._isActive;
+        }
         toolActivate() {
+            this._isActive = true;
             this._cursorMode.activateControl();
             this._brush.activateControl();
+            this._orientationSettings.activate();
             this._drawTypeSettings.activate();
+            this._editMode.activate();
         }
         toolDeactivate() {
+            this._isActive = false;
             if (this._brush.isControlActive()) {
                 this._brush.deactivateControl();
             }
             if (this._cursorMode.isActive) {
                 this._cursorMode.deactivateControl();
             }
+            this._orientationSettings.deactivate();
             this._drawTypeSettings.deactivate();
+            this._editMode.deactivate();
         }
         teardown() {
             this.toolDeactivate();
             this._brush.shutdown();
             this._cursorMode.shutdown();
+            this._orientationSettings.teardown();
         }
-        _addDirectionSetting(rootPane) {
-            const entries = [ {
-                value: server_editor_namespaceObject.BrushDirectionalPlacementMode.NormalCamera,
-                label: "resourcePack.editor.pencil.direction.bycamera"
-            }, {
-                value: server_editor_namespaceObject.BrushDirectionalPlacementMode.IgnoreCamera,
-                label: "resourcePack.editor.pencil.direction.default"
-            } ];
-            rootPane.addDropdown(this._directionMode, {
-                entries,
-                title: "resourcePack.editor.pencil.direction.title",
-                tooltip: "resourcePack.editor.pencil.direction.tooltip"
-            });
+        getTool() {
+            return this._tool;
         }
-        _addEditModeSetting(rootPane) {
-            rootPane.addToggleGroup(this._editMode, {
-                title: "resourcePack.editor.pencil.editmode.title",
-                tooltip: "resourcePack.editor.pencil.editmode.tooltip",
-                entries: [ {
-                    value: BrushEditMode.Draw,
-                    label: "resourcePack.editor.pencil.editmode.draw.title",
-                    icon: "pack://textures/editor/Pencil.png?filtering=point",
-                    tooltip: "resourcePack.editor.pencil.editmode.draw.tooltip"
-                }, {
-                    value: BrushEditMode.Erase,
-                    label: "resourcePack.editor.pencil.editmode.erase.title",
-                    icon: "pack://textures/editor/Erase.png?filtering=point",
-                    tooltip: "resourcePack.editor.pencil.editmode.erase.tooltip"
-                } ]
-            });
+        setCursorTargetMode(targetMode) {
+            this._cursorMode.forceTargetMode(targetMode);
+        }
+        getCursorTargetMode() {
+            return this._cursorMode.cursorProperties.targetMode;
         }
     }
+    var ScaleToolTelemetry;
+    (function(ScaleToolTelemetry) {
+        ScaleToolTelemetry["ScaleFactorChange"] = "ScaleFactorChange";
+        ScaleToolTelemetry["ApplyScaling"] = "ApplyScaling";
+    })(ScaleToolTelemetry || (ScaleToolTelemetry = {}));
+    class ScaleToolBehavior {
+        constructor(uiSession) {
+            this.uiSession = uiSession;
+            this.isActiveTool = false;
+            this.statusMessage = (0, server_editor_namespaceObject.makeObservable)("");
+            this.x_axis = (0, server_editor_namespaceObject.makeObservable)(true);
+            this.y_axis = (0, server_editor_namespaceObject.makeObservable)(true);
+            this.z_axis = (0, server_editor_namespaceObject.makeObservable)(true);
+            this.scaleFactor = (0, server_editor_namespaceObject.makeObservable)(ScaleToolBehavior.DEFAULT_SCALE_COEFFICIENT);
+            this.scaledBlocks = [];
+            this.visualizationWidgets = uiSession.extensionContext.widgetManager.createGroup({
+                groupSelectionMode: server_editor_namespaceObject.WidgetGroupSelectionMode.Single,
+                visible: true
+            });
+            this.telemetryManager = new TelemetryManager(uiSession.extensionContext.player, TelemetrySource.Scale);
+            this.transactionHandler = (0, server_editor_namespaceObject.registerUserDefinedTransactionHandler)(this.uiSession.extensionContext.transactionManager, (payload => {
+                try {
+                    this.uiSession.extensionContext.selectionManager.volume.set(payload.previousBoundingBox);
+                } catch (_) {
+                    uiSession.log.error(`Error when undoing selection`);
+                }
+            }), (payload => {
+                try {
+                    this.uiSession.extensionContext.selectionManager.volume.set(payload.newBoundingBox);
+                } catch (_) {
+                    uiSession.log.error(`Error when redoing selection`);
+                }
+            }));
+            const pane = this._createPropertyPane();
+            this.tool = this._addTool(uiSession);
+            this.tool.onModalToolActivation.subscribe((data => {
+                this.isActiveTool = data.isActiveTool;
+                if (data.isActiveTool) {
+                    this._queueVisualizationRedraw(uiSession);
+                } else {
+                    this._clearVisualization();
+                }
+            }));
+            this.selectionChangeEventSubscriptionHandle = uiSession.extensionContext.afterEvents.SelectionChange.subscribe((() => {
+                this._redrawVisualization(this.uiSession);
+            }));
+            this.modeChangeEventSubscriptionHandle = this.uiSession.extensionContext.afterEvents.modeChange.subscribe((event => {
+                if (event.mode === server_editor_namespaceObject.EditorMode.Crosshair) {
+                    this._clearVisualization();
+                } else if (event.mode === server_editor_namespaceObject.EditorMode.Tool) {
+                    this._queueVisualizationRedraw(uiSession);
+                }
+            }));
+            this.tool.bindPropertyPane(pane);
+        }
+        _createPropertyPane() {
+            const pane = this.uiSession.createPropertyPane({
+                title: "resourcePack.editor.ScaleTool.title",
+                infoTooltip: {
+                    description: [ "resourcePack.editor.ScaleTool.tooltip", {
+                        link: "https://aka.ms/BedrockEditorScaleTool",
+                        text: "resourcePack.editor.help.learnMore"
+                    } ]
+                }
+            });
+            this.statusMessagePane = pane.addText(this.statusMessage);
+            pane.addBool(this.x_axis, {
+                title: "resourcePack.editor.ScaleTool.pane.xAxis",
+                tooltip: "resourcePack.editor.ScaleTool.pane.xAxis.tooltip",
+                onChange: _ => {
+                    if (!this.x_axis.value && !this.y_axis.value && !this.z_axis.value) {
+                        this._clearVisualization();
+                    }
+                    this._queueVisualizationRedraw(this.uiSession);
+                }
+            });
+            pane.addBool(this.y_axis, {
+                title: "resourcePack.editor.ScaleTool.pane.yAxis",
+                tooltip: "resourcePack.editor.ScaleTool.pane.yAxis.tooltip",
+                onChange: _ => {
+                    if (!this.x_axis.value && !this.y_axis.value && !this.z_axis.value) {
+                        this._clearVisualization();
+                    }
+                    this._queueVisualizationRedraw(this.uiSession);
+                }
+            });
+            pane.addBool(this.z_axis, {
+                title: "resourcePack.editor.ScaleTool.pane.zAxis",
+                tooltip: "resourcePack.editor.ScaleTool.pane.zAxis.tooltip",
+                onChange: _ => {
+                    if (!this.x_axis.value && !this.y_axis.value && !this.z_axis.value) {
+                        this._clearVisualization();
+                    }
+                    this._queueVisualizationRedraw(this.uiSession);
+                }
+            });
+            pane.addNumber(this.scaleFactor, {
+                title: "resourcePack.editor.ScaleTool.pane.scaleFactor",
+                tooltip: "resourcePack.editor.ScaleTool.pane.scaleFactor.tooltip",
+                min: ScaleToolBehavior.MIN_SCALE_COEFFICIENT,
+                max: ScaleToolBehavior.MAX_SCALE_COEFFICIENT,
+                variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
+                onChange: newValue => {
+                    this.telemetryManager.fireTelemetryEvent(ScaleToolTelemetry.ScaleFactorChange, {
+                        scaleFactor: newValue
+                    });
+                    this._queueVisualizationRedraw(this.uiSession);
+                }
+            });
+            const applyAction = this.uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: async () => {
+                    this.telemetryManager.fireTelemetryEvent(ScaleToolTelemetry.ApplyScaling);
+                    await this._applyScaling(this.uiSession);
+                }
+            });
+            this.applyButton = pane.addButton(applyAction, {
+                title: "resourcePack.editor.ScaleTool.pane.Apply",
+                visible: true,
+                enable: true
+            });
+            return pane;
+        }
+        _addTool(uiSession) {
+            const tool = uiSession.toolRail.addTool("editor:modalTool:scaleTool", {
+                title: "resourcePack.editor.ScaleTool.title",
+                icon: "pack://textures/editor/ScaleTool.png",
+                tooltip: {
+                    description: "resourcePack.editor.ScaleTool.tooltip",
+                    image: "pack://textures/editor/ScaleTool.gif"
+                }
+            });
+            return tool;
+        }
+        _queueVisualizationRedraw(uiSession) {
+            if (!this.queueVisualizationsRedrawHandle) {
+                this.queueVisualizationsRedrawHandle = server_namespaceObject.system.runTimeout((() => {
+                    this._redrawVisualization(uiSession);
+                }), ScaleToolBehavior.REDRAW_BATCH_DELAY);
+            }
+        }
+        _redrawVisualization(uiSession) {
+            if (this.queueVisualizationsRedrawHandle) {
+                this.queueVisualizationsRedrawHandle = undefined;
+            }
+            if (uiSession.extensionContext.selectionManager.volume.isEmpty) {
+                this._clearVisualization();
+                if (this.statusMessagePane) {
+                    this.statusMessage.set({
+                        id: "resourcePack.editor.ScaleTool.statusMessage.noSelection"
+                    });
+                    this.statusMessagePane.visible = true;
+                }
+                return;
+            }
+            if (!this.isActiveTool) {
+                return;
+            }
+            if (this.statusMessagePane) {
+                this.statusMessagePane.visible = false;
+            }
+            if (!this.x_axis.value && !this.y_axis.value && !this.z_axis.value) {
+                return;
+            }
+            this._clearVisualization();
+            const boundingBox = uiSession.extensionContext.selectionManager.volume.getBoundingBox();
+            const originalCenter = {
+                x: (boundingBox.min.x + boundingBox.max.x) / 2,
+                y: (boundingBox.min.y + boundingBox.max.y) / 2,
+                z: (boundingBox.min.z + boundingBox.max.z) / 2
+            };
+            const scale = this.scaleFactor.value;
+            const scaleFactors = {
+                x: this.x_axis.value ? scale : 1,
+                y: this.y_axis.value ? scale : 1,
+                z: this.z_axis.value ? scale : 1
+            };
+            const originalSize = {
+                x: boundingBox.max.x - boundingBox.min.x + 1,
+                y: boundingBox.max.y - boundingBox.min.y + 1,
+                z: boundingBox.max.z - boundingBox.min.z + 1
+            };
+            const scaledSize = {
+                x: Math.max(Math.floor(originalSize.x * scaleFactors.x), 1),
+                y: Math.max(Math.floor(originalSize.y * scaleFactors.y), 1),
+                z: Math.max(Math.floor(originalSize.z * scaleFactors.z), 1)
+            };
+            const newMin = {
+                x: Math.floor(originalCenter.x - (scaledSize.x - 1) / 2),
+                y: Math.floor(originalCenter.y - (scaledSize.y - 1) / 2),
+                z: Math.floor(originalCenter.z - (scaledSize.z - 1) / 2)
+            };
+            const originalVolume = originalSize.x * originalSize.y * originalSize.z;
+            const scaledVolume = scaledSize.x * scaledSize.y * scaledSize.z;
+            if (scaledVolume > ScaleToolBehavior.MAX_ALLOWED_BLOCKS || originalVolume > ScaleToolBehavior.MAX_ALLOWED_BLOCKS) {
+                if (this.applyButton) {
+                    this.applyButton.enable = false;
+                }
+                this.uiSession.log.warning(`Volume exceeds the limit`, {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+                return;
+            } else {
+                if (this.applyButton) {
+                    this.applyButton.enable = true;
+                }
+            }
+            const selectedBlocks = [];
+            executeTickSafeOperation(uiSession.extensionContext, uiSession.log, boundingBox, (() => {
+                for (let x = boundingBox.min.x; x <= boundingBox.max.x; x++) {
+                    for (let y = boundingBox.min.y; y <= boundingBox.max.y; y++) {
+                        for (let z = boundingBox.min.z; z <= boundingBox.max.z; z++) {
+                            const pos = {
+                                x,
+                                y,
+                                z
+                            };
+                            const block = uiSession.extensionContext.player.dimension.getBlock(pos);
+                            selectedBlocks.push({
+                                pos,
+                                block: block?.permutation
+                            });
+                        }
+                    }
+                }
+            })).then((() => {
+                this.scaledBlocks = [];
+                this.scaledBlocks = this._fractionalScaling(selectedBlocks, boundingBox, originalSize, scaledSize, scaleFactors, newMin);
+            })).catch((e => {
+                this.uiSession.log.error(`Error while retrieving selected blocks: ${e.message}`, {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+            }));
+            let widget;
+            try {
+                widget = this.visualizationWidgets.createWidget(newMin, {});
+                if (widget) {
+                    widget.addBoundingBox(`scaledSizeBoundingBox`, scaledSize, ScaleToolBehavior.BOUNDING_BOX_STYLE);
+                }
+            } catch (error) {
+                const errorMessage = error.message;
+                this.uiSession.log.error(`Error while adding scaled object preview: ${errorMessage}`, {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+            } finally {
+                this.widget = widget;
+            }
+        }
+        async _applyScaling(uiSession) {
+            if (uiSession.extensionContext.selectionManager.volume.isEmpty) {
+                if (this.isActiveTool) {
+                    uiSession.log.info(`Scale tool: No selection to visualize`);
+                }
+                return;
+            }
+            if (!this.x_axis.value && !this.y_axis.value && !this.z_axis.value) {
+                return;
+            }
+            uiSession.extensionContext.transactionManager.openTransaction("Scale Tool");
+            const boundingBox = uiSession.extensionContext.selectionManager.volume.getBoundingBox();
+            const scaledBlockLocations = this.scaledBlocks.map((x => x.location));
+            const boundingBoxBlockLocations = [];
+            for (let x = boundingBox.min.x; x <= boundingBox.max.x; x++) {
+                for (let y = boundingBox.min.y; y <= boundingBox.max.y; y++) {
+                    for (let z = boundingBox.min.z; z <= boundingBox.max.z; z++) {
+                        boundingBoxBlockLocations.push({
+                            x,
+                            y,
+                            z
+                        });
+                    }
+                }
+            }
+            const combined = [ ...scaledBlockLocations, ...boundingBoxBlockLocations ];
+            const combinedWithoutDuplication = Array.from(new Map(combined.map((loc => [ `${loc.x},${loc.y},${loc.z}`, loc ]))).values());
+            uiSession.extensionContext.transactionManager.trackBlockChangeList(combinedWithoutDuplication);
+            await executeTickSafeOperation(uiSession.extensionContext, uiSession.log, boundingBox, (() => {
+                for (let x = boundingBox.min.x; x <= boundingBox.max.x; x++) {
+                    for (let y = boundingBox.min.y; y <= boundingBox.max.y; y++) {
+                        for (let z = boundingBox.min.z; z <= boundingBox.max.z; z++) {
+                            const block = uiSession.extensionContext.player.dimension.getBlock({
+                                x,
+                                y,
+                                z
+                            });
+                            if (block) {
+                                block.setType(lib_vanilla_MinecraftBlockTypes.Air);
+                            }
+                        }
+                    }
+                }
+            })).catch((e => {
+                this.uiSession.log.error(`Error while clearing original selection: ${e.message}`);
+            }));
+            if (scaledBlockLocations[0] === undefined) {
+                uiSession.log.warning(`No blocks after scaling operation`);
+                uiSession.extensionContext.transactionManager.commitOpenTransaction();
+                this._clearVisualization();
+                return;
+            }
+            let invalidBlockCount = 0;
+            let minX = scaledBlockLocations[0].x, minY = scaledBlockLocations[0].y, minZ = scaledBlockLocations[0].z;
+            let maxX = scaledBlockLocations[0].x, maxY = scaledBlockLocations[0].y, maxZ = scaledBlockLocations[0].z;
+            for (const loc of scaledBlockLocations) {
+                if (loc.x < minX) minX = loc.x;
+                if (loc.y < minY) minY = loc.y;
+                if (loc.z < minZ) minZ = loc.z;
+                if (loc.x > maxX) maxX = loc.x;
+                if (loc.y > maxY) maxY = loc.y;
+                if (loc.z > maxZ) maxZ = loc.z;
+            }
+            const appliedVolume = new server_namespaceObject.BlockVolume({
+                x: minX,
+                y: minY,
+                z: minZ
+            }, {
+                x: maxX,
+                y: maxY,
+                z: maxZ
+            });
+            await executeTickSafeOperation(uiSession.extensionContext, uiSession.log, appliedVolume.getBoundingBox(), (() => {
+                this.scaledBlocks.forEach((item => {
+                    const block = uiSession.extensionContext.player.dimension.getBlock(item.location);
+                    if (block && item.newBlock) {
+                        block.setPermutation(item.newBlock);
+                    } else {
+                        ++invalidBlockCount;
+                    }
+                }));
+            })).catch((e => {
+                this.uiSession.log.error(`Error while applying scaled options: ${e.message}`);
+            }));
+            const transactionPayload = {
+                previousBoundingBox: this.uiSession.extensionContext.selectionManager.volume.get(),
+                newBoundingBox: appliedVolume
+            };
+            this.transactionHandler.addUserDefinedOperation(transactionPayload, "ScaleToolSelectionChange");
+            this.uiSession.extensionContext.selectionManager.volume.set(appliedVolume);
+            if (invalidBlockCount > 0) {
+                uiSession.log.warning(`There were ${invalidBlockCount} invalid blocks while scaling selection!`);
+            }
+            uiSession.extensionContext.transactionManager.commitOpenTransaction();
+            this.scaleFactor.set(ScaleToolBehavior.DEFAULT_SCALE_COEFFICIENT);
+            this._clearVisualization();
+        }
+        _fractionalScaling(selectedBlocks, boundingBox, originalSize, scaledSize, scaleFactors, newMin) {
+            const blockMap = new Map;
+            for (const {pos, block} of selectedBlocks) {
+                const relPos = {
+                    x: pos.x - boundingBox.min.x,
+                    y: pos.y - boundingBox.min.y,
+                    z: pos.z - boundingBox.min.z
+                };
+                blockMap.set(`${relPos.x},${relPos.y},${relPos.z}`, block);
+            }
+            const scaledBlocks = [];
+            for (let x = 0; x < scaledSize.x; x++) {
+                for (let y = 0; y < scaledSize.y; y++) {
+                    for (let z = 0; z < scaledSize.z; z++) {
+                        const sourcePos = {
+                            x: Math.floor(x / scaleFactors.x),
+                            y: Math.floor(y / scaleFactors.y),
+                            z: Math.floor(z / scaleFactors.z)
+                        };
+                        sourcePos.x = Math.min(sourcePos.x, originalSize.x - 1);
+                        sourcePos.y = Math.min(sourcePos.y, originalSize.y - 1);
+                        sourcePos.z = Math.min(sourcePos.z, originalSize.z - 1);
+                        const key = `${sourcePos.x},${sourcePos.y},${sourcePos.z}`;
+                        const sourceBlockPermutation = blockMap.get(key);
+                        const worldPos = {
+                            x: newMin.x + x,
+                            y: newMin.y + y,
+                            z: newMin.z + z
+                        };
+                        scaledBlocks.push({
+                            location: worldPos,
+                            newBlock: sourceBlockPermutation
+                        });
+                    }
+                }
+            }
+            return scaledBlocks;
+        }
+        _clearVisualization() {
+            if (this.widget) {
+                this.visualizationWidgets.deleteWidget(this.widget);
+                this.widget = undefined;
+            }
+        }
+        teardown() {
+            if (this.modeChangeEventSubscriptionHandle) {
+                this.uiSession.extensionContext.afterEvents.modeChange.unsubscribe(this.modeChangeEventSubscriptionHandle);
+                this.modeChangeEventSubscriptionHandle = undefined;
+            }
+            if (this.selectionChangeEventSubscriptionHandle) {
+                this.uiSession.extensionContext.afterEvents.SelectionChange.unsubscribe(this.selectionChangeEventSubscriptionHandle);
+                this.selectionChangeEventSubscriptionHandle = undefined;
+            }
+            if (this.queueVisualizationsRedrawHandle) {
+                server_namespaceObject.system.clearRun(this.queueVisualizationsRedrawHandle);
+                this.queueVisualizationsRedrawHandle = undefined;
+            }
+            this._clearVisualization();
+            this.uiSession.log.debug(`Shutting down Scale tool`);
+        }
+    }
+    ScaleToolBehavior.REDRAW_BATCH_DELAY = .5 * server_namespaceObject.TicksPerSecond;
+    ScaleToolBehavior.MIN_SCALE_COEFFICIENT = .1;
+    ScaleToolBehavior.MAX_SCALE_COEFFICIENT = 5;
+    ScaleToolBehavior.DEFAULT_SCALE_COEFFICIENT = 1;
+    ScaleToolBehavior.MAX_ALLOWED_BLOCKS = 2e5;
+    ScaleToolBehavior.BOUNDING_BOX_STYLE = {
+        visible: true,
+        showWorldIntersections: true,
+        outlineColor: {
+            red: 0,
+            green: .8,
+            blue: .2,
+            alpha: .8
+        },
+        hullColor: {
+            red: 0,
+            green: .8,
+            blue: .2,
+            alpha: .2
+        }
+    };
+    var JigsawTelemetry;
+    (function(JigsawTelemetry) {
+        JigsawTelemetry["JigsawPaneInitialized"] = "JigsawPaneInitialized";
+        JigsawTelemetry["JigsawPaneOpened"] = "JigsawPaneOpened";
+        JigsawTelemetry["JigsawPaneClosed"] = "JigsawPaneClosed";
+        JigsawTelemetry["JigsawRegistryCreated"] = "JigsawRegistryCreated";
+        JigsawTelemetry["JigsawRegistryDeleted"] = "JigsawRegistryDeleted";
+        JigsawTelemetry["JigsawRegistrySelected"] = "JigsawRegistrySelected";
+        JigsawTelemetry["JigsawRegistryCreationAttempted"] = "JigsawRegistryCreationAttempted";
+        JigsawTelemetry["JigsawRegistryCreationFailed"] = "JigsawRegistryCreationFailed";
+        JigsawTelemetry["JigsawRegistryDeletionAttempted"] = "JigsawRegistryDeletionAttempted";
+        JigsawTelemetry["JigsawTemplatePoolCreated"] = "JigsawTemplatePoolCreated";
+        JigsawTelemetry["JigsawTemplatePoolDeleted"] = "JigsawTemplatePoolDeleted";
+        JigsawTelemetry["JigsawTemplatePoolSelected"] = "JigsawTemplatePoolSelected";
+        JigsawTelemetry["JigsawTemplatePoolCreationAttempted"] = "JigsawTemplatePoolCreationAttempted";
+        JigsawTelemetry["JigsawTemplatePoolCreationFailed"] = "JigsawTemplatePoolCreationFailed";
+        JigsawTelemetry["JigsawTemplatePoolDeletionAttempted"] = "JigsawTemplatePoolDeletionAttempted";
+        JigsawTelemetry["JigsawTemplatePoolEdited"] = "JigsawTemplatePoolEdited";
+        JigsawTelemetry["JigsawTemplatePoolElementAdded"] = "JigsawTemplatePoolElementAdded";
+        JigsawTelemetry["JigsawTemplatePoolElementDeleted"] = "JigsawTemplatePoolElementDeleted";
+        JigsawTelemetry["JigsawTemplatePoolElementModified"] = "JigsawTemplatePoolElementModified";
+        JigsawTelemetry["JigsawStructureAddedToPool"] = "JigsawStructureAddedToPool";
+        JigsawTelemetry["JigsawGenerationAttempted"] = "JigsawGenerationAttempted";
+        JigsawTelemetry["JigsawGenerationSucceeded"] = "JigsawGenerationSucceeded";
+        JigsawTelemetry["JigsawGenerationFailed"] = "JigsawGenerationFailed";
+        JigsawTelemetry["JigsawValidationError"] = "JigsawValidationError";
+        JigsawTelemetry["JigsawFileCorruption"] = "JigsawFileCorruption";
+    })(JigsawTelemetry || (JigsawTelemetry = {}));
+    class JigsawModeBehavior {
+        get currentRegistryName() {
+            if (!this._regNameDropdown) {
+                return "";
+            }
+            return this._regNameDropdown.getEntryByValue(this._regNameDropdown.value)?.label ?? "";
+        }
+        constructor(_uiSession) {
+            this._uiSession = _uiSession;
+            this._fileChanged = false;
+            this._structuresIds = [];
+            this._leaveVoidWorld = () => {};
+            this._inVoidWorld = false;
+            this.openMenuAction = this._uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawPaneOpened, {
+                        source: "action_bar",
+                        registryCount: this._regNameList.length,
+                        activeRegistry: this.currentRegistryName
+                    });
+                    this._rootPropertyPane?.show();
+                }
+            });
+            this.telemetryManager = new TelemetryManager(_uiSession.extensionContext.player, TelemetrySource.Jigsaw);
+            this._widgetGroup = this._uiSession.extensionContext.widgetManager.createGroup({
+                groupSelectionMode: server_editor_namespaceObject.WidgetGroupSelectionMode.Single,
+                visible: true
+            });
+            this.refreshStructureIds();
+            this._seed = {
+                x: 0,
+                y: 0,
+                z: 0
+            };
+            this._props = {
+                editTemplatePoolIndex: (0, server_editor_namespaceObject.makeObservable)(0),
+                jigsawGenerationDepth: (0, server_editor_namespaceObject.makeObservable)(1),
+                jigsawHorizontalSize: (0, server_editor_namespaceObject.makeObservable)(128),
+                lockJigsawSeed: (0, server_editor_namespaceObject.makeObservable)(false),
+                bypassValidation: (0, server_editor_namespaceObject.makeObservable)(false),
+                fileName: (0, server_editor_namespaceObject.makeObservable)(""),
+                startingTarget: (0, server_editor_namespaceObject.makeObservable)("")
+            };
+            this._regNameList = [];
+            _uiSession.log.debug(`Initializing ${JigsawModeBehavior.BEHAVIOR_NAME}`);
+            const player = _uiSession.extensionContext.player;
+            this._jigsawService = server_editor_private_bindings_namespaceObject.editorInternal.getPlayerServices(player).jigsawService;
+            this._rootPropertyPane = _uiSession.createPropertyPane({
+                title: `resourcePack.editor.jigsaw.pane.title`,
+                uniqueId: "editor:pane:jigsaw",
+                infoTooltip: {
+                    description: [ "resourcePack.editor.jigsaw.pane.tooltip", {
+                        link: "https://aka.ms/BedrockEditorJigsaws",
+                        text: "resourcePack.editor.help.learnMore"
+                    } ]
+                }
+            });
+            this._newTemplateDialog = new ModalDialogStringInput(this._uiSession, this._rootPropertyPane, (name => this._validateTemplateName(name)));
+            this._newRegistryDialog = new ModalDialogStringInput(this._uiSession, this._rootPropertyPane, (name => this._validateRegistryName(name)));
+            this._init();
+            this.cursorProperties = _uiSession.extensionContext.cursor.getProperties();
+            if (this.cursorProperties.fillColor) {
+                delete this.cursorProperties.fillColor;
+            }
+            this.cursorProperties.outlineColor = {
+                red: 0,
+                green: .95,
+                blue: 1,
+                alpha: .88
+            };
+            this.cursorProperties.controlMode = server_editor_namespaceObject.CursorControlMode.KeyboardAndMouse;
+            this.cursorProperties.targetMode = server_editor_namespaceObject.CursorTargetMode.Block;
+            this.cursorProperties.projectThroughLiquid = false;
+            this.cursorProperties.visible = true;
+            this._uiSession.actionBar.registerItem("editor:actionBarItem:jigsawManager", this.openMenuAction, {
+                label: "resourcePack.editor.jigsaw.actionBar.title",
+                icon: "pack://textures/editor/Jigsaw.png",
+                tooltipTitle: "resourcePack.editor.jigsaw.actionBar.title",
+                tooltipDescription: "resourcePack.editor.jigsaw.actionBar.tooltip",
+                executeOnAdd: true
+            });
+        }
+        teardown() {
+            this._uiSession.log.debug(`Shutting down ${JigsawModeBehavior.BEHAVIOR_NAME}`);
+            if (this._paneChangedHandle) {
+                this._leaveVoidWorld();
+                server_namespaceObject.system.clearRun(this._paneChangedHandle);
+            }
+        }
+        _validateRegistryName(name) {
+            const nameRegex = /^[A-Za-z0-9_]+$/;
+            if (!nameRegex.test(name)) {
+                this._uiSession.log.error("Invalid name", {
+                    channelMask: server_editor_namespaceObject.LogChannel.Toast
+                });
+                this._uiSession.log.error("Jigsaw Collection name must be alphanumeric.");
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawValidationError, {
+                    validationType: "registry_name",
+                    inputValue: name,
+                    context: "registry_creation_invalid_format"
+                });
+                return false;
+            }
+            if (this._regNameList.includes(name)) {
+                this._uiSession.log.error("Invalid name", {
+                    channelMask: server_editor_namespaceObject.LogChannel.Toast
+                });
+                this._uiSession.log.error(`Jigsaw Collection name "${name}" already exists. Please choose a different name.`);
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawValidationError, {
+                    validationType: "registry_name",
+                    inputValue: name,
+                    context: "registry_creation_duplicate_name"
+                });
+                return false;
+            }
+            return true;
+        }
+        _validateTemplateName(name) {
+            if (!name || name.trim() === "") {
+                this._uiSession.log.error("Invalid name", {
+                    channelMask: server_editor_namespaceObject.LogChannel.Toast
+                });
+                this._uiSession.log.error("Jigsaw Pool name cannot be empty.");
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawValidationError, {
+                    validationType: "empty_field",
+                    inputValue: name,
+                    context: "template_pool_creation_empty_name"
+                });
+                return false;
+            }
+            const nameRegex = /^[A-Za-z0-9_]+:[A-Za-z0-9_/]+$/;
+            if (!nameRegex.test(name)) {
+                this._uiSession.log.error("Invalid name", {
+                    channelMask: server_editor_namespaceObject.LogChannel.Toast
+                });
+                this._uiSession.log.error("Jigsaw Pool name must be alphanumeric be in the form of `namespace:name`");
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawValidationError, {
+                    validationType: "template_name",
+                    inputValue: name,
+                    context: "template_pool_creation_invalid_format"
+                });
+                return false;
+            }
+            if (this._currentRegFiles !== undefined || this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool] !== undefined) {
+                const existingNames = this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].map((file => file.fileName));
+                if (existingNames.includes(name)) {
+                    this._uiSession.log.error("Invalid name", {
+                        channelMask: server_editor_namespaceObject.LogChannel.Toast
+                    });
+                    this._uiSession.log.error(`Jigsaw Pool name "${name}" already exists. Please choose a different name.`);
+                    this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawValidationError, {
+                        validationType: "template_name",
+                        inputValue: name,
+                        context: "template_pool_creation_duplicate_name"
+                    });
+                    return false;
+                }
+            }
+            return true;
+        }
+        createMenuItem() {
+            void this._uiSession.menuBar.getMenu(server_editor_namespaceObject.CoreMenuType.View).then((menu => {
+                menu.addItem({
+                    label: "resourcePack.editor.jigsaw.menuItem.title",
+                    tooltip: "resourcePack.editor.jigsaw.menuItem.tooltip"
+                }, this._uiSession?.actionManager.createAction({
+                    actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                    onExecute: () => {
+                        this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawPaneOpened, {
+                            source: "menu",
+                            registryCount: this._regNameList.length,
+                            activeRegistry: this.currentRegistryName
+                        });
+                        this._rootPropertyPane.show();
+                    }
+                }));
+            }));
+        }
+        _init() {
+            this.createGenerateSubpane();
+            this._rootPropertyPane.addDivider();
+            this._editingSubpane = this._rootPropertyPane.createSubPane({
+                title: "resourcePack.editor.jigsaw.pane.edit.heading",
+                infoTooltip: {
+                    title: "resourcePack.editor.jigsaw.pane.edit.tooltip"
+                },
+                hasExpander: true,
+                hasMargins: true
+            });
+            this.generateRegistrySelectionSubpane();
+            this._regNameList = this._jigsawService.getRegistryList();
+            this.updateJigsawRegistryDropdown();
+            this.generateTemplatePoolSelectionSubpane();
+            this._editingSubpane.addDivider();
+            this.initializeFromRegistry(this.currentRegistryName);
+            this.createMenuItem();
+            this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawPaneInitialized, {
+                registryCount: this._regNameList.length,
+                templatePoolCount: this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool]?.length ?? 0
+            });
+        }
+        initializeFromRegistry(regName) {
+            this._currentRegFiles = this._jigsawService.getRegistryData(regName);
+            if (this._currentRegFiles === undefined || this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool] === undefined) {
+                this._currentRegFiles = {
+                    [server_editor_private_bindings_namespaceObject.JigsawJsonType.Processor]: [],
+                    [server_editor_private_bindings_namespaceObject.JigsawJsonType.Structure]: [],
+                    [server_editor_private_bindings_namespaceObject.JigsawJsonType.StructureSet]: [],
+                    [server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool]: []
+                };
+            }
+            const jigsawFileNameDropdownItems = this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].map(((name, index) => {
+                const item = {
+                    label: name.fileName,
+                    value: Number(index)
+                };
+                return item;
+            }));
+            this._editingTemplatePoolDropdown.updateEntries(jigsawFileNameDropdownItems, 0);
+            this._generatingTemplatePoolDropdown.updateEntries(jigsawFileNameDropdownItems, 0);
+            if (this._editingTemplatePoolSubpane) {
+                this._editingSubpane.removeSubPane(this._editingTemplatePoolSubpane);
+            }
+            this._editingTemplatePoolSubpane = this._editingSubpane.createSubPane({
+                hasExpander: true,
+                hasMargins: true
+            });
+            this.refreshTemplatePoolEditorSubpane(0, undefined);
+        }
+        generateRegistrySelectionSubpane() {
+            this._registryDropdownSubpane = this._editingSubpane.createSubPane({
+                direction: server_editor_namespaceObject.LayoutDirection.Horizontal,
+                hasExpander: false,
+                hasMargins: false
+            });
+            this._regNameDropdown = this._registryDropdownSubpane.addDropdown(0, {
+                title: `resourcePack.editor.jigsaw.pane.registryDropdown.heading`,
+                tooltip: `resourcePack.editor.jigsaw.pane.registryDropdown.tooltip`,
+                entries: [],
+                onChange: newValue => {
+                    this.handleRegistryDropdownChange(newValue);
+                }
+            });
+            this._registryDropdownSubpane.addButton((() => {
+                this._newRegistryDialog.activate("", "resourcePack.editor.jigsaw.pane.registryCreation.title", "resourcePack.editor.jigsaw.pane.registryCreation.heading").then((name => {
+                    this.handleRegistryCreateRequest(name);
+                })).catch((reason => {
+                    this._uiSession.log.error(`Error showing new Jigsaw Collection dialog: ${reason}`);
+                }));
+            }), {
+                icon: "plusIcon",
+                tooltip: "resourcePack.editor.jigsaw.pane.registryCreation.tooltip"
+            });
+            this._registryDropdownSubpane.addButton((() => {
+                this.handleRegistryDeleteRequest();
+            }), {
+                icon: "trashCanIcon",
+                tooltip: "resourcePack.editor.jigsaw.pane.registryDeletion.tooltip"
+            });
+        }
+        updateJigsawRegistryDropdown() {
+            const jigsawRegistryNameDropdownItems = this._regNameList.map(((name, index) => {
+                const item = {
+                    label: name,
+                    value: Number(index)
+                };
+                return item;
+            }));
+            if (jigsawRegistryNameDropdownItems && jigsawRegistryNameDropdownItems.length > 0) {
+                this._regNameDropdown.updateEntries(jigsawRegistryNameDropdownItems);
+            }
+        }
+        generateTemplatePoolSelectionSubpane() {
+            this._templatePoolDropdownSubpane = this._editingSubpane.createSubPane({
+                direction: server_editor_namespaceObject.LayoutDirection.Horizontal,
+                hasExpander: false,
+                hasMargins: false
+            });
+            this._editingTemplatePoolDropdown = this._templatePoolDropdownSubpane.addDropdown(this._props.editTemplatePoolIndex, {
+                title: `resourcePack.editor.jigsaw.pane.templatePoolDropdown.title`,
+                tooltip: `resourcePack.editor.jigsaw.pane.templatePoolDropdown.tooltip`,
+                entries: [],
+                onChange: (newValue, oldValue) => {
+                    this.handleTemplatePoolDropdownChange(newValue, oldValue);
+                }
+            });
+            this._templatePoolDropdownSubpane.addButton((() => {
+                this._newTemplateDialog.activate("", "resourcePack.editor.jigsaw.pane.templatePoolCreation.title", "resourcePack.editor.jigsaw.pane.templatePoolCreation.heading").then((name => {
+                    this.handleTemplatePoolCreateRequest(name);
+                })).catch((reason => {
+                    this._uiSession.log.error(`Error showing new Jigsaw Pool dialog: ${reason}`);
+                }));
+            }), {
+                icon: "plusIcon",
+                tooltip: "resourcePack.editor.jigsaw.pane.templatePoolCreation.tooltip"
+            });
+            this._templatePoolDropdownSubpane.addButton((() => {
+                this.handleTemplatePoolDeleteRequest();
+            }), {
+                icon: "trashCanIcon",
+                tooltip: "resourcePack.editor.jigsaw.pane.templatePoolDeletion.tooltip"
+            });
+        }
+        createGenerateSubpane() {
+            this._generateSubPane = this._rootPropertyPane.createSubPane({
+                title: "resourcePack.editor.jigsaw.pane.generate.subpane.title",
+                hasExpander: true,
+                hasMargins: true
+            });
+            this._generateSubPane.addNumber(this._props.jigsawGenerationDepth, {
+                title: "resourcePack.editor.jigsaw.pane.generate.depth.title",
+                min: JigsawModeBehavior.MINIMUM_DEPTH,
+                max: JigsawModeBehavior.MAXIMUM_DEPTH,
+                variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
+                isInteger: true,
+                tooltip: "resourcePack.editor.jigsaw.pane.generate.depth.tooltip"
+            });
+            this._generateSubPane.addNumber(this._props.jigsawHorizontalSize, {
+                title: "resourcePack.editor.jigsaw.pane.generate.horizontalSize.title",
+                min: JigsawModeBehavior.MINIMUM_HORIZONTAL_SIZE,
+                max: JigsawModeBehavior.MAXIMUM_HORIZONTAL_SIZE,
+                variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
+                isInteger: true,
+                tooltip: "resourcePack.editor.jigsaw.pane.generate.horizontalSize.tooltip"
+            });
+            this._generateSubPane.addBool(this._props.lockJigsawSeed, {
+                title: "resourcePack.editor.jigsaw.pane.generate.seed.title",
+                tooltip: "resourcePack.editor.jigsaw.pane.generate.seed.tooltip"
+            });
+            this._generateSubPane.addBool(this._props.bypassValidation, {
+                title: "resourcePack.editor.jigsaw.pane.generate.bypassValidation.title",
+                tooltip: "resourcePack.editor.jigsaw.pane.generate.bypassValidation.tooltip"
+            });
+            this._generatingTemplatePoolDropdown = this._generateSubPane.addDropdown(0, {
+                title: `resourcePack.editor.jigsaw.pane.generate.startPool.title`,
+                tooltip: `resourcePack.editor.jigsaw.pane.generate.startPool.tooltip`,
+                entries: []
+            });
+            this._generateSubPane.addString(this._props.startingTarget, {
+                title: "resourcePack.editor.jigsaw.pane.generate.startTarget.title",
+                tooltip: "resourcePack.editor.jigsaw.pane.generate.startTarget.tooltip"
+            });
+            this._buttonPane = this._generateSubPane.addButtonPane();
+            this._buttonPane.addButton(this._uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: this.generateJigsaw.bind(this)
+            }), {
+                title: "resourcePack.editor.jigsaw.pane.generate.preview.title",
+                tooltip: "resourcePack.editor.jigsaw.pane.generate.preview.tooltip"
+            });
+            this._buttonPane.addButton(this._uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    if (this._inVoidWorld) {
+                        this._leaveVoidWorld();
+                        if (this._paneChangedHandle !== undefined) {
+                            server_namespaceObject.system.clearRun(this._paneChangedHandle);
+                        }
+                    }
+                }
+            }), {
+                title: "resourcePack.editor.jigsaw.misc.return.title",
+                tooltip: "resourcePack.editor.jigsaw.misc.return.tooltip"
+            });
+            this._buttonPane.addButton(this._uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    const exportLocation = this._jigsawService.getExportLocation();
+                    this._uiSession.log.info(`Jigsaw structures exported to: ${exportLocation}`);
+                    this._uiSession.log.info(`Jigsaw structures exported to: ${exportLocation}`, {
+                        channelMask: server_editor_namespaceObject.LogChannel.Toast
+                    });
+                }
+            }), {
+                title: "resourcePack.editor.exportProject.export",
+                tooltip: "resourcePack.editor.exportProject.export"
+            });
+        }
+        refreshTemplatePoolEditorSubpane(newValue, oldValue) {
+            this.refreshStructureIds();
+            if (this._fileChanged && oldValue !== undefined) {
+                const updatedFileName = this._editingTemplatePoolDropdown.getEntryByValue(oldValue)?.label ?? "";
+                this._updateFile(updatedFileName);
+            }
+            this._fileChanged = false;
+            this._editingSubpane.removeSubPane(this._editingTemplatePoolSubpane);
+            this._editingTemplatePoolSubpane = this._editingSubpane.createSubPane({
+                title: "resourcePack.editor.jigsaw.pane.poolSubpane.title",
+                infoTooltip: {
+                    title: "resourcePack.editor.jigsaw.pane.poolSubpane.tooltip"
+                },
+                hasExpander: true,
+                hasMargins: true
+            });
+            const itemName = this._editingTemplatePoolDropdown.getEntryByValue(newValue)?.label ?? "";
+            const selectedFile = this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].find((item => item.fileName === itemName));
+            if (selectedFile) {
+                this._constructTemplatePoolSubpane(selectedFile);
+            }
+        }
+        _constructTemplatePoolSubpane(json) {
+            this._editingTemplatePoolSubpane.addButton(this._uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    this.handleAddNewTemplatePoolElement();
+                }
+            }), {
+                title: "resourcePack.editor.jigsaw.pane.poolSubpane.add.title",
+                tooltip: "resourcePack.editor.jigsaw.pane.poolSubpane.add.tooltip"
+            });
+            try {
+                this._loadedFile = JSON.parse(json.fileJson);
+                this._loadedFile["minecraft:template_pool"].elements.forEach(((element, index) => {
+                    this._addTemplatePoolElementSection(element, index);
+                    this._editingTemplatePoolSubpane.addDivider();
+                }));
+            } catch (error) {
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawFileCorruption, {
+                    fileName: json.fileName,
+                    registryName: this.currentRegistryName,
+                    corruptionType: "json_parse_error",
+                    errorMessage: error?.message || "Unknown JSON parse error"
+                });
+                this._uiSession.log.error(`Failed to parse Jigsaw Pool file: ${json.fileName}`, {
+                    channelMask: server_editor_namespaceObject.LogChannel.Toast
+                });
+                throw error;
+            }
+        }
+        _addTemplatePoolElementSection(element, index) {
+            const elementSubpane = this._editingTemplatePoolSubpane.createSubPane({
+                direction: server_editor_namespaceObject.LayoutDirection.Horizontal,
+                hasExpander: false
+            });
+            this.refreshStructureIds();
+            let selectedId = this._structuresIds.findIndex((item => element.element?.location === item || element.element?.element_type === item));
+            if (selectedId === -1) {
+                selectedId = 0;
+            }
+            const entries = this._structuresIds.map(((structure, index) => {
+                const item = {
+                    label: structure,
+                    value: index
+                };
+                return item;
+            }));
+            elementSubpane.addDropdown(selectedId, {
+                title: `resourcePack.editor.jigsaw.pane.poolSubpane.structure.title`,
+                tooltip: `resourcePack.editor.jigsaw.pane.poolSubpane.structure.tooltip`,
+                entries,
+                onChange: newValue => {
+                    this.handleTemplatePoolElementStructureChange(index, newValue);
+                }
+            });
+            elementSubpane.addNumber(element.weight ?? JigsawModeBehavior.MINIMUM_WEIGHT, {
+                title: "resourcePack.editor.jigsaw.pane.poolSubpane.weight.title",
+                min: JigsawModeBehavior.MINIMUM_WEIGHT,
+                max: JigsawModeBehavior.MAXIMUM_WEIGHT,
+                variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputField,
+                isInteger: true,
+                tooltip: "resourcePack.editor.jigsaw.pane.poolSubpane.weight.tooltip",
+                onChange: newValue => {
+                    this.handleTemplatePoolElementWeightChange(index, newValue);
+                }
+            });
+            elementSubpane.addButton(this._uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    this.handleDeleteTemplatePoolElementRequest(index);
+                }
+            }), {
+                icon: "trashCanIcon",
+                tooltip: "resourcePack.editor.jigsaw.pane.poolSubpane.delete.tooltip"
+            });
+        }
+        handleRegistryDropdownChange(newValue) {
+            this._uiSession.log.info(`Selected Jigsaw Collection: ${newValue}`);
+            const previousRegistry = this.currentRegistryName;
+            const regName = String(newValue);
+            this._currentRegFiles = this._jigsawService.getRegistryData(regName);
+            this.initializeFromRegistry(this.currentRegistryName);
+            this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawRegistrySelected, {
+                registryName: this.currentRegistryName,
+                templatePoolCount: this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool]?.length || 0,
+                previousRegistry: previousRegistry !== this.currentRegistryName ? previousRegistry : undefined
+            });
+        }
+        handleRegistryCreateRequest(name) {
+            if (name) {
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawRegistryCreationAttempted, {
+                    registryName: name,
+                    existingRegistryCount: this._regNameList.length
+                });
+                this._regNameList.push(name);
+                this._regNameDropdown.updateEntries(this._regNameList.map(((name, index) => {
+                    const item = {
+                        label: name,
+                        value: Number(index)
+                    };
+                    return item;
+                })), this._regNameList.length - 1);
+                this.initializeFromRegistry(name);
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawRegistryCreated, {
+                    registryName: name,
+                    existingRegistryCount: this._regNameList.length - 1
+                });
+            }
+        }
+        handleRegistryDeleteRequest() {
+            if (this._regNameList.length > 0) {
+                const removedIndex = this._regNameDropdown.value;
+                const registryName = this._regNameList[removedIndex];
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawRegistryDeletionAttempted, {
+                    registryName,
+                    templatePoolCount: this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool]?.length || 0
+                });
+                this._regNameList.splice(removedIndex, 1);
+                this._regNameDropdown.updateEntries(this._regNameList.map(((name, index) => {
+                    const item = {
+                        label: name,
+                        value: Number(index)
+                    };
+                    return item;
+                })), 0);
+                if (this._regNameList.length > 0) {
+                    this.initializeFromRegistry(this._regNameList[0]);
+                } else {
+                    this._currentRegFiles = {
+                        [server_editor_private_bindings_namespaceObject.JigsawJsonType.Processor]: [],
+                        [server_editor_private_bindings_namespaceObject.JigsawJsonType.Structure]: [],
+                        [server_editor_private_bindings_namespaceObject.JigsawJsonType.StructureSet]: [],
+                        [server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool]: []
+                    };
+                    this._editingTemplatePoolDropdown.updateEntries([], -1);
+                    this._generatingTemplatePoolDropdown.updateEntries([], -1);
+                    this._editingSubpane.removeSubPane(this._editingTemplatePoolSubpane);
+                }
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawRegistryDeleted, {
+                    registryName,
+                    templatePoolCount: this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool]?.length || 0
+                });
+            }
+        }
+        handleTemplatePoolDropdownChange(newValue, oldValue) {
+            this.refreshTemplatePoolEditorSubpane(newValue, oldValue);
+            const templatePoolName = this._editingTemplatePoolDropdown.getEntryByValue(newValue)?.label ?? "";
+            const elementCount = this._loadedFile ? this._loadedFile["minecraft:template_pool"].elements.length : 0;
+            this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawTemplatePoolSelected, {
+                templatePoolName,
+                elementCount,
+                registryName: this.currentRegistryName
+            });
+        }
+        handleTemplatePoolCreateRequest(templatePoolName) {
+            if (templatePoolName) {
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawTemplatePoolCreationAttempted, {
+                    templatePoolName,
+                    registryName: this.currentRegistryName,
+                    existingPoolCount: this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool]?.length || 0
+                });
+                if (this._fileChanged && this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].length > 0) {
+                    const currentFileName = this._editingTemplatePoolDropdown.getEntryByValue(this._editingTemplatePoolDropdown.value)?.label ?? "";
+                    if (currentFileName) {
+                        this._updateFile(currentFileName);
+                    }
+                }
+                const tempPool = {
+                    format_version: "1.21.20",
+                    "minecraft:template_pool": {
+                        description: {
+                            identifier: templatePoolName
+                        },
+                        elements: []
+                    }
+                };
+                this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].push({
+                    fileName: templatePoolName,
+                    fileJson: JSON.stringify(tempPool)
+                });
+                const jigsawFileNameDropdownItems = this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].map(((name, index) => {
+                    const item = {
+                        label: name.fileName,
+                        value: Number(index)
+                    };
+                    return item;
+                }));
+                const newTemplatePoolIndex = jigsawFileNameDropdownItems.length - 1;
+                this._editingTemplatePoolDropdown.updateEntries(jigsawFileNameDropdownItems, newTemplatePoolIndex);
+                this._generatingTemplatePoolDropdown.updateEntries(jigsawFileNameDropdownItems, newTemplatePoolIndex);
+                this.refreshTemplatePoolEditorSubpane(newTemplatePoolIndex, undefined);
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawTemplatePoolCreated, {
+                    templatePoolName,
+                    registryName: this.currentRegistryName,
+                    existingPoolCount: this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].length - 1
+                });
+            }
+        }
+        handleTemplatePoolDeleteRequest() {
+            if (this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].length > 0) {
+                const removedIndex = this._editingTemplatePoolDropdown.value;
+                const templatePoolName = this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool][removedIndex]?.fileName || "";
+                const elementCount = this._loadedFile ? this._loadedFile["minecraft:template_pool"].elements.length : 0;
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawTemplatePoolDeletionAttempted, {
+                    templatePoolName,
+                    registryName: this.currentRegistryName,
+                    elementCount
+                });
+                this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].splice(removedIndex, 1);
+                const jigsawFileNameDropdownItems = this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].map(((name, index) => {
+                    const item = {
+                        label: name.fileName,
+                        value: Number(index)
+                    };
+                    return item;
+                }));
+                this._editingTemplatePoolDropdown.updateEntries(jigsawFileNameDropdownItems, 0);
+                this._generatingTemplatePoolDropdown.updateEntries(jigsawFileNameDropdownItems, 0);
+                this.refreshTemplatePoolEditorSubpane(0, undefined);
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawTemplatePoolDeleted, {
+                    templatePoolName,
+                    registryName: this.currentRegistryName,
+                    elementCount
+                });
+            }
+        }
+        generateJigsaw() {
+            const startTime = Date.now();
+            if (!this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool] || this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].length === 0) {
+                this._uiSession.log.error("Cannot generate jigsaw. The registry is empty. Please create at least one Jigsaw Pool first.", {
+                    channelMask: server_editor_namespaceObject.LogChannel.Toast
+                });
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawGenerationFailed, {
+                    registryName: this.currentRegistryName,
+                    templatePoolName: "",
+                    failureReason: "invalid_pool",
+                    errorMessage: "Registry is empty - no template pools available"
+                });
+                return;
+            }
+            const templatePoolName = this._generatingTemplatePoolDropdown.getEntryByValue(this._generatingTemplatePoolDropdown.value)?.label ?? "";
+            const elementCount = this._loadedFile ? this._loadedFile["minecraft:template_pool"].elements.length : 0;
+            if (!templatePoolName) {
+                this._uiSession.log.error("Cannot generate jigsaw. No Jigsaw Pool selected.", {
+                    channelMask: server_editor_namespaceObject.LogChannel.Toast
+                });
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawGenerationFailed, {
+                    registryName: this.currentRegistryName,
+                    templatePoolName: "",
+                    failureReason: "invalid_pool",
+                    errorMessage: "No template pool selected"
+                });
+                return;
+            }
+            if (!this._props.lockJigsawSeed.value) {
+                const x = Math.random() * 64e3 - 32e3;
+                const y = Math.random() * 64e3 - 32e3;
+                const z = Math.random() * 64e3 - 32e3;
+                this._seed = {
+                    x,
+                    y,
+                    z
+                };
+            }
+            if (this._fileChanged) {
+                const updatedFileName = this._editingTemplatePoolDropdown.getEntryByValue(this._editingTemplatePoolDropdown.value)?.label ?? "";
+                this._updateFile(updatedFileName);
+            }
+            const templatePoolNames = this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].map((file => file.fileName));
+            const hasDuplicates = templatePoolNames.some(((name, index) => templatePoolNames.indexOf(name) !== index));
+            this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawGenerationAttempted, {
+                registryName: this.currentRegistryName,
+                templatePoolName,
+                startingTarget: this._props.startingTarget.value,
+                generationDepth: this._props.jigsawGenerationDepth.value,
+                horizontalSize: this._props.jigsawHorizontalSize.value,
+                bypassValidation: this._props.bypassValidation.value,
+                seedLocked: this._props.lockJigsawSeed.value,
+                templatePoolElementCount: elementCount,
+                hasDuplicateNames: hasDuplicates
+            });
+            if (hasDuplicates) {
+                this._uiSession.log.error("Cannot generate jigsaw. There are duplicate Jigsaw Pool names.", {
+                    channelMask: server_editor_namespaceObject.LogChannel.Toast
+                });
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawGenerationFailed, {
+                    registryName: this.currentRegistryName,
+                    templatePoolName,
+                    failureReason: "duplicate_names",
+                    errorMessage: "Duplicate Jigsaw Pool names found"
+                });
+                return;
+            }
+            this._fileChanged = false;
+            const empty = [];
+            this._jigsawService.setRegistryData(this.currentRegistryName, this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.Processor] ?? empty, this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.Structure] ?? empty, this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.StructureSet] ?? empty, this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool] ?? empty).then((regList => {
+                this._regNameList = regList;
+                this.updateJigsawRegistryDropdown();
+            })).catch((error => {
+                this._uiSession.log.error(`Export error : ${error}`);
+                this._regNameList = [];
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawGenerationFailed, {
+                    registryName: this.currentRegistryName,
+                    templatePoolName,
+                    failureReason: "system_error",
+                    errorMessage: error
+                });
+            }));
+            this._jigsawService.generateJigsaw(this.currentRegistryName, templatePoolName.replace("-", ":"), this._props.startingTarget.value, this._seed, this._props.jigsawGenerationDepth.value, this._props.jigsawHorizontalSize.value, !this._props.bypassValidation.value, this._uiSession.extensionContext.clipboardManager.clipboard).then((() => {
+                const executionTime = Date.now() - startTime;
+                this._uiSession.log.info(`Successfully generated jigsaw and wrote to clipboard.`);
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawGenerationSucceeded, {
+                    registryName: this.currentRegistryName,
+                    templatePoolName,
+                    generationDepth: this._props.jigsawGenerationDepth.value,
+                    seedLocked: this._props.lockJigsawSeed.value,
+                    executionTimeMs: executionTime
+                });
+                if (!this._inVoidWorld) {
+                    this._setupTemplateEditingEnvironment();
+                    this._paneChangedHandle = server_namespaceObject.system.runInterval((() => {
+                        const activeToolId = this._uiSession.toolRail.getSelectedToolId();
+                        const isAnyToolActive = activeToolId !== undefined && activeToolId.length > 0;
+                        if (isAnyToolActive) {
+                            this._leaveVoidWorld();
+                            if (this._paneChangedHandle !== undefined) {
+                                server_namespaceObject.system.clearRun(this._paneChangedHandle);
+                            }
+                        }
+                    }), server_namespaceObject.TicksPerSecond);
+                }
+            })).catch((error => {
+                this._uiSession.log.error(`Jigsaw Generation error : ${error}`);
+                this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawGenerationFailed, {
+                    registryName: this.currentRegistryName,
+                    templatePoolName,
+                    failureReason: "system_error",
+                    errorMessage: error
+                });
+            }));
+        }
+        _updateFile(targetFile) {
+            const updatedFileIndex = this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool].findIndex((item => item.fileName === targetFile));
+            this._loadedFile["minecraft:template_pool"].elements.forEach(((element, index) => {
+                if (element.element.location === "minecraft:empty_pool_element" && element.element.location !== undefined) {
+                    const emptyElement = {
+                        element_type: "minecraft:empty_pool_element"
+                    };
+                    this._loadedFile["minecraft:template_pool"].elements[index].element = emptyElement;
+                }
+            }));
+            this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool][updatedFileIndex].fileJson = JSON.stringify(this._loadedFile);
+        }
+        handleAddNewTemplatePoolElement() {
+            const emptyElement = {
+                element_type: "minecraft:empty_pool_element"
+            };
+            const element = {
+                element: emptyElement,
+                weight: JigsawModeBehavior.MINIMUM_WEIGHT
+            };
+            const size = this._loadedFile["minecraft:template_pool"].elements.push(element);
+            this._addTemplatePoolElementSection(element, size - 1);
+            this._editingTemplatePoolSubpane.addDivider();
+            this._fileChanged = true;
+            this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawTemplatePoolElementAdded, {
+                templatePoolName: this._editingTemplatePoolDropdown.getEntryByValue(this._editingTemplatePoolDropdown.value)?.label ?? "",
+                structureLocation: "",
+                weight: 1,
+                totalElements: size,
+                registryName: this.currentRegistryName
+            });
+        }
+        handleTemplatePoolElementStructureChange(index, newValue) {
+            const structureName = this._structuresIds[newValue];
+            if (structureName === "minecraft:empty_pool_element") {
+                const emptyElement = {
+                    element_type: "minecraft:empty_pool_element"
+                };
+                this._loadedFile["minecraft:template_pool"].elements[index].element = emptyElement;
+            } else {
+                const singleElement = {
+                    location: structureName,
+                    element_type: "minecraft:single_pool_element"
+                };
+                this._loadedFile["minecraft:template_pool"].elements[index].element = singleElement;
+            }
+            this._fileChanged = true;
+            this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawTemplatePoolElementModified, {
+                templatePoolName: this._editingTemplatePoolDropdown.getEntryByValue(this._editingTemplatePoolDropdown.value)?.label ?? "",
+                changeType: "structure_changed",
+                newStructureLocation: this._structuresIds[newValue],
+                registryName: this.currentRegistryName
+            });
+        }
+        handleTemplatePoolElementWeightChange(index, newValue) {
+            this._loadedFile["minecraft:template_pool"].elements[index].weight = newValue;
+            this._fileChanged = true;
+            this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawTemplatePoolElementModified, {
+                templatePoolName: this._editingTemplatePoolDropdown.getEntryByValue(this._editingTemplatePoolDropdown.value)?.label ?? "",
+                changeType: "weight_changed",
+                newWeight: newValue,
+                registryName: this.currentRegistryName
+            });
+        }
+        handleDeleteTemplatePoolElementRequest(index) {
+            const elementToDelete = this._loadedFile["minecraft:template_pool"].elements[index];
+            const structureLocation = elementToDelete.element?.location || elementToDelete.element?.element_type || "";
+            this.telemetryManager.fireTelemetryEvent(JigsawTelemetry.JigsawTemplatePoolElementDeleted, {
+                templatePoolName: this._editingTemplatePoolDropdown.getEntryByValue(this._editingTemplatePoolDropdown.value)?.label ?? "",
+                structureLocation,
+                weight: elementToDelete.weight || JigsawModeBehavior.MINIMUM_WEIGHT,
+                remainingElements: this._loadedFile["minecraft:template_pool"].elements.length - 1,
+                registryName: this.currentRegistryName
+            });
+            this._loadedFile["minecraft:template_pool"].elements.splice(index, 1);
+            this._fileChanged = true;
+            this.refreshTemplatePoolEditorSubpane(this._editingTemplatePoolDropdown.value, this._editingTemplatePoolDropdown.value);
+        }
+        refreshStructureIds() {
+            const structs = this._uiSession.extensionContext.structureManager.searchStructures({
+                sources: [ server_editor_namespaceObject.StructureSource.EditorProject ]
+            });
+            this._structuresIds = structs.map((structure => structure.structureFullName.replace(":", "/")));
+            this._structuresIds.unshift("minecraft:empty_pool_element");
+        }
+        _setupTemplateEditingEnvironment() {
+            this._inVoidWorld = true;
+            this._uiSession.toolRail.setSelectedToolId(undefined);
+            const originalCursorProperties = this._uiSession.extensionContext.cursor.getProperties();
+            const newCursorProperties = this._uiSession.extensionContext.cursor.getProperties();
+            newCursorProperties.visible = false;
+            this._uiSession.extensionContext.cursor.setProperties(newCursorProperties);
+            this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableTerrainRendering, true);
+            this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableEntityRendering, false);
+            this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableWeatherRendering, true);
+            this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableParticleRendering, true);
+            this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableBlockEntityRendering, true);
+            requestWeatherChange(`EditorJigsaw-${this._uiSession.extensionContext.player.id}`, server_namespaceObject.WeatherType.Clear);
+            requestTimeOfDayChange(`EditorJigsaw-${this._uiSession.extensionContext.player.id}`, server_namespaceObject.TimeOfDay.Sunrise);
+            const oldPlayerLocation = this._uiSession.extensionContext.player.location;
+            const oldPlayerRotation = this._uiSession.extensionContext.player.getRotation();
+            this._uiSession.extensionContext.player.teleport({
+                x: 0,
+                y: 5,
+                z: 24
+            }, {
+                rotation: {
+                    x: 10,
+                    y: 180
+                },
+                checkForBlocks: false,
+                keepVelocity: false
+            });
+            const gridWidget = this._widgetGroup.createWidget({
+                x: 0,
+                y: 0,
+                z: 0
+            }, {
+                selectable: false,
+                visible: true
+            });
+            gridWidget.addGridComponent("grid", {
+                color: {
+                    red: .5,
+                    green: .5,
+                    blue: 0,
+                    alpha: .5
+                },
+                offset: {
+                    x: -8,
+                    y: 0,
+                    z: -8
+                },
+                gridSize: {
+                    x: 1,
+                    y: 1
+                },
+                gridCount: {
+                    x: 17,
+                    y: 17
+                }
+            });
+            gridWidget.addClipboardComponent("JigsawPreview", this._uiSession.extensionContext.clipboardManager.clipboard, {
+                showOutline: false,
+                hullColor: {
+                    red: 1,
+                    green: 1,
+                    blue: 1,
+                    alpha: 1
+                },
+                highlightHullColor: {
+                    red: 0,
+                    green: 0,
+                    blue: 0,
+                    alpha: 0
+                },
+                highlightOutlineColor: {
+                    red: 0,
+                    green: 0,
+                    blue: 0,
+                    alpha: 0
+                }
+            });
+            this._leaveVoidWorld = () => {
+                restoreWeatherChange(`EditorJigsaw-${this._uiSession.extensionContext.player.id}`);
+                restoreTimeOfDayChange(`EditorJigsaw-${this._uiSession.extensionContext.player.id}`);
+                this._widgetGroup.deleteWidget(gridWidget);
+                this._uiSession.extensionContext.player.teleport(oldPlayerLocation, {
+                    rotation: oldPlayerRotation,
+                    checkForBlocks: false,
+                    keepVelocity: false
+                });
+                this._uiSession.extensionContext.cursor.setProperties(originalCursorProperties);
+                this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableTerrainRendering, false);
+                this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableEntityRendering, false);
+                this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableWeatherRendering, false);
+                this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableParticleRendering, false);
+                this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableBlockEntityRendering, false);
+                this._inVoidWorld = false;
+            };
+        }
+    }
+    JigsawModeBehavior.BEHAVIOR_NAME = "JigsawMode";
+    JigsawModeBehavior.TEMPLATE_POOL = "Template Pool";
+    JigsawModeBehavior.MINIMUM_WEIGHT = 1;
+    JigsawModeBehavior.MAXIMUM_WEIGHT = 20;
+    JigsawModeBehavior.MINIMUM_DEPTH = 1;
+    JigsawModeBehavior.MAXIMUM_DEPTH = 20;
+    JigsawModeBehavior.MINIMUM_HORIZONTAL_SIZE = 16;
+    JigsawModeBehavior.MAXIMUM_HORIZONTAL_SIZE = 1024;
     function createCoreUI(uiSession) {
         if (!uiSession.scratchStorage) {
             throw new Error("Core UI initialization order incorrect");
@@ -28592,6 +32367,7 @@ var __webpack_exports__ = {};
             const locateTool = new LocateTool(uiSession, uiSession.scratchStorage.coreMenuItems.worldOptions);
             const timeOfDay = new TimeOfDayBehavior(uiSession, uiSession.scratchStorage.coreMenuItems.worldOptions);
             const vibrantVisuals = new VibrantVisualsBehavior(uiSession);
+            const jigsawMode = new JigsawModeBehavior(uiSession);
             const weather = new WeatherBehavior(uiSession, uiSession.scratchStorage.coreMenuItems.worldOptions);
             addDimensionsMenuItems(uiSession, uiSession.scratchStorage.coreMenuItems.worldOptions);
             const exportBehavior = new ExportBehavior(uiSession, uiSession.scratchStorage.coreMenuItems.file);
@@ -28604,6 +32380,7 @@ var __webpack_exports__ = {};
             const workbench = new WorkbenchBehavior(uiSession);
             const farmGeneratorTool = new FarmGeneratorTool(uiSession);
             const blockInspector = new BlockInspectorBehavior(uiSession);
+            const scaleTool = new ScaleToolBehavior(uiSession);
             const realmsUploadPane = new RealmsUpload(uiSession, uiSession.scratchStorage.coreMenuItems.file);
             const viewSettings = new SettingsBehavior(uiSession, uiSession.scratchStorage.coreMenuItems.file);
             const orbitLocation = new OrbitLocationBehavior(uiSession);
@@ -28618,7 +32395,7 @@ var __webpack_exports__ = {};
                 tooltip: "resourcePack.editor.menuBar.file.saveAndExit.tooltip"
             }, saveAndExitAction);
             uiSession.log.debug("CoreEditor Extension Initialized\n");
-            return [ selectionBehavior, uiSession.scratchStorage.deleteBehavior, uiSession.scratchStorage.playerCountBehavior, uiSession.scratchStorage.pauseBehavior, uiSession.scratchStorage.newPastePreview, uiSession.scratchStorage.copyPasteBehavior, transactions, playtest, navigationStack, line, summonTool, timeOfDay, navigation, weather, vibrantVisuals, rulerTool, exportBehavior, brushPainter, locateTool, smartFill, terrain, extrudeTool, repeaterTool, farmGeneratorTool, viewSettings, workbench, blockInspector, entityInspector, realmsUploadPane, orbitLocation, pencilTool ];
+            return [ selectionBehavior, uiSession.scratchStorage.deleteBehavior, uiSession.scratchStorage.playerCountBehavior, uiSession.scratchStorage.pauseBehavior, uiSession.scratchStorage.newPastePreview, uiSession.scratchStorage.copyPasteBehavior, transactions, playtest, navigationStack, line, summonTool, timeOfDay, navigation, weather, vibrantVisuals, jigsawMode, rulerTool, exportBehavior, brushPainter, locateTool, smartFill, terrain, extrudeTool, repeaterTool, farmGeneratorTool, viewSettings, workbench, blockInspector, entityInspector, realmsUploadPane, orbitLocation, pencilTool, scaleTool ];
         }), (uiSession => {
             uiSession.log.debug(`Shutting down ${uiSession.extensionContext.extensionInfo.name} Extension\n`);
             if (uiSession.scratchStorage) {

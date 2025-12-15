@@ -74,7 +74,13 @@ world.afterEvents.playerSpawn.subscribe(e => {
 
 let btns = [];
 
-
+system.runInterval(() => {
+    for(const player of world.getPlayers()) {
+        system.run(() => {
+            playerStorage.saveData(player)
+        })
+    }
+}, 2)
 
 world.beforeEvents.itemUse.subscribe(e => {
     for (const bind of binding.db.findDocuments()) {
