@@ -15,18 +15,18 @@
 		}
 	},
 	"header": {
-		"name": "§b§lFeather Essentials §r§e- §bv0.5",
+		"name": "§b§lFeather Essentials §r§e- §bv0.6",
 		"description": "Feather Essentials",
 		"min_engine_version": [
 			1,
 			21,
-			30
+			120
 		],
 		"uuid": "0b9d667d-dc6b-4c49-800d-cc58bf93f2d9",
 		"version": [
 			1,
 			0,
-			29
+			36
 		]
 	},
 	"modules": [
@@ -36,7 +36,7 @@
 			"version": [
 				1,
 				0,
-				29
+				36
 			]
 		}
 	]

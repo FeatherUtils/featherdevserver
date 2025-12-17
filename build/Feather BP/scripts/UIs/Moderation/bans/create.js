@@ -8,7 +8,7 @@ import playerStorage from "../../../Libraries/playerStorage";
 import icons from "../../../Modules/icons";
 import moment from '../../../Libraries/moment'
 
-uiManager.addUI(config.uinames.moderation.bans.create,'add ban cuz funny :3',(player)=>{
+uiManager.addUI(config.uinames.moderation.bans.create,'add ban cuz funny :3',(player,name='')=>{
     let form = new ActionForm();
     form.title(`${consts.tag}§rCreate ban`)
     form.button(`§cBack\n§7Go back to ban ui`, null, (player) => {
@@ -19,7 +19,7 @@ uiManager.addUI(config.uinames.moderation.bans.create,'add ban cuz funny :3',(pl
         let plr = playerStorage.getPlayerByID(plr2)
         if(plr.name === player.name) continue;
         if(moderation.Database.findFirst({player:plr2,type:'BAN'})) continue;
-        if(plr.tags.includes('admin')) continue;
+        if(plr.tags.includes('moderationexempt')) continue;
         form.button(`§c${plr.name}\n§7Ban this player`, null, (player) => {
             let form2 = new ModalFormData();
             form2.title(`§cBan ${plr.name}`)
