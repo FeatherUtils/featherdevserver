@@ -1,25 +1,25 @@
 Dedicated_Server.txt
-[2025-12-29 18:20:13:784 INFO] Starting Server
-[2025-12-29 18:20:13:784 INFO] Version: 1.21.130.4
-[2025-12-29 18:20:13:784 INFO] Session ID: 1cbf2359-c7c9-40d9-8072-91c4cac8b71c
-[2025-12-29 18:20:13:784 INFO] Build ID: 39448927
-[2025-12-29 18:20:13:784 INFO] Branch: r/21_u13
-[2025-12-29 18:20:13:784 INFO] Commit ID: e672f33702ce73fed7df91a6530bc79c4f8ba656
-[2025-12-29 18:20:13:784 INFO] Configuration: Publish
-[2025-12-29 18:20:13:785 INFO] Level Name: Bedrock level
-[2025-12-29 18:20:13:786 INFO] No CDN config file found at: cdn_config.json for dedicated server
-[2025-12-29 18:20:13:786 INFO] Game mode: 1 Creative
-[2025-12-29 18:20:13:786 INFO] Difficulty: 1 EASY
-[2025-12-29 18:20:13:787 INFO] Content logging to console is enabled.
-[2025-12-29 18:20:14:288 INFO] Experiment(s) active: gtst
-[2025-12-29 18:20:14:288 INFO] Opening level 'worlds/Bedrock level/db'
-[2025-12-29 18:20:14:349 WARN] Configured pack (id: d796ba58-a13b-4a75-90c2-0691ddcddb8b, version: 0.1.0) was not found and was ignored
-[2025-12-29 18:20:14:349 WARN] Configured pack (id: a9d375d4-2334-4efc-999b-2ffeee7796b4, version: 0.1.0) was not found and was ignored
-[2025-12-29 18:20:14:402 INFO] Pack Stack - [00] §b§lFeather Essentials §e- §bv0.6.1 (id: 0364746b-2522-4e9c-94b5-32c15d30fe44, version: 1.0.31) @ development_behavior_packs/Feather BP
-[2025-12-29 18:20:14:402 INFO] Pack Stack - [01] Feather Communications Testing (id: 5673aba8-e4b5-4fa1-bf33-103416af563d, version: 1.0.0) @ development_behavior_packs/asd
-[2025-12-29 18:20:14:460 ERROR] [Scripting] Plugin [Feather Communications Testing - 1.0.0] - failed to create context.
+[2025-12-29 18:27:21:139 INFO] Starting Server
+[2025-12-29 18:27:21:139 INFO] Version: 1.21.130.4
+[2025-12-29 18:27:21:139 INFO] Session ID: 7d5ea4b0-36cf-4cdb-a7cf-089455e1073d
+[2025-12-29 18:27:21:139 INFO] Build ID: 39448927
+[2025-12-29 18:27:21:139 INFO] Branch: r/21_u13
+[2025-12-29 18:27:21:139 INFO] Commit ID: e672f33702ce73fed7df91a6530bc79c4f8ba656
+[2025-12-29 18:27:21:139 INFO] Configuration: Publish
+[2025-12-29 18:27:21:139 INFO] Level Name: Bedrock level
+[2025-12-29 18:27:21:140 INFO] No CDN config file found at: cdn_config.json for dedicated server
+[2025-12-29 18:27:21:140 INFO] Game mode: 1 Creative
+[2025-12-29 18:27:21:140 INFO] Difficulty: 1 EASY
+[2025-12-29 18:27:21:140 INFO] Content logging to console is enabled.
+[2025-12-29 18:27:21:561 INFO] Experiment(s) active: gtst
+[2025-12-29 18:27:21:561 INFO] Opening level 'worlds/Bedrock level/db'
+[2025-12-29 18:27:21:581 WARN] Configured pack (id: d796ba58-a13b-4a75-90c2-0691ddcddb8b, version: 0.1.0) was not found and was ignored
+[2025-12-29 18:27:21:581 WARN] Configured pack (id: a9d375d4-2334-4efc-999b-2ffeee7796b4, version: 0.1.0) was not found and was ignored
+[2025-12-29 18:27:21:622 INFO] Pack Stack - [00] §b§lFeather Essentials §e- §bv0.6.1 (id: 0364746b-2522-4e9c-94b5-32c15d30fe44, version: 1.0.31) @ development_behavior_packs/Feather BP
+[2025-12-29 18:27:21:622 INFO] Pack Stack - [01] Feather Communications Testing (id: 5673aba8-e4b5-4fa1-bf33-103416af563d, version: 1.0.0) @ development_behavior_packs/asd
+[2025-12-29 18:27:21:644 ERROR] [Scripting] Plugin [Feather Communications Testing - 1.0.0] - failed to create context.
 
-[2025-12-29 18:20:14:460 ERROR] [Scripting] Plugin [Feather Communications Testing] - module [Feather Communications Testing - 1.0.0] requested invalid version [2.2.0-beta] of [@minecraft/server].
+[2025-12-29 18:27:21:644 ERROR] [Scripting] Plugin [Feather Communications Testing] - module [Feather Communications Testing - 1.0.0] requested invalid version [2.2.0-beta] of [@minecraft/server].
 
 Current [beta] version is [2.5.0-beta].
 
@@ -31,28 +31,28 @@ Available versions:
 3.0.0-alpha
 
 
-[2025-12-29 18:20:14:547 ERROR] [Scripting] Plugin [Feather Communications Testing - 1.0.0] - run failed, no runtime or context available.
+[2025-12-29 18:27:21:703 ERROR] [Scripting] Plugin [Feather Communications Testing - 1.0.0] - run failed, no runtime or context available.
 
-[2025-12-29 18:20:15:324 INFO] IPv4 supported, port: 19132: Used for gameplay and LAN discovery
-[2025-12-29 18:20:15:324 INFO] IPv6 supported, port: 19133: Used for gameplay
-[2025-12-29 18:20:15:350 INFO] Waiting for Minecraft services...
-[2025-12-29 18:20:15:450 INFO] Server started.
-[2025-12-29 18:20:15:450 INFO] ================ TELEMETRY MESSAGE ===================
-[2025-12-29 18:20:15:450 INFO] Server Telemetry is currently not enabled. 
-[2025-12-29 18:20:15:450 INFO] Enabling this telemetry helps us improve the game.
-[2025-12-29 18:20:15:450 INFO] 
-[2025-12-29 18:20:15:450 INFO] To enable this feature, add the line 'emit-server-telemetry=true'
-[2025-12-29 18:20:15:450 INFO] to the server.properties file in the handheld/src-server directory
-[2025-12-29 18:20:15:450 INFO] ======================================================
-[2025-12-29 18:20:15:451 WARN] [Scripting] Custom Command alias [transfer] already in use. Required to use full name [feather:transfer].
+[2025-12-29 18:27:22:306 INFO] IPv4 supported, port: 19132: Used for gameplay and LAN discovery
+[2025-12-29 18:27:22:306 INFO] IPv6 supported, port: 19133: Used for gameplay
+[2025-12-29 18:27:22:330 INFO] Waiting for Minecraft services...
+[2025-12-29 18:27:22:432 INFO] Server started.
+[2025-12-29 18:27:22:432 INFO] ================ TELEMETRY MESSAGE ===================
+[2025-12-29 18:27:22:432 INFO] Server Telemetry is currently not enabled. 
+[2025-12-29 18:27:22:432 INFO] Enabling this telemetry helps us improve the game.
+[2025-12-29 18:27:22:432 INFO] 
+[2025-12-29 18:27:22:432 INFO] To enable this feature, add the line 'emit-server-telemetry=true'
+[2025-12-29 18:27:22:432 INFO] to the server.properties file in the handheld/src-server directory
+[2025-12-29 18:27:22:432 INFO] ======================================================
+[2025-12-29 18:27:22:434 WARN] [Scripting] Custom Command alias [transfer] already in use. Required to use full name [feather:transfer].
 
-[2025-12-29 18:20:17:628 INFO] [Json] minecraft:cat | minecraft:behavior.nearest_attackable_target | minecraft:cat | For entity cat, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+[2025-12-29 18:27:24:498 INFO] [Json] minecraft:cat | minecraft:behavior.nearest_attackable_target | minecraft:cat | For entity cat, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
 
-[2025-12-29 18:20:17:680 INFO] [Json] minecraft:cat | minecraft:behavior.nearest_attackable_target | minecraft:cat | For entity cat, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+[2025-12-29 18:27:24:551 INFO] [Json] minecraft:cat | minecraft:behavior.nearest_attackable_target | minecraft:cat | For entity cat, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
 
-[2025-12-29 18:20:17:681 INFO] [Json] minecraft:cat | minecraft:behavior.nearest_attackable_target | minecraft:cat | For entity cat, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+[2025-12-29 18:27:24:559 INFO] [Json] minecraft:cat | minecraft:behavior.nearest_attackable_target | minecraft:cat | For entity cat, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
 
-[2025-12-29 18:20:19:640 INFO] Player connected: ARandomFern, xuid: 2535409281343117
-[2025-12-29 18:20:51:782 INFO] [Json] minecraft:frog | minecraft:behavior.nearest_attackable_target | minecraft:frog | For entity frog, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+[2025-12-29 18:27:34:315 INFO] Player connected: ARandomFern, xuid: 2535409281343117
+[2025-12-29 18:28:02:046 INFO] [Json] minecraft:frog | minecraft:behavior.nearest_attackable_target | minecraft:frog | For entity frog, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
 
-[2025-12-29 18:20:52:148 INFO] [Json
+[2025-12-29 18:28:02:259 INFO] [Json
