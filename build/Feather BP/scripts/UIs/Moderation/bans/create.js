@@ -14,7 +14,7 @@ uiManager.addUI(config.uinames.moderation.bans.create,'add ban cuz funny :3',(pl
     form.button(`§cBack\n§7Go back to ban ui`, null, (player) => {
         uiManager.open(player,config.uinames.moderation.bans.root)
     })
-    let players = playerStorage.searchPlayersByName('')
+    let players = playerStorage.searchPlayersByName(name)
     for(const plr2 of players) {
         let plr = playerStorage.getPlayerByID(plr2)
         if(plr.name === player.name) continue;

@@ -140,6 +140,26 @@ export default {
             root: 'bounty',
             add: 'bounty_add'
         },
+        repeatedBroadcasts: {
+            root: 'repeated_broadcasts',
+            create: 'repeated_broadcasts_create',
+            edit: 'repeated_broadcasts_edit'
+        },
+        leaderboards: {
+            root: 'leaderboards_root',
+            create: 'leaderboards_create',
+            edit: 'leaderboards_edit',
+            spawn: 'leaderboards_spawn'
+        },
+        codes: {
+            root: 'codes | Codes',
+            admin: 'codes_admin | Codes/Admin',
+            create: 'codes_create | Codes/Create',
+            manage: 'codes_manage | Codes/Manage',
+            details: 'codes_details | Codes/Details',
+            addAction: 'codes_addaction | Codes/AddAction',
+            redeem: 'codes_redeem | Codes/Redeem'
+        },
         shop: {
             root: 'shop_root', // d
             addCategory: 'shop_addCategory', // d
@@ -154,15 +174,21 @@ export default {
             search: 'plrmgmnt_search',
             view: 'plrmgmnt_view'
         },
-        warpManagement: 'warpmgmnt'
+        warpManagement: 'warpmgmnt',
+        permissions: {
+            root: 'permissions',
+            edit: 'permissions_editrole',
+            editPermissions: 'permissions_editrole_permissions',
+            create: 'permissions_createrole'
+        },
     },
     info: {
         name: 'Feather Essentials',
         abName: 'Feather',
-        release: 'Stable',
-        version: [0, 6],
+        release: 'Redstone',
+        version: [7],
         versionString() {
-            return `${this.release} ${this.version.join('.')}`;
+            return `${this.release}`;
         },
         defaultChatRankFormat: `§r<bc>[§r{{joined_ranks}}§r<bc>]§r §r<nc><name> §r<bc><arrow> §r<cc><msg>`,
     },
@@ -182,7 +208,23 @@ export default {
         {perm:'misc_settings',display:'Misc Settings'},
         {perm:'bans',display:'Bans'},
         {perm:'mute',display:'Mute'},
-        {perm:'warn',display:'Warn'}
+        {perm:'warn',display:'Warn'},
+        {perm:'plrmgmnt',display:'Player Management'},
+        {perm:'codes',display:'Codes (admin)'},
+        {perm:'bypassAntiSpam',display:'Bypass Anti Spam'},
+        {perm:'sidebar_editor',display:'Sidebar Editor'},
+        {perm:'events',display:'Events'},
+        {perm:'voting_admin',display:'Voting Admin'},
+        {perm:'crf',display:'Edit Chat Rank format'},
+        {perm:'platform_settings',display:'Platform Settings'},
+        {perm:'economy',display:'Economy'},
+        {perm:'warps',display:'Warp Management'},
+        {perm:'clan_settings',display:'Clan Settings'},
+        {perm:'repbroad',display:'Repeated Broadcasts'},
+        {perm:'leaderboards',display:'Leaderboards'},
+        {perm:'afkkicksettings',display:'AFK Kick Settings'},
+        {perm:'homesettings',display:"Home Settings"},
+        {perm:'antiSpamSettings',display:'Anti Spam Settings'}
     ],
     credits: [
         {name:'Isabella (isabelladakitty)', description:'Main contributor/Lead dev/Founder'},
