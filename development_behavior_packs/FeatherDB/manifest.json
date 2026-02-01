@@ -1,0 +1,56 @@
+{
+  "format_version": 2,
+  "metadata": {
+    "authors": [
+      "ARandomFern",
+      "IsabellaDaKitty"
+    ]
+  },
+  "header": {
+    "name": "FeatherDB Development & Testing",
+    "description": "FeatherDB",
+    "min_engine_version": [
+      1,
+      20,
+      60
+    ],
+    "uuid": "2fe076e5-1089-4472-bc91-29fe20172ed9",
+    "version": [
+      1,
+      0,
+      0
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "aabaddeb-58a5-4b61-8611-127222a85e7a",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "uuid": "8885da7d-9f04-438f-a38f-6e5de5878b8a",
+      "entry": "scripts/main.js",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "beta"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "beta"
+    }
+  ]
+}

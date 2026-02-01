@@ -1,0 +1,57 @@
+{
+  "format_version": 2,
+  "metadata": {
+    "authors": [
+      "IsabellaDaKitty",
+      "ARandomFern"
+    ]
+  },
+  "header": {
+    "name": "Feather Lifesteal",
+    "description": "Lifesteal plugin for Feather Essentials",
+    "min_engine_version": [
+      1,
+      21,
+      120
+    ],
+    "uuid": "265b4e23-a3fa-4a5d-87b2-491b89ebdb3a",
+    "version": [
+      1,
+      0,
+      0
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "21c84637-fe3d-4e92-b294-7d7ba40f3bcf",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "uuid": "a233843a-49eb-47e8-b9d8-93c7e00f994c",
+      "entry": "scripts/index.js",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "capabilities": ["script_eval"],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "beta"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "beta"
+    }
+  ]
+}

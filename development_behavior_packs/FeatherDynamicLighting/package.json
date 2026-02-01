@@ -1,0 +1,20 @@
+{
+  "name": "featherdynamiclighting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --format=esm --outfile=scripts/index.js --external:@minecraft/server --external:@minecraft/server-ui --external:@minecraft/server-admin",
+    "watch": "esbuild src/index.js --bundle --format=esm --outfile=scripts/index.js --watch --external:@minecraft/server --external:@minecraft/server-ui --external:@minecraft/server-admin"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.27.2"
+  },
+  "dependencies": {
+    "@minecraft/server": "^2.5.0-beta.1.21.130-stable",
+    "@minecraft/server-ui": "^2.1.0-beta.1.21.130-stable"
+  }
+}

@@ -5,6 +5,7 @@ import modules from '../../Modules/modules'
 import { translate } from '../../translate'
 import preview from '../../preview'
 import { system, world } from '@minecraft/server'
+import {commands} from '../../Modules/commands'
 import { consts } from '../../cherryUIConsts'
 
 uiManager.addUI(config.uinames.config.modules, 'config modules', (player) => {
@@ -19,10 +20,13 @@ uiManager.addUI(config.uinames.config.modules, 'config modules', (player) => {
     form.toggle('/vote', {defaultValue: modules.get('vote')})
     form.toggle('/bounty', {defaultValue: modules.get('bounty')})
     form.toggle('/redeem', {defaultValue: modules.get('redeem')})
+    form.toggle('/rtp', {defaultValue: modules.get('rtp')})
+    form.toggle(modules.get('commandPrefix') + 'playershop', {defaultValue: modules.get('playershop')})
+    form.textField('Prefix','!', {defaultValue: modules.get('commandPrefix')})
     form.dropdown(`${translate(config.lang.config.modules.lang)}`, langs.map(_=>_.name), {defaultValueIndex: langs.findIndex(_=>_.val==modules.get('language'))})
     form.show(player).then((res) => {
         if(res.canceled) return uiManager.open(player, config.uinames.config.root);
-        let[cr,dev,pay,homes,nick,vote,bounty,redeem,l] = res.formValues
+        let[cr,dev,pay,homes,nick,vote,bounty,redeem,rtp,playershop,prefix,l] = res.formValues
         let lang = langs[l]
         modules.set('devMode', dev)
         modules.set('cr', cr)
@@ -33,6 +37,15 @@ uiManager.addUI(config.uinames.config.modules, 'config modules', (player) => {
         modules.set('bounty', bounty)
         modules.set('redeem', redeem)
         modules.set('language',lang.val)
+        modules.set('rtp',rtp)
+        modules.set('playershop',playershop)
+        if(!prefix) player.error('Enter something in the prefix field! It was set to !.')
+        try {
+            commands.updatePrefix(prefix ?? '!')
+        } catch (e) {
+            commands.updatePrefix('!')
+            player.error(e.message)
+        }
         system.run(() => {uiManager.open(player, config.uinames.config.root)})
     })
 })

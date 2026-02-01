@@ -1,0 +1,55 @@
+{
+  "format_version": 2,
+  "metadata": {
+    "authors": [
+      "IsabellaDaKitty"
+    ]
+  },
+  "header": {
+    "name": "Feather Dynamic Lighting",
+    "description": "Dynamic Lighting while holding a soul torch, torch, lantern, redstone torch, soul latern.",
+    "min_engine_version": [
+      1,
+      20,
+      60
+    ],
+    "uuid": "271661df-2a89-4e29-b803-06d1554f153c",
+    "version": [
+      1,
+      0,
+      0
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "21ec4bc4-a985-47b2-8f1f-82657cf39423",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "uuid": "77391fbf-5b94-42bc-b173-fb537d67e51c",
+      "entry": "scripts/index.js",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "beta"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "beta"
+    }
+  ]
+}

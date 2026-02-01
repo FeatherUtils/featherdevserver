@@ -1,0 +1,29 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "featherlifesteal:apple_of_life"
+    },
+    "tags": ["crafting_table"],
+    "pattern": [
+      "I#I",
+      "#A#",
+      "I#I"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:diamond_block"
+      },
+      "#": {
+          "item": "minecraft:ancient_debris"
+      },
+      "A": {
+        "item": "minecraft:enchanted_golden_apple"
+      }
+    },
+    "result": {
+      "item": "featherlifesteal:apple_of_life",
+      "count": 1
+    }
+  }
+}

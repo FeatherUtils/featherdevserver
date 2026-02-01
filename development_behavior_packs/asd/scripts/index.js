@@ -7,5 +7,5 @@ system.run(async () => {
     let btn = JSON.stringify(button)
     await system.waitTicks(10)
     console.log(btn)
-    dim.runCommand(`scriptevent feather:pushToConfig ${btn}`)
+    // dim.runCommand(`scriptevent feather:pushToConfig ${btn}`)
 })

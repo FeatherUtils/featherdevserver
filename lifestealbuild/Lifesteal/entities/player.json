@@ -1,0 +1,2203 @@
+{
+    "format_version": "1.21.0",
+    "minecraft:entity": {
+        "description": {
+            "identifier": "minecraft:player",
+            "spawn_category": "creature",
+            "is_spawnable": false,
+            "is_summonable": false,
+            "properties": {
+                "lifesteal:health": {
+                    "range": [0, 200],
+                    "default": "(10.0)",
+                    "type": "int"
+                }
+            }
+        },
+        "component_groups": {
+            "lifesteal:health-1": {
+                "minecraft:health": {
+                    "max": 2
+                }
+            },
+            "lifesteal:health-2": {
+                "minecraft:health": {
+                    "max": 4
+                }
+            },
+            "lifesteal:health-3": {
+                "minecraft:health": {
+                    "max": 6
+                }
+            },
+            "lifesteal:health-4": {
+                "minecraft:health": {
+                    "max": 8
+                }
+            },
+            "lifesteal:health-5": {
+                "minecraft:health": {
+                    "max": 10
+                }
+            },
+            "lifesteal:health-6": {
+                "minecraft:health": {
+                    "max": 12
+                }
+            },
+            "lifesteal:health-7": {
+                "minecraft:health": {
+                    "max": 14
+                }
+            },
+            "lifesteal:health-8": {
+                "minecraft:health": {
+                    "max": 16
+                }
+            },
+            "lifesteal:health-9": {
+                "minecraft:health": {
+                    "max": 18
+                }
+            },
+            "lifesteal:health-10": {
+                "minecraft:health": {
+                    "max": 20
+                }
+            },
+            "lifesteal:health-11": {
+                "minecraft:health": {
+                    "max": 22
+                }
+            },
+            "lifesteal:health-12": {
+                "minecraft:health": {
+                    "max": 24
+                }
+            },
+            "lifesteal:health-13": {
+                "minecraft:health": {
+                    "max": 26
+                }
+            },
+            "lifesteal:health-14": {
+                "minecraft:health": {
+                    "max": 28
+                }
+            },
+            "lifesteal:health-15": {
+                "minecraft:health": {
+                    "max": 30
+                }
+            },
+            "lifesteal:health-16": {
+                "minecraft:health": {
+                    "max": 32
+                }
+            },
+            "lifesteal:health-17": {
+                "minecraft:health": {
+                    "max": 34
+                }
+            },
+            "lifesteal:health-18": {
+                "minecraft:health": {
+                    "max": 36
+                }
+            },
+            "lifesteal:health-19": {
+                "minecraft:health": {
+                    "max": 38
+                }
+            },
+            "lifesteal:health-20": {
+                "minecraft:health": {
+                    "max": 40
+                }
+            },
+            "lifesteal:health-21": {
+                "minecraft:health": {
+                    "max": 42
+                }
+            },
+            "lifesteal:health-22": {
+                "minecraft:health": {
+                    "max": 44
+                }
+            },
+            "lifesteal:health-23": {
+                "minecraft:health": {
+                    "max": 46
+                }
+            },
+            "lifesteal:health-24": {
+                "minecraft:health": {
+                    "max": 48
+                }
+            },
+            "lifesteal:health-25": {
+                "minecraft:health": {
+                    "max": 50
+                }
+            },
+            "lifesteal:health-26": {
+                "minecraft:health": {
+                    "max": 52
+                }
+            },
+            "lifesteal:health-27": {
+                "minecraft:health": {
+                    "max": 54
+                }
+            },
+            "lifesteal:health-28": {
+                "minecraft:health": {
+                    "max": 56
+                }
+            },
+            "lifesteal:health-29": {
+                "minecraft:health": {
+                    "max": 58
+                }
+            },
+            "lifesteal:health-30": {
+                "minecraft:health": {
+                    "max": 60
+                }
+            },
+            "lifesteal:health-31": {
+                "minecraft:health": {
+                    "max": 62
+                }
+            },
+            "lifesteal:health-32": {
+                "minecraft:health": {
+                    "max": 64
+                }
+            },
+            "lifesteal:health-33": {
+                "minecraft:health": {
+                    "max": 66
+                }
+            },
+            "lifesteal:health-34": {
+                "minecraft:health": {
+                    "max": 68
+                }
+            },
+            "lifesteal:health-35": {
+                "minecraft:health": {
+                    "max": 70
+                }
+            },
+            "lifesteal:health-36": {
+                "minecraft:health": {
+                    "max": 72
+                }
+            },
+            "lifesteal:health-37": {
+                "minecraft:health": {
+                    "max": 74
+                }
+            },
+            "lifesteal:health-38": {
+                "minecraft:health": {
+                    "max": 76
+                }
+            },
+            "lifesteal:health-39": {
+                "minecraft:health": {
+                    "max": 78
+                }
+            },
+            "lifesteal:health-40": {
+                "minecraft:health": {
+                    "max": 80
+                }
+            },
+            "lifesteal:health-41": {
+                "minecraft:health": {
+                    "max": 82
+                }
+            },
+            "lifesteal:health-42": {
+                "minecraft:health": {
+                    "max": 84
+                }
+            },
+            "lifesteal:health-43": {
+                "minecraft:health": {
+                    "max": 86
+                }
+            },
+            "lifesteal:health-44": {
+                "minecraft:health": {
+                    "max": 88
+                }
+            },
+            "lifesteal:health-45": {
+                "minecraft:health": {
+                    "max": 90
+                }
+            },
+            "lifesteal:health-46": {
+                "minecraft:health": {
+                    "max": 92
+                }
+            },
+            "lifesteal:health-47": {
+                "minecraft:health": {
+                    "max": 94
+                }
+            },
+            "lifesteal:health-48": {
+                "minecraft:health": {
+                    "max": 96
+                }
+            },
+            "lifesteal:health-49": {
+                "minecraft:health": {
+                    "max": 98
+                }
+            },
+            "lifesteal:health-50": {
+                "minecraft:health": {
+                    "max": 100
+                }
+            },
+            "lifesteal:health-51": {
+                "minecraft:health": {
+                    "max": 102
+                }
+            },
+            "lifesteal:health-52": {
+                "minecraft:health": {
+                    "max": 104
+                }
+            },
+            "lifesteal:health-53": {
+                "minecraft:health": {
+                    "max": 106
+                }
+            },
+            "lifesteal:health-54": {
+                "minecraft:health": {
+                    "max": 108
+                }
+            },
+            "lifesteal:health-55": {
+                "minecraft:health": {
+                    "max": 110
+                }
+            },
+            "lifesteal:health-56": {
+                "minecraft:health": {
+                    "max": 112
+                }
+            },
+            "lifesteal:health-57": {
+                "minecraft:health": {
+                    "max": 114
+                }
+            },
+            "lifesteal:health-58": {
+                "minecraft:health": {
+                    "max": 116
+                }
+            },
+            "lifesteal:health-59": {
+                "minecraft:health": {
+                    "max": 118
+                }
+            },
+            "lifesteal:health-60": {
+                "minecraft:health": {
+                    "max": 120
+                }
+            },
+            "lifesteal:health-61": {
+                "minecraft:health": {
+                    "max": 122
+                }
+            },
+            "lifesteal:health-62": {
+                "minecraft:health": {
+                    "max": 124
+                }
+            },
+            "lifesteal:health-63": {
+                "minecraft:health": {
+                    "max": 126
+                }
+            },
+            "lifesteal:health-64": {
+                "minecraft:health": {
+                    "max": 128
+                }
+            },
+            "lifesteal:health-65": {
+                "minecraft:health": {
+                    "max": 130
+                }
+            },
+            "lifesteal:health-66": {
+                "minecraft:health": {
+                    "max": 132
+                }
+            },
+            "lifesteal:health-67": {
+                "minecraft:health": {
+                    "max": 134
+                }
+            },
+            "lifesteal:health-68": {
+                "minecraft:health": {
+                    "max": 136
+                }
+            },
+            "lifesteal:health-69": {
+                "minecraft:health": {
+                    "max": 138
+                }
+            },
+            "lifesteal:health-70": {
+                "minecraft:health": {
+                    "max": 140
+                }
+            },
+            "lifesteal:health-71": {
+                "minecraft:health": {
+                    "max": 142
+                }
+            },
+            "lifesteal:health-72": {
+                "minecraft:health": {
+                    "max": 144
+                }
+            },
+            "lifesteal:health-73": {
+                "minecraft:health": {
+                    "max": 146
+                }
+            },
+            "lifesteal:health-74": {
+                "minecraft:health": {
+                    "max": 148
+                }
+            },
+            "lifesteal:health-75": {
+                "minecraft:health": {
+                    "max": 150
+                }
+            },
+            "lifesteal:health-76": {
+                "minecraft:health": {
+                    "max": 152
+                }
+            },
+            "lifesteal:health-77": {
+                "minecraft:health": {
+                    "max": 154
+                }
+            },
+            "lifesteal:health-78": {
+                "minecraft:health": {
+                    "max": 156
+                }
+            },
+            "lifesteal:health-79": {
+                "minecraft:health": {
+                    "max": 158
+                }
+            },
+            "lifesteal:health-80": {
+                "minecraft:health": {
+                    "max": 160
+                }
+            },
+            "lifesteal:health-81": {
+                "minecraft:health": {
+                    "max": 162
+                }
+            },
+            "lifesteal:health-82": {
+                "minecraft:health": {
+                    "max": 164
+                }
+            },
+            "lifesteal:health-83": {
+                "minecraft:health": {
+                    "max": 166
+                }
+            },
+            "lifesteal:health-84": {
+                "minecraft:health": {
+                    "max": 168
+                }
+            },
+            "lifesteal:health-85": {
+                "minecraft:health": {
+                    "max": 170
+                }
+            },
+            "lifesteal:health-86": {
+                "minecraft:health": {
+                    "max": 172
+                }
+            },
+            "lifesteal:health-87": {
+                "minecraft:health": {
+                    "max": 174
+                }
+            },
+            "lifesteal:health-88": {
+                "minecraft:health": {
+                    "max": 176
+                }
+            },
+            "lifesteal:health-89": {
+                "minecraft:health": {
+                    "max": 178
+                }
+            },
+            "lifesteal:health-90": {
+                "minecraft:health": {
+                    "max": 180
+                }
+            },
+            "lifesteal:health-91": {
+                "minecraft:health": {
+                    "max": 182
+                }
+            },
+            "lifesteal:health-92": {
+                "minecraft:health": {
+                    "max": 184
+                }
+            },
+            "lifesteal:health-93": {
+                "minecraft:health": {
+                    "max": 186
+                }
+            },
+            "lifesteal:health-94": {
+                "minecraft:health": {
+                    "max": 188
+                }
+            },
+            "lifesteal:health-95": {
+                "minecraft:health": {
+                    "max": 190
+                }
+            },
+            "lifesteal:health-96": {
+                "minecraft:health": {
+                    "max": 192
+                }
+            },
+            "lifesteal:health-97": {
+                "minecraft:health": {
+                    "max": 194
+                }
+            },
+            "lifesteal:health-98": {
+                "minecraft:health": {
+                    "max": 196
+                }
+            },
+            "lifesteal:health-99": {
+                "minecraft:health": {
+                    "max": 198
+                }
+            },
+            "lifesteal:health-100": {
+                "minecraft:health": {
+                    "max": 200
+                }
+            },
+            "lifesteal:health-101": {
+                "minecraft:health": {
+                    "max": 202
+                }
+            },
+            "lifesteal:health-102": {
+                "minecraft:health": {
+                    "max": 204
+                }
+            },
+            "lifesteal:health-103": {
+                "minecraft:health": {
+                    "max": 206
+                }
+            },
+            "lifesteal:health-104": {
+                "minecraft:health": {
+                    "max": 208
+                }
+            },
+            "lifesteal:health-105": {
+                "minecraft:health": {
+                    "max": 210
+                }
+            },
+            "lifesteal:health-106": {
+                "minecraft:health": {
+                    "max": 212
+                }
+            },
+            "lifesteal:health-107": {
+                "minecraft:health": {
+                    "max": 214
+                }
+            },
+            "lifesteal:health-108": {
+                "minecraft:health": {
+                    "max": 216
+                }
+            },
+            "lifesteal:health-109": {
+                "minecraft:health": {
+                    "max": 218
+                }
+            },
+            "lifesteal:health-110": {
+                "minecraft:health": {
+                    "max": 220
+                }
+            },
+            "lifesteal:health-111": {
+                "minecraft:health": {
+                    "max": 222
+                }
+            },
+            "lifesteal:health-112": {
+                "minecraft:health": {
+                    "max": 224
+                }
+            },
+            "lifesteal:health-113": {
+                "minecraft:health": {
+                    "max": 226
+                }
+            },
+            "lifesteal:health-114": {
+                "minecraft:health": {
+                    "max": 228
+                }
+            },
+            "lifesteal:health-115": {
+                "minecraft:health": {
+                    "max": 230
+                }
+            },
+            "lifesteal:health-116": {
+                "minecraft:health": {
+                    "max": 232
+                }
+            },
+            "lifesteal:health-117": {
+                "minecraft:health": {
+                    "max": 234
+                }
+            },
+            "lifesteal:health-118": {
+                "minecraft:health": {
+                    "max": 236
+                }
+            },
+            "lifesteal:health-119": {
+                "minecraft:health": {
+                    "max": 238
+                }
+            },
+            "lifesteal:health-120": {
+                "minecraft:health": {
+                    "max": 240
+                }
+            },
+            "lifesteal:health-121": {
+                "minecraft:health": {
+                    "max": 242
+                }
+            },
+            "lifesteal:health-122": {
+                "minecraft:health": {
+                    "max": 244
+                }
+            },
+            "lifesteal:health-123": {
+                "minecraft:health": {
+                    "max": 246
+                }
+            },
+            "lifesteal:health-124": {
+                "minecraft:health": {
+                    "max": 248
+                }
+            },
+            "lifesteal:health-125": {
+                "minecraft:health": {
+                    "max": 250
+                }
+            },
+            "lifesteal:health-126": {
+                "minecraft:health": {
+                    "max": 252
+                }
+            },
+            "lifesteal:health-127": {
+                "minecraft:health": {
+                    "max": 254
+                }
+            },
+            "lifesteal:health-128": {
+                "minecraft:health": {
+                    "max": 256
+                }
+            },
+            "lifesteal:health-129": {
+                "minecraft:health": {
+                    "max": 258
+                }
+            },
+            "lifesteal:health-130": {
+                "minecraft:health": {
+                    "max": 260
+                }
+            },
+            "lifesteal:health-131": {
+                "minecraft:health": {
+                    "max": 262
+                }
+            },
+            "lifesteal:health-132": {
+                "minecraft:health": {
+                    "max": 264
+                }
+            },
+            "lifesteal:health-133": {
+                "minecraft:health": {
+                    "max": 266
+                }
+            },
+            "lifesteal:health-134": {
+                "minecraft:health": {
+                    "max": 268
+                }
+            },
+            "lifesteal:health-135": {
+                "minecraft:health": {
+                    "max": 270
+                }
+            },
+            "lifesteal:health-136": {
+                "minecraft:health": {
+                    "max": 272
+                }
+            },
+            "lifesteal:health-137": {
+                "minecraft:health": {
+                    "max": 274
+                }
+            },
+            "lifesteal:health-138": {
+                "minecraft:health": {
+                    "max": 276
+                }
+            },
+            "lifesteal:health-139": {
+                "minecraft:health": {
+                    "max": 278
+                }
+            },
+            "lifesteal:health-140": {
+                "minecraft:health": {
+                    "max": 280
+                }
+            },
+            "lifesteal:health-141": {
+                "minecraft:health": {
+                    "max": 282
+                }
+            },
+            "lifesteal:health-142": {
+                "minecraft:health": {
+                    "max": 284
+                }
+            },
+            "lifesteal:health-143": {
+                "minecraft:health": {
+                    "max": 286
+                }
+            },
+            "lifesteal:health-144": {
+                "minecraft:health": {
+                    "max": 288
+                }
+            },
+            "lifesteal:health-145": {
+                "minecraft:health": {
+                    "max": 290
+                }
+            },
+            "lifesteal:health-146": {
+                "minecraft:health": {
+                    "max": 292
+                }
+            },
+            "lifesteal:health-147": {
+                "minecraft:health": {
+                    "max": 294
+                }
+            },
+            "lifesteal:health-148": {
+                "minecraft:health": {
+                    "max": 296
+                }
+            },
+            "lifesteal:health-149": {
+                "minecraft:health": {
+                    "max": 298
+                }
+            },
+            "lifesteal:health-150": {
+                "minecraft:health": {
+                    "max": 300
+                }
+            },
+            "lifesteal:health-151": {
+                "minecraft:health": {
+                    "max": 302
+                }
+            },
+            "lifesteal:health-152": {
+                "minecraft:health": {
+                    "max": 304
+                }
+            },
+            "lifesteal:health-153": {
+                "minecraft:health": {
+                    "max": 306
+                }
+            },
+            "lifesteal:health-154": {
+                "minecraft:health": {
+                    "max": 308
+                }
+            },
+            "lifesteal:health-155": {
+                "minecraft:health": {
+                    "max": 310
+                }
+            },
+            "lifesteal:health-156": {
+                "minecraft:health": {
+                    "max": 312
+                }
+            },
+            "lifesteal:health-157": {
+                "minecraft:health": {
+                    "max": 314
+                }
+            },
+            "lifesteal:health-158": {
+                "minecraft:health": {
+                    "max": 316
+                }
+            },
+            "lifesteal:health-159": {
+                "minecraft:health": {
+                    "max": 318
+                }
+            },
+            "lifesteal:health-160": {
+                "minecraft:health": {
+                    "max": 320
+                }
+            },
+            "lifesteal:health-161": {
+                "minecraft:health": {
+                    "max": 322
+                }
+            },
+            "lifesteal:health-162": {
+                "minecraft:health": {
+                    "max": 324
+                }
+            },
+            "lifesteal:health-163": {
+                "minecraft:health": {
+                    "max": 326
+                }
+            },
+            "lifesteal:health-164": {
+                "minecraft:health": {
+                    "max": 328
+                }
+            },
+            "lifesteal:health-165": {
+                "minecraft:health": {
+                    "max": 330
+                }
+            },
+            "lifesteal:health-166": {
+                "minecraft:health": {
+                    "max": 332
+                }
+            },
+            "lifesteal:health-167": {
+                "minecraft:health": {
+                    "max": 334
+                }
+            },
+            "lifesteal:health-168": {
+                "minecraft:health": {
+                    "max": 336
+                }
+            },
+            "lifesteal:health-169": {
+                "minecraft:health": {
+                    "max": 338
+                }
+            },
+            "lifesteal:health-170": {
+                "minecraft:health": {
+                    "max": 340
+                }
+            },
+            "lifesteal:health-171": {
+                "minecraft:health": {
+                    "max": 342
+                }
+            },
+            "lifesteal:health-172": {
+                "minecraft:health": {
+                    "max": 344
+                }
+            },
+            "lifesteal:health-173": {
+                "minecraft:health": {
+                    "max": 346
+                }
+            },
+            "lifesteal:health-174": {
+                "minecraft:health": {
+                    "max": 348
+                }
+            },
+            "lifesteal:health-175": {
+                "minecraft:health": {
+                    "max": 350
+                }
+            },
+            "lifesteal:health-176": {
+                "minecraft:health": {
+                    "max": 352
+                }
+            },
+            "lifesteal:health-177": {
+                "minecraft:health": {
+                    "max": 354
+                }
+            },
+            "lifesteal:health-178": {
+                "minecraft:health": {
+                    "max": 356
+                }
+            },
+            "lifesteal:health-179": {
+                "minecraft:health": {
+                    "max": 358
+                }
+            },
+            "lifesteal:health-180": {
+                "minecraft:health": {
+                    "max": 360
+                }
+            },
+            "lifesteal:health-181": {
+                "minecraft:health": {
+                    "max": 362
+                }
+            },
+            "lifesteal:health-182": {
+                "minecraft:health": {
+                    "max": 364
+                }
+            },
+            "lifesteal:health-183": {
+                "minecraft:health": {
+                    "max": 366
+                }
+            },
+            "lifesteal:health-184": {
+                "minecraft:health": {
+                    "max": 368
+                }
+            },
+            "lifesteal:health-185": {
+                "minecraft:health": {
+                    "max": 370
+                }
+            },
+            "lifesteal:health-186": {
+                "minecraft:health": {
+                    "max": 372
+                }
+            },
+            "lifesteal:health-187": {
+                "minecraft:health": {
+                    "max": 374
+                }
+            },
+            "lifesteal:health-188": {
+                "minecraft:health": {
+                    "max": 376
+                }
+            },
+            "lifesteal:health-189": {
+                "minecraft:health": {
+                    "max": 378
+                }
+            },
+            "lifesteal:health-190": {
+                "minecraft:health": {
+                    "max": 380
+                }
+            },
+            "lifesteal:health-191": {
+                "minecraft:health": {
+                    "max": 382
+                }
+            },
+            "lifesteal:health-192": {
+                "minecraft:health": {
+                    "max": 384
+                }
+            },
+            "lifesteal:health-193": {
+                "minecraft:health": {
+                    "max": 386
+                }
+            },
+            "lifesteal:health-194": {
+                "minecraft:health": {
+                    "max": 388
+                }
+            },
+            "lifesteal:health-195": {
+                "minecraft:health": {
+                    "max": 390
+                }
+            },
+            "lifesteal:health-196": {
+                "minecraft:health": {
+                    "max": 392
+                }
+            },
+            "lifesteal:health-197": {
+                "minecraft:health": {
+                    "max": 394
+                }
+            },
+            "lifesteal:health-198": {
+                "minecraft:health": {
+                    "max": 396
+                }
+            },
+            "lifesteal:health-199": {
+                "minecraft:health": {
+                    "max": 398
+                }
+            },
+            "lifesteal:health-200": {
+                "minecraft:health": {
+                    "max": 400
+                }
+            },
+            "minecraft:add_raid_omen": {
+                "minecraft:spell_effects": {
+                    "add_effects": [
+                        {
+                            "effect": "raid_omen",
+                            "duration": 30,
+                            "display_on_screen_animation": true
+                        }
+                    ],
+                    "remove_effects": "bad_omen"
+                },
+                "minecraft:timer": {
+                    "time": [0.0, 0.0],
+                    "looping": false,
+                    "time_down_event": {
+                        "event": "minecraft:clear_add_raid_omen",
+                        "target": "self"
+                    }
+                }
+            },
+            "minecraft:clear_raid_omen_spell_effect": {
+                "minecraft:spell_effects": {}
+            },
+            "minecraft:raid_trigger": {
+                "minecraft:raid_trigger": {
+                    "triggered_event": {
+                        "event": "minecraft:remove_raid_trigger",
+                        "target": "self"
+                    }
+                }
+            }
+        },
+        "components": {
+            "minecraft:experience_reward": {
+                "on_death": "Math.Min(query.player_level * 7, 100)"
+            },
+            "minecraft:type_family": {
+                "family": ["player"]
+            },
+            "minecraft:is_hidden_when_invisible": {},
+            "minecraft:loot": {
+                "table": "loot_tables/empty.json"
+            },
+            "minecraft:collision_box": {
+                "width": 0.6,
+                "height": 1.8
+            },
+            "minecraft:can_climb": {},
+            "minecraft:movement": {
+                "value": 0.1
+            },
+            "minecraft:hurt_on_condition": {
+                "damage_conditions": [
+                    {
+                        "filters": {
+                            "test": "in_lava",
+                            "subject": "self",
+                            "operator": "==",
+                            "value": true
+                        },
+                        "cause": "lava",
+                        "damage_per_tick": 4
+                    }
+                ]
+            },
+            "minecraft:attack": {
+                "damage": 1
+            },
+            "minecraft:exhaustion_values": {
+                "heal": 6,
+                "jump": 0.05,
+                "sprint_jump": 0.2,
+                "mine": 0.005,
+                "attack": 0.1,
+                "damage": 0.1,
+                "walk": 0.0,
+                "sprint": 0.1,
+                "swim": 0.01
+            },
+            "minecraft:player.saturation": {
+                "value": 5,
+                "max": 20
+            },
+            "minecraft:player.exhaustion": {
+                "value": 0,
+                "max": 20
+            },
+            "minecraft:player.level": {
+                "value": 0,
+                "max": 24791
+            },
+            "minecraft:player.experience": {
+                "value": 0,
+                "max": 1
+            },
+            "minecraft:breathable": {
+                "total_supply": 15,
+                "suffocate_time": -1,
+                "inhale_time": 3.75,
+                "generates_bubbles": false
+            },
+            "minecraft:nameable": {
+                "always_show": true,
+                "allow_name_tag_renaming": false
+            },
+            "minecraft:physics": {
+                "push_towards_closest_space": true
+            },
+            "minecraft:pushable": {
+                "is_pushable": false,
+                "is_pushable_by_piston": true
+            },
+            "minecraft:insomnia": {
+                "days_until_insomnia": 3
+            },
+            "minecraft:rideable": {
+                "seat_count": 2,
+                "family_types": ["parrot_tame"],
+                "pull_in_entities": true,
+                "seats": [
+                    {
+                        "position": [0.4, -0.2, -0.1],
+                        "min_rider_count": 0,
+                        "max_rider_count": 0,
+                        "lock_rider_rotation": 0
+                    },
+                    {
+                        "position": [-0.4, -0.2, -0.1],
+                        "min_rider_count": 1,
+                        "max_rider_count": 2,
+                        "lock_rider_rotation": 0
+                    }
+                ]
+            },
+            "minecraft:conditional_bandwidth_optimization": {},
+            "minecraft:block_climber": {},
+            "minecraft:environment_sensor": {
+                "triggers": {
+                    "filters": {
+                        "all_of": [
+                            {
+                                "test": "has_mob_effect",
+                                "subject": "self",
+                                "value": "bad_omen"
+                            },
+                            {
+                                "test": "is_in_village",
+                                "subject": "self",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "event": "minecraft:gain_raid_omen"
+                }
+            }
+        },
+
+        "events": {
+            "lifesteal:health-1": {
+                "add": {
+                    "component_groups": ["lifesteal:health-1"]
+                }
+            },
+            "lifesteal:health-2": {
+                "add": {
+                    "component_groups": ["lifesteal:health-2"]
+                }
+            },
+            "lifesteal:health-3": {
+                "add": {
+                    "component_groups": ["lifesteal:health-3"]
+                }
+            },
+            "lifesteal:health-4": {
+                "add": {
+                    "component_groups": ["lifesteal:health-4"]
+                }
+            },
+            "lifesteal:health-5": {
+                "add": {
+                    "component_groups": ["lifesteal:health-5"]
+                }
+            },
+            "lifesteal:health-6": {
+                "add": {
+                    "component_groups": ["lifesteal:health-6"]
+                }
+            },
+            "lifesteal:health-7": {
+                "add": {
+                    "component_groups": ["lifesteal:health-7"]
+                }
+            },
+            "lifesteal:health-8": {
+                "add": {
+                    "component_groups": ["lifesteal:health-8"]
+                }
+            },
+            "lifesteal:health-9": {
+                "add": {
+                    "component_groups": ["lifesteal:health-9"]
+                }
+            },
+            "lifesteal:health-10": {
+                "add": {
+                    "component_groups": ["lifesteal:health-10"]
+                }
+            },
+            "lifesteal:health-11": {
+                "add": {
+                    "component_groups": ["lifesteal:health-11"]
+                }
+            },
+            "lifesteal:health-12": {
+                "add": {
+                    "component_groups": ["lifesteal:health-12"]
+                }
+            },
+            "lifesteal:health-13": {
+                "add": {
+                    "component_groups": ["lifesteal:health-13"]
+                }
+            },
+            "lifesteal:health-14": {
+                "add": {
+                    "component_groups": ["lifesteal:health-14"]
+                }
+            },
+            "lifesteal:health-15": {
+                "add": {
+                    "component_groups": ["lifesteal:health-15"]
+                }
+            },
+            "lifesteal:health-16": {
+                "add": {
+                    "component_groups": ["lifesteal:health-16"]
+                }
+            },
+            "lifesteal:health-17": {
+                "add": {
+                    "component_groups": ["lifesteal:health-17"]
+                }
+            },
+            "lifesteal:health-18": {
+                "add": {
+                    "component_groups": ["lifesteal:health-18"]
+                }
+            },
+            "lifesteal:health-19": {
+                "add": {
+                    "component_groups": ["lifesteal:health-19"]
+                }
+            },
+            "lifesteal:health-20": {
+                "add": {
+                    "component_groups": ["lifesteal:health-20"]
+                }
+            },
+            "lifesteal:health-21": {
+                "add": {
+                    "component_groups": ["lifesteal:health-21"]
+                }
+            },
+            "lifesteal:health-22": {
+                "add": {
+                    "component_groups": ["lifesteal:health-22"]
+                }
+            },
+            "lifesteal:health-23": {
+                "add": {
+                    "component_groups": ["lifesteal:health-23"]
+                }
+            },
+            "lifesteal:health-24": {
+                "add": {
+                    "component_groups": ["lifesteal:health-24"]
+                }
+            },
+            "lifesteal:health-25": {
+                "add": {
+                    "component_groups": ["lifesteal:health-25"]
+                }
+            },
+            "lifesteal:health-26": {
+                "add": {
+                    "component_groups": ["lifesteal:health-26"]
+                }
+            },
+            "lifesteal:health-27": {
+                "add": {
+                    "component_groups": ["lifesteal:health-27"]
+                }
+            },
+            "lifesteal:health-28": {
+                "add": {
+                    "component_groups": ["lifesteal:health-28"]
+                }
+            },
+            "lifesteal:health-29": {
+                "add": {
+                    "component_groups": ["lifesteal:health-29"]
+                }
+            },
+            "lifesteal:health-30": {
+                "add": {
+                    "component_groups": ["lifesteal:health-30"]
+                }
+            },
+            "lifesteal:health-31": {
+                "add": {
+                    "component_groups": ["lifesteal:health-31"]
+                }
+            },
+            "lifesteal:health-32": {
+                "add": {
+                    "component_groups": ["lifesteal:health-32"]
+                }
+            },
+            "lifesteal:health-33": {
+                "add": {
+                    "component_groups": ["lifesteal:health-33"]
+                }
+            },
+            "lifesteal:health-34": {
+                "add": {
+                    "component_groups": ["lifesteal:health-34"]
+                }
+            },
+            "lifesteal:health-35": {
+                "add": {
+                    "component_groups": ["lifesteal:health-35"]
+                }
+            },
+            "lifesteal:health-36": {
+                "add": {
+                    "component_groups": ["lifesteal:health-36"]
+                }
+            },
+            "lifesteal:health-37": {
+                "add": {
+                    "component_groups": ["lifesteal:health-37"]
+                }
+            },
+            "lifesteal:health-38": {
+                "add": {
+                    "component_groups": ["lifesteal:health-38"]
+                }
+            },
+            "lifesteal:health-39": {
+                "add": {
+                    "component_groups": ["lifesteal:health-39"]
+                }
+            },
+            "lifesteal:health-40": {
+                "add": {
+                    "component_groups": ["lifesteal:health-40"]
+                }
+            },
+            "lifesteal:health-41": {
+                "add": {
+                    "component_groups": ["lifesteal:health-41"]
+                }
+            },
+            "lifesteal:health-42": {
+                "add": {
+                    "component_groups": ["lifesteal:health-42"]
+                }
+            },
+            "lifesteal:health-43": {
+                "add": {
+                    "component_groups": ["lifesteal:health-43"]
+                }
+            },
+            "lifesteal:health-44": {
+                "add": {
+                    "component_groups": ["lifesteal:health-44"]
+                }
+            },
+            "lifesteal:health-45": {
+                "add": {
+                    "component_groups": ["lifesteal:health-45"]
+                }
+            },
+            "lifesteal:health-46": {
+                "add": {
+                    "component_groups": ["lifesteal:health-46"]
+                }
+            },
+            "lifesteal:health-47": {
+                "add": {
+                    "component_groups": ["lifesteal:health-47"]
+                }
+            },
+            "lifesteal:health-48": {
+                "add": {
+                    "component_groups": ["lifesteal:health-48"]
+                }
+            },
+            "lifesteal:health-49": {
+                "add": {
+                    "component_groups": ["lifesteal:health-49"]
+                }
+            },
+            "lifesteal:health-50": {
+                "add": {
+                    "component_groups": ["lifesteal:health-50"]
+                }
+            },
+            "lifesteal:health-51": {
+                "add": {
+                    "component_groups": ["lifesteal:health-51"]
+                }
+            },
+            "lifesteal:health-52": {
+                "add": {
+                    "component_groups": ["lifesteal:health-52"]
+                }
+            },
+            "lifesteal:health-53": {
+                "add": {
+                    "component_groups": ["lifesteal:health-53"]
+                }
+            },
+            "lifesteal:health-54": {
+                "add": {
+                    "component_groups": ["lifesteal:health-54"]
+                }
+            },
+            "lifesteal:health-55": {
+                "add": {
+                    "component_groups": ["lifesteal:health-55"]
+                }
+            },
+            "lifesteal:health-56": {
+                "add": {
+                    "component_groups": ["lifesteal:health-56"]
+                }
+            },
+            "lifesteal:health-57": {
+                "add": {
+                    "component_groups": ["lifesteal:health-57"]
+                }
+            },
+            "lifesteal:health-58": {
+                "add": {
+                    "component_groups": ["lifesteal:health-58"]
+                }
+            },
+            "lifesteal:health-59": {
+                "add": {
+                    "component_groups": ["lifesteal:health-59"]
+                }
+            },
+            "lifesteal:health-60": {
+                "add": {
+                    "component_groups": ["lifesteal:health-60"]
+                }
+            },
+            "lifesteal:health-61": {
+                "add": {
+                    "component_groups": ["lifesteal:health-61"]
+                }
+            },
+            "lifesteal:health-62": {
+                "add": {
+                    "component_groups": ["lifesteal:health-62"]
+                }
+            },
+            "lifesteal:health-63": {
+                "add": {
+                    "component_groups": ["lifesteal:health-63"]
+                }
+            },
+            "lifesteal:health-64": {
+                "add": {
+                    "component_groups": ["lifesteal:health-64"]
+                }
+            },
+            "lifesteal:health-65": {
+                "add": {
+                    "component_groups": ["lifesteal:health-65"]
+                }
+            },
+            "lifesteal:health-66": {
+                "add": {
+                    "component_groups": ["lifesteal:health-66"]
+                }
+            },
+            "lifesteal:health-67": {
+                "add": {
+                    "component_groups": ["lifesteal:health-67"]
+                }
+            },
+            "lifesteal:health-68": {
+                "add": {
+                    "component_groups": ["lifesteal:health-68"]
+                }
+            },
+            "lifesteal:health-69": {
+                "add": {
+                    "component_groups": ["lifesteal:health-69"]
+                }
+            },
+            "lifesteal:health-70": {
+                "add": {
+                    "component_groups": ["lifesteal:health-70"]
+                }
+            },
+            "lifesteal:health-71": {
+                "add": {
+                    "component_groups": ["lifesteal:health-71"]
+                }
+            },
+            "lifesteal:health-72": {
+                "add": {
+                    "component_groups": ["lifesteal:health-72"]
+                }
+            },
+            "lifesteal:health-73": {
+                "add": {
+                    "component_groups": ["lifesteal:health-73"]
+                }
+            },
+            "lifesteal:health-74": {
+                "add": {
+                    "component_groups": ["lifesteal:health-74"]
+                }
+            },
+            "lifesteal:health-75": {
+                "add": {
+                    "component_groups": ["lifesteal:health-75"]
+                }
+            },
+            "lifesteal:health-76": {
+                "add": {
+                    "component_groups": ["lifesteal:health-76"]
+                }
+            },
+            "lifesteal:health-77": {
+                "add": {
+                    "component_groups": ["lifesteal:health-77"]
+                }
+            },
+            "lifesteal:health-78": {
+                "add": {
+                    "component_groups": ["lifesteal:health-78"]
+                }
+            },
+            "lifesteal:health-79": {
+                "add": {
+                    "component_groups": ["lifesteal:health-79"]
+                }
+            },
+            "lifesteal:health-80": {
+                "add": {
+                    "component_groups": ["lifesteal:health-80"]
+                }
+            },
+            "lifesteal:health-81": {
+                "add": {
+                    "component_groups": ["lifesteal:health-81"]
+                }
+            },
+            "lifesteal:health-82": {
+                "add": {
+                    "component_groups": ["lifesteal:health-82"]
+                }
+            },
+            "lifesteal:health-83": {
+                "add": {
+                    "component_groups": ["lifesteal:health-83"]
+                }
+            },
+            "lifesteal:health-84": {
+                "add": {
+                    "component_groups": ["lifesteal:health-84"]
+                }
+            },
+            "lifesteal:health-85": {
+                "add": {
+                    "component_groups": ["lifesteal:health-85"]
+                }
+            },
+            "lifesteal:health-86": {
+                "add": {
+                    "component_groups": ["lifesteal:health-86"]
+                }
+            },
+            "lifesteal:health-87": {
+                "add": {
+                    "component_groups": ["lifesteal:health-87"]
+                }
+            },
+            "lifesteal:health-88": {
+                "add": {
+                    "component_groups": ["lifesteal:health-88"]
+                }
+            },
+            "lifesteal:health-89": {
+                "add": {
+                    "component_groups": ["lifesteal:health-89"]
+                }
+            },
+            "lifesteal:health-90": {
+                "add": {
+                    "component_groups": ["lifesteal:health-90"]
+                }
+            },
+            "lifesteal:health-91": {
+                "add": {
+                    "component_groups": ["lifesteal:health-91"]
+                }
+            },
+            "lifesteal:health-92": {
+                "add": {
+                    "component_groups": ["lifesteal:health-92"]
+                }
+            },
+            "lifesteal:health-93": {
+                "add": {
+                    "component_groups": ["lifesteal:health-93"]
+                }
+            },
+            "lifesteal:health-94": {
+                "add": {
+                    "component_groups": ["lifesteal:health-94"]
+                }
+            },
+            "lifesteal:health-95": {
+                "add": {
+                    "component_groups": ["lifesteal:health-95"]
+                }
+            },
+            "lifesteal:health-96": {
+                "add": {
+                    "component_groups": ["lifesteal:health-96"]
+                }
+            },
+            "lifesteal:health-97": {
+                "add": {
+                    "component_groups": ["lifesteal:health-97"]
+                }
+            },
+            "lifesteal:health-98": {
+                "add": {
+                    "component_groups": ["lifesteal:health-98"]
+                }
+            },
+            "lifesteal:health-99": {
+                "add": {
+                    "component_groups": ["lifesteal:health-99"]
+                }
+            },
+            "lifesteal:health-100": {
+                "add": {
+                    "component_groups": ["lifesteal:health-100"]
+                }
+            },
+            "lifesteal:health-101": {
+                "add": {
+                    "component_groups": ["lifesteal:health-101"]
+                }
+            },
+            "lifesteal:health-102": {
+                "add": {
+                    "component_groups": ["lifesteal:health-102"]
+                }
+            },
+            "lifesteal:health-103": {
+                "add": {
+                    "component_groups": ["lifesteal:health-103"]
+                }
+            },
+            "lifesteal:health-104": {
+                "add": {
+                    "component_groups": ["lifesteal:health-104"]
+                }
+            },
+            "lifesteal:health-105": {
+                "add": {
+                    "component_groups": ["lifesteal:health-105"]
+                }
+            },
+            "lifesteal:health-106": {
+                "add": {
+                    "component_groups": ["lifesteal:health-106"]
+                }
+            },
+            "lifesteal:health-107": {
+                "add": {
+                    "component_groups": ["lifesteal:health-107"]
+                }
+            },
+            "lifesteal:health-108": {
+                "add": {
+                    "component_groups": ["lifesteal:health-108"]
+                }
+            },
+            "lifesteal:health-109": {
+                "add": {
+                    "component_groups": ["lifesteal:health-109"]
+                }
+            },
+            "lifesteal:health-110": {
+                "add": {
+                    "component_groups": ["lifesteal:health-110"]
+                }
+            },
+            "lifesteal:health-111": {
+                "add": {
+                    "component_groups": ["lifesteal:health-111"]
+                }
+            },
+            "lifesteal:health-112": {
+                "add": {
+                    "component_groups": ["lifesteal:health-112"]
+                }
+            },
+            "lifesteal:health-113": {
+                "add": {
+                    "component_groups": ["lifesteal:health-113"]
+                }
+            },
+            "lifesteal:health-114": {
+                "add": {
+                    "component_groups": ["lifesteal:health-114"]
+                }
+            },
+            "lifesteal:health-115": {
+                "add": {
+                    "component_groups": ["lifesteal:health-115"]
+                }
+            },
+            "lifesteal:health-116": {
+                "add": {
+                    "component_groups": ["lifesteal:health-116"]
+                }
+            },
+            "lifesteal:health-117": {
+                "add": {
+                    "component_groups": ["lifesteal:health-117"]
+                }
+            },
+            "lifesteal:health-118": {
+                "add": {
+                    "component_groups": ["lifesteal:health-118"]
+                }
+            },
+            "lifesteal:health-119": {
+                "add": {
+                    "component_groups": ["lifesteal:health-119"]
+                }
+            },
+            "lifesteal:health-120": {
+                "add": {
+                    "component_groups": ["lifesteal:health-120"]
+                }
+            },
+            "lifesteal:health-121": {
+                "add": {
+                    "component_groups": ["lifesteal:health-121"]
+                }
+            },
+            "lifesteal:health-122": {
+                "add": {
+                    "component_groups": ["lifesteal:health-122"]
+                }
+            },
+            "lifesteal:health-123": {
+                "add": {
+                    "component_groups": ["lifesteal:health-123"]
+                }
+            },
+            "lifesteal:health-124": {
+                "add": {
+                    "component_groups": ["lifesteal:health-124"]
+                }
+            },
+            "lifesteal:health-125": {
+                "add": {
+                    "component_groups": ["lifesteal:health-125"]
+                }
+            },
+            "lifesteal:health-126": {
+                "add": {
+                    "component_groups": ["lifesteal:health-126"]
+                }
+            },
+            "lifesteal:health-127": {
+                "add": {
+                    "component_groups": ["lifesteal:health-127"]
+                }
+            },
+            "lifesteal:health-128": {
+                "add": {
+                    "component_groups": ["lifesteal:health-128"]
+                }
+            },
+            "lifesteal:health-129": {
+                "add": {
+                    "component_groups": ["lifesteal:health-129"]
+                }
+            },
+            "lifesteal:health-130": {
+                "add": {
+                    "component_groups": ["lifesteal:health-130"]
+                }
+            },
+            "lifesteal:health-131": {
+                "add": {
+                    "component_groups": ["lifesteal:health-131"]
+                }
+            },
+            "lifesteal:health-132": {
+                "add": {
+                    "component_groups": ["lifesteal:health-132"]
+                }
+            },
+            "lifesteal:health-133": {
+                "add": {
+                    "component_groups": ["lifesteal:health-133"]
+                }
+            },
+            "lifesteal:health-134": {
+                "add": {
+                    "component_groups": ["lifesteal:health-134"]
+                }
+            },
+            "lifesteal:health-135": {
+                "add": {
+                    "component_groups": ["lifesteal:health-135"]
+                }
+            },
+            "lifesteal:health-136": {
+                "add": {
+                    "component_groups": ["lifesteal:health-136"]
+                }
+            },
+            "lifesteal:health-137": {
+                "add": {
+                    "component_groups": ["lifesteal:health-137"]
+                }
+            },
+            "lifesteal:health-138": {
+                "add": {
+                    "component_groups": ["lifesteal:health-138"]
+                }
+            },
+            "lifesteal:health-139": {
+                "add": {
+                    "component_groups": ["lifesteal:health-139"]
+                }
+            },
+            "lifesteal:health-140": {
+                "add": {
+                    "component_groups": ["lifesteal:health-140"]
+                }
+            },
+            "lifesteal:health-141": {
+                "add": {
+                    "component_groups": ["lifesteal:health-141"]
+                }
+            },
+            "lifesteal:health-142": {
+                "add": {
+                    "component_groups": ["lifesteal:health-142"]
+                }
+            },
+            "lifesteal:health-143": {
+                "add": {
+                    "component_groups": ["lifesteal:health-143"]
+                }
+            },
+            "lifesteal:health-144": {
+                "add": {
+                    "component_groups": ["lifesteal:health-144"]
+                }
+            },
+            "lifesteal:health-145": {
+                "add": {
+                    "component_groups": ["lifesteal:health-145"]
+                }
+            },
+            "lifesteal:health-146": {
+                "add": {
+                    "component_groups": ["lifesteal:health-146"]
+                }
+            },
+            "lifesteal:health-147": {
+                "add": {
+                    "component_groups": ["lifesteal:health-147"]
+                }
+            },
+            "lifesteal:health-148": {
+                "add": {
+                    "component_groups": ["lifesteal:health-148"]
+                }
+            },
+            "lifesteal:health-149": {
+                "add": {
+                    "component_groups": ["lifesteal:health-149"]
+                }
+            },
+            "lifesteal:health-150": {
+                "add": {
+                    "component_groups": ["lifesteal:health-150"]
+                }
+            },
+            "lifesteal:health-151": {
+                "add": {
+                    "component_groups": ["lifesteal:health-151"]
+                }
+            },
+            "lifesteal:health-152": {
+                "add": {
+                    "component_groups": ["lifesteal:health-152"]
+                }
+            },
+            "lifesteal:health-153": {
+                "add": {
+                    "component_groups": ["lifesteal:health-153"]
+                }
+            },
+            "lifesteal:health-154": {
+                "add": {
+                    "component_groups": ["lifesteal:health-154"]
+                }
+            },
+            "lifesteal:health-155": {
+                "add": {
+                    "component_groups": ["lifesteal:health-155"]
+                }
+            },
+            "lifesteal:health-156": {
+                "add": {
+                    "component_groups": ["lifesteal:health-156"]
+                }
+            },
+            "lifesteal:health-157": {
+                "add": {
+                    "component_groups": ["lifesteal:health-157"]
+                }
+            },
+            "lifesteal:health-158": {
+                "add": {
+                    "component_groups": ["lifesteal:health-158"]
+                }
+            },
+            "lifesteal:health-159": {
+                "add": {
+                    "component_groups": ["lifesteal:health-159"]
+                }
+            },
+            "lifesteal:health-160": {
+                "add": {
+                    "component_groups": ["lifesteal:health-160"]
+                }
+            },
+            "lifesteal:health-161": {
+                "add": {
+                    "component_groups": ["lifesteal:health-161"]
+                }
+            },
+            "lifesteal:health-162": {
+                "add": {
+                    "component_groups": ["lifesteal:health-162"]
+                }
+            },
+            "lifesteal:health-163": {
+                "add": {
+                    "component_groups": ["lifesteal:health-163"]
+                }
+            },
+            "lifesteal:health-164": {
+                "add": {
+                    "component_groups": ["lifesteal:health-164"]
+                }
+            },
+            "lifesteal:health-165": {
+                "add": {
+                    "component_groups": ["lifesteal:health-165"]
+                }
+            },
+            "lifesteal:health-166": {
+                "add": {
+                    "component_groups": ["lifesteal:health-166"]
+                }
+            },
+            "lifesteal:health-167": {
+                "add": {
+                    "component_groups": ["lifesteal:health-167"]
+                }
+            },
+            "lifesteal:health-168": {
+                "add": {
+                    "component_groups": ["lifesteal:health-168"]
+                }
+            },
+            "lifesteal:health-169": {
+                "add": {
+                    "component_groups": ["lifesteal:health-169"]
+                }
+            },
+            "lifesteal:health-170": {
+                "add": {
+                    "component_groups": ["lifesteal:health-170"]
+                }
+            },
+            "lifesteal:health-171": {
+                "add": {
+                    "component_groups": ["lifesteal:health-171"]
+                }
+            },
+            "lifesteal:health-172": {
+                "add": {
+                    "component_groups": ["lifesteal:health-172"]
+                }
+            },
+            "lifesteal:health-173": {
+                "add": {
+                    "component_groups": ["lifesteal:health-173"]
+                }
+            },
+            "lifesteal:health-174": {
+                "add": {
+                    "component_groups": ["lifesteal:health-174"]
+                }
+            },
+            "lifesteal:health-175": {
+                "add": {
+                    "component_groups": ["lifesteal:health-175"]
+                }
+            },
+            "lifesteal:health-176": {
+                "add": {
+                    "component_groups": ["lifesteal:health-176"]
+                }
+            },
+            "lifesteal:health-177": {
+                "add": {
+                    "component_groups": ["lifesteal:health-177"]
+                }
+            },
+            "lifesteal:health-178": {
+                "add": {
+                    "component_groups": ["lifesteal:health-178"]
+                }
+            },
+            "lifesteal:health-179": {
+                "add": {
+                    "component_groups": ["lifesteal:health-179"]
+                }
+            },
+            "lifesteal:health-180": {
+                "add": {
+                    "component_groups": ["lifesteal:health-180"]
+                }
+            },
+            "lifesteal:health-181": {
+                "add": {
+                    "component_groups": ["lifesteal:health-181"]
+                }
+            },
+            "lifesteal:health-182": {
+                "add": {
+                    "component_groups": ["lifesteal:health-182"]
+                }
+            },
+            "lifesteal:health-183": {
+                "add": {
+                    "component_groups": ["lifesteal:health-183"]
+                }
+            },
+            "lifesteal:health-184": {
+                "add": {
+                    "component_groups": ["lifesteal:health-184"]
+                }
+            },
+            "lifesteal:health-185": {
+                "add": {
+                    "component_groups": ["lifesteal:health-185"]
+                }
+            },
+            "lifesteal:health-186": {
+                "add": {
+                    "component_groups": ["lifesteal:health-186"]
+                }
+            },
+            "lifesteal:health-187": {
+                "add": {
+                    "component_groups": ["lifesteal:health-187"]
+                }
+            },
+            "lifesteal:health-188": {
+                "add": {
+                    "component_groups": ["lifesteal:health-188"]
+                }
+            },
+            "lifesteal:health-189": {
+                "add": {
+                    "component_groups": ["lifesteal:health-189"]
+                }
+            },
+            "lifesteal:health-190": {
+                "add": {
+                    "component_groups": ["lifesteal:health-190"]
+                }
+            },
+            "lifesteal:health-191": {
+                "add": {
+                    "component_groups": ["lifesteal:health-191"]
+                }
+            },
+            "lifesteal:health-192": {
+                "add": {
+                    "component_groups": ["lifesteal:health-192"]
+                }
+            },
+            "lifesteal:health-193": {
+                "add": {
+                    "component_groups": ["lifesteal:health-193"]
+                }
+            },
+            "lifesteal:health-194": {
+                "add": {
+                    "component_groups": ["lifesteal:health-194"]
+                }
+            },
+            "lifesteal:health-195": {
+                "add": {
+                    "component_groups": ["lifesteal:health-195"]
+                }
+            },
+            "lifesteal:health-196": {
+                "add": {
+                    "component_groups": ["lifesteal:health-196"]
+                }
+            },
+            "lifesteal:health-197": {
+                "add": {
+                    "component_groups": ["lifesteal:health-197"]
+                }
+            },
+            "lifesteal:health-198": {
+                "add": {
+                    "component_groups": ["lifesteal:health-198"]
+                }
+            },
+            "lifesteal:health-199": {
+                "add": {
+                    "component_groups": ["lifesteal:health-199"]
+                }
+            },
+            "lifesteal:health-200": {
+                "add": {
+                    "component_groups": ["lifesteal:health-200"]
+                }
+            },
+            "minecraft:gain_raid_omen": {
+                "add": {
+                    "component_groups": ["minecraft:add_raid_omen"]
+                }
+            },
+            "minecraft:clear_add_raid_omen": {
+                "remove": {
+                    "component_groups": ["minecraft:add_raid_omen"]
+                },
+                "add": {
+                    "component_groups": [
+                        "minecraft:clear_raid_omen_spell_effect"
+                    ]
+                }
+            },
+            "minecraft:trigger_raid": {
+                "add": {
+                    "component_groups": ["minecraft:raid_trigger"]
+                }
+            },
+            "minecraft:remove_raid_trigger": {
+                "remove": {
+                    "component_groups": ["minecraft:raid_trigger"]
+                }
+            }
+        }
+    }
+}

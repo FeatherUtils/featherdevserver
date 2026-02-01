@@ -1,0 +1,20 @@
+{
+	"format_version": "1.20.80",
+	"minecraft:item": {
+		"description": {
+			"identifier": "featherlifesteal:apple_of_life",
+			"menu_category": {
+				"category": "equipment"
+			}
+		},
+		"components": {
+			"minecraft:icon": "apple",
+			"minecraft:display_name": {
+				"value": "§e§lApple of Life"
+			},
+			"minecraft:glint": true,
+			"minecraft:can_destroy_in_creative": false,
+			"minecraft:allow_off_hand": false
+		}
+	}
+}
