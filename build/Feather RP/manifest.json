@@ -15,7 +15,7 @@
 		}
 	},
 	"header": {
-		"name": "§b§lFeather Essentials §r§e- §gGold §b9.1",
+		"name": "§b§lFeather Essentials §r§e- §gGold §b9.3",
 		"description": "Feather Essentials - Made with love by IsabellaDaKitty and ARandomFern",
 		"min_engine_version": [
 			1,
@@ -26,7 +26,7 @@
 		"version": [
 			1,
 			0,
-			49
+			51
 		]
 	},
 	"modules": [
@@ -36,7 +36,7 @@
 			"version": [
 				1,
 				0,
-				49
+				51
 			]
 		}
 	]

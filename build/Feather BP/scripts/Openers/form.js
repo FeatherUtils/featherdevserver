@@ -70,11 +70,14 @@ system.afterEvents.scriptEventReceive.subscribe(async e => {
         if (button.permission && !prismarineDb.permissions.hasPermission(player, button.permission)) continue;
         let bpre = '§r'
         if (button.cherry && u.layout == 4) {
-            if (button.cherry.includes('alt')) bpre = consts.alt + `${u.theme}` + bpre
+            let theme;
+            if(u.theme == 0) theme = ''
+            if(u.theme != 0) theme = u.theme
+            if (button.cherry.includes('alt')) bpre = consts.alt + `${theme}` + bpre
             if (button.cherry.includes('disableVertical')) bpre = bpre + consts.disablevertical
             if (button.cherry.includes('left')) bpre = bpre + consts.left
             if (!button.cherry.includes('left') && button.cherry.includes('right')) bpre = bpre + consts.right
-            if (button.cherry.includes('disabled')) bpre = bpre + consts.disabled
+            if (button.cherry.includes('disabled')) bpre = bpre + consts.disabled + '§r'
             if (button.cherry.includes('header')) bpre = bpre + consts.header
         }
         let rqt = await formatter.format(button.requiredTag, player)
