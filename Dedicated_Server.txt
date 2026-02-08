@@ -1,0 +1,96 @@
+Dedicated_Server.txt
+[2026-02-08 06:23:43:305 INFO] [Json] minecraft:skeleton | minecraft:behavior.nearest_attackable_target | minecraft:skeleton | For entity skeleton, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:23:59:152 INFO] [Json] minecraft:skeleton | minecraft:behavior.nearest_attackable_target | minecraft:skeleton | For entity skeleton, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:23:59:153 INFO] [Json] minecraft:skeleton | minecraft:behavior.nearest_attackable_target | minecraft:skeleton | For entity skeleton, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:23:59:153 INFO] [Json] minecraft:zombie | minecraft:behavior.nearest_attackable_target | minecraft:zombie | For entity zombie, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:23:59:154 INFO] [Json] minecraft:zombie_villager_v2 | minecraft:behavior.nearest_attackable_target | minecraft:zombie_villager_v2 | For entity zombie_villager_v2, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:24:02:655 INFO] [Json] minecraft:creeper | minecraft:behavior.nearest_attackable_target | minecraft:creeper | For entity creeper, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:24:03:654 INFO] [Json] minecraft:skeleton | minecraft:behavior.nearest_attackable_target | minecraft:skeleton | For entity skeleton, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:24:03:655 INFO] [Json] minecraft:skeleton | minecraft:behavior.nearest_attackable_target | minecraft:skeleton | For entity skeleton, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:24:07:354 INFO] [Json] minecraft:skeleton | minecraft:behavior.nearest_attackable_target | minecraft:skeleton | For entity skeleton, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:24:08:830 INFO] Function and script files have been reloaded.
+[2026-02-08 06:24:09:244 INFO] [Scripting] Send push to config scriptevent
+
+[2026-02-08 06:24:09:248 INFO] [Scripting] [Feather] Lifesteal is installed, version: v0.1
+
+[2026-02-08 06:24:09:248 INFO] [Scripting] [Lifesteal] Verified Feather installed, version: §eGold §e9
+
+[2026-02-08 06:24:09:443 ERROR] [Scripting] TypeError: cannot read property 'typeId' of undefined    at <anonymous> (Modules/bounty.js:14)
+
+
+[2026-02-08 06:24:09:494 INFO] [Scripting] [Dynamic Lighting] Feather is installed, version: §eGold §e9
+
+[2026-02-08 06:24:09:750 INFO] [Scripting] {"text":"Feather Dynamic Lighting","subtext":"Open feather dynamic lighting config","icon":".azalea/3","permission":"dynamicLighting","actions":["scriptevent featherdynlight:config"]}
+
+[2026-02-08 06:24:09:946 WARN] [Scripting] 200,join piss secret society at https://discord.gg/szX7A2r7NV
+
+[2026-02-08 06:24:15:684 INFO] [Json] minecraft:skeleton | minecraft:behavior.nearest_attackable_target | minecraft:skeleton | For entity skeleton, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:24:37:944 ERROR] [Scripting] TypeError: cannot read property 'typeId' of undefined    at <anonymous> (Modules/bounty.js:14)
+
+
+[2026-02-08 06:24:39:667 INFO] Function and script files have been reloaded.
+[2026-02-08 06:24:40:107 INFO] [Scripting] Send push to config scriptevent
+
+[2026-02-08 06:24:40:109 INFO] [Scripting] [Feather] Lifesteal is installed, version: v0.1
+
+[2026-02-08 06:24:40:110 INFO] [Scripting] [Lifesteal] Verified Feather installed, version: §eGold §e9
+
+[2026-02-08 06:24:40:359 INFO] [Scripting] [Dynamic Lighting] Feather is installed, version: §eGold §e9
+
+[2026-02-08 06:24:40:607 INFO] [Scripting] {"text":"Feather Dynamic Lighting","subtext":"Open feather dynamic lighting config","icon":".azalea/3","permission":"dynamicLighting","actions":["scriptevent featherdynlight:config"]}
+
+[2026-02-08 06:24:44:860 WARN] [Scripting] 200,{"cat":"\u0e05(\u25cf\u00b4\u03c9\uff40\u25cf)\u0e05"}
+
+
+[2026-02-08 06:24:53:750 INFO] [Json] minecraft:creeper | minecraft:behavior.nearest_attackable_target | minecraft:creeper | For entity creeper, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:25:15:603 INFO] Function and script files have been reloaded.
+[2026-02-08 06:25:16:048 INFO] [Scripting] Send push to config scriptevent
+
+[2026-02-08 06:25:16:050 INFO] [Scripting] [Feather] Lifesteal is installed, version: v0.1
+
+[2026-02-08 06:25:16:050 INFO] [Scripting] [Lifesteal] Verified Feather installed, version: §eGold §e9
+
+[2026-02-08 06:25:16:300 INFO] [Scripting] [Dynamic Lighting] Feather is installed, version: §eGold §e9
+
+[2026-02-08 06:25:16:547 INFO] [Scripting] {"text":"Feather Dynamic Lighting","subtext":"Open feather dynamic lighting config","icon":".azalea/3","permission":"dynamicLighting","actions":["scriptevent featherdynlight:config"]}
+
+[2026-02-08 06:25:17:598 WARN] [Scripting] 200,{"cat":"=\uff3e\u25cf \u22cf \u25cf\uff3e="}
+
+
+[2026-02-08 06:25:21:491 INFO] [Json] minecraft:drowned | minecraft:behavior.nearest_attackable_target | minecraft:drowned | For entity drowned, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:25:22:992 INFO] [Json] minecraft:drowned | minecraft:behavior.nearest_attackable_target | minecraft:drowned | For entity drowned, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:25:23:991 INFO] [Json] minecraft:drowned | minecraft:behavior.nearest_attackable_target | minecraft:drowned | For entity drowned, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:25:24:992 INFO] [Json] minecraft:drowned | minecraft:behavior.nearest_attackable_target | minecraft:drowned | For entity drowned, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:25:25:991 INFO] [Json] minecraft:drowned | minecraft:behavior.nearest_attackable_target | minecraft:drowned | For entity drowned, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:25:26:991 INFO] [Json] minecraft:drowned | minecraft:behavior.nearest_attackable_target | minecraft:drowned | For entity drowned, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:25:43:249 ERROR] [Scripting] TypeError: cannot read property 'typeId' of undefined    at <anonymous> (Modules/bounty.js:14)
+
+
+[2026-02-08 06:25:46:800 INFO] [Json] minecraft:frog | minecraft:behavior.nearest_attackable_target | minecraft:frog | For entity frog, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:25:49:094 INFO] [Json] minecraft:creeper | minecraft:behavior.nearest_attackable_target | minecraft:creeper | For entity creeper, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:25:49:450 INFO] [Json] minecraft:creeper | minecraft:behavior.nearest_attackable_target | minecraft:creeper | For entity creeper, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:25:53:416 INFO] [Json] minecraft:drowned | minecraft:behavior.nearest_attackable_target | minecraft:drowned | For entity drowned, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:26:07:244 INFO] [Json] minecraft:creeper | minecraft:behavior.nearest_attackable_target | minecraft:creeper | For entity creeper, "attack_interval" is disabled (max <= 0); goal will fall back to "scan_interval" (ticks).
+
+[2026-02-08 06:26:08:694 INFO] [Json] minecraft:skeleton | minecraft:behavior.nearest_attackable_target | mi
