@@ -6,8 +6,8 @@
     ]
   },
   "header": {
-    "name": "Feather Communications Testing",
-    "description": "Communications testing for Feather Essentials",
+    "name": "Feather BDS Networking",
+    "description": "BDS Helper for FeatherNetworking",
     "min_engine_version": [
       1,
       20,
@@ -49,6 +49,14 @@
     },
     {
       "module_name": "@minecraft/server-ui",
+      "version": "beta"
+    },
+    {
+      "module_name": "@minecraft/server-admin",
+      "version": "beta"
+    },
+    {
+      "module_name": "@minecraft/server-net",
       "version": "beta"
     }
   ]
