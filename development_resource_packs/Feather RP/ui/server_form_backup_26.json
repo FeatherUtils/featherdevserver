@@ -517,7 +517,6 @@
                         "100%"
                     ],
                     "$BUTTON_STYLE_default_texture": "textures/example/button",
-                    "$BUTTON_STYLE_default": "starlib_pkg_button_style.button_style_template2",
                     "$HOVER_BUTTON_hover_control": "server_form.hover",
                     "$HOVER_BUTTON_image_size": [
                         13,
@@ -605,490 +604,448 @@
     "header_default9@style.image": {
         "texture": "textures/example/headeralec"
     },
-    "header@style.image": {
-        "bindings": [
-                                                                        {
-                            "binding_type": "global",
-                            "binding_name": "#title_text"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('\b' + #title_text - $cherryuinext_flag)",
-							"target_property_name": "#data"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('§r' + '%.101s' * #data - '\b' - '\t' + '§r')",
-                            "target_property_name": "#form_title"
-                        },
-                        {
-                            "binding_type": "view",
-                            // "source_property_name": "(('§r' + '%.151s' * #data - '%.101s' * #data) - '\b' - '\t' + '§r')",
-                            "source_property_name": "('%.151s' * #data - '%.101s' * #data - '\t' - '\b')",
-                            "target_property_name": "#texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.201s' * #data - '%.151s' * #data - '\t' - '\b')",
-                            "target_property_name": "#border_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.251s' * #data - '%.201s' * #data - '\t')",
-                            "target_property_name": "#header_button_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.301s' * #data - '%.251s' * #data - '\t')",
-                            "target_property_name": "#default_button_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.351s' * #data - '%.301s' * #data - '\t')",
-                            "target_property_name": "#disabled_button_texture"
-                        }
-                                            ]
-        // "type": "panel",
-        // "controls": [
-        //     {
-        //         "yes@global.reverse_title_binding": {
-        //             "$key": "§t§h§e§m§0§1",
-        //             "$control": "server_form.header_default"
-        //         }
-        //     },
-        //     {
-        //         "yes@global.reverse_title_binding": {
-        //             "$key": "§t§h§e§m§0§1",
-        //             "$control": "server_form.header_default"
-        //         }
-        //     },
-        //     {
-        //         "yes2@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§o§c§e§a§n",
-        //             "$control": "server_form.header_ocean"
-        //         }
-        //     },
-        //     {
-        //         "yes3@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§b§t§0§8",
-        //             "$control": "server_form.header_batch08"
-        //         }
-        //     },
-        //     {
-        //         "yes3@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§u§w§u§1",
-        //             "$control": "server_form.header_uwu1"
-        //         }
-        //     },
-        //     {
-        //         "yes4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§b§l§o§s§1",
-        //             "$control": "server_form.header_blossom_essentials"
-        //         }
-        //     },
-        //     {
-        //         "yes4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§p§o§1",
-        //             "$control": "server_form.header_pink_orchid"
-        //         }
-        //     },
-        //     {
-        //         "yes4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§c§s§1",
-        //             "$control": "server_form.header_cottonsky"
-        //         }
-        //     },
-        //     {
-        //         "yes4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§f§p§1",
-        //             "$control": "server_form.header_frosted_petals"
-        //         }
-        //     },
-        //     {
-        //         "yes4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§v§b§1",
-        //             "$control": "server_form.header_verdant_bloom"
-        //         }
-        //     },
-        //     {
-        //         "yes4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§d§s§1",
-        //             "$control": "server_form.header_dogshit"
-        //         }
-        //     },
-        //     {
-        //         "yes4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§g§r§1",
-        //             "$control": "server_form.header_grass"
-        //         }
-        //     },
-        //     {
-        //         "yes4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§b§l§1",
-        //             "$control": "server_form.header_blue1"
-        //         }
-        //     },
-        //     {
-        //         "yes4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§p§r§1",
-        //             "$control": "server_form.header_purple1"
-        //         }
-        //     },
-        //     {
-        //         "yes4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§c§d§1",
-        //             "$control": "server_form.header_candy"
-        //         }
-        //     },
-        //     {
-        //         "yes4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§p§1",
-        //             "$control": "server_form.header_redpurple"
-        //         }
-        //     },
-        //     {
-        //         "cherry@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§c§h§1",
-        //             "$control": "server_form.header_cherry"
-        //         }
-        //     },
-        //     {
-        //         "nut@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§n§u§t§1",
-        //             "$control": "server_form.header_nut"
-        //         }
-        //     },
-        //     {
-        //         "yes@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§y§e§s§1",
-        //             "$control": "server_form.header_yes"
-        //         }
-        //     },
-        //     {
-        //         "sunset@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§s§u§n§s§e§t",
-        //             "$control": "server_form.header_sunset"
-        //         }
-        //     },
-        //     {
-        //         "headerbluegreen@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§b§g§1",
-        //             "$control": "server_form.header_headerbluegreen"
-        //         }
-        //     },
-        //     {
-        //         "pink_blue@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§p§b§1",
-        //             "$control": "server_form.header_pink_blue"
-        //         }
-        //     },
-        //     {
-        //         "purple_2@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§p§r§2",
-        //             "$control": "server_form.header_purple_2"
-        //         }
-        //     },
-        //     {
-        //         "alec_theme@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§a§l§1",
-        //             "$control": "server_form.header_alec_theme"
-        //         }
-        //     },
-        //     {
-        //         "lemon_lime@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§l§l§o§1",
-        //             "$control": "server_form.header_lemon_lime"
-        //         }
-        //     },
-        //     {
-        //         "uwu_#2@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§u§w§u§2",
-        //             "$control": "server_form.header_uwu_#2"
-        //         }
-        //     },
-        //     {
-        //         "leaf_essentials_v3.0@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§l§f§3§0",
-        //             "$control": "server_form.header_leaf_essentials_v3.0"
-        //         }
-        //     },
-        //     {
-        //         "twilight_bloom@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§t§b§1",
-        //             "$control": "server_form.header_twilight_bloom"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_1@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§1",
-        //             "$control": "server_form.header_random_theme_1"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_2@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§2",
-        //             "$control": "server_form.header_random_theme_2"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_3@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§3",
-        //             "$control": "server_form.header_random_theme_3"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§4",
-        //             "$control": "server_form.header_random_theme_4"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_5@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§5",
-        //             "$control": "server_form.header_random_theme_5"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_6@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§6",
-        //             "$control": "server_form.header_random_theme_6"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_7@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§7",
-        //             "$control": "server_form.header_random_theme_7"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_8@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§8",
-        //             "$control": "server_form.header_random_theme_8"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_9@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§9",
-        //             "$control": "server_form.header_random_theme_9"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_10@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§a",
-        //             "$control": "server_form.header_random_theme_10"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_11@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§b",
-        //             "$control": "server_form.header_random_theme_11"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_12@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§c",
-        //             "$control": "server_form.header_random_theme_12"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_13@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§d",
-        //             "$control": "server_form.header_random_theme_13"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_14@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§e",
-        //             "$control": "server_form.header_random_theme_14"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_15@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§f",
-        //             "$control": "server_form.header_random_theme_15"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_16@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§g",
-        //             "$control": "server_form.header_random_theme_16"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_17@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§h",
-        //             "$control": "server_form.header_random_theme_17"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_18@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§i",
-        //             "$control": "server_form.header_random_theme_18"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_19@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§j",
-        //             "$control": "server_form.header_random_theme_19"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_20@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§k",
-        //             "$control": "server_form.header_random_theme_20"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_21@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§l",
-        //             "$control": "server_form.header_random_theme_21"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_22@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§m",
-        //             "$control": "server_form.header_random_theme_22"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_23@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§n",
-        //             "$control": "server_form.header_random_theme_23"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_24@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§o",
-        //             "$control": "server_form.header_random_theme_24"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_25@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§t§p",
-        //             "$control": "server_form.header_random_theme_25"
-        //         }
-        //     },
-        //     {
-        //         "basic@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§b§s§0§1",
-        //             "$control": "server_form.header_basic"
-        //         }
-        //     },
-        //     {
-        //         "pride@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§g§a§1",
-        //             "$control": "server_form.header_pride"
-        //         }
-        //     },
-        //     {
-        //         "pride_-_trans@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§g§a§2",
-        //             "$control": "server_form.header_pride_-_trans"
-        //         }
-        //     },
-        //     {
-        //         "alec2@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§a§l§0§2",
-        //             "$control": "server_form.header_:v"
-        //         }
-        //     },
-        //     {
-        //         "alec3@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§a§l§0§3",
-        //             "$control": "server_form.header_:b"
-        //         }
-        //     },
-        //     {
-        //         "alec4@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§a§l§0§4",
-        //             "$control": "server_form.header_:3"
-        //         }
-        //     },
-        //     {
-        //         "owo@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§a§l§0§5",
-        //             "$control": "server_form.header_owo"
-        //         }
-        //     },
-        //     {
-        //         "alec5@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§a§l§0§6",
-        //             "$control": "server_form.header_alec5"
-        //         }
-        //     },
-        //     {
-        //         "alec6@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§a§l§0§7",
-        //             "$control": "server_form.header_alec6"
-        //         }
-        //     },
-        //     {
-        //         "uwo@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§a§l§0§8",
-        //             "$control": "server_form.header_uwo"
-        //         }
-        //     },
-        //     {
-        //         "owu@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§a§l§0§9",
-        //             "$control": "server_form.header_owu"
-        //         }
-        //     },
-        //     {
-        //         "spookyblue@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§s§k§0§1",
-        //             "$control": "server_form.header_spookyblue"
-        //         }
-        //     },
-        //     {
-        //         "spooky_goop@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§s§k§0§2",
-        //             "$control": "server_form.header_spooky_goop"
-        //         }
-        //     },
-        //     {
-        //         "spooky_squared@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§s§k§0§3",
-        //             "$control": "server_form.header_spooky_squared"
-        //         }
-        //     },
-        //     {
-        //         "spooky_spooky@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§s§k§0§4",
-        //             "$control": "server_form.header_spooky_spooky"
-        //         }
-        //     },
-        //     {
-        //         "vista?@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§v§i§s§0§1",
-        //             "$control": "server_form.header_vista?"
-        //         }
-        //     },
-        //     {
-        //         "elbanosaer@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§r§e§0§3§1",
-        //             "$control": "server_form.header_elbanosaer"
-        //         }
-        //     },
-        //     {
-        //         "default@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§d§w§d§0§1",
-        //             "$control": "server_form.header_default"
-        //         }
-        //     },
-        //     {
-        //         "skobeloff@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§s§k§0§1",
-        //             "$control": "server_form.header_skobeloff"
-        //         }
-        //     },
-        //     {
-        //         "ourple@global.title_binding": {
-        //             "$key": "§t§h§e§m§0§1§o§u§r§0§1",
-        //             "$control": "server_form.header_ourple"
-        //         }
-        //     }
-        // ]
+    "header": {
+        "type": "panel",
+        "controls": [
+            {
+                "yes@global.reverse_title_binding": {
+                    "$key": "§t§h§e§m§0§1",
+                    "$control": "server_form.header_default"
+                }
+            },
+            {
+                "yes@global.reverse_title_binding": {
+                    "$key": "§t§h§e§m§0§1",
+                    "$control": "server_form.header_default"
+                }
+            },
+            {
+                "yes2@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§o§c§e§a§n",
+                    "$control": "server_form.header_ocean"
+                }
+            },
+            {
+                "yes3@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§b§t§0§8",
+                    "$control": "server_form.header_batch08"
+                }
+            },
+            {
+                "yes3@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§u§w§u§1",
+                    "$control": "server_form.header_uwu1"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§b§l§o§s§1",
+                    "$control": "server_form.header_blossom_essentials"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§p§o§1",
+                    "$control": "server_form.header_pink_orchid"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§c§s§1",
+                    "$control": "server_form.header_cottonsky"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§f§p§1",
+                    "$control": "server_form.header_frosted_petals"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§v§b§1",
+                    "$control": "server_form.header_verdant_bloom"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§d§s§1",
+                    "$control": "server_form.header_dogshit"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§g§r§1",
+                    "$control": "server_form.header_grass"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§b§l§1",
+                    "$control": "server_form.header_blue1"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§p§r§1",
+                    "$control": "server_form.header_purple1"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§c§d§1",
+                    "$control": "server_form.header_candy"
+                }
+            },
+            {
+                "yes4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§p§1",
+                    "$control": "server_form.header_redpurple"
+                }
+            },
+            {
+                "cherry@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§c§h§1",
+                    "$control": "server_form.header_cherry"
+                }
+            },
+            {
+                "nut@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§n§u§t§1",
+                    "$control": "server_form.header_nut"
+                }
+            },
+            {
+                "yes@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§y§e§s§1",
+                    "$control": "server_form.header_yes"
+                }
+            },
+            {
+                "sunset@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§s§u§n§s§e§t",
+                    "$control": "server_form.header_sunset"
+                }
+            },
+            {
+                "headerbluegreen@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§b§g§1",
+                    "$control": "server_form.header_headerbluegreen"
+                }
+            },
+            {
+                "pink_blue@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§p§b§1",
+                    "$control": "server_form.header_pink_blue"
+                }
+            },
+            {
+                "purple_2@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§p§r§2",
+                    "$control": "server_form.header_purple_2"
+                }
+            },
+            {
+                "alec_theme@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§1",
+                    "$control": "server_form.header_alec_theme"
+                }
+            },
+            {
+                "lemon_lime@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§l§l§o§1",
+                    "$control": "server_form.header_lemon_lime"
+                }
+            },
+            {
+                "uwu_#2@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§u§w§u§2",
+                    "$control": "server_form.header_uwu_#2"
+                }
+            },
+            {
+                "leaf_essentials_v3.0@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§l§f§3§0",
+                    "$control": "server_form.header_leaf_essentials_v3.0"
+                }
+            },
+            {
+                "twilight_bloom@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§t§b§1",
+                    "$control": "server_form.header_twilight_bloom"
+                }
+            },
+            {
+                "random_theme_1@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§1",
+                    "$control": "server_form.header_random_theme_1"
+                }
+            },
+            {
+                "random_theme_2@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§2",
+                    "$control": "server_form.header_random_theme_2"
+                }
+            },
+            {
+                "random_theme_3@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§3",
+                    "$control": "server_form.header_random_theme_3"
+                }
+            },
+            {
+                "random_theme_4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§4",
+                    "$control": "server_form.header_random_theme_4"
+                }
+            },
+            {
+                "random_theme_5@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§5",
+                    "$control": "server_form.header_random_theme_5"
+                }
+            },
+            {
+                "random_theme_6@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§6",
+                    "$control": "server_form.header_random_theme_6"
+                }
+            },
+            {
+                "random_theme_7@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§7",
+                    "$control": "server_form.header_random_theme_7"
+                }
+            },
+            {
+                "random_theme_8@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§8",
+                    "$control": "server_form.header_random_theme_8"
+                }
+            },
+            {
+                "random_theme_9@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§9",
+                    "$control": "server_form.header_random_theme_9"
+                }
+            },
+            {
+                "random_theme_10@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§a",
+                    "$control": "server_form.header_random_theme_10"
+                }
+            },
+            {
+                "random_theme_11@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§b",
+                    "$control": "server_form.header_random_theme_11"
+                }
+            },
+            {
+                "random_theme_12@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§c",
+                    "$control": "server_form.header_random_theme_12"
+                }
+            },
+            {
+                "random_theme_13@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§d",
+                    "$control": "server_form.header_random_theme_13"
+                }
+            },
+            {
+                "random_theme_14@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§e",
+                    "$control": "server_form.header_random_theme_14"
+                }
+            },
+            {
+                "random_theme_15@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§f",
+                    "$control": "server_form.header_random_theme_15"
+                }
+            },
+            {
+                "random_theme_16@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§g",
+                    "$control": "server_form.header_random_theme_16"
+                }
+            },
+            {
+                "random_theme_17@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§h",
+                    "$control": "server_form.header_random_theme_17"
+                }
+            },
+            {
+                "random_theme_18@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§i",
+                    "$control": "server_form.header_random_theme_18"
+                }
+            },
+            {
+                "random_theme_19@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§j",
+                    "$control": "server_form.header_random_theme_19"
+                }
+            },
+            {
+                "random_theme_20@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§k",
+                    "$control": "server_form.header_random_theme_20"
+                }
+            },
+            {
+                "random_theme_21@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§l",
+                    "$control": "server_form.header_random_theme_21"
+                }
+            },
+            {
+                "random_theme_22@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§m",
+                    "$control": "server_form.header_random_theme_22"
+                }
+            },
+            {
+                "random_theme_23@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§n",
+                    "$control": "server_form.header_random_theme_23"
+                }
+            },
+            {
+                "random_theme_24@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§o",
+                    "$control": "server_form.header_random_theme_24"
+                }
+            },
+            {
+                "random_theme_25@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§t§p",
+                    "$control": "server_form.header_random_theme_25"
+                }
+            },
+            {
+                "basic@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§b§s§0§1",
+                    "$control": "server_form.header_basic"
+                }
+            },
+            {
+                "pride@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§g§a§1",
+                    "$control": "server_form.header_pride"
+                }
+            },
+            {
+                "pride_-_trans@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§g§a§2",
+                    "$control": "server_form.header_pride_-_trans"
+                }
+            },
+            {
+                "alec2@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§2",
+                    "$control": "server_form.header_:v"
+                }
+            },
+            {
+                "alec3@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§3",
+                    "$control": "server_form.header_:b"
+                }
+            },
+            {
+                "alec4@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§4",
+                    "$control": "server_form.header_:3"
+                }
+            },
+            {
+                "owo@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§5",
+                    "$control": "server_form.header_owo"
+                }
+            },
+            {
+                "alec5@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§6",
+                    "$control": "server_form.header_alec5"
+                }
+            },
+            {
+                "alec6@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§7",
+                    "$control": "server_form.header_alec6"
+                }
+            },
+            {
+                "uwo@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§8",
+                    "$control": "server_form.header_uwo"
+                }
+            },
+            {
+                "owu@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§a§l§0§9",
+                    "$control": "server_form.header_owu"
+                }
+            },
+            {
+                "spookyblue@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§s§k§0§1",
+                    "$control": "server_form.header_spookyblue"
+                }
+            },
+            {
+                "spooky_goop@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§s§k§0§2",
+                    "$control": "server_form.header_spooky_goop"
+                }
+            },
+            {
+                "spooky_squared@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§s§k§0§3",
+                    "$control": "server_form.header_spooky_squared"
+                }
+            },
+            {
+                "spooky_spooky@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§s§k§0§4",
+                    "$control": "server_form.header_spooky_spooky"
+                }
+            },
+            {
+                "vista?@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§v§i§s§0§1",
+                    "$control": "server_form.header_vista?"
+                }
+            },
+            {
+                "elbanosaer@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§r§e§0§3§1",
+                    "$control": "server_form.header_elbanosaer"
+                }
+            },
+            {
+                "default@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§d§w§d§0§1",
+                    "$control": "server_form.header_default"
+                }
+            },
+            {
+                "skobeloff@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§s§k§0§1",
+                    "$control": "server_form.header_skobeloff"
+                }
+            },
+            {
+                "ourple@global.title_binding": {
+                    "$key": "§t§h§e§m§0§1§o§u§r§0§1",
+                    "$control": "server_form.header_ourple"
+                }
+            }
+        ]
     },
     "close_button@starlib_pkg_screen_common.async_close_button": {
         "$CLOSE_BUTTON_size": [
@@ -1123,54 +1080,7 @@
         "size": [
             "100% + 2px",
             "100% + 2px"
-        ],
-        "bindings": [
-                                                                        {
-                            "binding_type": "global",
-                            "binding_name": "#title_text"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('\b' + #title_text - $cherryuinext_flag)",
-							"target_property_name": "#data"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('§r' + '%.101s' * #data - '\b' - '\t' + '§r')",
-                            "target_property_name": "#form_title"
-                        },
-                        {
-                            "binding_type": "view",
-                            // "source_property_name": "(('§r' + '%.151s' * #data - '%.101s' * #data) - '\b' - '\t' + '§r')",
-                            "source_property_name": "('%.151s' * #data - '%.101s' * #data - '\t' - '\b')",
-                            "target_property_name": "#header_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.201s' * #data - '%.151s' * #data - '\t' - '\b')",
-                            "target_property_name": "#border_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.251s' * #data - '%.201s' * #data - '\t')",
-                            "target_property_name": "#header_button_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.301s' * #data - '%.251s' * #data - '\t')",
-                            "target_property_name": "#default_button_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.351s' * #data - '%.301s' * #data - '\t')",
-                            "target_property_name": "#disabled_button_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.401s' * #data - '%.351s' * #data - '\t')",
-                            "target_property_name": "#texture"
-                        }
-                                            ]
+        ]
     },
     "hover_light@style.image": {
         "texture": "textures/example/light/button_hover",
@@ -1180,514 +1090,467 @@
         ]
     },
     "advanced_button@starlib_pkg_button_templates.horizontal_button_template": {
-        // "$BUTTON_STYLE_default_variable_controls": [
-        //     {
-        //         "default_defaultb@starlib_pkg_button_style.reverse_style_variable": {
-        //             "texture": "textures/example/button",
-        //             "$key": "§a§l§t§b§t§n"
-        //         }
-        //     },
-            
-        //     {
-        //         "alt_defaulta@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/header",
-        //             "$key": "§a§l§t§b§t§n"
-        //         }
-        //     },
-        //     {
-        //         "alt_default9@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerocean",
-        //             "$key": "§a§l§t§b§t§n§o§c§e§a§n"
-        //         }
-        //     },
-        //     {
-        //         "alt_default8@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headercandy",
-        //             "$key": "§a§l§t§b§t§n§c§d§1"
-        //         }
-        //     },
-        //     {
-        //         "alt_default7@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerblue1",
-        //             "$key": "§a§l§t§b§t§n§b§l§1"
-        //         }
-        //     },
-        //     {
-        //         "alt_default6@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerpurple1",
-        //             "$key": "§a§l§t§b§t§n§p§r§1"
-        //         }
-        //     },
-        //     {
-        //         "alt_default5@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerredpurple",
-        //             "$key": "§a§l§t§b§t§n§r§p§1"
-        //         }
-        //     },
-        //     {
-        //         "alt_default4@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerbatch08",
-        //             "$key": "§a§l§t§b§t§n§b§t§0§8"
-        //         }
-        //     },
-        //     {
-        //         "alt_default3@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headeruwu1",
-        //             "$key": "§a§l§t§b§t§n§u§w§u§1"
-        //         }
-        //     },
-        //     {
-        //         "alt_default2@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerblossomessentials",
-        //             "$key": "§a§l§t§b§t§n§b§l§o§s§1"
-        //         }
-        //     },
-        //     {
-        //         "alt_default1@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headergrass",
-        //             "$key": "§a§l§t§b§t§n§g§r§1"
-        //         }
-        //     },
-        //     {
-        //         "outlined@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/button_outline",
-        //             "$key": "§o§1"
-        //         }
-        //     },
-        //     {
-        //         "cherryColor@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/buttoncherry",
-        //             "$key": "§c§h§e§1"
-        //         }
-        //     },
-        //     {
-        //         "leafColor@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/buttonleaf",
-        //             "$key": "§l§e§f§1"
-        //         }
-        //     },
-        //     {
-        //         "alt_defaultz@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerpinkorchid",
-        //             "$key": "§a§l§t§b§t§n§p§o§1"
-        //         }
-        //     },
-        //     {
-        //         "alt_defaultzz@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headercottonsky",
-        //             "$key": "§a§l§t§b§t§n§c§s§1"
-        //         }
-        //     },
-        //     {
-        //         "alt_defaultzzz@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerfrostedpetals",
-        //             "$key": "§a§l§t§b§t§n§f§p§1"
-        //         }
-        //     },
-        //     {
-        //         "alt_defaultzzzz@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerverdantbloom",
-        //             "$key": "§a§l§t§b§t§n§v§b§1"
-        //         }
-        //     },
-        //     {
-        //         "alt_defaultzzzzz@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/dogshit",
-        //             "$key": "§a§l§t§b§t§n§d§s§1"
-        //         }
-        //     },
-        //     {
-        //         "cherry_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headercherry",
-        //             "$key": "§a§l§t§b§t§n§c§h§1"
-        //         }
-        //     },
-        //     {
-        //         "nut_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headernut",
-        //             "$key": "§a§l§t§b§t§n§n§u§t§1"
-        //         }
-        //     },
-        //     {
-        //         "yes_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headeryes",
-        //             "$key": "§a§l§t§b§t§n§y§e§s§1"
-        //         }
-        //     },
-        //     {
-        //         "sunset_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headersunset",
-        //             "$key": "§a§l§t§b§t§n§s§u§n§s§e§t"
-        //         }
-        //     },
-        //     {
-        //         "headerbluegreen_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerbluegreen",
-        //             "$key": "§a§l§t§b§t§n§b§g§1"
-        //         }
-        //     },
-        //     {
-        //         "pink_blue_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerpinkblue",
-        //             "$key": "§a§l§t§b§t§n§p§b§1"
-        //         }
-        //     },
-        //     {
-        //         "purple_2_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerpurple2",
-        //             "$key": "§a§l§t§b§t§n§p§r§2"
-        //         }
-        //     },
-        //     {
-        //         "alecs_theme__default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headeralec",
-        //             "$key": "§a§l§t§b§t§n§a§l§1"
-        //         }
-        //     },
-        //     {
-        //         "lemon_lime_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerlemonlime",
-        //             "$key": "§a§l§t§b§t§n§l§l§o§1"
-        //         }
-        //     },
-        //     {
-        //         "uwu_2_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headeruwu2",
-        //             "$key": "§a§l§t§b§t§n§u§w§u§2"
-        //         }
-        //     },
-        //     {
-        //         "leaf_essentials_v3.0_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/leafess3",
-        //             "$key": "§a§l§t§b§t§n§l§f§3§0"
-        //         }
-        //     },
-        //     {
-        //         "twilight_bloom_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headertwilightbloom",
-        //             "$key": "§a§l§t§b§t§n§t§b§1"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_1_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom1",
-        //             "$key": "§a§l§t§b§t§n§r§t§1"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_2_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom2",
-        //             "$key": "§a§l§t§b§t§n§r§t§2"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_3_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom3",
-        //             "$key": "§a§l§t§b§t§n§r§t§3"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_4_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom4",
-        //             "$key": "§a§l§t§b§t§n§r§t§4"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_5_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom5",
-        //             "$key": "§a§l§t§b§t§n§r§t§5"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_6_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom6",
-        //             "$key": "§a§l§t§b§t§n§r§t§6"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_7_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom7",
-        //             "$key": "§a§l§t§b§t§n§r§t§7"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_8_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom8",
-        //             "$key": "§a§l§t§b§t§n§r§t§8"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_9_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom9",
-        //             "$key": "§a§l§t§b§t§n§r§t§9"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_10_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom10",
-        //             "$key": "§a§l§t§b§t§n§r§t§a"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_11_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom11",
-        //             "$key": "§a§l§t§b§t§n§r§t§b"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_12_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom12",
-        //             "$key": "§a§l§t§b§t§n§r§t§c"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_13_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom13",
-        //             "$key": "§a§l§t§b§t§n§r§t§d"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_14_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom14",
-        //             "$key": "§a§l§t§b§t§n§r§t§e"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_15_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom15",
-        //             "$key": "§a§l§t§b§t§n§r§t§f"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_16_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom16",
-        //             "$key": "§a§l§t§b§t§n§r§t§g"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_17_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom17",
-        //             "$key": "§a§l§t§b§t§n§r§t§h"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_18_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom18",
-        //             "$key": "§a§l§t§b§t§n§r§t§i"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_19_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom19",
-        //             "$key": "§a§l§t§b§t§n§r§t§j"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_20_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom20",
-        //             "$key": "§a§l§t§b§t§n§r§t§k"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_21_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom21",
-        //             "$key": "§a§l§t§b§t§n§r§t§l"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_22_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom22",
-        //             "$key": "§a§l§t§b§t§n§r§t§m"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_23_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom23",
-        //             "$key": "§a§l§t§b§t§n§r§t§n"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_24_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom24",
-        //             "$key": "§a§l§t§b§t§n§r§t§o"
-        //         }
-        //     },
-        //     {
-        //         "random_theme_25_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerrandom25",
-        //             "$key": "§a§l§t§b§t§n§r§t§p"
-        //         }
-        //     },
-        //     {
-        //         "basic_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/button",
-        //             "$key": "§a§l§t§b§t§n§b§s§0§1"
-        //         }
-        //     },
-        //     {
-        //         "pride_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerpride",
-        //             "$key": "§a§l§t§b§t§n§g§a§1"
-        //         }
-        //     },
-        //     {
-        //         "pride_-_trans_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headerpride2",
-        //             "$key": "§a§l§t§b§t§n§g§a§2"
-        //         }
-        //     },
-        //     {
-        //         ":v_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/alec/1",
-        //             "$key": "§a§l§t§b§t§n§a§l§0§2"
-        //         }
-        //     },
-        //     {
-        //         ":b_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/alec/2",
-        //             "$key": "§a§l§t§b§t§n§a§l§0§3"
-        //         }
-        //     },
-        //     {
-        //         ":3_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/alec/3",
-        //             "$key": "§a§l§t§b§t§n§a§l§0§4"
-        //         }
-        //     },
-        //     {
-        //         "owo_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/alec/4",
-        //             "$key": "§a§l§t§b§t§n§a§l§0§5"
-        //         }
-        //     },
-        //     {
-        //         "^-^_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/alec/5",
-        //             "$key": "§a§l§t§b§t§n§a§l§0§6"
-        //         }
-        //     },
-        //     {
-        //         ":/_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/alec/6",
-        //             "$key": "§a§l§t§b§t§n§a§l§0§7"
-        //         }
-        //     },
-        //     {
-        //         "uwo_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/alec/7",
-        //             "$key": "§a§l§t§b§t§n§a§l§0§8"
-        //         }
-        //     },
-        //     {
-        //         "owu_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/alec/8",
-        //             "$key": "§a§l§t§b§t§n§a§l§0§9"
-        //         }
-        //     },
-        //     {
-        //         "spookyblue_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/spookyblue",
-        //             "$key": "§a§l§t§b§t§n§s§k§0§1"
-        //         }
-        //     },
-        //     {
-        //         "spooky_goop_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/spookygoop",
-        //             "$key": "§a§l§t§b§t§n§s§k§0§2"
-        //         }
-        //     },
-        //     {
-        //         "spooky_squared_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/spookysquared",
-        //             "$key": "§a§l§t§b§t§n§s§k§0§3"
-        //         }
-        //     },
-        //     {
-        //         "spooky_spooky_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/spookyspooky",
-        //             "$key": "§a§l§t§b§t§n§s§k§0§4"
-        //         }
-        //     },
-        //     {
-        //         "vista?_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/headervista",
-        //             "$key": "§a§l§t§b§t§n§v§i§s§0§1"
-        //         }
-        //     },
-        //     {
-        //         "elbanosaer_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/elbanosaer",
-        //             "$key": "§a§l§t§b§t§n§r§e§0§3§1"
-        //         }
-        //     },
-        //     {
-        //         "default_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/header",
-        //             "$key": "§a§l§t§b§t§n§d§w§d§0§1"
-        //         }
-        //     },
-        //     {
-        //         "skobeloff_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/skobeloff_green",
-        //             "$key": "§a§l§t§b§t§n§s§k§0§1"
-        //         }
-        //     },
-        //     {
-        //         "ourple_default@starlib_pkg_button_style.style_variable": {
-        //             "texture": "textures/example/ourple",
-        //             "$key": "§a§l§t§b§t§n§o§u§r§0§1"
-        //         }
-        //     }
-        // ]
+        "$BUTTON_STYLE_default_variable_controls": [
+            {
+                "default_defaultb@starlib_pkg_button_style.reverse_style_variable": {
+                    "texture": "textures/example/button",
+                    "$key": "§a§l§t§b§t§n"
+                }
+            },
+            {
+                "alt_defaulta@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/header",
+                    "$key": "§a§l§t§b§t§n"
+                }
+            },
+            {
+                "alt_default9@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerocean",
+                    "$key": "§a§l§t§b§t§n§o§c§e§a§n"
+                }
+            },
+            {
+                "alt_default8@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headercandy",
+                    "$key": "§a§l§t§b§t§n§c§d§1"
+                }
+            },
+            {
+                "alt_default7@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerblue1",
+                    "$key": "§a§l§t§b§t§n§b§l§1"
+                }
+            },
+            {
+                "alt_default6@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerpurple1",
+                    "$key": "§a§l§t§b§t§n§p§r§1"
+                }
+            },
+            {
+                "alt_default5@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerredpurple",
+                    "$key": "§a§l§t§b§t§n§r§p§1"
+                }
+            },
+            {
+                "alt_default4@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerbatch08",
+                    "$key": "§a§l§t§b§t§n§b§t§0§8"
+                }
+            },
+            {
+                "alt_default3@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headeruwu1",
+                    "$key": "§a§l§t§b§t§n§u§w§u§1"
+                }
+            },
+            {
+                "alt_default2@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerblossomessentials",
+                    "$key": "§a§l§t§b§t§n§b§l§o§s§1"
+                }
+            },
+            {
+                "alt_default1@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headergrass",
+                    "$key": "§a§l§t§b§t§n§g§r§1"
+                }
+            },
+            {
+                "outlined@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/button_outline",
+                    "$key": "§o§1"
+                }
+            },
+            {
+                "cherryColor@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/buttoncherry",
+                    "$key": "§c§h§e§1"
+                }
+            },
+            {
+                "leafColor@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/buttonleaf",
+                    "$key": "§l§e§f§1"
+                }
+            },
+            {
+                "alt_defaultz@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerpinkorchid",
+                    "$key": "§a§l§t§b§t§n§p§o§1"
+                }
+            },
+            {
+                "alt_defaultzz@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headercottonsky",
+                    "$key": "§a§l§t§b§t§n§c§s§1"
+                }
+            },
+            {
+                "alt_defaultzzz@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerfrostedpetals",
+                    "$key": "§a§l§t§b§t§n§f§p§1"
+                }
+            },
+            {
+                "alt_defaultzzzz@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerverdantbloom",
+                    "$key": "§a§l§t§b§t§n§v§b§1"
+                }
+            },
+            {
+                "alt_defaultzzzzz@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/dogshit",
+                    "$key": "§a§l§t§b§t§n§d§s§1"
+                }
+            },
+            {
+                "cherry_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headercherry",
+                    "$key": "§a§l§t§b§t§n§c§h§1"
+                }
+            },
+            {
+                "nut_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headernut",
+                    "$key": "§a§l§t§b§t§n§n§u§t§1"
+                }
+            },
+            {
+                "yes_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headeryes",
+                    "$key": "§a§l§t§b§t§n§y§e§s§1"
+                }
+            },
+            {
+                "sunset_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headersunset",
+                    "$key": "§a§l§t§b§t§n§s§u§n§s§e§t"
+                }
+            },
+            {
+                "headerbluegreen_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerbluegreen",
+                    "$key": "§a§l§t§b§t§n§b§g§1"
+                }
+            },
+            {
+                "pink_blue_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerpinkblue",
+                    "$key": "§a§l§t§b§t§n§p§b§1"
+                }
+            },
+            {
+                "purple_2_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerpurple2",
+                    "$key": "§a§l§t§b§t§n§p§r§2"
+                }
+            },
+            {
+                "alecs_theme__default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headeralec",
+                    "$key": "§a§l§t§b§t§n§a§l§1"
+                }
+            },
+            {
+                "lemon_lime_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerlemonlime",
+                    "$key": "§a§l§t§b§t§n§l§l§o§1"
+                }
+            },
+            {
+                "uwu_2_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headeruwu2",
+                    "$key": "§a§l§t§b§t§n§u§w§u§2"
+                }
+            },
+            {
+                "leaf_essentials_v3.0_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/leafess3",
+                    "$key": "§a§l§t§b§t§n§l§f§3§0"
+                }
+            },
+            {
+                "twilight_bloom_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headertwilightbloom",
+                    "$key": "§a§l§t§b§t§n§t§b§1"
+                }
+            },
+            {
+                "random_theme_1_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom1",
+                    "$key": "§a§l§t§b§t§n§r§t§1"
+                }
+            },
+            {
+                "random_theme_2_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom2",
+                    "$key": "§a§l§t§b§t§n§r§t§2"
+                }
+            },
+            {
+                "random_theme_3_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom3",
+                    "$key": "§a§l§t§b§t§n§r§t§3"
+                }
+            },
+            {
+                "random_theme_4_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom4",
+                    "$key": "§a§l§t§b§t§n§r§t§4"
+                }
+            },
+            {
+                "random_theme_5_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom5",
+                    "$key": "§a§l§t§b§t§n§r§t§5"
+                }
+            },
+            {
+                "random_theme_6_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom6",
+                    "$key": "§a§l§t§b§t§n§r§t§6"
+                }
+            },
+            {
+                "random_theme_7_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom7",
+                    "$key": "§a§l§t§b§t§n§r§t§7"
+                }
+            },
+            {
+                "random_theme_8_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom8",
+                    "$key": "§a§l§t§b§t§n§r§t§8"
+                }
+            },
+            {
+                "random_theme_9_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom9",
+                    "$key": "§a§l§t§b§t§n§r§t§9"
+                }
+            },
+            {
+                "random_theme_10_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom10",
+                    "$key": "§a§l§t§b§t§n§r§t§a"
+                }
+            },
+            {
+                "random_theme_11_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom11",
+                    "$key": "§a§l§t§b§t§n§r§t§b"
+                }
+            },
+            {
+                "random_theme_12_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom12",
+                    "$key": "§a§l§t§b§t§n§r§t§c"
+                }
+            },
+            {
+                "random_theme_13_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom13",
+                    "$key": "§a§l§t§b§t§n§r§t§d"
+                }
+            },
+            {
+                "random_theme_14_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom14",
+                    "$key": "§a§l§t§b§t§n§r§t§e"
+                }
+            },
+            {
+                "random_theme_15_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom15",
+                    "$key": "§a§l§t§b§t§n§r§t§f"
+                }
+            },
+            {
+                "random_theme_16_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom16",
+                    "$key": "§a§l§t§b§t§n§r§t§g"
+                }
+            },
+            {
+                "random_theme_17_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom17",
+                    "$key": "§a§l§t§b§t§n§r§t§h"
+                }
+            },
+            {
+                "random_theme_18_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom18",
+                    "$key": "§a§l§t§b§t§n§r§t§i"
+                }
+            },
+            {
+                "random_theme_19_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom19",
+                    "$key": "§a§l§t§b§t§n§r§t§j"
+                }
+            },
+            {
+                "random_theme_20_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom20",
+                    "$key": "§a§l§t§b§t§n§r§t§k"
+                }
+            },
+            {
+                "random_theme_21_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom21",
+                    "$key": "§a§l§t§b§t§n§r§t§l"
+                }
+            },
+            {
+                "random_theme_22_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom22",
+                    "$key": "§a§l§t§b§t§n§r§t§m"
+                }
+            },
+            {
+                "random_theme_23_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom23",
+                    "$key": "§a§l§t§b§t§n§r§t§n"
+                }
+            },
+            {
+                "random_theme_24_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom24",
+                    "$key": "§a§l§t§b§t§n§r§t§o"
+                }
+            },
+            {
+                "random_theme_25_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerrandom25",
+                    "$key": "§a§l§t§b§t§n§r§t§p"
+                }
+            },
+            {
+                "basic_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/button",
+                    "$key": "§a§l§t§b§t§n§b§s§0§1"
+                }
+            },
+            {
+                "pride_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerpride",
+                    "$key": "§a§l§t§b§t§n§g§a§1"
+                }
+            },
+            {
+                "pride_-_trans_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headerpride2",
+                    "$key": "§a§l§t§b§t§n§g§a§2"
+                }
+            },
+            {
+                ":v_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/1",
+                    "$key": "§a§l§t§b§t§n§a§l§0§2"
+                }
+            },
+            {
+                ":b_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/2",
+                    "$key": "§a§l§t§b§t§n§a§l§0§3"
+                }
+            },
+            {
+                ":3_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/3",
+                    "$key": "§a§l§t§b§t§n§a§l§0§4"
+                }
+            },
+            {
+                "owo_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/4",
+                    "$key": "§a§l§t§b§t§n§a§l§0§5"
+                }
+            },
+            {
+                "^-^_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/5",
+                    "$key": "§a§l§t§b§t§n§a§l§0§6"
+                }
+            },
+            {
+                ":/_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/6",
+                    "$key": "§a§l§t§b§t§n§a§l§0§7"
+                }
+            },
+            {
+                "uwo_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/7",
+                    "$key": "§a§l§t§b§t§n§a§l§0§8"
+                }
+            },
+            {
+                "owu_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/alec/8",
+                    "$key": "§a§l§t§b§t§n§a§l§0§9"
+                }
+            },
+            {
+                "spookyblue_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/spookyblue",
+                    "$key": "§a§l§t§b§t§n§s§k§0§1"
+                }
+            },
+            {
+                "spooky_goop_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/spookygoop",
+                    "$key": "§a§l§t§b§t§n§s§k§0§2"
+                }
+            },
+            {
+                "spooky_squared_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/spookysquared",
+                    "$key": "§a§l§t§b§t§n§s§k§0§3"
+                }
+            },
+            {
+                "spooky_spooky_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/spookyspooky",
+                    "$key": "§a§l§t§b§t§n§s§k§0§4"
+                }
+            },
+            {
+                "vista?_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/headervista",
+                    "$key": "§a§l§t§b§t§n§v§i§s§0§1"
+                }
+            },
+            {
+                "elbanosaer_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/elbanosaer",
+                    "$key": "§a§l§t§b§t§n§r§e§0§3§1"
+                }
+            },
+            {
+                "default_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/header",
+                    "$key": "§a§l§t§b§t§n§d§w§d§0§1"
+                }
+            },
+            {
+                "skobeloff_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/skobeloff_green",
+                    "$key": "§a§l§t§b§t§n§s§k§0§1"
+                }
+            },
+            {
+                "ourple_default@starlib_pkg_button_style.style_variable": {
+                    "texture": "textures/example/ourple",
+                    "$key": "§a§l§t§b§t§n§o§u§r§0§1"
+                }
+            }
+        ]
     },
     "close_button_default@style.image": {
-        "bindings": [
-                                                                        {
-                            "binding_type": "global",
-                            "binding_name": "#title_text"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('\b' + #title_text - $cherryuinext_flag)",
-							"target_property_name": "#data"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('§r' + '%.101s' * #data - '\b' - '\t' + '§r')",
-                            "target_property_name": "#form_title"
-                        },
-                        {
-                            "binding_type": "view",
-                            // "source_property_name": "(('§r' + '%.151s' * #data - '%.101s' * #data) - '\b' - '\t' + '§r')",
-                            "source_property_name": "('%.151s' * #data - '%.101s' * #data - '\t' - '\b')",
-                            "target_property_name": "#header_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.201s' * #data - '%.151s' * #data - '\t' - '\b')",
-                            "target_property_name": "#border_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.251s' * #data - '%.201s' * #data - '\t')",
-                            "target_property_name": "#texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.301s' * #data - '%.251s' * #data - '\t')",
-                            "target_property_name": "#default_button_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.351s' * #data - '%.301s' * #data - '\t')",
-                            "target_property_name": "#disabled_button_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.401s' * #data - '%.351s' * #data - '\t')",
-                            "target_property_name": "#hover_button_texture"
-                        }
-                ]
+        "texture": "textures/example/button"
     },
     "close_button_light_default@style.image": {
         "texture": "textures/example/light/button"
@@ -1755,9 +1618,10 @@
         "$VERTICAL_PROCESSING_sizer_template_control": "server_form.vertical_sizer",
         "$COMMON_BUTTON_hover_control": "server_form.hover",
         "$COMMON_BUTTON_panel_control": "starlib_pkg_button_common.disabled_variable_button_panel",
-        "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.yes",
+        "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.disabled_variable_button_style",
         "$BUTTON_STYLE_disabled_variable_key": "§p§3§0",
-
+        "$BUTTON_STYLE_default_variable_texture": "textures/example/button",
+        "$BUTTON_STYLE_disabled_variable_texture": "textures/example/button_disabled",
         "$HORIZONTAL_BUTTON_image_background_texture": "textures/example/none",
         "$BUTTON_SIZER_left_third": "§p§1§1",
         "$BUTTON_SIZER_right_third": "§p§2§1",
@@ -1783,8 +1647,10 @@
         "$VERTICAL_PROCESSING_sizer_template_control": "server_form.vertical_sizer",
         "$COMMON_BUTTON_hover_control": "server_form.hover",
         "$COMMON_BUTTON_panel_control": "starlib_pkg_button_common.disabled_variable_button_panel",
-        "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.yes",
+        "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.disabled_variable_button_style",
         "$BUTTON_STYLE_disabled_variable_key": "§p§3§0",
+        "$BUTTON_STYLE_default_variable_texture": "textures/example/button",
+        "$BUTTON_STYLE_disabled_variable_texture": "textures/example/button_disabled",
         "$HORIZONTAL_BUTTON_image_background_texture": "textures/example/none",
         "$BUTTON_SIZER_left_third": "§p§1§1",
         "$BUTTON_SIZER_right_third": "§p§2§1",
@@ -1814,7 +1680,7 @@
             "100%x"
         ],
         "$COMMON_BUTTON_panel_control": "starlib_pkg_button_common.disabled_variable_button_panel",
-        "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.yes",
+        "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.disabled_variable_button_style",
         "$BUTTON_STYLE_disabled_variable_key": "§p§3§0",
         "$BUTTON_STYLE_default_variable_texture": "textures/example/button",
         "$BUTTON_STYLE_disabled_variable_texture": "textures/example/button_disabled",
@@ -1839,11 +1705,6 @@
     },
     "advanced_dynamic_button@server_form.advanced_dynamic_button_nya": {},
     "vertical_sizer@starlib_pkg_dynamic_structure.vertical_sizer_template": {},
-    "debug_label@style.label": {
-        "$DEBUG_LABEL_TEXT|default": "Default Text",
-        "text": "$DEBUG_LABEL_TEXT",
-        "font_type": "MinecraftTen"
-    },
     "long_form": {
         "type": "panel",
         "size": [
@@ -1879,81 +1740,28 @@
                 }
             },
             {
-                "meow@starlib_pkg_screen_template.screen": {
+                "long_form@starlib_pkg_screen_template.screen": {
                     "bindings": [
                         {
                             "binding_name": "#title_text"
                         },
                         {
                             "binding_type": "view",
-                            "source_property_name": "(((#title_text - '§c§h§e§s§t') = #title_text) and ((#title_text - '§f§u§l§l') = #title_text) and ((#title_text - '§g§r§i§d§u§i') = #title_text) and ((#title_text - '§t§e§s§t') = #title_text) and ((#title_text - '§l§i§g§h§t') = #title_text) and ((#title_text - '§t§a§b§b§e§d') = #title_text) and (not ((#title_text - $cherryuinext_flag) = #title_text)))",
+                            "source_property_name": "(((#title_text - '§c§h§e§s§t') = #title_text) and ((#title_text - '§f§u§l§l') = #title_text) and ((#title_text - '§g§r§i§d§u§i') = #title_text) and ((#title_text - '§t§e§s§t') = #title_text) and ((#title_text - '§l§i§g§h§t') = #title_text) and ((#title_text - '§t§a§b§b§e§d') = #title_text) and (not ((#title_text - '§f§0§0') = #title_text)))",
                             "target_property_name": "#visible"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('\b' + #title_text - $cherryuinext_flag)",
-							"target_property_name": "#data"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('§r' + '%.101s' * #data - '\b' - '\t' + '§r')",
-                            "target_property_name": "#form_title"
-                        },
-                        {
-                            "binding_type": "view",
-                            // "source_property_name": "(('§r' + '%.151s' * #data - '%.101s' * #data) - '\b' - '\t' + '§r')",
-                            "source_property_name": "('%.151s' * #data - '%.101s' * #data - '\t')",
-                            "target_property_name": "#header_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.201s' * #data - '%.151s' * #data - '\t')",
-                            "target_property_name": "#border_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.251s' * #data - '%.201s' * #data - '\t')",
-                            "target_property_name": "#header_button_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.301s' * #data - '%.251s' * #data - '\t')",
-                            "target_property_name": "#default_button_texture"
-                        },
-                        {
-                            "binding_type": "view",
-                            "source_property_name": "('%.351s' * #data - '%.301s' * #data - '\t')",
-                            "target_property_name": "#disabled_button_texture"
                         }
                     ],
-                    "$FORM_TITLE": "#form_title",
-                    "$HEADER_TEXTURE": "#header_texture",
-                    "$BORDER_TEXTURE": "#border_texture",
-                    "$HEADER_BUTTON_TEXTURE": "#header_button_texture",
-                    "$DEFAULT_BUTTON_TEXTURE": "#default_button_texture",
-                    "$DISABLED_BUTTON_TEXTURE": "#disabled_button_texture",
                     "$forms_holder_controls": [
-                        {
-                            "text": {
-                                "type": "text",
-                                "anchor_from": "center",
-                                "anchor_to": "center",
-                                "shadow": true,
-                                "color": [1.0, 1.0, 1.0],
-                                "text": "Meow mrrp nya mrrp!"
-                            }
-                        },
                         {
                             "nopaperdoll@global.reverse_title_binding": {
                                 "$SCREEN_TEMPLATE_fade_enabled": true,
                                 "$SCROLLING_CONTENT_main_control": "global.button_factory_2",
                                 "$FORM_TEMPLATE_header_control": "starlib_pkg_dynamic_common.common_dynamic_header",
-                                "$FORM_TEMPLATE_background_texture": "textures/example/header",
+                                "$FORM_TEMPLATE_background_texture": "textures/example/border",
                                 "$FORM_TEMPLATE_content_size": [
                                     "100% - 20px",
                                     "100% - 16px"
                                 ],
-                                "$DEBUG_LABEL_TEXT": "#data",
                                 "$CONTENT_between_contents_padding_size": [
                                     0,
                                     0
@@ -1965,8 +1773,10 @@
                                 "$button_item_control": "server_form.advanced_dynamic_button",
                                 "$COMMON_BUTTON_hover_control": "server_form.hover",
                                 "$COMMON_BUTTON_panel_control": "starlib_pkg_button_common.disabled_variable_button_panel",
-                                "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.yes",
+                                "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.disabled_variable_button_style",
                                 "$BUTTON_STYLE_disabled_variable_key": "§p§3§0",
+                                "$BUTTON_STYLE_default_variable_texture": "textures/example/button",
+                                "$BUTTON_STYLE_disabled_variable_texture": "textures/example/button_disabled",
                                 "$HORIZONTAL_BUTTON_image_background_texture": "textures/example/none",
                                 "$BUTTON_SIZER_left_third": "§p§1§1",
                                 "$BUTTON_SIZER_right_third": "§p§2§1",
@@ -1980,32 +1790,6 @@
                                 "$form_size": [
                                     300,
                                     265
-                                ],
-                                "$FORM_TEMPLATE_extra_bindings": [
-                                    {
-                                        "binding_name": "#data",
-                                        "binding_type": "global"
-                                    },
-                                    {
-                                        "binding_name": "#form_title",
-                                        "binding_type": "global"
-                                    },
-                                    {
-                                        "binding_name": "#border_texture",
-                                        "binding_type": "global"
-                                    },
-                                    {
-                                        "binding_name": "#header_button_texture",
-                                        "binding_type": "global"
-                                    },
-                                    {
-                                        "binding_name": "#default_button_texture",
-                                        "binding_type": "global"
-                                    },
-                                    {
-                                        "binding_name": "#disabled_button_texture",
-                                        "binding_type": "global"
-                                    }
                                 ],
                                 "$DYNAMIC_ITEM_bindings": [
                                     {
@@ -2066,8 +1850,10 @@
                                 "$button_item_control": "server_form.advanced_dynamic_button",
                                 "$COMMON_BUTTON_hover_control": "server_form.hover",
                                 "$COMMON_BUTTON_panel_control": "starlib_pkg_button_common.disabled_variable_button_panel",
-                                "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.yes",
+                                "$COMMON_BUTTON_style_control": "starlib_pkg_button_style.disabled_variable_button_style",
                                 "$BUTTON_STYLE_disabled_variable_key": "§p§3§0",
+                                "$BUTTON_STYLE_default_variable_texture": "textures/example/button",
+                                "$BUTTON_STYLE_disabled_variable_texture": "textures/example/button_disabled",
                                 "$HORIZONTAL_BUTTON_image_background_texture": "textures/example/none",
                                 "$BUTTON_SIZER_left_third": "§p§1§1",
                                 "$BUTTON_SIZER_right_third": "§p§2§1",

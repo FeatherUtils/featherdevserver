@@ -150,7 +150,8 @@
         ]
     },
     "button_text@style.label": {
-        "text": "#form_button_text",
+        "text": "#button_text",
+        "shadow": true,
         "bindings": [
             {
                 "binding_collection_name": "form_buttons",
@@ -161,7 +162,28 @@
                 "binding_type": "view",
                 "source_property_name": "(not(#form_button_text = ''))",
                 "target_property_name": "#visible"
-            }
+            },
+                                                    {
+                                            "binding_type": "view",
+                                            "source_property_name": "('\b' + #form_button_text)",
+                                            "target_property_name": "#data"
+                                        },
+                                        {
+                                            "binding_type":"view",
+                                            "source_property_name": "(not ((#form_button_text - '§a§l§t§b§t§n') = #form_button_text))",
+                                            "target_property_name": "#shadow"
+                                        },
+                                        {
+                                            "binding_type": "view",
+                                            "source_property_name": "('§r' + '%.301s' * #data - '\b' - '\t' + '§r')",
+                                            "target_property_name": "#button_text"
+                                        },
+                                        {
+                                            "binding_type": "view",
+                                            // "source_property_name": "(('§r' + '%.151s' * #data - '%.101s' * #data) - '\b' - '\t' + '§r')",
+                                            "source_property_name": "('%.451s' * #data - '%.301s' * #data - '\t' - '\b')",
+                                            "target_property_name": "#button_bg"
+                                        }
         ],
         "$label_layer": 245
     },
