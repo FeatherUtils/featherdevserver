@@ -1898,7 +1898,8 @@ var __webpack_exports__ = {};
         ["KeyProcessingState"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.KeyProcessingState,
         ["KeyboardKey"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.KeyboardKey,
         ["LayoutAlignment"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.LayoutAlignment,
-        ["LayoutDirection"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.LayoutDirection,
+        ["LayoutFlex"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.LayoutFlex,
+        ["LayoutSizeType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.LayoutSizeType,
         ["ListPaneEntryType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.ListPaneEntryType,
         ["LogChannel"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.LogChannel,
         ["ModalDialogResponseType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.ModalDialogResponseType,
@@ -1907,7 +1908,9 @@ var __webpack_exports__ = {};
         ["NumberPropertyItemVariant"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.NumberPropertyItemVariant,
         ["PaintCompletionState"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.PaintCompletionState,
         ["PaintMode"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.PaintMode,
+        ["PaneLayoutType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.PaneLayoutType,
         ["PlaytestSessionResult"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.PlaytestSessionResult,
+        ["ProgressIndicatorPropertyItemVariant"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.ProgressIndicatorPropertyItemVariant,
         ["RelativeVolumeListBlockVolume"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.RelativeVolumeListBlockVolume,
         ["SelectionVolumeEventType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.SelectionVolumeEventType,
         ["SingleBlockBrushShape"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.SingleBlockBrushShape,
@@ -1917,6 +1920,7 @@ var __webpack_exports__ = {};
         ["StructureSource"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.StructureSource,
         ["ThemeSettingsColorKey"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.ThemeSettingsColorKey,
         ["WidgetCollisionType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.WidgetCollisionType,
+        ["WidgetComponentRenderPrimitiveTypeBox"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.WidgetComponentRenderPrimitiveTypeBox,
         ["WidgetComponentRenderPrimitiveTypeDisc"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.WidgetComponentRenderPrimitiveTypeDisc,
         ["WidgetComponentRenderPrimitiveTypeLine"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.WidgetComponentRenderPrimitiveTypeLine,
         ["WidgetGizmoEventType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_81aed4a5__.WidgetGizmoEventType,
@@ -1946,11 +1950,13 @@ var __webpack_exports__ = {};
         ["BlockFluidContainerComponent"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.BlockFluidContainerComponent,
         ["BlockPermutation"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.BlockPermutation,
         ["BlockPistonComponent"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.BlockPistonComponent,
+        ["BlockRedstoneProducerComponent"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.BlockRedstoneProducerComponent,
         ["BlockSignComponent"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.BlockSignComponent,
         ["BlockStates"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.BlockStates,
         ["BlockTypes"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.BlockTypes,
         ["BlockVolume"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.BlockVolume,
         ["BlockVolumeBase"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.BlockVolumeBase,
+        ["CatmullRomSpline"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.CatmullRomSpline,
         ["Difficulty"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.Difficulty,
         ["Direction"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.Direction,
         ["EasingType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.EasingType,
@@ -1982,6 +1988,8 @@ var __webpack_exports__ = {};
         ["GraphicsMode"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.GraphicsMode,
         ["ItemStack"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.ItemStack,
         ["ItemTypes"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.ItemTypes,
+        ["LinearSpline"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.LinearSpline,
+        ["LiquidType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.LiquidType,
         ["PlayerPermissionLevel"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.PlayerPermissionLevel,
         ["SignSide"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.SignSide,
         ["StructureMirrorAxis"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_fb7572af__.StructureMirrorAxis,
@@ -5208,6 +5216,58 @@ var __webpack_exports__ = {};
         }
         return EDITOR_PREFIX + name + "::" + guid();
     }
+    var lib = __webpack_require__(607);
+    function _calcDiagonalMaxVolume(newSize, maxBlockVolume) {
+        const dirVector = lib.Vector3Utils.normalize(newSize);
+        const magnitude = Math.cbrt(maxBlockVolume / (dirVector.x * dirVector.y * dirVector.z));
+        return {
+            x: magnitude * dirVector.x,
+            y: magnitude * dirVector.y,
+            z: magnitude * dirVector.z
+        };
+    }
+    function _clampVolumeAlongDiagonal(newSize, maxBlockVolume) {
+        const maxVolume = _calcDiagonalMaxVolume(newSize, maxBlockVolume);
+        return {
+            x: Math.floor(Math.max(1, Math.min(newSize.x, maxVolume.x))),
+            y: Math.floor(Math.max(1, Math.min(newSize.y, maxVolume.y))),
+            z: Math.floor(Math.max(1, Math.min(newSize.z, maxVolume.z)))
+        };
+    }
+    function clampVolumeAlongAxis(oldSize, newSize, maxBlockVolume) {
+        const xChanged = oldSize.x !== newSize.x;
+        const yChanged = oldSize.y !== newSize.y;
+        const zChanged = oldSize.z !== newSize.z;
+        if (!xChanged && !yChanged && !zChanged) {
+            return oldSize;
+        }
+        if (xChanged && !yChanged && !zChanged) {
+            return {
+                x: Math.floor(Math.max(1, Math.min(newSize.x, maxBlockVolume / (newSize.y * newSize.z)))),
+                y: newSize.y,
+                z: newSize.z
+            };
+        }
+        if (yChanged && !xChanged && !zChanged) {
+            return {
+                x: newSize.x,
+                y: Math.floor(Math.max(1, Math.min(newSize.y, maxBlockVolume / (newSize.x * newSize.z)))),
+                z: newSize.z
+            };
+        }
+        if (zChanged && !xChanged && !yChanged) {
+            return {
+                x: newSize.x,
+                y: newSize.y,
+                z: Math.floor(Math.max(1, Math.min(newSize.z, maxBlockVolume / (newSize.x * newSize.y))))
+            };
+        }
+        return _clampVolumeAlongDiagonal(newSize, maxBlockVolume);
+    }
+    function isWithinLimits(newSize, maxBlockVolume) {
+        const maxPosition = _calcDiagonalMaxVolume(newSize, maxBlockVolume);
+        return lib.Vector3Utils.magnitude(newSize) <= lib.Vector3Utils.magnitude(maxPosition);
+    }
     var server_editor_private_bindings_x = y => {
         var x = {};
         __webpack_require__.d(x, y);
@@ -5218,6 +5278,8 @@ var __webpack_exports__ = {};
         ["EditorRealmsServiceAvailability"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.EditorRealmsServiceAvailability,
         ["JigsawJointType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.JigsawJointType,
         ["JigsawJsonType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.JigsawJsonType,
+        ["PersistenceGroupType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.PersistenceGroupType,
+        ["PersistenceScope"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.PersistenceScope,
         ["PrefabInstanceInteractionEventType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.PrefabInstanceInteractionEventType,
         ["ProjectRegionAvailabilityMode"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.ProjectRegionAvailabilityMode,
         ["RealmsWorldUploadResult"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_private_bindings_ae1d7ddf__.RealmsWorldUploadResult,
@@ -5339,7 +5401,6 @@ var __webpack_exports__ = {};
             }
         }));
     }
-    var lib = __webpack_require__(607);
     var direction_Direction;
     (function(Direction) {
         Direction[Direction["Forward"] = 0] = "Forward";
@@ -5563,6 +5624,34 @@ var __webpack_exports__ = {};
             return rayLocation;
         }
         return undefined;
+    }
+    function calculateClosestPointOnSecondLine(origin1, ray1, origin2, ray2) {
+        const originDiff = lib.Vector3Utils.subtract(origin2, origin1);
+        const a = lib.Vector3Utils.dot(ray1, originDiff);
+        const c = -lib.Vector3Utils.dot(ray2, originDiff);
+        const b = lib.Vector3Utils.dot(ray1, ray2);
+        const denom = 1 - b * b;
+        if (nearEqual(denom, 0)) {
+            return undefined;
+        }
+        const t2 = (c + a * b) / denom;
+        const rayProjection = lib.Vector3Utils.scale(ray2, t2);
+        return lib.Vector3Utils.add(origin2, rayProjection);
+    }
+    function nearEqual(a, b) {
+        return Math.abs(a - b) < .001;
+    }
+    function calculateYPlaneIntersection(pointOnPlane, rayOrigin, rayDirection) {
+        const normal = lib.VECTOR3_UP;
+        const dotProduct = lib.Vector3Utils.dot(rayDirection, normal);
+        if (nearEqual(dotProduct, 0)) {
+            return undefined;
+        }
+        const popMinusRayO = lib.Vector3Utils.subtract(pointOnPlane, rayOrigin);
+        const t = lib.Vector3Utils.dot(popMinusRayO, normal) / dotProduct;
+        const rayProjection = lib.Vector3Utils.scale(rayDirection, t);
+        const rawIntersection = lib.Vector3Utils.add(rayOrigin, rayProjection);
+        return lib.Vector3Utils.floor(rawIntersection);
     }
     class Vector3Map {
         constructor(initialItems) {
@@ -6522,31 +6611,6 @@ var __webpack_exports__ = {};
         }
         return `data:image/bmp;base64,${buffer.toString("base64")}`;
     }
-    function backupColors(extensionContext) {
-        const cursorProperties = extensionContext.cursor.getProperties();
-        const colorBackup = {};
-        if (cursorProperties.fillColor) {
-            colorBackup.cursorFillColor = cursorProperties.fillColor;
-        }
-        if (cursorProperties.outlineColor) {
-            colorBackup.cursorOutlineColor = cursorProperties.outlineColor;
-        }
-        return colorBackup;
-    }
-    function restoreBackedUpColors(extensionContext, backedUpColors) {
-        const cursorProperties = extensionContext.cursor.getProperties();
-        if (!backedUpColors.cursorFillColor) {
-            delete cursorProperties.fillColor;
-        } else {
-            cursorProperties.fillColor = backedUpColors.cursorFillColor;
-        }
-        if (!backedUpColors.cursorOutlineColor) {
-            delete cursorProperties.outlineColor;
-        } else {
-            cursorProperties.outlineColor = backedUpColors.cursorOutlineColor;
-        }
-        extensionContext.cursor.setProperties(cursorProperties);
-    }
     function getMapValueFromKey(map, key) {
         const value = map.get(key);
         if (value === undefined) {
@@ -6606,6 +6670,24 @@ var __webpack_exports__ = {};
             }
         }
         return str;
+    }
+    function validateIdentifierString(name) {
+        if (!name || name.trim() === "") {
+            return {
+                valid: false,
+                message: "Template name cannot be empty"
+            };
+        }
+        if (!/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(name)) {
+            return {
+                valid: false,
+                message: "Identifier name must start with a letter or underscore and contain only alphanumeric characters and underscores"
+            };
+        }
+        return {
+            valid: true,
+            message: ""
+        };
     }
     class CustomSet {
         constructor(hashFunction) {
@@ -7223,9 +7305,136 @@ var __webpack_exports__ = {};
         }
         return false;
     }
+    class PersistenceGroupItemImpl {
+        constructor(groupItem) {
+            this._persistenceGroupItem = groupItem;
+        }
+        get key() {
+            return this._persistenceGroupItem.getKey();
+        }
+        setValue(value) {
+            this._persistenceGroupItem.setValue(value);
+            this._persistenceGroupItem.commit();
+        }
+        getValue() {
+            return this._persistenceGroupItem.getAsJSON();
+        }
+        get value() {
+            if (this.valueObj === undefined) {
+                try {
+                    this.valueObj = JSON.parse(this._persistenceGroupItem.getAsJSON());
+                } catch {
+                    return undefined;
+                }
+            }
+            return this.valueObj;
+        }
+        set value(itemValue) {
+            this.valueObj = itemValue;
+        }
+        commit() {
+            if (this.valueObj === undefined) {
+                return;
+            }
+            const itemValue = ConvertValueToString(this.valueObj);
+            this._persistenceGroupItem.setValue(itemValue);
+            this._persistenceGroupItem.commit();
+        }
+    }
+    class PersistenceGroupImpl {
+        constructor(group) {
+            this._persistenceGroup = group;
+        }
+        createItem(key, item) {
+            const itemValue = ConvertValueToString(item);
+            const newItem = this._persistenceGroup.createItem(key, itemValue);
+            const itemImpl = new PersistenceGroupItemImpl(newItem);
+            itemImpl.value = item;
+            return itemImpl;
+        }
+        deleteItem(key) {
+            this._persistenceGroup.deleteItem(key);
+        }
+        getOrCreateItem(key, item) {
+            const itemValue = ConvertValueToString(item);
+            const newItem = this._persistenceGroup.getOrCreateItem(key, itemValue);
+            const itemImpl = new PersistenceGroupItemImpl(newItem);
+            itemImpl.value = item;
+            return itemImpl;
+        }
+        fetchItem(key) {
+            const item = this._persistenceGroup.fetchItem(key);
+            if (!item) {
+                return undefined;
+            }
+            return new PersistenceGroupItemImpl(item);
+        }
+        listItemNames() {
+            return this._persistenceGroup.listItems();
+        }
+        dispose() {
+            return this._persistenceGroup.dispose();
+        }
+    }
+    class PersistenceManager {
+        constructor(persistenceManager) {
+            this._internal = persistenceManager;
+        }
+        createGroup(namespaceName, options) {
+            return new PersistenceGroupImpl(this._internal.createGroup(namespaceName, options));
+        }
+        getOrCreateGroup(namespaceName, options) {
+            return new PersistenceGroupImpl(this._internal.getOrCreateGroup(namespaceName, options));
+        }
+        deleteGroup(namespaceName, options) {
+            return this._internal.deleteGroup(namespaceName, options);
+        }
+        getGroup(namespaceName, options) {
+            const group = this._internal.getGroup(namespaceName, options);
+            if (group) {
+                return new PersistenceGroupImpl(group);
+            }
+            return undefined;
+        }
+        getGroups(options) {
+            const groups = this._internal.fetchGroups(options);
+            const persistenceGroupList = [];
+            for (const group of groups) {
+                persistenceGroupList.push(new PersistenceGroupImpl(group));
+            }
+            return persistenceGroupList;
+        }
+        requestClientGroup(namespacedName, options, callback) {
+            const handleResult = persistenceGroup => {
+                if (persistenceGroup) {
+                    const group = new PersistenceGroupImpl(persistenceGroup);
+                    callback(group);
+                } else {
+                    callback(undefined);
+                }
+            };
+            this._internal.requestClientGroup(namespacedName, options, handleResult);
+        }
+        disposeAllGroups() {
+            this._internal.disposeAllGroups();
+        }
+    }
+    function ConvertValueToString(value) {
+        if (typeof value === "object" && value !== undefined || Array.isArray(value)) {
+            return JSON.stringify(value);
+        }
+        if (typeof value === "number" || typeof value === "boolean") {
+            return value.toString();
+        }
+        return value;
+    }
+    function getPersistenceManager(player) {
+        const persistenceManager = server_editor_private_bindings_namespaceObject.editorInternal.getPlayerServices(player).internalPersistenceManager;
+        return new PersistenceManager(persistenceManager);
+    }
+    const PERSISTENCE_GROUP_NAME = "editor:brushpaint";
+    const PERSISTENCE_GROUPITEM_SETTINGS = "settings";
     const PROPERTY_BRUSHPAINTCONTROL_NAME = "BrushPaintControl";
-    const PROPERTY_BRUSHPAINTCONTROL_BLOCKMASK_SETTINGS_MASK = `${PROPERTY_BRUSHPAINTCONTROL_NAME}:BlockMask:Mask`;
-    const PROPERTY_BRUSHPAINTCONTROL_BLOCKMASK_SETTINGS_REPLACE = `${PROPERTY_BRUSHPAINTCONTROL_NAME}:BlockMask:Replace`;
     const PROPERTY_BRUSHPAINTCONTROL_LOCALIZATION_PREFIX = `resourcePack.editor.${PROPERTY_BRUSHPAINTCONTROL_NAME}`;
     var InternalMaskType;
     (function(InternalMaskType) {
@@ -7278,17 +7487,21 @@ var __webpack_exports__ = {};
             this._updateSettingsOperationTickHandle = undefined;
             this._editorMode = server_editor_namespaceObject.EditorMode.Tool;
             this._needsRefresh = false;
+            this._blockMaskKey = `${this.tool.id}_BlockMask_Mask`;
+            this._blockReplaceKey = `${this.tool.id}_BlockMask_Replace`;
+            this._persistenceManager = getPersistenceManager(session.extensionContext.player);
             this._brushSettings = _brushSettings;
             if (this._options?.locOverride) {
                 this._locFunction = key => this._options?.locOverride?.get(key) ?? this.localize(key);
             } else {
                 this._locFunction = key => this.localize(key);
             }
+            this._loadBrushSettings();
         }
         initialize() {
             super.initialize();
-            this._blockListMask = this._loadBlockMask(PROPERTY_BRUSHPAINTCONTROL_BLOCKMASK_SETTINGS_MASK, convertBlockStringsToBlockType([ "air" ]));
-            this._blockListReplace = this._loadBlockMask(PROPERTY_BRUSHPAINTCONTROL_BLOCKMASK_SETTINGS_REPLACE, convertBlockStringsToBlockType([ "air" ]));
+            this._blockListMask = this._loadBlockMask(this._blockMaskKey, convertBlockStringsToBlockType([ "air" ]));
+            this._blockListReplace = this._loadBlockMask(this._blockReplaceKey, convertBlockStringsToBlockType([ "air" ]));
             if (!this.tool) {
                 throw new Error("SharedControl tool is not set");
             }
@@ -7390,19 +7603,11 @@ var __webpack_exports__ = {};
             this._fillMaskSubPane = undefined;
         }
         activateControl() {
+            if (this.isActive) {
+                this.session.log.error("Cannot activate already active Brush Control");
+                return;
+            }
             super.activateControl();
-            this._modeChangeEventSubscriptionHandle = this.session.extensionContext.afterEvents.modeChange.subscribe((event => {
-                this._editorMode = event.mode;
-                if (this._editorMode === server_editor_namespaceObject.EditorMode.Tool) {
-                    if (this.isActive) {
-                        this.activateVisualization();
-                    } else {
-                        this.deactivateVisualization();
-                    }
-                } else {
-                    this.deactivateVisualization();
-                }
-            }));
             this._brushShapeOffset.set(this.session.extensionContext.brushShapeManager.getBrushShapeOffset());
             this._constructControlUI();
             this._setupBrushModeAndType();
@@ -7414,12 +7619,12 @@ var __webpack_exports__ = {};
             this.activateVisualization();
         }
         deactivateControl() {
+            if (!this.isActive) {
+                this.session.log.error("Cannot deactivate inactive Brush Control");
+                return;
+            }
             super.deactivateControl();
             this._needsRefresh = false;
-            if (this._modeChangeEventSubscriptionHandle) {
-                this.session.extensionContext.afterEvents.modeChange.unsubscribe(this._modeChangeEventSubscriptionHandle);
-                this._modeChangeEventSubscriptionHandle = undefined;
-            }
             this.deactivateVisualization();
             this._destroyControlUI();
             if (this._updateSettingsOperationTickHandle !== undefined) {
@@ -7428,10 +7633,12 @@ var __webpack_exports__ = {};
             this._brushControlRootPane?.hide();
         }
         activateVisualization() {
-            this.session.extensionContext.brushShapeManager.activateBrushTool();
-            this._setBrushVolume();
-            this._setBrushMask();
-            this._switchBrushMaskPanes();
+            if (this.isActive) {
+                this.session.extensionContext.brushShapeManager.activateBrushTool();
+                this._setBrushVolume();
+                this._setBrushMask();
+                this._switchBrushMaskPanes();
+            }
         }
         showVisualization() {
             this.session.extensionContext.brushShapeManager.setBrushShapeVisible(true);
@@ -7688,6 +7895,7 @@ var __webpack_exports__ = {};
             const brushShape = this._getSelectedBrushShape();
             this._customSettingsSubPane = brushShape.createSettingsPane(this._brushSettingsSubPane, (() => {
                 this._needsRefresh = true;
+                this._saveBrushSettings();
             }));
             this._customSettingsSubPane?.show();
             if (this._customSettingsSubPane) {
@@ -7704,26 +7912,45 @@ var __webpack_exports__ = {};
             }
         }
         _saveBlockMasks() {
-            const maskList = convertBlockTypesToBlockStrings(this._blockListMask);
-            this.session.extensionContext.player.setDynamicProperty(PROPERTY_BRUSHPAINTCONTROL_BLOCKMASK_SETTINGS_MASK, JSON.stringify(maskList));
-            const replaceList = convertBlockTypesToBlockStrings(this._blockListReplace);
-            this.session.extensionContext.player.setDynamicProperty(PROPERTY_BRUSHPAINTCONTROL_BLOCKMASK_SETTINGS_REPLACE, JSON.stringify(replaceList));
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject
+            };
+            const group = this._persistenceManager.getOrCreateGroup(PERSISTENCE_GROUP_NAME, option);
+            const errorMsg = "Fail to store block mask";
+            if (!group) {
+                this.session.log.error(errorMsg);
+                return;
+            } else {
+                const maskList = convertBlockTypesToBlockStrings(this._blockListMask);
+                const maskListItem = group.getOrCreateItem(this._blockMaskKey, maskList);
+                if (maskListItem && maskListItem.value) {
+                    maskListItem.commit();
+                }
+                const replaceList = convertBlockTypesToBlockStrings(this._blockListReplace);
+                const replaceListItem = group.getOrCreateItem(this._blockReplaceKey, replaceList);
+                if (replaceListItem && replaceListItem.value) {
+                    replaceListItem.commit();
+                }
+                group.dispose();
+            }
         }
         _loadBlockMask(key, defaultList) {
-            const data = this.session.extensionContext.player.getDynamicProperty(key);
-            if (data) {
-                try {
-                    const blockStringList = JSON.parse(data);
-                    if (blockStringList !== undefined && blockStringList.length > 0) {
-                        const blockList = convertBlockStringsToBlockType(blockStringList);
-                        if (blockList.length > 0) {
-                            return blockList;
-                        }
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject
+            };
+            const group = this._persistenceManager.getGroup(PERSISTENCE_GROUP_NAME, option);
+            const errorMsg = "No stored block mask found";
+            if (!group) {
+                this.session.log.info(errorMsg);
+            } else {
+                const storeItem = group.fetchItem(key);
+                if (storeItem && storeItem.value) {
+                    const blockList = convertBlockStringsToBlockType(storeItem.value);
+                    if (blockList.length > 0) {
+                        return blockList;
                     }
-                    return defaultList;
-                } catch (_e) {
-                    return defaultList;
                 }
+                group.dispose();
             }
             return defaultList;
         }
@@ -7754,6 +7981,89 @@ var __webpack_exports__ = {};
                 return item;
             }));
         }
+        _loadBrushSettings() {
+            this._brushShapes.map((brushShape => {
+                const option = {
+                    scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject
+                };
+                const group = this._persistenceManager.getGroup(PERSISTENCE_GROUP_NAME, option);
+                if (!group) {
+                    return;
+                }
+                const key = `${this.tool.id}.${brushShape.id}.${PERSISTENCE_GROUPITEM_SETTINGS}`;
+                try {
+                    switch (brushShape.id) {
+                      case server_editor_namespaceObject.CoreBrushShapeType.Cone:
+                        {
+                            const item = group.fetchItem(key);
+                            if (item && item.value) {
+                                brushShape.applySetting(item.value);
+                            }
+                        }
+                        break;
+
+                      case server_editor_namespaceObject.CoreBrushShapeType.Cuboid:
+                        {
+                            const item = group.fetchItem(key);
+                            if (item && item.value) {
+                                brushShape.applySetting(item.value);
+                            }
+                        }
+                        break;
+
+                      case server_editor_namespaceObject.CoreBrushShapeType.Cylinder:
+                        {
+                            const item = group.fetchItem(key);
+                            if (item && item.value) {
+                                brushShape.applySetting(item.value);
+                            }
+                        }
+                        break;
+
+                      case server_editor_namespaceObject.CoreBrushShapeType.Ellipsoid:
+                        {
+                            const item = group.fetchItem(key);
+                            if (item && item.value) {
+                                brushShape.applySetting(item.value);
+                            }
+                        }
+                        break;
+
+                      case server_editor_namespaceObject.CoreBrushShapeType.Pyramid:
+                        {
+                            const item = group.fetchItem(key);
+                            if (item && item.value) {
+                                brushShape.applySetting(item.value);
+                            }
+                        }
+                        break;
+
+                      case server_editor_namespaceObject.CoreBrushShapeType.SingleBlock:
+                        break;
+                    }
+                } catch (e) {
+                    this.session.log.error(`Failed to load brush settings, ${stringFromException(e)}`);
+                }
+                group.dispose();
+            }));
+        }
+        _saveBrushSettings() {
+            const brushShape = this._getSelectedBrushShape();
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject
+            };
+            const group = this._persistenceManager.getOrCreateGroup(PERSISTENCE_GROUP_NAME, option);
+            if (!group) {
+                this.session.log.error(`Failed to save brush settings of ${brushShape.displayName}`);
+                return;
+            }
+            const key = `${this.tool.id}.${brushShape.id}.${PERSISTENCE_GROUPITEM_SETTINGS}`;
+            const item = group.getOrCreateItem(key, brushShape.getSettings());
+            if (item && item.value) {
+                item.commit();
+            }
+            group.dispose();
+        }
     }
     BrushPaintSharedControl.DEFAULT_NUMBER_MIN = 1;
     BrushPaintSharedControl.DEFAULT_NUMBER_MAX = 6;
@@ -7767,6 +8077,8 @@ var __webpack_exports__ = {};
         y: 20,
         z: 20
     };
+    const CursorModeControl_PERSISTENCE_GROUP_NAME = "editor:cursor";
+    const PERSISTENCE_GROUPITEM_NAME = "cursor_settings";
     const PROPERTY_CURSORMODECONTROL_NAME = "CursorModeControl";
     const PROPERTY_CURSORMODECONTROL_LOCALIZATION_PREFIX = `resourcePack.editor.${PROPERTY_CURSORMODECONTROL_NAME}`;
     const KEY_REPEAT_DELAY = 5;
@@ -7790,7 +8102,7 @@ var __webpack_exports__ = {};
             this._projectThroughWater = (0, server_editor_namespaceObject.makeObservable)(true);
             this._fixedDistanceCursor = (0, server_editor_namespaceObject.makeObservable)(5);
             this._canMoveManually = () => true;
-            this._updateCursorProperties = (session, cursorControlMode, cursorTargetMode, fixedDistanceValue, fixedDistanceSliderControl) => {
+            this._updateCursorProperties = (session, isActivationUpdate, cursorControlMode, cursorTargetMode, fixedDistanceValue, fixedDistanceSliderControl, isSaveSettings = true) => {
                 const cursorProperties = {
                     ...this._overrideCursorProperties,
                     controlMode: cursorControlMode,
@@ -7806,18 +8118,33 @@ var __webpack_exports__ = {};
                 if (this._projectThroughWaterCheckbox) {
                     this._projectThroughWaterCheckbox.visible = cursorControlMode === server_editor_namespaceObject.CursorControlMode.Mouse || cursorControlMode === server_editor_namespaceObject.CursorControlMode.KeyboardAndMouse;
                 }
-                session.extensionContext.cursor.setProperties(cursorProperties);
+                if (isActivationUpdate) {
+                    session.extensionContext.cursor.pushPropertiesById(cursorProperties, this.tool.id);
+                } else {
+                    session.extensionContext.cursor.updatePropertiesById(cursorProperties, this.tool.id);
+                }
+                this._cachedCursorProperties = cursorProperties;
+                if (isSaveSettings) {
+                    this._saveSettings(cursorProperties);
+                }
             };
-            this._storedCursorProperties = this.session.extensionContext.cursor.getProperties();
+            this._persistenceManager = getPersistenceManager(_session.extensionContext.player);
+            this._bindManualInput = _bindManualInput ?? true;
+            const savedCursorProperties = this._loadSettings();
             this._overrideCursorProperties = {
                 ..._overrideCursorProperties
             };
-            this._bindManualInput = _bindManualInput ?? true;
-            const currentCursorProperties = _overrideCursorProperties ?? this._storedCursorProperties;
-            this._mouseControlMode.set(currentCursorProperties.controlMode ?? server_editor_namespaceObject.CursorControlMode.KeyboardAndMouse);
-            this._cursorTargetMode.set(currentCursorProperties.targetMode ?? server_editor_namespaceObject.CursorTargetMode.Block);
+            this._cachedCursorProperties = this._overrideCursorProperties;
+            if (savedCursorProperties) {
+                delete savedCursorProperties.projectThroughLiquid;
+                this._cachedCursorProperties = savedCursorProperties;
+            }
+            const currentCursorProperties = _overrideCursorProperties ?? this.session.extensionContext.cursor.getDefaultProperties();
             this._projectThroughWater.set(currentCursorProperties.projectThroughLiquid ?? true);
-            this._fixedDistanceCursor.set(currentCursorProperties.fixedModeDistance ?? 5);
+            this._mouseControlMode.set(this._cachedCursorProperties.controlMode ?? server_editor_namespaceObject.CursorControlMode.KeyboardAndMouse);
+            this._cursorTargetMode.set(this._cachedCursorProperties.targetMode ?? server_editor_namespaceObject.CursorTargetMode.Block);
+            this._fixedDistanceCursor.set(this._cachedCursorProperties.fixedModeDistance ?? 5);
+            currentCursorProperties.visible = true;
         }
         bindMovementFunctions(canMove, moveForward, moveBack, moveLeft, moveRight, moveUp, moveDown) {
             this._canMoveManually = canMove ?? this._canMoveManually;
@@ -7832,9 +8159,21 @@ var __webpack_exports__ = {};
             super.initialize();
             this.tool.onModalToolActivation.subscribe((eventData => {
                 if (eventData.isActiveTool) {
-                    this._updateCursorProperties(this.session, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
+                    const savedCursorProperties = this._cachedCursorProperties;
+                    if (savedCursorProperties) {
+                        if (savedCursorProperties.controlMode) {
+                            this._mouseControlMode.set(savedCursorProperties.controlMode);
+                        }
+                        if (savedCursorProperties.targetMode) {
+                            this._cursorTargetMode.set(savedCursorProperties.targetMode);
+                        }
+                        if (savedCursorProperties.fixedModeDistance) {
+                            this._fixedDistanceCursor.set(savedCursorProperties.fixedModeDistance);
+                        }
+                    }
+                    this._updateCursorProperties(this.session, true, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl, false);
                 } else {
-                    this.session.extensionContext.cursor.setProperties(this._storedCursorProperties);
+                    this.session.extensionContext.cursor.popPropertiesById(this.tool.id);
                 }
             }));
             if (this._bindManualInput) {
@@ -7977,7 +8316,7 @@ var __webpack_exports__ = {};
                                 newMode = server_editor_namespaceObject.CursorControlMode.KeyboardAndMouse;
                             }
                             this._mouseControlMode.set(newMode);
-                            this._updateCursorProperties(this.session, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
+                            this._updateCursorProperties(this.session, false, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
                         }
                     });
                     this.registerToolKeyBinding(keyToggleMouseControlModeAction, {
@@ -7999,7 +8338,7 @@ var __webpack_exports__ = {};
                                     currentDistance = CursorModeControl.MAX_FIXED_DISTANCE;
                                 }
                                 this._fixedDistanceCursor.set(currentDistance);
-                                this._updateCursorProperties(this.session, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
+                                this._updateCursorProperties(this.session, false, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
                             }
                         } else if (mouseProps.inputType === server_editor_namespaceObject.MouseInputType.WheelIn && mouseProps.modifiers.shift) {
                             if (this._mouseControlMode.value === server_editor_namespaceObject.CursorControlMode.Fixed) {
@@ -8013,7 +8352,7 @@ var __webpack_exports__ = {};
                                     currentDistance = CursorModeControl.MIN_FIXED_DISTANCE;
                                 }
                                 this._fixedDistanceCursor.set(currentDistance);
-                                this._updateCursorProperties(this.session, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
+                                this._updateCursorProperties(this.session, false, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
                             }
                         }
                     }
@@ -8027,13 +8366,12 @@ var __webpack_exports__ = {};
                         const currentMode = this._cursorTargetMode.value;
                         const newMode = currentMode === server_editor_namespaceObject.CursorTargetMode.Block ? server_editor_namespaceObject.CursorTargetMode.Face : server_editor_namespaceObject.CursorTargetMode.Block;
                         this._cursorTargetMode.set(newMode);
-                        this._updateCursorProperties(this.session, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
+                        this._updateCursorProperties(this.session, false, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
                     }
                 });
                 this.registerToolKeyBinding(keyToggleTargetModeAction, {
                     key: server_editor_namespaceObject.KeyboardKey.KEY_B
                 }, "toggleBlockTargetMode");
-                this._updateCursorProperties(this.session, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
             }
         }
         shutdown() {
@@ -8041,7 +8379,6 @@ var __webpack_exports__ = {};
             if (this._cursorPropertyEventSub) {
                 this.session.extensionContext.afterEvents.cursorPropertyChange.unsubscribe(this._cursorPropertyEventSub);
             }
-            this.session.extensionContext.cursor.setProperties(this._storedCursorProperties);
         }
         activateControl() {
             super.activateControl();
@@ -8053,7 +8390,7 @@ var __webpack_exports__ = {};
         }
         forceTargetMode(value) {
             this._cursorTargetMode.set(value);
-            this._updateCursorProperties(this.session, this._mouseControlMode.value, value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
+            this._updateCursorProperties(this.session, false, this._mouseControlMode.value, value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
         }
         _destroyControlUI() {
             if (this._controlRootPane) {
@@ -8097,12 +8434,13 @@ var __webpack_exports__ = {};
                         value: server_editor_namespaceObject.CursorControlMode.Fixed
                     } ],
                     onChange: () => {
-                        this._updateCursorProperties(this.session, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
+                        this._updateCursorProperties(this.session, false, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
                     }
                 });
-                const cursorProperties = this.session.extensionContext.cursor.getProperties();
-                this._fixedDistanceCursor.set(cursorProperties.fixedModeDistance ?? 5);
-                const fixedDistanceSliderVisible = cursorProperties.controlMode === server_editor_namespaceObject.CursorControlMode.Fixed;
+                this._mouseControlMode.set(this._cachedCursorProperties.controlMode ?? server_editor_namespaceObject.CursorControlMode.KeyboardAndMouse);
+                this._cursorTargetMode.set(this._cachedCursorProperties.targetMode ?? server_editor_namespaceObject.CursorTargetMode.Block);
+                this._fixedDistanceCursor.set(this._cachedCursorProperties.fixedModeDistance ?? 5);
+                const fixedDistanceSliderVisible = this._cachedCursorProperties.controlMode === server_editor_namespaceObject.CursorControlMode.Fixed;
                 this._fixedDistanceSliderControl = this._controlRootPane.addNumber(this._fixedDistanceCursor, {
                     visible: fixedDistanceSliderVisible,
                     isInteger: true,
@@ -8112,7 +8450,7 @@ var __webpack_exports__ = {};
                     tooltip: this.localize("fixedDistance.slider.tooltip"),
                     variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
                     onChange: () => {
-                        this._updateCursorProperties(this.session, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
+                        this._updateCursorProperties(this.session, false, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
                     }
                 });
                 this.session.extensionContext.afterEvents.cursorPropertyChange.subscribe((_event => {
@@ -8162,7 +8500,7 @@ var __webpack_exports__ = {};
                         icon: "pack://textures/editor/face-mode.png"
                     } ],
                     onChange: () => {
-                        this._updateCursorProperties(this.session, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
+                        this._updateCursorProperties(this.session, false, this._mouseControlMode.value, this._cursorTargetMode.value, this._fixedDistanceCursor.value, this._fixedDistanceSliderControl);
                     }
                 });
             }
@@ -8175,7 +8513,7 @@ var __webpack_exports__ = {};
                         const cursorProperties = {
                             projectThroughLiquid: this._projectThroughWater.value
                         };
-                        this.session.extensionContext.cursor.setProperties(cursorProperties);
+                        this.session.extensionContext.cursor.updatePropertiesById(cursorProperties, this.tool.id);
                     }
                 });
                 this._cursorPropertyEventSub = this.session.extensionContext.afterEvents.cursorPropertyChange.subscribe((event => {
@@ -8183,6 +8521,38 @@ var __webpack_exports__ = {};
                         this._projectThroughWater.set(event.properties.projectThroughLiquid);
                     }
                 }));
+            }
+        }
+        _loadSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getGroup(CursorModeControl_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const key = `${this.tool.id}_${PERSISTENCE_GROUPITEM_NAME}`;
+                const storeItem = group.fetchItem(key);
+                if (storeItem && storeItem.value) {
+                    return storeItem.value;
+                }
+                group.dispose();
+            }
+            return undefined;
+        }
+        _saveSettings(settings) {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getOrCreateGroup(CursorModeControl_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const key = `${this.tool.id}_${PERSISTENCE_GROUPITEM_NAME}`;
+                const storeItem = group.getOrCreateItem(key, settings);
+                if (storeItem) {
+                    storeItem.commit();
+                }
+                group.dispose();
+                return;
             }
         }
     }
@@ -9065,6 +9435,8 @@ var __webpack_exports__ = {};
         TelemetrySource["Pencil"] = "PENCIL";
         TelemetrySource["Scale"] = "SCALE";
         TelemetrySource["Jigsaw"] = "JIGSAW";
+        TelemetrySource["ChunkManagement"] = "CHUNK_MANAGEMENT";
+        TelemetrySource["FloodTool"] = "FLOOD_TOOL";
     })(TelemetrySource || (TelemetrySource = {}));
     function fireTelemetryEvent(player, source, eventName, properties = {}) {
         if (SHOULD_LOG_TELEMETRY) {
@@ -9449,129 +9821,78 @@ var __webpack_exports__ = {};
             timeChangeListeners.delete(handle);
         }
     }
-    class PersistenceGroupItemImpl {
-        constructor(groupItem) {
-            this._persistenceGroupItem = groupItem;
+    class Vector3Pool {
+        constructor() {
+            this.width = 0;
+            this.height = 0;
+            this.depth = 0;
+            this.count = 0;
+            this.min = lib.VECTOR3_ZERO;
+            this.max = lib.VECTOR3_ZERO;
+            this.bitmap = new Uint8Array(0);
         }
-        get key() {
-            return this._persistenceGroupItem.getKey();
-        }
-        setValue(value) {
-            this._persistenceGroupItem.setValue(value);
-            this._persistenceGroupItem.commit();
-        }
-        getValue() {
-            return this._persistenceGroupItem.getAsJSON();
-        }
-        get value() {
-            if (!this.valueObj) {
-                try {
-                    this.valueObj = JSON.parse(this._persistenceGroupItem.getAsJSON());
-                } catch {
-                    return undefined;
-                }
-            }
-            return this.valueObj;
-        }
-        set value(itemValue) {
-            this.valueObj = itemValue;
-        }
-        commit() {
-            if (!this.valueObj) {
-                return;
-            }
-            const itemValue = ConvertValueToString(this.valueObj);
-            this._persistenceGroupItem.setValue(itemValue);
-            this._persistenceGroupItem.commit();
-        }
-    }
-    class PersistenceGroupImpl {
-        constructor(group) {
-            this._persistenceGroup = group;
-        }
-        createItem(key, item) {
-            const itemValue = ConvertValueToString(item);
-            const newItem = this._persistenceGroup.createItem(key, itemValue);
-            const itemImpl = new PersistenceGroupItemImpl(newItem);
-            itemImpl.value = item;
-            return itemImpl;
-        }
-        deleteItem(key) {
-            this._persistenceGroup.deleteItem(key);
-        }
-        getOrCreateItem(key, item) {
-            const itemValue = ConvertValueToString(item);
-            const newItem = this._persistenceGroup.getOrCreateItem(key, itemValue);
-            const itemImpl = new PersistenceGroupItemImpl(newItem);
-            itemImpl.value = item;
-            return itemImpl;
-        }
-        fetchItem(key) {
-            const item = this._persistenceGroup.fetchItem(key);
-            if (!item) {
-                return undefined;
-            }
-            return new PersistenceGroupItemImpl(item);
-        }
-        listItemNames() {
-            return this._persistenceGroup.listItems();
-        }
-        dispose() {
-            return this._persistenceGroup.dispose();
-        }
-    }
-    class PersistenceManager {
-        constructor(persistenceManager) {
-            this._internal = persistenceManager;
-        }
-        createGroup(namespaceName, options) {
-            return new PersistenceGroupImpl(this._internal.createGroup(namespaceName, options));
-        }
-        getOrCreateGroup(namespaceName, options) {
-            return new PersistenceGroupImpl(this._internal.getOrCreateGroup(namespaceName, options));
-        }
-        deleteGroup(namespaceName, options) {
-            return this._internal.deleteGroup(namespaceName, options);
-        }
-        getGroup(namespaceName, options) {
-            const group = this._internal.getGroup(namespaceName, options);
-            if (group) {
-                return new PersistenceGroupImpl(group);
-            }
-            return undefined;
-        }
-        getGroups(options) {
-            const groups = this._internal.fetchGroups(options);
-            const persistenceGroupList = [];
-            for (const group of groups) {
-                persistenceGroupList.push(new PersistenceGroupImpl(group));
-            }
-            return persistenceGroupList;
-        }
-        requestClientGroup(namespacedName, options, callback) {
-            const handleResult = persistenceGroup => {
-                if (persistenceGroup) {
-                    const group = new PersistenceGroupImpl(persistenceGroup);
-                    callback(group);
-                } else {
-                    callback(undefined);
-                }
+        init(min, max) {
+            let size = lib.Vector3Utils.subtract(max, min);
+            size = {
+                x: Math.ceil(size.x + 1),
+                y: Math.ceil(size.y + 1),
+                z: Math.ceil(size.z + 1)
             };
-            this._internal.requestClientGroup(namespacedName, options, handleResult);
+            this.width = size.x;
+            this.height = size.y;
+            this.depth = size.z;
+            this.min = min;
+            this.max = max;
+            const totalBits = this.width * this.height * this.depth;
+            this.bitmap = new Uint8Array(Math.ceil(totalBits / 8));
+            this.count = 0;
         }
-        disposeAllGroups() {
-            this._internal.disposeAllGroups();
+        reset() {
+            this.width = 0;
+            this.height = 0;
+            this.depth = 0;
+            this.count = 0;
+            this.min = lib.VECTOR3_ZERO;
+            this.max = lib.VECTOR3_ZERO;
+            this.bitmap = new Uint8Array(0);
         }
-    }
-    function ConvertValueToString(value) {
-        if (typeof value === "object" && value !== undefined || Array.isArray(value)) {
-            return JSON.stringify(value);
+        _index(x, y, z) {
+            const ox = x - this.min.x;
+            const oy = y - this.min.y;
+            const oz = z - this.min.z;
+            return ox + oy * this.width + oz * this.width * this.height;
         }
-        return value;
-    }
-    function getPersistenceManager(player) {
-        const persistenceManager = editorInternal.getPlayerServices(player).internalPersistenceManager;
-        return new PersistenceManager(persistenceManager);
+        add(v) {
+            if (v.x < this.min.x || v.x > this.max.x || v.y < this.min.y || v.y > this.max.y || v.z < this.min.z || v.z > this.max.z) {
+                return false;
+            }
+            const idx = this._index(v.x, v.y, v.z);
+            const byteIndex = idx >> 3;
+            const bitOffset = idx & 7;
+            const mask = 1 << bitOffset;
+            if ((this.bitmap[byteIndex] & mask) === 0) {
+                this.bitmap[byteIndex] |= mask;
+                this.count++;
+                return true;
+            }
+            return false;
+        }
+        size() {
+            return this.count;
+        }
+        isEmpty() {
+            return this.count === 0;
+        }
+        contains(v) {
+            if (v.x < this.min.x || v.x > this.max.x || v.y < this.min.y || v.y > this.max.y || v.z < this.min.z || v.z > this.max.z) {
+                return false;
+            }
+            const idx = this._index(v.x, v.y, v.z);
+            const byteIndex = idx >> 3;
+            const bitOffset = idx & 7;
+            const result = (this.bitmap[byteIndex] & 1 << bitOffset) !== 0;
+            return result;
+        }
     }
     function isNear(n1, n2) {
         return Math.abs(n1 - n2) < 1e-12;
@@ -12015,6 +12336,8 @@ var __webpack_exports__ = {};
         label: "Linear",
         value: EaseType.Linear
     } ];
+    const Line_PERSISTENCE_GROUP_NAME = "editor:line";
+    const Line_PERSISTENCE_GROUPITEM_NAME = "line_settings";
     class LineBehavior {
         constructor(uiSession) {
             this.startTransactionRequestedEventHandler = name => {
@@ -12028,6 +12351,7 @@ var __webpack_exports__ = {};
             };
             this._uiSession = uiSession;
             this._uiSession.log.debug(`Initializing ${LineBehavior.BEHAVIOR_NAME}`);
+            this._persistenceManager = getPersistenceManager(uiSession.extensionContext.player);
             this._updatePointAndLineValsOperationTickHandle = undefined;
             this._pointLinePropsDirty = false;
             this._segmentSelectorPropsDirty = false;
@@ -12085,6 +12409,7 @@ var __webpack_exports__ = {};
                 const newState = payload.newState;
                 this.updateState(newState);
             }));
+            this._loadSettings();
             this._tool = this.createTool();
             this._pane = this.createPane();
             this._cursorControlHolderPane = this._pane.createSubPane({
@@ -12101,25 +12426,8 @@ var __webpack_exports__ = {};
             this._tool.bindPropertyPane(this._pane);
             this.registerMouseButtonInputs();
             this.registerKeyboardInputs();
-            this._modeChangeEventSubscriptionHandle = this._uiSession.extensionContext.afterEvents.modeChange.subscribe((event => {
-                if (event.mode === server_editor_namespaceObject.EditorMode.Crosshair) {
-                    for (const controlPoint of this._lineSegmentsManager.controlPoints) {
-                        controlPoint.isSelected = false;
-                    }
-                    for (const selector of this._lineSegmentsManager.segmentSelectors) {
-                        selector.isSelected = false;
-                    }
-                    this._lineSegmentsManager.toggleVisibility(false);
-                } else {
-                    this._lineSegmentsManager.toggleVisibility(true);
-                }
-            }));
         }
         teardown() {
-            if (this._modeChangeEventSubscriptionHandle) {
-                this._uiSession.extensionContext.afterEvents.modeChange.unsubscribe(this._modeChangeEventSubscriptionHandle);
-                this._modeChangeEventSubscriptionHandle = undefined;
-            }
             this._cursorModeControl.shutdown();
             this._lineSegmentsManager.teardown();
         }
@@ -12149,9 +12457,7 @@ var __webpack_exports__ = {};
             });
             tool.onModalToolActivation.subscribe((eventData => {
                 if (eventData.isActiveTool) {
-                    this._backedUpColors = backupColors(this._uiSession.extensionContext);
                     this._cursorModeControl.activateControl();
-                    this._uiSession.extensionContext.cursor.setProperties(this._toolCursorProperties);
                     this._updatePointAndLineValsOperationTickHandle = server_namespaceObject.system.runInterval((() => {
                         this.runUpdatePointAndLineValsOperation();
                         this.runUpdateSegmentSelectorValsOperation();
@@ -12171,10 +12477,6 @@ var __webpack_exports__ = {};
                         this._updatePointAndLineValsOperationTickHandle = undefined;
                     }
                     this._cursorModeControl.deactivateControl();
-                    if (this._backedUpColors) {
-                        restoreBackedUpColors(this._uiSession.extensionContext, this._backedUpColors);
-                        this._backedUpColors = undefined;
-                    }
                     this._lineSegmentsManager.toggleVisibility(false);
                 }
             }));
@@ -12203,6 +12505,7 @@ var __webpack_exports__ = {};
                 } ],
                 onChange: () => {
                     this.updateLineAlgorithm();
+                    this._saveSettings();
                 }
             });
             pane.addDivider();
@@ -12364,6 +12667,7 @@ var __webpack_exports__ = {};
                     this._paneProperties.verticalWeightPropertyItem.visible = !newVal;
                     this._paneProperties.verticalWeightPropertyItem.enable = !newVal;
                     this._pointLinePropsDirty = true;
+                    this._saveSettings();
                 }
             });
             this._paneProperties.uniformWeightPropertyItem = globalWeightPane.addNumber(this._paneProperties.uniformWeight, {
@@ -12373,10 +12677,11 @@ var __webpack_exports__ = {};
                 isInteger: true,
                 min: LineBehavior.LINE_MIN_WEIGHT,
                 max: LineBehavior.LINE_MAX_WEIGHT,
-                enable: false,
-                visible: false,
+                enable: this._paneProperties.isUniformWeight.value,
+                visible: this._paneProperties.isUniformWeight.value,
                 onChange: () => {
                     this._pointLinePropsDirty = true;
+                    this._saveSettings();
                 }
             });
             this._paneProperties.horizontalWeightPropertyItem = globalWeightPane.addNumber(this._paneProperties.horizontalWeight, {
@@ -12386,9 +12691,11 @@ var __webpack_exports__ = {};
                 isInteger: true,
                 min: LineBehavior.LINE_MIN_WEIGHT,
                 max: LineBehavior.LINE_MAX_WEIGHT,
-                enable: true,
+                enable: !this._paneProperties.isUniformWeight.value,
+                visible: !this._paneProperties.isUniformWeight.value,
                 onChange: () => {
                     this._pointLinePropsDirty = true;
+                    this._saveSettings();
                 }
             });
             this._paneProperties.verticalWeightPropertyItem = globalWeightPane.addNumber(this._paneProperties.verticalWeight, {
@@ -12398,9 +12705,11 @@ var __webpack_exports__ = {};
                 isInteger: true,
                 min: LineBehavior.LINE_MIN_WEIGHT,
                 max: LineBehavior.LINE_MAX_WEIGHT,
-                enable: true,
+                enable: !this._paneProperties.isUniformWeight.value,
+                visible: !this._paneProperties.isUniformWeight.value,
                 onChange: () => {
                     this._pointLinePropsDirty = true;
+                    this._saveSettings();
                 }
             });
             globalWeightPane.endConstruct();
@@ -12576,7 +12885,7 @@ var __webpack_exports__ = {};
             const executeAction = this._uiSession.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.MouseRayCastAction,
                 onExecute: (mouseRay, mouseProps) => {
-                    if (mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton && mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonUp && this._uiSession.toolRail.getSelectedToolId() === this._tool.id) {
+                    if (mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton && mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonUp && this._tool.isActive) {
                         if (mouseProps.modifiers.ctrl) {
                             this.ctrlClick(mouseRay);
                         } else {
@@ -13205,6 +13514,52 @@ var __webpack_exports__ = {};
             const locationWithinMaxDistance = Math.abs(lib.Vector3Utils.magnitude(lib.Vector3Utils.subtract(playerXZLocation, XZLocation))) <= viewDistance;
             return locationUnoccupied && locationWithinMaxDistance;
         }
+        _loadSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getGroup(Line_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const storeItem = group.fetchItem(Line_PERSISTENCE_GROUPITEM_NAME);
+                if (storeItem && storeItem.value) {
+                    try {
+                        const storedSettings = storeItem.value;
+                        this._paneProperties.blockLineTypeAlgorithm.set(storedSettings.algorithm);
+                        this._paneProperties.horizontalWeight.set(storedSettings.horizontalWeight);
+                        this._paneProperties.verticalWeight.set(storedSettings.verticalWeight);
+                        this._paneProperties.isUniformWeight.set(storedSettings.isUniformWeight);
+                        this._paneProperties.uniformWeight.set(storedSettings.uniformWeight);
+                    } catch (error) {
+                        this._uiSession.log.error("Fail to load the settings, error: " + stringFromException(error));
+                    }
+                }
+                group.dispose();
+            }
+        }
+        _saveSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getOrCreateGroup(Line_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const settings = {
+                    algorithm: this._paneProperties.blockLineTypeAlgorithm.value,
+                    horizontalWeight: this._paneProperties.horizontalWeight.value,
+                    verticalWeight: this._paneProperties.verticalWeight.value,
+                    isUniformWeight: this._paneProperties.isUniformWeight.value,
+                    uniformWeight: this._paneProperties.uniformWeight.value
+                };
+                const storeItem = group.getOrCreateItem(Line_PERSISTENCE_GROUPITEM_NAME, settings);
+                if (storeItem) {
+                    storeItem.commit();
+                }
+                group.dispose();
+                return;
+            }
+            this._uiSession.log.error("Fail to save settings for Line");
+        }
     }
     LineBehavior.BEHAVIOR_NAME = "Line";
     LineBehavior.LINE_MIN_WEIGHT = 1;
@@ -13500,11 +13855,13 @@ var __webpack_exports__ = {};
         label: "resourcePack.editor.timeOfDay.dropDown.custom",
         time: CUSTOM_TOD
     } ];
-    const paneDataDynamicPropertyName = "playtest:paneData";
+    const PLAY_TEST_GROUP = "editor:playtest";
+    const PANE_SETTINGS_NAME = "pane_settings";
     class PlaytestBehavior {
         constructor(uiSession) {
             this._lastPlayTestAvailability = false;
-            this._playTestData = this.loadPlayTestDynamicProperties(uiSession);
+            this._persistenceManager = getPersistenceManager(uiSession.extensionContext.player);
+            this._playTestData = this.loadPlayTestSettings();
             this._extensionMenuItem = this.addMenuItem(uiSession);
             this._propertyPane = this.buildPropertyPane(uiSession);
             this.registerActionBarItem(uiSession);
@@ -13572,7 +13929,7 @@ var __webpack_exports__ = {};
                 tooltip: "resourcePack.editor.playtest.Dialog.GameMode.tooltip",
                 entries: gameTypeItems,
                 onChange: () => {
-                    this.savePlayTestDynamicProperties(player);
+                    this.savePlayTestSettings(player);
                 }
             });
             const difficultyItems = validDifficulties.map(((v, i) => {
@@ -13587,14 +13944,14 @@ var __webpack_exports__ = {};
                 tooltip: "resourcePack.editor.playtest.Dialog.Difficulty.tooltip",
                 entries: difficultyItems,
                 onChange: () => {
-                    this.savePlayTestDynamicProperties(player);
+                    this.savePlayTestSettings(player);
                 }
             });
             propertyPane.addBool(this._playTestData.overrideSpawn, {
                 title: "resourcePack.editor.playtest.Dialog.OverrideSpawn",
                 tooltip: "resourcePack.editor.playtest.Dialog.OverrideSpawn.tooltip",
                 onChange: () => {
-                    this.savePlayTestDynamicProperties(player);
+                    this.savePlayTestSettings(player);
                 }
             });
             const advancedPane = propertyPane.createSubPane({
@@ -13617,7 +13974,7 @@ var __webpack_exports__ = {};
                 tooltip: "resourcePack.editor.playtest.Dialog.DaylightCycle.tooltip",
                 entries: daylightCycleItems,
                 onChange: () => {
-                    this.savePlayTestDynamicProperties(player);
+                    this.savePlayTestSettings(player);
                 }
             });
             const customTime = advancedPane.addString(this._playTestData.time, {
@@ -13625,7 +13982,7 @@ var __webpack_exports__ = {};
                 tooltip: "resourcePack.editor.timeOfDay.customTime.tooltip",
                 enable: this._playTestData.timeOfDay.value === 7,
                 onChange: (newValue, oldValue) => {
-                    this.savePlayTestDynamicProperties(player);
+                    this.savePlayTestSettings(player);
                     if (!this._playTestData) {
                         return;
                     }
@@ -13656,14 +14013,14 @@ var __webpack_exports__ = {};
                             customTime.enable = false;
                         }
                     }
-                    this.savePlayTestDynamicProperties(player);
+                    this.savePlayTestSettings(player);
                 }
             });
             advancedPane.addBool(this._playTestData.weatherCycle, {
                 title: "resourcePack.editor.playtest.Dialog.WeatherCycle",
                 tooltip: "resourcePack.editor.playtest.Dialog.WeatherCycle.tooltip",
                 onChange: () => {
-                    this.savePlayTestDynamicProperties(player);
+                    this.savePlayTestSettings(player);
                 }
             });
             const weatherItems = validWeather.map(((v, i) => {
@@ -13678,14 +14035,14 @@ var __webpack_exports__ = {};
                 tooltip: "resourcePack.editor.playtest.Dialog.weather.tooltip",
                 entries: weatherItems,
                 onChange: () => {
-                    this.savePlayTestDynamicProperties(player);
+                    this.savePlayTestSettings(player);
                 }
             });
             advancedPane.addBool(this._playTestData.showCoordinates, {
                 title: "resourcePack.editor.playtest.Dialog.ShowCoordinates",
                 tooltip: "resourcePack.editor.playtest.Dialog.ShowCoordinates.tooltip",
                 onChange: () => {
-                    this.savePlayTestDynamicProperties(player);
+                    this.savePlayTestSettings(player);
                 }
             });
             const oneSleepingPlayerMessage = {
@@ -13712,7 +14069,7 @@ var __webpack_exports__ = {};
                         }
                         sleepSkipPercentPropItem.setTitle(localizedPercentTitle);
                     }
-                    this.savePlayTestDynamicProperties(player);
+                    this.savePlayTestSettings(player);
                 }
             });
             const sleepSkipPercentProps = {
@@ -13730,7 +14087,7 @@ var __webpack_exports__ = {};
                         localizedPercentTitle.props = [ oneSleepingPlayerMessage.id ];
                     }
                     sleepSkipPercentPropItem.setTitle(localizedPercentTitle);
-                    this.savePlayTestDynamicProperties(player);
+                    this.savePlayTestSettings(player);
                 }
             };
             const sleepSkipPercentPropItem = advancedPane.addNumber(this._playTestData.sleepSkipPercent, sleepSkipPercentProps);
@@ -13772,15 +14129,19 @@ var __webpack_exports__ = {};
             });
             return propertyPane;
         }
-        loadPlayTestDynamicProperties(uiSession) {
+        loadPlayTestSettings() {
             let loadedData;
-            const dynamicPaneData = uiSession.extensionContext.player.getDynamicProperty(paneDataDynamicPropertyName);
-            if (dynamicPaneData) {
-                try {
-                    loadedData = JSON.parse(dynamicPaneData);
-                } catch (_e) {
-                    uiSession.log.warning(`'${dynamicPaneData}' could not be parsed`);
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getGroup(PLAY_TEST_GROUP, option);
+            if (group) {
+                const paneSettings = group.fetchItem(PANE_SETTINGS_NAME);
+                if (paneSettings) {
+                    loadedData = paneSettings.value;
                 }
+                group.dispose();
             }
             const defaultPaneData = {
                 gameMode: (0, server_editor_namespaceObject.makeObservable)(loadedData?.gameMode ?? 0),
@@ -13798,13 +14159,22 @@ var __webpack_exports__ = {};
             };
             return defaultPaneData;
         }
-        savePlayTestDynamicProperties(player) {
+        savePlayTestSettings(player) {
             if (player) {
                 const paneData = Object.entries(this._playTestData).reduce(((data, [key, observable]) => {
                     data[key] = observable.value;
                     return data;
                 }), {});
-                player.setDynamicProperty(paneDataDynamicPropertyName, JSON.stringify(paneData));
+                const option = {
+                    scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                    version: 0
+                };
+                const group = this._persistenceManager.getOrCreateGroup(PLAY_TEST_GROUP, option);
+                if (group) {
+                    const paneSettings = group.getOrCreateItem(PANE_SETTINGS_NAME, paneData);
+                    paneSettings.commit();
+                    group.dispose();
+                }
             }
         }
         parseTimeValue(timeString) {
@@ -13975,7 +14345,7 @@ var __webpack_exports__ = {};
         };
     }
     function limitVolumeSize(volume, prospectiveTo, maxVolumeSize) {
-        const newVolume = new server_namespaceObject.BlockVolume(volume.from, prospectiveTo);
+        const newVolume = new BlockVolume(volume.from, prospectiveTo);
         const newSpan = newVolume.getSpan();
         const deltaSizeX = newSpan.x - maxVolumeSize.x;
         const deltaSizeY = newSpan.y - maxVolumeSize.y;
@@ -13996,7 +14366,7 @@ var __webpack_exports__ = {};
         if (deltaSizeZ > 0) {
             newZ -= dirZ * deltaSizeZ;
         }
-        return new server_namespaceObject.BlockVolume(volume.from, {
+        return new BlockVolume(volume.from, {
             x: newX,
             y: newY,
             z: newZ
@@ -14097,7 +14467,6 @@ var __webpack_exports__ = {};
     var server_editor_bindings_y = x => () => x;
     const server_editor_bindings_namespaceObject = server_editor_bindings_x({
         ["Axis"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_bindings_e2bf1028__.Axis,
-        ["EditorMode"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_bindings_e2bf1028__.EditorMode,
         ["InputModifier"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_bindings_e2bf1028__.InputModifier,
         ["PaintCompletionState"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_bindings_e2bf1028__.PaintCompletionState,
         ["WidgetGizmoEventType"]: () => __WEBPACK_EXTERNAL_MODULE__minecraft_server_editor_bindings_e2bf1028__.WidgetGizmoEventType,
@@ -14109,12 +14478,22 @@ var __webpack_exports__ = {};
         MarqueeSelectionVolumeState[MarqueeSelectionVolumeState["Dragging"] = 1] = "Dragging";
         MarqueeSelectionVolumeState[MarqueeSelectionVolumeState["Done"] = 2] = "Done";
     })(MarqueeSelectionVolumeState || (MarqueeSelectionVolumeState = {}));
+    var ThreePointSelectionState;
+    (function(ThreePointSelectionState) {
+        ThreePointSelectionState[ThreePointSelectionState["NoPoints"] = 0] = "NoPoints";
+        ThreePointSelectionState[ThreePointSelectionState["FirstCorner"] = 1] = "FirstCorner";
+        ThreePointSelectionState[ThreePointSelectionState["BottomFace"] = 2] = "BottomFace";
+        ThreePointSelectionState[ThreePointSelectionState["Finished"] = 3] = "Finished";
+    })(ThreePointSelectionState || (ThreePointSelectionState = {}));
     class MarqueeSelectionVolume {
         get parent() {
             return this._modeImpl.parent;
         }
         constructor(_modeImpl, _worldVolume, onChanged) {
             this._state = MarqueeSelectionVolumeState.Idle;
+            this._threePointSelectionState = ThreePointSelectionState.NoPoints;
+            this._firstCorner = undefined;
+            this._secondCorner = undefined;
             this._isNudgeActionActive = false;
             this._onChanged = () => {};
             this._modeImpl = _modeImpl;
@@ -14144,12 +14523,11 @@ var __webpack_exports__ = {};
                 enableResizeHandles: server_editor_namespaceObject.Axis.X | server_editor_namespaceObject.Axis.Y | server_editor_namespaceObject.Axis.Z,
                 hullColor: boundsColors.hull,
                 outlineColor: boundsColors.outline,
-                minSize: {
-                    x: 1,
-                    y: 1,
-                    z: 1
+                limit: {
+                    min: lib.VECTOR3_ONE,
+                    max: server_editor_namespaceObject.editor.constants.maxDynamicSelectionSize,
+                    maxBlockVolume: server_editor_namespaceObject.editor.constants.maxBlockVolume
                 },
-                maxSize: server_editor_namespaceObject.editor.constants.maxSelectionSize,
                 stateChangeEvent: evt => this.onMarqueCornerEvent(evt)
             });
         }
@@ -14248,8 +14626,26 @@ var __webpack_exports__ = {};
         get state() {
             return this._state;
         }
+        get threePointSelectionState() {
+            return this._threePointSelectionState;
+        }
+        get firstCorner() {
+            return this._firstCorner;
+        }
+        get secondCorner() {
+            return this._secondCorner;
+        }
         set state(value) {
             this._state = value;
+        }
+        set threePointSelectionState(value) {
+            this._threePointSelectionState = value;
+        }
+        set firstCorner(value) {
+            this._firstCorner = value;
+        }
+        set secondCorner(value) {
+            this._secondCorner = value;
         }
         get isDragging() {
             return this._state === MarqueeSelectionVolumeState.Dragging;
@@ -14260,9 +14656,19 @@ var __webpack_exports__ = {};
         get isDone() {
             return this._state === MarqueeSelectionVolumeState.Done;
         }
+        get isShiftDown() {
+            return this._modeImpl?.parent?.isModifierDown(server_editor_bindings_namespaceObject.InputModifier.Shift) ?? false;
+        }
         onColorChangeEvent(_outline, _hull) {
             this._widgetBoxComponent.hullColor = _hull;
             this._widgetBoxComponent.outlineColor = _outline;
+        }
+        toggleCornerGizmos(showCorners) {
+            if (showCorners) {
+                this._widgetBoxComponent.enableResizeHandles = server_editor_namespaceObject.Axis.X | server_editor_namespaceObject.Axis.Y | server_editor_namespaceObject.Axis.Z;
+            } else {
+                this._widgetBoxComponent.enableResizeHandles = server_editor_namespaceObject.Axis.None;
+            }
         }
         onOriginEvent(evt) {
             if (evt.eventType === server_editor_namespaceObject.WidgetGizmoEventType.OriginGrabbed && this._modeImpl.parent.isModifierDown(server_editor_bindings_namespaceObject.InputModifier.Alt) && this._modeImpl.parent.isModifierDown(server_editor_bindings_namespaceObject.InputModifier.Shift)) {
@@ -14284,7 +14690,9 @@ var __webpack_exports__ = {};
         }
         onMarqueCornerEvent(evt) {
             if (evt.eventType === server_editor_namespaceObject.WidgetGizmoEventType.CornerGrabbed) {
-                this.parent.beginTransactionableOperation("Marquee Volume Resize");
+                if (!this.parent.isTransactionOperationActive()) {
+                    this.parent.beginTransactionableOperation("Marquee Volume Resize");
+                }
                 return;
             }
             try {
@@ -14293,7 +14701,7 @@ var __webpack_exports__ = {};
                 const newBounds = newTransformedVolume.getBoundingBox();
                 if (evt.eventType === server_editor_namespaceObject.WidgetGizmoEventType.CornerMoved) {
                     if (!server_namespaceObject.BlockBoundingBoxUtils.equals(prevBounds, newBounds)) {
-                        const maxSelectionSize = server_editor_namespaceObject.editor.constants.maxSelectionSize;
+                        const maxSelectionSize = server_editor_namespaceObject.editor.constants.maxDynamicSelectionSize;
                         const span = lib.Vector3Utils.clamp(newTransformedVolume.getSpan(), {
                             min: {
                                 x: 1,
@@ -14308,7 +14716,7 @@ var __webpack_exports__ = {};
                 }
                 if (evt.eventType === server_editor_namespaceObject.WidgetGizmoEventType.CornerReleased) {
                     if (!server_namespaceObject.BlockBoundingBoxUtils.equals(prevBounds, newBounds)) {
-                        const maxSelectionSize = server_editor_namespaceObject.editor.constants.maxSelectionSize;
+                        const maxSelectionSize = server_editor_namespaceObject.editor.constants.maxDynamicSelectionSize;
                         const span = lib.Vector3Utils.clamp(newTransformedVolume.getSpan(), {
                             min: {
                                 x: 1,
@@ -14347,7 +14755,7 @@ var __webpack_exports__ = {};
                 this.parent.debugLog(`Transformed Volume: ${lib.Vector3Utils.toString(newBounds.min)} -> ${lib.Vector3Utils.toString(newBounds.max)}`);
                 if (evt.eventType === server_editor_namespaceObject.WidgetGizmoEventType.OriginMoved) {
                     if (!server_namespaceObject.BlockBoundingBoxUtils.equals(prevBounds, newBounds)) {
-                        const maxSelectionSize = server_editor_namespaceObject.editor.constants.maxSelectionSize;
+                        const maxSelectionSize = server_editor_namespaceObject.editor.constants.maxDynamicSelectionSize;
                         const span = lib.Vector3Utils.clamp(newTransformedVolume.getSpan(), {
                             min: {
                                 x: 1,
@@ -14362,7 +14770,7 @@ var __webpack_exports__ = {};
                 }
                 if (evt.eventType === server_editor_namespaceObject.WidgetGizmoEventType.OriginReleased) {
                     if (!server_namespaceObject.BlockBoundingBoxUtils.equals(prevBounds, newBounds)) {
-                        const maxSelectionSize = server_editor_namespaceObject.editor.constants.maxSelectionSize;
+                        const maxSelectionSize = server_editor_namespaceObject.editor.constants.maxDynamicSelectionSize;
                         const span = lib.Vector3Utils.clamp(newTransformedVolume.getSpan(), {
                             min: {
                                 x: 1,
@@ -14392,6 +14800,8 @@ var __webpack_exports__ = {};
             this._translationKeyRepeatRefCount = 0;
             this._resizeKeyRepeatRefCount = 0;
             this._resizeShrink = false;
+            this._tickHandle = undefined;
+            this._shiftTickHandle = undefined;
             this._parentPane = _parentPane;
             this._parent = _parent;
             this._modePane = this._parentPane.createSubPane({
@@ -14455,12 +14865,12 @@ var __webpack_exports__ = {};
                     y: 1,
                     z: 1
                 },
-                max: server_editor_namespaceObject.editor.constants.maxSelectionSize,
+                max: server_editor_namespaceObject.editor.constants.maxDynamicSelectionSize,
                 onChange: (newValue, oldValue) => {
                     this.parent.performSingleTransactionableOperation((() => {
                         const volume = this._currentVolume();
                         if (volume) {
-                            volume.span = this._size.value;
+                            volume.span = clampVolumeAlongAxis(oldValue, this._size.value, server_editor_namespaceObject.editor.constants.maxBlockVolume);
                         }
                         this.applyVolumeStackToSelectionManager();
                         return true;
@@ -14506,11 +14916,22 @@ var __webpack_exports__ = {};
             if (_toolActive) {
                 this._modePane.show();
             }
+            this._tickHandle = server_namespaceObject.system.runInterval((() => {
+                this._onTick();
+            }), server_namespaceObject.TicksPerSecond / 3);
             this._showVolumes();
         }
         deactivate(_toolActive, _switchingModes) {
             if (_toolActive) {
                 this._modePane.hide();
+            }
+            if (this._tickHandle) {
+                server_namespaceObject.system.clearRun(this._tickHandle);
+                this._tickHandle = undefined;
+            }
+            if (this._shiftTickHandle) {
+                server_namespaceObject.system.clearRun(this._shiftTickHandle);
+                this._shiftTickHandle = undefined;
             }
             this._volumeStack.forEach((volume => {
                 volume.deactivateHandles();
@@ -14538,83 +14959,270 @@ var __webpack_exports__ = {};
         applyImmediateSelection() {}
         onMouseClickAndDrag(_mouseRay, _mouseProps, _oneShot = false) {
             if (_mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton) {
-                if (_mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown) {
-                    if (_mouseRay.rayHit) {
-                        this.parent.beginTransactionableOperation("Marquee Volume Creation");
-                        if (this._volumeStack.length !== 0 && _mouseProps.modifiers.shift) {
-                            const volume = this._currentVolume();
-                            if (volume) {
-                                this._tryAssignVolumeTo(volume, _mouseRay.cursorBlockLocation);
-                                volume.state = MarqueeSelectionVolumeState.Idle;
-                                this.debugLog(`SHIFT+Click - Marquee Volume to ${lib.Vector3Utils.toString(volume.to)}`);
-                            } else {
-                                this.parent.cancelTransactionableOperation();
-                                throw new Error("Failed to fetch current volume");
-                            }
-                        } else {
-                            if (!_mouseProps.modifiers.ctrl) {
-                                this.debugLog(`Clearing Marquee Stack - no CTRL`);
-                                this._clearVolumeStack();
-                            } else {
-                                this.debugLog(`CTRL pressed - creating new Marquee item on stack`);
-                            }
-                            const blockVolume = new server_namespaceObject.BlockVolume(_mouseRay.cursorBlockLocation, _mouseRay.cursorBlockLocation);
-                            const newVolume = this._createVolume(blockVolume, true);
-                            newVolume.state = MarqueeSelectionVolumeState.Idle;
-                            this.debugLog(`Clicked at ${lib.Vector3Utils.toString(_mouseRay.cursorBlockLocation)}`);
+                switch (_mouseProps.inputType) {
+                  case server_editor_namespaceObject.MouseInputType.ButtonDown:
+                    {
+                        if (_mouseRay.rayHit) {
+                            this._onLeftMousePressed(_mouseProps.modifiers.ctrl, _mouseProps.modifiers.shift, _mouseRay);
                         }
-                    } else {}
-                } else if (_mouseProps.inputType === server_editor_namespaceObject.MouseInputType.DragStart || _mouseProps.inputType === server_editor_namespaceObject.MouseInputType.Drag) {
-                    if (_mouseRay.rayHit) {
-                        const volume = this._currentVolume();
-                        if (volume) {
-                            volume.state = MarqueeSelectionVolumeState.Dragging;
-                            const maxSelectionSize = server_editor_namespaceObject.editor.constants.maxSelectionSize;
-                            const newVolume = limitVolumeSize(volume.blockVolume, _mouseRay.cursorBlockLocation, maxSelectionSize);
-                            this.debugLog(`Marquee drag ${lib.Vector3Utils.toString(newVolume.from)} -> ${lib.Vector3Utils.toString(newVolume.to)} (${lib.Vector3Utils.toString(newVolume.getSpan())})`);
-                            this._tryAssignVolumeTo(volume, newVolume.to);
-                        } else {
-                            this.parent.cancelTransactionableOperation();
-                            throw new Error("Failed to fetch current volume");
+                        break;
+                    }
+
+                  case server_editor_namespaceObject.MouseInputType.Drag:
+                    {
+                        if (_mouseRay.rayHit) {
+                            this._onLeftMouseDrag(_mouseProps.modifiers.ctrl, _mouseProps.modifiers.shift, _mouseRay);
                         }
+                        break;
                     }
-                } else if (_mouseProps.inputType === server_editor_namespaceObject.MouseInputType.DragEnd || _mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonUp) {
-                    if (_mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonUp) {
-                        this.debugLog(`Mouse button released`);
-                    } else if (_mouseProps.inputType === server_editor_namespaceObject.MouseInputType.DragEnd) {
-                        this.debugLog(`Mouse drag ended`);
-                    }
-                    if (!this.parent.isTransactionOperationActive()) {
-                        return;
-                    }
-                    const volume = this._currentVolume();
-                    if (volume) {
-                        if (volume.isDragging || volume.isIdle) {
-                            const maxSelectionSize = server_editor_namespaceObject.editor.constants.maxSelectionSize;
-                            const newVolume = limitVolumeSize(volume.blockVolume, _mouseRay.cursorBlockLocation, maxSelectionSize);
-                            this.debugLog(`Marquee drag END ${lib.Vector3Utils.toString(newVolume.from)} -> ${lib.Vector3Utils.toString(newVolume.to)} (${lib.Vector3Utils.toString(newVolume.getSpan())})`);
-                            try {
-                                const bounds = newVolume.getBoundingBox();
-                                volume.from = bounds.min;
-                                volume.span = newVolume.getSpan();
-                            } catch {
-                                this._popVolume();
-                            }
-                            volume.state = MarqueeSelectionVolumeState.Done;
-                            this.applyVolumeStackToSelectionManager();
-                            this.parent.endTransactionableOperation();
-                        } else {
-                            this.debugLog(`Marquee drag operation ended and volume is done already!`);
+
+                  case server_editor_namespaceObject.MouseInputType.ButtonUp:
+                    {
+                        if (_mouseRay.rayHit) {
+                            this._onLeftMouseReleased(_mouseProps.modifiers.shift, _mouseRay);
                         }
-                    } else {
-                        this.parent.cancelTransactionableOperation();
+                        break;
+                    }
+
+                  case server_editor_namespaceObject.MouseInputType.DragStart:
+                  case server_editor_namespaceObject.MouseInputType.DragEnd:
+                  default:
+                    {
+                        break;
                     }
                 }
             }
         }
-        _tryAssignVolumeTo(volume, toLocation) {
+        _onTick() {
+            if (this._parent.isSimpleSelectEnabled()) {
+                return;
+            }
+            const volume = this._currentVolume();
+            if (!volume) {
+                return;
+            }
+            if (volume.isShiftDown) {
+                if (!this._shiftTickHandle) {
+                    this._shiftTickHandle = server_namespaceObject.system.runInterval((() => {
+                        this._onShiftTick();
+                    }), 1);
+                }
+            } else if (this._shiftTickHandle) {
+                server_namespaceObject.system.clearRun(this._shiftTickHandle);
+                this._shiftTickHandle = undefined;
+            }
+        }
+        _onShiftTick() {
+            if (this._parent.isSimpleSelectEnabled()) {
+                if (this._shiftTickHandle) {
+                    server_namespaceObject.system.clearRun(this._shiftTickHandle);
+                    this._shiftTickHandle = undefined;
+                }
+                return;
+            }
+            const volume = this._currentVolume();
+            if (!volume) {
+                return;
+            }
+            const mouseHit = this.session.extensionContext.cursor.getRay();
+            if (!mouseHit.hit) {
+                return;
+            }
+            volume.toggleCornerGizmos(!volume.isShiftDown || volume.threePointSelectionState === ThreePointSelectionState.Finished || volume.threePointSelectionState === ThreePointSelectionState.NoPoints);
+            if (!volume.isShiftDown) {
+                if (this._shiftTickHandle) {
+                    server_namespaceObject.system.clearRun(this._shiftTickHandle);
+                    this._shiftTickHandle = undefined;
+                }
+                return;
+            }
+            const mouseRay = lib.Vector3Utils.normalize(lib.Vector3Utils.subtract(mouseHit.end, mouseHit.start));
+            if (volume.threePointSelectionState === ThreePointSelectionState.FirstCorner) {
+                const secondPointCandidate = calculateYPlaneIntersection(volume.firstCorner ?? volume.from, mouseHit.start, mouseRay);
+                if (secondPointCandidate) {
+                    if (!lib.Vector3Utils.equals(secondPointCandidate, volume.to) && this._isValidCornerPoint(secondPointCandidate, volume.from)) {
+                        this._tryAssignVolumeTo(volume, secondPointCandidate);
+                    }
+                }
+            } else if (volume.threePointSelectionState === ThreePointSelectionState.BottomFace) {
+                const thirdPointCandidate = calculateClosestPointOnSecondLine(mouseHit.start, mouseRay, volume.secondCorner ?? volume.to, lib.VECTOR3_UP);
+                if (thirdPointCandidate) {
+                    if (!lib.Vector3Utils.equals(thirdPointCandidate, volume.to) && this._isValidCornerPoint(thirdPointCandidate, volume.from)) {
+                        this._tryAssignVolumeTo(volume, thirdPointCandidate);
+                    }
+                }
+            }
+        }
+        _onLeftMousePressed(isCtrlDown, isShiftDown, mouseRay) {
+            if (!this.parent.isTransactionOperationActive()) {
+                this.parent.beginTransactionableOperation("Marquee Selection Operation");
+            }
+            let currVolume = this._currentVolume();
+            if (!currVolume) {
+                currVolume = this._createVolume(new server_namespaceObject.BlockVolume(mouseRay.cursorBlockLocation, mouseRay.cursorBlockLocation), true);
+                currVolume.firstCorner = mouseRay.cursorBlockLocation;
+                currVolume.secondCorner = undefined;
+                currVolume.threePointSelectionState = ThreePointSelectionState.NoPoints;
+            }
+            currVolume.state = MarqueeSelectionVolumeState.Idle;
+            const threePointSelectionEnabled = !this._parent.isSimpleSelectEnabled();
+            if (threePointSelectionEnabled && isShiftDown) {
+                switch (currVolume.threePointSelectionState) {
+                  case ThreePointSelectionState.FirstCorner:
+                    {
+                        const newSecondCorner = calculateYPlaneIntersection(currVolume.from, mouseRay.location, mouseRay.direction);
+                        if (newSecondCorner) {
+                            if (this._isValidCornerPoint(newSecondCorner, currVolume.from)) {
+                                this._tryAssignVolumeTo(currVolume, newSecondCorner);
+                                currVolume.secondCorner = currVolume.to;
+                                currVolume.threePointSelectionState = ThreePointSelectionState.BottomFace;
+                            }
+                        }
+                        break;
+                    }
+
+                  case ThreePointSelectionState.BottomFace:
+                    {
+                        const topOrBottomCorner = calculateClosestPointOnSecondLine(mouseRay.location, mouseRay.direction, currVolume.secondCorner ?? currVolume.to, lib.VECTOR3_UP);
+                        if (topOrBottomCorner) {
+                            const newSecondCorner = {
+                                x: currVolume?.secondCorner?.x ?? currVolume.to.x,
+                                y: topOrBottomCorner.y,
+                                z: currVolume?.secondCorner?.z ?? currVolume.to.z
+                            };
+                            if (this._isValidCornerPoint(newSecondCorner, currVolume.from)) {
+                                this._tryAssignVolumeTo(currVolume, newSecondCorner);
+                                currVolume.secondCorner = currVolume.to;
+                                currVolume.threePointSelectionState = ThreePointSelectionState.Finished;
+                            }
+                        }
+                        break;
+                    }
+
+                  case ThreePointSelectionState.NoPoints:
+                  case ThreePointSelectionState.Finished:
+                    {
+                        if (this._tryAssignVolumeFrom(currVolume, mouseRay.cursorBlockLocation) && this._tryAssignVolumeTo(currVolume, mouseRay.cursorBlockLocation)) {
+                            currVolume.firstCorner = mouseRay.cursorBlockLocation;
+                            currVolume.secondCorner = undefined;
+                            currVolume.threePointSelectionState = ThreePointSelectionState.FirstCorner;
+                        }
+                        break;
+                    }
+
+                  default:
+                    {
+                        break;
+                    }
+                }
+            } else {
+                if (isShiftDown) {
+                    const targetLocation = mouseRay.cursorBlockLocation;
+                    if (!lib.Vector3Utils.equals(targetLocation, currVolume.to) && this._isValidCornerPoint(targetLocation, currVolume.from)) {
+                        this._tryAssignVolumeTo(currVolume, targetLocation);
+                    }
+                } else {
+                    if (!isCtrlDown) {
+                        this._clearVolumeStack();
+                    }
+                    const newVolume = this._createVolume(new server_namespaceObject.BlockVolume(mouseRay.cursorBlockLocation, mouseRay.cursorBlockLocation), true);
+                    newVolume.firstCorner = mouseRay.cursorBlockLocation;
+                    newVolume.secondCorner = undefined;
+                    newVolume.state = MarqueeSelectionVolumeState.Idle;
+                    newVolume.threePointSelectionState = ThreePointSelectionState.FirstCorner;
+                }
+            }
+            this.applyVolumeStackToSelectionManager();
+        }
+        _onLeftMouseDrag(isCtrlDown, isShiftDown, mouseRay) {
+            if (!this.parent.isTransactionOperationActive()) {
+                return;
+            }
+            const currVolume = this._currentVolume();
+            if (!currVolume) {
+                return;
+            }
+            currVolume.state = MarqueeSelectionVolumeState.Dragging;
+            const threePointSelectionEnabled = !this._parent.isSimpleSelectEnabled();
+            if (threePointSelectionEnabled && isShiftDown) {
+                switch (currVolume.threePointSelectionState) {
+                  case ThreePointSelectionState.FirstCorner:
+                    {
+                        const newSecondCorner = calculateYPlaneIntersection(currVolume.firstCorner ?? currVolume.from, mouseRay.location, mouseRay.direction);
+                        if (newSecondCorner) {
+                            if (!lib.Vector3Utils.equals(newSecondCorner, currVolume.to) && this._isValidCornerPoint(currVolume.from, newSecondCorner)) {
+                                this._tryAssignVolumeTo(currVolume, newSecondCorner);
+                                currVolume.secondCorner = currVolume.to;
+                            }
+                        }
+                        break;
+                    }
+
+                  case ThreePointSelectionState.NoPoints:
+                  case ThreePointSelectionState.BottomFace:
+                  case ThreePointSelectionState.Finished:
+                  default:
+                    {
+                        break;
+                    }
+                }
+            } else {
+                const targetLocation = mouseRay.cursorBlockLocation;
+                if (!lib.Vector3Utils.equals(targetLocation, currVolume.to) && this._isValidCornerPoint(currVolume.from, targetLocation)) {
+                    this._tryAssignVolumeTo(currVolume, targetLocation);
+                }
+            }
+        }
+        _onLeftMouseReleased(isShiftDown, mouseRay) {
+            if (!this.parent.isTransactionOperationActive()) {
+                return;
+            }
+            const currVolume = this._currentVolume();
+            if (!currVolume) {
+                return;
+            }
+            if (currVolume.state === MarqueeSelectionVolumeState.Dragging) {
+                const threePointSelectionEnabled = !this._parent.isSimpleSelectEnabled();
+                if (threePointSelectionEnabled && isShiftDown) {
+                    if (currVolume.threePointSelectionState === ThreePointSelectionState.FirstCorner) {
+                        const newSecondCorner = calculateYPlaneIntersection(currVolume.firstCorner ?? currVolume.from, mouseRay.location, mouseRay.direction);
+                        if (newSecondCorner) {
+                            if (!lib.Vector3Utils.equals(newSecondCorner, currVolume.to) && this._isValidCornerPoint(newSecondCorner, currVolume.from)) {
+                                this._tryAssignVolumeTo(currVolume, newSecondCorner);
+                                currVolume.secondCorner = currVolume.to;
+                                currVolume.threePointSelectionState = ThreePointSelectionState.BottomFace;
+                            }
+                        }
+                    }
+                } else {
+                    const targetLocation = mouseRay.cursorBlockLocation;
+                    if (!lib.Vector3Utils.equals(targetLocation, currVolume.to) && this._isValidCornerPoint(targetLocation, currVolume.from)) {
+                        this._tryAssignVolumeTo(currVolume, targetLocation);
+                    }
+                }
+            }
+            currVolume.state = MarqueeSelectionVolumeState.Done;
+            this.applyVolumeStackToSelectionManager();
+            if (this.parent.isTransactionOperationActive()) {
+                this.parent.endTransactionableOperation();
+            }
+        }
+        _isValidCornerPoint(firstCorner, secondCornerCandidate) {
+            const difference = lib.Vector3Utils.subtract(secondCornerCandidate, firstCorner);
+            const size = {
+                x: Math.abs(difference.x),
+                y: Math.abs(difference.y),
+                z: Math.abs(difference.z)
+            };
+            if (size.x < 1 || size.y < 1 || size.z < 1) {
+                return size.x <= server_editor_namespaceObject.editor.constants.maxDynamicSelectionSize.x && size.y <= server_editor_namespaceObject.editor.constants.maxDynamicSelectionSize.y && size.z <= server_editor_namespaceObject.editor.constants.maxDynamicSelectionSize.z;
+            }
+            return isWithinLimits(size, server_editor_namespaceObject.editor.constants.maxBlockVolume);
+        }
+        _tryAssignVolumeFrom(volume, fromLocation) {
             try {
-                volume.to = toLocation;
+                volume.from = fromLocation;
+                return true;
             } catch (_e) {
                 if (_e instanceof Error) {
                     this.session.log.error(`${_e.message}`, {
@@ -14622,6 +15230,21 @@ var __webpack_exports__ = {};
                     });
                 }
                 this.parent.cancelTransactionableOperation();
+                return false;
+            }
+        }
+        _tryAssignVolumeTo(volume, toLocation) {
+            try {
+                volume.to = toLocation;
+                return true;
+            } catch (_e) {
+                if (_e instanceof Error) {
+                    this.session.log.error(`${_e.message}`, {
+                        channelMask: server_editor_namespaceObject.LogChannel.All
+                    });
+                }
+                this.parent.cancelTransactionableOperation();
+                return false;
             }
         }
         _showVolumes() {
@@ -15052,7 +15675,6 @@ var __webpack_exports__ = {};
         deactivate(_toolActive, _switchingModes) {
             if (_toolActive) {
                 this._brushSharedControl?.deactivateControl();
-                this._brushSharedControl?.deactivateVisualization();
             }
             this._freehandSelectionActive = false;
             if (_switchingModes) {
@@ -15263,6 +15885,7 @@ var __webpack_exports__ = {};
             }));
         }
     }
+    const BlockMaskSharedControl_PERSISTENCE_GROUP_NAME = "editor:brushpaint";
     const PROPERTY_NAME = "BlockMaskControl";
     const PROPERTY_LOCALIZATION_PREFIX = `resourcePack.editor.${PROPERTY_NAME}`;
     var BlockMaskControlMaskMode;
@@ -15280,6 +15903,9 @@ var __webpack_exports__ = {};
             this._blockListMaskIds = (0, server_editor_namespaceObject.makeObservable)([]);
             this._blockListMask = [];
             this._onBlockMaskModeChanged = onBlockMaskModeChanged;
+            this._blockMaskKey = `${this.tool.id}_BlockMask_Mask`;
+            this._blockReplaceKey = `${this.tool.id}_BlockMask_Replace`;
+            this._persistenceManager = getPersistenceManager(this.session.extensionContext.player);
         }
         debugLog(_msg) {
             this.session.log.debug(`${PROPERTY_NAME}::${_msg}`);
@@ -15289,6 +15915,8 @@ var __webpack_exports__ = {};
         }
         initialize() {
             super.initialize();
+            this._blockListMask = this._loadBlockMask(this._blockMaskKey, convertBlockStringsToBlockType([ "air" ]));
+            this._blockListReplace = this._loadBlockMask(this._blockReplaceKey, convertBlockStringsToBlockType([ "air" ]));
         }
         shutdown() {
             super.shutdown();
@@ -15360,20 +15988,20 @@ var __webpack_exports__ = {};
                     this._onBlockMaskModeChanged(_newMode);
                 }
             });
-            this._blockListMask = convertBlockStringsToBlockType([ "air" ]);
             this._blockListMaskIds.set(convertBlockTypesToBlockStrings(this._blockListMask));
             const maskControl = this._controlPane.addBlockList(this._blockListMaskIds, {
                 visible: false,
                 onChange: newVal => {
                     this._blockListMask = convertBlockStringsToBlockType(newVal);
+                    this._saveBlockMasks();
                 }
             });
-            this._blockListReplace = convertBlockStringsToBlockType([ "air" ]);
             this._blockListReplaceIds.set(convertBlockTypesToBlockStrings(this._blockListReplace));
             const replaceControl = this._controlPane.addBlockList(this._blockListReplaceIds, {
                 visible: false,
                 onChange: newVal => {
                     this._blockListReplace = convertBlockStringsToBlockType(newVal);
+                    this._saveBlockMasks();
                 }
             });
         }
@@ -15401,6 +16029,51 @@ var __webpack_exports__ = {};
                 maskType,
                 blockList
             };
+        }
+        _saveBlockMasks() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getOrCreateGroup(BlockMaskSharedControl_PERSISTENCE_GROUP_NAME, option);
+            const errorMsg = "Fail to store block mask";
+            if (!group) {
+                this.session.log.error(errorMsg);
+                return;
+            } else {
+                const maskList = convertBlockTypesToBlockStrings(this._blockListMask);
+                const maskListItem = group.getOrCreateItem(this._blockMaskKey, maskList);
+                if (maskListItem && maskListItem.value) {
+                    maskListItem.commit();
+                }
+                const replaceList = convertBlockTypesToBlockStrings(this._blockListReplace);
+                const replaceListItem = group.getOrCreateItem(this._blockReplaceKey, replaceList);
+                if (replaceListItem && replaceListItem.value) {
+                    replaceListItem.commit();
+                }
+                group.dispose();
+            }
+        }
+        _loadBlockMask(key, defaultList) {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getGroup(BlockMaskSharedControl_PERSISTENCE_GROUP_NAME, option);
+            const errorMsg = "No stored block mask found";
+            if (!group) {
+                this.session.log.info(errorMsg);
+            } else {
+                const storeItem = group.fetchItem(key);
+                if (storeItem && storeItem.value) {
+                    const blockList = convertBlockStringsToBlockType(storeItem.value);
+                    if (blockList.length > 0) {
+                        return blockList;
+                    }
+                }
+                group.dispose();
+            }
+            return defaultList;
         }
     }
     class MagicSelectionVolume {
@@ -15870,8 +16543,8 @@ var __webpack_exports__ = {};
             const directionButtonsPane = directionsPane.createSubPane({
                 title: "",
                 hasExpander: false,
-                direction: server_editor_namespaceObject.LayoutDirection.Horizontal,
-                alignment: server_editor_namespaceObject.LayoutAlignment.Left
+                layout: server_editor_namespaceObject.PaneLayoutType.Wrapping,
+                alignment: server_editor_namespaceObject.LayoutAlignment.Start
             });
             const directions = [ {
                 dir: direction_Direction.Left,
@@ -15967,24 +16640,6 @@ var __webpack_exports__ = {};
                 visible: true,
                 axes: server_editor_bindings_namespaceObject.Axis.X | server_editor_bindings_namespaceObject.Axis.Y | server_editor_bindings_namespaceObject.Axis.Z
             });
-            this._modeSwitchHandle = session.extensionContext.afterEvents.modeChange.subscribe((evt => {
-                if (evt.mode === server_editor_bindings_namespaceObject.EditorMode.Crosshair) {
-                    if (this._widgetClipboardComponent) {
-                        this._savedPreviewConfig = {
-                            offset: this._widgetClipboardComponent.offset,
-                            showOutline: this._widgetClipboardComponent.showOutline
-                        };
-                    }
-                    this.deletePreview();
-                } else if (evt.mode === server_editor_bindings_namespaceObject.EditorMode.Tool && this._savedPreviewConfig) {
-                    server_namespaceObject.system.runTimeout((() => {
-                        if (this._savedPreviewConfig) {
-                            this.createPreview(this._savedPreviewConfig.offset, this._savedPreviewConfig.showOutline);
-                            this._savedPreviewConfig = undefined;
-                        }
-                    }), .2 * server_namespaceObject.TicksPerSecond);
-                }
-            }));
             this._session = session;
             this._clipboardItem = clipboard;
         }
@@ -16001,7 +16656,6 @@ var __webpack_exports__ = {};
             this.deletePreview();
         }
         teardown() {
-            this._session.extensionContext.afterEvents.modeChange.unsubscribe(this._modeSwitchHandle);
             this.deletePreview();
             this._widgetGizmoComponent.delete();
             this._widget.delete();
@@ -16301,6 +16955,8 @@ var __webpack_exports__ = {};
             return this._isDown;
         }
     }
+    const SelectionBehavior_PERSISTENCE_GROUP_NAME = "editor:selection";
+    const SelectionBehavior_PERSISTENCE_GROUPITEM_NAME = "trim_settings";
     class SelectionBehavior {
         get toolId() {
             return this._tool.id;
@@ -16333,10 +16989,11 @@ var __webpack_exports__ = {};
             };
         }
         get isActiveTool() {
-            return this.toolId === this.session.toolRail.getSelectedToolId();
+            return this.tool.isActive;
         }
         constructor(uiSession) {
             this.uiSession = uiSession;
+            this._useSimpleSelectionMode = (0, server_editor_namespaceObject.makeObservable)(true);
             this._quickActionMode = (0, server_editor_namespaceObject.makeObservable)(SelectionCommonTypes_QuickActionMode.Invalid);
             this._volumeTrimActionMode = (0, server_editor_namespaceObject.makeObservable)(TrimActionMode.Invalid);
             this._volumeTrimIgnoreLiquid = (0, server_editor_namespaceObject.makeObservable)(true);
@@ -16526,8 +17183,11 @@ var __webpack_exports__ = {};
                 const keySelectAction = uiSession.actionManager.createAction({
                     actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                     onExecute: () => {
-                        this.uiSession.extensionContext.selectionManager.volume.clear();
-                        this.selectionCreationMode?.applyImmediateSelection();
+                        const selectionCreationMode = this.selectionCreationMode;
+                        if (selectionCreationMode !== undefined) {
+                            this.uiSession.extensionContext.selectionManager.volume.clear();
+                            selectionCreationMode.applyImmediateSelection();
+                        }
                     }
                 });
                 this._registerToolKeyBinding(keySelectAction, {
@@ -16856,6 +17516,14 @@ var __webpack_exports__ = {};
                 this._nudgeMode.addNudgeUI(_parentPane);
                 this._nudgeMode.updateNudgeEnabled();
                 this._quickActionsDivider = _parentPane.addDivider();
+                this._simpleSelectionCheckBox = _parentPane.addBool(this._useSimpleSelectionMode, {
+                    visible: false,
+                    title: "resourcePack.editor.selectionTool.modeSelection.useSimpleSelection.title",
+                    tooltip: "resourcePack.editor.selectionTool.modeSelection.useSimpleSelection.tooltip",
+                    onChange: () => {
+                        this._saveTrimSettings();
+                    }
+                });
                 this._quickActionsUI = _parentPane.addToggleGroup(this._quickActionMode, {
                     title: "resourcePack.editor.selectionTool.quickAction.title",
                     tooltip: "resourcePack.editor.selectionTool.quickAction.tooltip",
@@ -17031,12 +17699,18 @@ var __webpack_exports__ = {};
                 const ignoreLiquidUIElement = this._volumeTrimActionsSettingsPane.addBool(this._volumeTrimIgnoreLiquid, {
                     title: "resourcePack.editor.selectionTool.trimAction.trimVolume.SettingsPane.ignoreLiquid",
                     tooltip: "resourcePack.editor.selectionTool.trimAction.trimVolume.SettingsPane.ignoreLiquid.tooltip",
-                    variant: server_editor_namespaceObject.BoolPropertyItemVariant.ToggleSwitch
+                    variant: server_editor_namespaceObject.BoolPropertyItemVariant.ToggleSwitch,
+                    onChange: () => {
+                        this._saveTrimSettings();
+                    }
                 });
                 const collisionOnlyUIElement = this._volumeTrimActionsSettingsPane.addBool(this._volumeTrimOnlyCollision, {
                     title: "resourcePack.editor.selectionTool.trimAction.trimVolume.SettingsPane.onlyCollidable",
                     tooltip: "resourcePack.editor.selectionTool.trimAction.trimVolume.SettingsPane.onlyCollidable.tooltip",
-                    variant: server_editor_namespaceObject.BoolPropertyItemVariant.ToggleSwitch
+                    variant: server_editor_namespaceObject.BoolPropertyItemVariant.ToggleSwitch,
+                    onChange: () => {
+                        this._saveTrimSettings();
+                    }
                 });
                 this._blockMaskSharedControl = new BlockMaskSharedControl(this.session, this.tool, this._volumeTrimActionsSettingsPane, "trim", (_mode => {
                     if (_mode === BlockMaskControlMaskMode.Disabled) {
@@ -17096,7 +17770,7 @@ var __webpack_exports__ = {};
                 });
             };
             this._addTool = (uiSession, action) => {
-                const tool = uiSession.toolRail.addTool("editor:modalTool:selection", {
+                const tool = uiSession.toolRail.addTool(SelectionBehavior.MODAL_TOOL_ID, {
                     title: "resourcePack.editor.selectionTool.toolRail.title",
                     icon: "pack://textures/editor/marquee.png?filtering=point",
                     tooltip: {
@@ -17105,17 +17779,6 @@ var __webpack_exports__ = {};
                     },
                     action
                 });
-                tool.onModalToolActivation.subscribe((eventData => {
-                    if (eventData.isActiveTool) {
-                        this._backedUpColors = backupColors(uiSession.extensionContext);
-                        uiSession.extensionContext.cursor.setProperties(this._toolCursorProperties);
-                    } else {
-                        if (this._backedUpColors) {
-                            restoreBackedUpColors(uiSession.extensionContext, this._backedUpColors);
-                            this._backedUpColors = undefined;
-                        }
-                    }
-                }));
                 return tool;
             };
             this._bindGlobalActivationShortcut = uiSession => {
@@ -17359,6 +18022,8 @@ var __webpack_exports__ = {};
             if (!storage) {
                 throw new Error("Can not instantiate Selection functionality without valid CoreEditor storage.");
             }
+            this._persistenceManager = getPersistenceManager(this.session.extensionContext.player);
+            this._loadTrimSettings();
             this._telemetryManager = new TelemetryManager(uiSession.extensionContext.player, TelemetrySource.Selection);
             this._selectionMode = (0, server_editor_namespaceObject.makeObservable)(SelectionToolMode.Marquee);
             this._widgetGroup = this.session.extensionContext.widgetManager.createGroup({
@@ -17419,7 +18084,7 @@ var __webpack_exports__ = {};
             this._toggleAction = uiSession.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
-                    if (uiSession.toolRail.getSelectedToolId() === this._tool.id) {
+                    if (this._tool.isActive) {
                         this.cycleSelectionMode();
                     } else {
                         uiSession.toolRail.setSelectedToolId(this._tool.id);
@@ -17499,7 +18164,7 @@ var __webpack_exports__ = {};
             this._bindGlobalActivationShortcut(uiSession);
             server_namespaceObject.system.runTimeout((() => uiSession.toolRail.setSelectedToolId(this._tool.id)));
             const selectionChangeEventHandle = uiSession.extensionContext.afterEvents.SelectionChange.subscribe((event => {
-                if (this._tool.id !== this.session.toolRail.getSelectedToolId()) {
+                if (!this._tool.isActive) {
                     if (event.volumeEventData) {
                         let type = "";
                         switch (event.volumeEventData.type) {
@@ -17639,7 +18304,7 @@ var __webpack_exports__ = {};
         }
         teardown() {
             if (this._activeModeImplementation) {
-                this._activeModeImplementation.deactivate(this.uiSession.toolRail.getSelectedToolId() === this.toolId, false);
+                this._activeModeImplementation.deactivate(this.tool.isActive, false);
                 this._activeModeImplementation = undefined;
             }
             this._marqueeModeImplementation.teardown();
@@ -17694,6 +18359,9 @@ var __webpack_exports__ = {};
             } else {
                 return false;
             }
+        }
+        isSimpleSelectEnabled() {
+            return this._useSimpleSelectionMode?.value ?? false;
         }
         isNudgeEnabled() {
             const nudgeEntry = this._modeToggleGroup?.getEntryByValue(SelectionToolMode.Nudge);
@@ -17772,6 +18440,7 @@ var __webpack_exports__ = {};
               default:
                 throw new Error("Unknown selection mode requested");
             }
+            this._simpleSelectionCheckBox.visible = false;
             this._selectionMode.set(this._activeModeImplementation?.modeType);
         }
         _registerToolKeyBinding(action, binding, tag) {
@@ -17970,7 +18639,49 @@ var __webpack_exports__ = {};
                 enabled: nudgeEnabled
             } ];
         }
+        _loadTrimSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 1
+            };
+            const group = this._persistenceManager.getGroup(SelectionBehavior_PERSISTENCE_GROUP_NAME, option);
+            const errorMsg = "No stored trim settings found";
+            if (!group) {
+                this.session.log.info(errorMsg);
+            } else {
+                const storeItem = group.fetchItem(SelectionBehavior_PERSISTENCE_GROUPITEM_NAME);
+                if (storeItem && storeItem.value) {
+                    this._volumeTrimIgnoreLiquid.set(storeItem.value.volumeTrimIgnoreLiquid);
+                    this._volumeTrimOnlyCollision.set(storeItem.value.volumeTrimOnlyCollision);
+                    this._useSimpleSelectionMode.set(storeItem.value.simpleSelectionEnabled);
+                }
+                group.dispose();
+            }
+        }
+        _saveTrimSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 1
+            };
+            const group = this._persistenceManager.getOrCreateGroup(SelectionBehavior_PERSISTENCE_GROUP_NAME, option);
+            const errorMsg = "No stored trim settings found";
+            if (group) {
+                const data = {
+                    volumeTrimIgnoreLiquid: this._volumeTrimIgnoreLiquid.value,
+                    volumeTrimOnlyCollision: this._volumeTrimOnlyCollision.value,
+                    simpleSelectionEnabled: this._useSimpleSelectionMode.value
+                };
+                const storeItem = group.getOrCreateItem(SelectionBehavior_PERSISTENCE_GROUPITEM_NAME, data);
+                if (storeItem) {
+                    storeItem.commit();
+                }
+                group.dispose();
+                return;
+            }
+            this.session.log.error(errorMsg);
+        }
     }
+    SelectionBehavior.MODAL_TOOL_ID = "editor:modalTool:selection";
     class UndoRedoBehavior {
         constructor(uiSession, coreMenuItems) {
             this._canUndo = false;
@@ -18076,6 +18787,8 @@ var __webpack_exports__ = {};
         SummonTelemetry["MoveCompleted"] = "MoveCompleted";
     })(SummonTelemetry || (SummonTelemetry = {}));
     const ROTATION_SCROLL_STEP_DEGREES = 10;
+    const SummonTool_PERSISTENCE_GROUP_NAME = "editor:summon";
+    const SummonTool_PERSISTENCE_GROUPITEM_NAME = "summon_settings";
     class SummonTool {
         constructor(session) {
             this.NUDGE_REPEAT_INTERVAL = 5;
@@ -18105,6 +18818,7 @@ var __webpack_exports__ = {};
                 visible: true,
                 fixedModeDistance: 5
             };
+            this._persistenceManager = getPersistenceManager(session.extensionContext.player);
             this.telemetryManager = new TelemetryManager(session.extensionContext.player, TelemetrySource.Summon);
             const dimensionBounds = this._session.extensionContext.blockUtilities.getDimensionLocationBoundingBox();
             const center = server_namespaceObject.BlockBoundingBoxUtils.getCenter(dimensionBounds);
@@ -18190,7 +18904,7 @@ var __webpack_exports__ = {};
                     this._session.toolRail.setSelectedToolId(this._tool.id);
                 }
             });
-            this._tool = this._session.toolRail.addTool("editor:modalTool:summon", {
+            this._tool = this._session.toolRail.addTool(SummonTool.MODAL_TOOL_ID, {
                 title: "resourcePack.editor.toolRail.summonTool.tool.title",
                 icon: "pack://textures/editor/Entity.png?filtering=point",
                 tooltip: {
@@ -18201,8 +18915,7 @@ var __webpack_exports__ = {};
             });
             this._tool.onModalToolActivation.subscribe((eventData => {
                 if (eventData.isActiveTool) {
-                    this._backedUpColors = backupColors(session.extensionContext);
-                    this._session.extensionContext.cursor.setProperties(this._cursorProperties);
+                    this._session.extensionContext.cursor.pushPropertiesById(this._cursorProperties, SummonTool.MODAL_TOOL_ID);
                 } else {
                     if (this._isWidgetMoving) {
                         const manager = this._session.extensionContext.transactionManager;
@@ -18212,10 +18925,7 @@ var __webpack_exports__ = {};
                     }
                     this.shutdownMouseWatcher();
                     this.clearSelection();
-                    if (this._backedUpColors) {
-                        restoreBackedUpColors(session.extensionContext, this._backedUpColors);
-                        this._backedUpColors = undefined;
-                    }
+                    this._session.extensionContext.cursor.popPropertiesById(SummonTool.MODAL_TOOL_ID);
                 }
             }));
             this._createTransactionHandler = (0, server_editor_namespaceObject.registerUserDefinedTransactionHandler)(this._session.extensionContext.transactionManager, (() => {
@@ -18427,6 +19137,7 @@ var __webpack_exports__ = {};
             }, "moveDown");
             this._rotation = (0, server_editor_namespaceObject.makeObservable)(0);
             this._mouseMoveWatcherId = -1;
+            this._loadSettings();
             {
                 this._pane = this._session.createPropertyPane({
                     title: "resourcePack.editor.toolRail.summonTool.pane.title",
@@ -18452,7 +19163,9 @@ var __webpack_exports__ = {};
                         y: 8,
                         z: 8
                     },
-                    onChange: () => {}
+                    onChange: () => {
+                        this._saveSettings();
+                    }
                 });
                 this._pane.addVector3(this._entityGridAlignment, {
                     title: "resourcePack.editor.toolRail.summonTool.tool.GridSize",
@@ -18468,7 +19181,9 @@ var __webpack_exports__ = {};
                         y: 8,
                         z: 8
                     },
-                    onChange: () => {}
+                    onChange: () => {
+                        this._saveSettings();
+                    }
                 });
                 this._pane.addDivider();
                 this._pane.addNumber(this._rotation, {
@@ -18480,6 +19195,7 @@ var __webpack_exports__ = {};
                     variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
                     onChange: () => {
                         this.updateRotation();
+                        this._saveSettings();
                     }
                 });
                 this._pane.addText("resourcePack.editor.toolRail.summonTool.tool.infoText");
@@ -18588,10 +19304,6 @@ var __webpack_exports__ = {};
             this._rotation.set(entity.getRotation().y);
             this._widget.location = entity.location;
             this._widget.visible = true;
-            this._session.extensionContext.cursor.setProperties({
-                ...this._cursorProperties,
-                visible: false
-            });
             this.updateSelectionPreview();
         }
         getRelativeNudgeDirection(direction) {
@@ -18710,10 +19422,6 @@ var __webpack_exports__ = {};
         clearSelection() {
             this._widget.visible = false;
             this._selectedEntity = undefined;
-            this._session.extensionContext.cursor.setProperties({
-                ...this._cursorProperties,
-                visible: true
-            });
         }
         updateSelectionPreview() {
             if (this._selectedEntity) {
@@ -18730,7 +19438,50 @@ var __webpack_exports__ = {};
                 tooltip: `resourcePack.editor.toolRail.summonTool.keyBinding.${tag}.tooltip`
             });
         }
+        _loadSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getGroup(SummonTool_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const storeItem = group.fetchItem(SummonTool_PERSISTENCE_GROUPITEM_NAME);
+                if (storeItem && storeItem.value) {
+                    try {
+                        const storedSettings = storeItem.value;
+                        this._entityOffset.set(storedSettings.entityOffset);
+                        this._entityGridAlignment.set(storedSettings.entityGridAlignment);
+                        this._rotation.set(storedSettings.rotation);
+                    } catch (error) {
+                        this._session.log.error("Fail to load the settings, error: " + stringFromException(error));
+                    }
+                }
+                group.dispose();
+            }
+        }
+        _saveSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getOrCreateGroup(SummonTool_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const settings = {
+                    entityOffset: this._entityOffset.value,
+                    entityGridAlignment: this._entityGridAlignment.value,
+                    rotation: this._rotation.value
+                };
+                const storeItem = group.getOrCreateItem(SummonTool_PERSISTENCE_GROUPITEM_NAME, settings);
+                if (storeItem) {
+                    storeItem.commit();
+                }
+                group.dispose();
+                return;
+            }
+            this._session.log.error("Fail to save settings for Summon");
+        }
     }
+    SummonTool.MODAL_TOOL_ID = "editor:modalTool:summon";
     const TimeOfDay_validDaylightCycle = [ {
         val: server_editor_namespaceObject.DaylightCycle.Normal,
         label: "resourcePack.editor.exportProject.cheatsSettings.daylightCycle.normal"
@@ -18745,6 +19496,8 @@ var __webpack_exports__ = {};
     (function(TimeOfDayTelemetry) {
         TimeOfDayTelemetry["SettingsChanged"] = "SettingsChanged";
     })(TimeOfDayTelemetry || (TimeOfDayTelemetry = {}));
+    const TimeOfDay_PERSISTENCE_GROUP_NAME = "editor:time_of_day";
+    const TimeOfDay_PERSISTENCE_GROUPITEM_NAME = "time_of_day_settings";
     class TimeOfDayBehavior {
         constructor(_uiSession, _parentMenu) {
             this._uiSession = _uiSession;
@@ -18763,6 +19516,7 @@ var __webpack_exports__ = {};
                     this._pane?.show();
                 }
             });
+            this._persistenceManager = getPersistenceManager(_uiSession.extensionContext.player);
             this.createMenuItem(_parentMenu);
             this.telemetryManager = new TelemetryManager(_uiSession.extensionContext.player, TelemetrySource.TimeOfDay);
             this._pane = _uiSession.createPropertyPane({
@@ -18792,6 +19546,7 @@ var __webpack_exports__ = {};
                         settingName: "clockType",
                         newSetting: newValue
                     });
+                    this.saveSettings();
                 }
             });
             this._pane.addString(this._timeOfDayTimeString, {
@@ -18818,6 +19573,7 @@ var __webpack_exports__ = {};
                         settingName: "daylightCycle",
                         newSetting: newValue
                     });
+                    this.saveSettings();
                 }
             });
             this._pane.addDivider();
@@ -18834,22 +19590,23 @@ var __webpack_exports__ = {};
                 entries: timeItems,
                 onChange: newValue => {
                     if (newValue === TODDropDown.None) {
-                        customTime.enable = true;
-                        customTime.visible = true;
+                        this._customTimeHandle.enable = true;
+                        this._customTimeHandle.visible = true;
                     } else {
                         this.setDaylightCycle(server_editor_namespaceObject.DaylightCycle.LockTime, newValue, _uiSession);
                         this._timeOfDayValue.set(newValue);
                         server_namespaceObject.world.setTimeOfDay(newValue);
-                        customTime.enable = false;
-                        customTime.visible = false;
+                        this._customTimeHandle.enable = false;
+                        this._customTimeHandle.visible = false;
                     }
                     this.telemetryManager.fireTelemetryEvent(TimeOfDayTelemetry.SettingsChanged, {
                         settingName: "currentPreset",
                         newSetting: newValue
                     });
+                    this.saveSettings();
                 }
             });
-            const customTime = this._pane.addNumber(this._customTime, {
+            this._customTimeHandle = this._pane.addNumber(this._customTime, {
                 title: "resourcePack.editor.timeOfDay.customTime",
                 tooltip: "resourcePack.editor.timeOfDay.customTime.tooltip",
                 min: 0,
@@ -18880,20 +19637,20 @@ var __webpack_exports__ = {};
                     currentTime: this._timeOfDayValue.value,
                     daylightCycle: this._daylightCycle.value,
                     customTime: this._customTime.value,
-                    controlEnabled: customTime.enable,
-                    controlVisible: customTime.visible
+                    controlEnabled: this._customTimeHandle.enable,
+                    controlVisible: this._customTimeHandle.visible
                 });
                 if (typeof _timeOfDayChange === "number") {
-                    customTime.enable = true;
-                    customTime.visible = true;
+                    this._customTimeHandle.enable = true;
+                    this._customTimeHandle.visible = true;
                     this._currentPreset.set(TODDropDown.None);
                     this._timeOfDayValue.set(_timeOfDayChange);
                     this.setDaylightCycle(server_editor_namespaceObject.DaylightCycle.LockTime, _timeOfDayChange, _uiSession);
                     this._daylightCycle.set(server_editor_namespaceObject.DaylightCycle.LockTime);
                     this._customTime.set(_timeOfDayChange);
                 } else if (_timeOfDayChange === TODDropDown.None) {
-                    customTime.enable = false;
-                    customTime.visible = false;
+                    this._customTimeHandle.enable = false;
+                    this._customTimeHandle.visible = false;
                     this._currentPreset.set(_timeOfDayChange);
                     this._timeOfDayValue.set(0);
                     this.setDaylightCycle(server_editor_namespaceObject.DaylightCycle.Normal, 0, _uiSession);
@@ -18902,11 +19659,12 @@ var __webpack_exports__ = {};
                 } else {
                     throw new Error(`Invalid time of day change value: ${typeof _timeOfDayChange}`);
                 }
+                this.saveSettings();
             }), (_id => {
                 const stored = this._storedSettings.get(_id);
                 if (stored) {
-                    customTime.enable = stored.controlEnabled;
-                    customTime.visible = stored.controlVisible;
+                    this._customTimeHandle.enable = stored.controlEnabled;
+                    this._customTimeHandle.visible = stored.controlVisible;
                     this._currentPreset.set(stored.currentPreset);
                     this._timeOfDayValue.set(stored.currentTime);
                     this.setDaylightCycle(stored.daylightCycle, stored.currentTime, _uiSession);
@@ -18914,6 +19672,7 @@ var __webpack_exports__ = {};
                     this._customTime.set(stored.customTime);
                 }
             }));
+            this.loadSettings();
         }
         createMenuItem(menu) {
             menu.addItem({
@@ -18938,6 +19697,57 @@ var __webpack_exports__ = {};
                 });
             }
         }
+        loadSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getGroup(TimeOfDay_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const storeItem = group.fetchItem(TimeOfDay_PERSISTENCE_GROUPITEM_NAME);
+                if (storeItem && storeItem.value) {
+                    try {
+                        const storedSettings = storeItem.value;
+                        this._clockType.set(storedSettings.clockType);
+                        this._customTime.set(storedSettings.customTime);
+                        this._daylightCycle.set(storedSettings.daylightCycle);
+                        this._currentPreset.set(storedSettings.currentPreset);
+                        if (this._currentPreset.value === TODDropDown.None) {
+                            this._customTimeHandle.enable = true;
+                            this._customTimeHandle.visible = true;
+                        } else {
+                            this._customTimeHandle.enable = false;
+                            this._customTimeHandle.visible = false;
+                        }
+                    } catch (error) {
+                        this._uiSession.log.error("Fail to load the settings, error: " + stringFromException(error));
+                    }
+                }
+                group.dispose();
+            }
+        }
+        saveSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getOrCreateGroup(TimeOfDay_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const settings = {
+                    clockType: this._clockType.value,
+                    currentPreset: this._currentPreset.value,
+                    customTime: this._customTime.value,
+                    daylightCycle: this._daylightCycle.value
+                };
+                const storeItem = group.getOrCreateItem(TimeOfDay_PERSISTENCE_GROUPITEM_NAME, settings);
+                if (storeItem) {
+                    storeItem.commit();
+                }
+                group.dispose();
+                return;
+            }
+            this._uiSession.log.error("Fail to save settings for Time Of Day");
+        }
         teardown() {
             if (this._updateHandle) {
                 server_namespaceObject.system.clearRun(this._updateHandle);
@@ -18948,6 +19758,8 @@ var __webpack_exports__ = {};
         }
     }
     TimeOfDayBehavior.BEHAVIOR_NAME = "Time of Day";
+    const STORED_LOCATION_GROUP_SETTINGS = "editor:navigation";
+    const STORED_LOCATION_GROUP_ITEM_SETTINGS = "settings";
     const STORED_LOCATION_WORLD_PROPERTY_NAME = "goto-mark:storedLocations";
     const STORED_LOCATION_NAME_MAX_LENGTH = 16;
     const WHITE_RGBA = {
@@ -19023,6 +19835,7 @@ var __webpack_exports__ = {};
             this.quickActionMode = (0, server_editor_namespaceObject.makeObservable)(0);
             this.lastUpdateTimestamp = 0;
             this.previousPlayerIds = new Set;
+            this.initializedMinimapCache = false;
             this.openMenuAction = this.uiSession.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
@@ -19036,6 +19849,7 @@ var __webpack_exports__ = {};
             this.playerIconWhiteBlockIndexArrays = [ [], [], [], [], [ -7, -6, -1, 0 ], [ -7, -6, -5 - 2, -1, 0, 1 ], [ -6, -5, -4, -3, -2, -1, 0, 1, 2 ], [ -5, -4, -3, -2, -1, 0, 1, 2, 3 ], [ -4, -3, -2, -1, 0, 1, 2, 3, 4 ], [ -3, -2, -1, 0, 1, 2, 3, 4, 5 ], [ -2, -1, 0, 1, 2, 3, 4, 5, 6 ], [ -1, 0, 1, 2, 3, 4, 5, 6, 7 ], [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ], [ 1, 2, 3, 4, 5, 6, 7, 8 ], [ 2, 3, 4, 5, 6, 7, 8, 9 ], [ 3, 4, 5, 6, 7, 8 ], [ 4, 5, 6, 7 ], [ 5, 6 ], [], [], [], [], [], [], [] ];
             uiSession.log.debug(`Initializing extension [${uiSession.extensionContext.extensionInfo.name}] for player [${uiSession.extensionContext.player.name}]`);
             this.createMenuItem(parentMenu);
+            this.persistenceManager = getPersistenceManager(uiSession.extensionContext.player);
             this.telemetryManager = new TelemetryManager(uiSession.extensionContext.player, TelemetrySource.Navigation);
             this.previousLocation = uiSession.extensionContext.player.location;
             this.storedLocations = [];
@@ -19066,6 +19880,7 @@ var __webpack_exports__ = {};
             this.locationMarkRenderingStorage = {};
             this.loadLocationsFromWorld();
             this.startStoredLocationsSynchronization();
+            this.loadSettings();
             this._buildParentPane();
             uiSession.actionBar.registerItem("editor:actionBarItem:goToMark", this.openMenuAction, {
                 label: "resourcePack.editor.goToMark.title",
@@ -19100,7 +19915,7 @@ var __webpack_exports__ = {};
             }, this.openMenuAction);
         }
         _buildParentPane() {
-            const parentPane = this.uiSession.createPropertyPane({
+            this.parentPane = this.uiSession.createPropertyPane({
                 title: "resourcePack.editor.goToMark.title",
                 uniqueId: "editor:pane:goToMark",
                 infoTooltip: {
@@ -19110,11 +19925,25 @@ var __webpack_exports__ = {};
                     } ]
                 }
             });
-            this.parentPane = parentPane;
+            this.parentPane.onPropertyPaneVisibilityUpdated.subscribe((data => {
+                if (!this.initializedMinimapCache && data.isVisible) {
+                    this.initializedMinimapCache = true;
+                    this.updateLocationMarkRenderingStorage();
+                    this.updateSurfaceBlockColorCache().then((() => {
+                        this.mapPayload.set(this._createMiniMap());
+                    })).catch((e => {
+                        this.uiSession.log.error(`${e.message}`, {
+                            channelMask: server_editor_namespaceObject.LogChannel.All
+                        });
+                    })).finally((() => {
+                        this.surfaceBlockColorCache.isUpdating = false;
+                    }));
+                }
+            }));
             this.buildMinimapPane();
             this.buildUsersPane();
             this.buildLocationPane();
-            return parentPane;
+            return this.parentPane;
         }
         buildMinimapPane() {
             if (!this.parentPane) {
@@ -19125,23 +19954,13 @@ var __webpack_exports__ = {};
             }
             const minimapPane = this.parentPane.createSubPane({
                 title: "resourcePack.editor.goToMark.pane.mapPane.heading",
-                collapsed: true
+                collapsed: false
             });
             const currentLocation = lib.Vector3Utils.floor(this.uiSession.extensionContext.player.location);
             const playerLocation = (0, server_editor_namespaceObject.makeObservable)(currentLocation);
             this.previousLocation = {
                 ...currentLocation
             };
-            this.updateLocationMarkRenderingStorage();
-            this.updateSurfaceBlockColorCache().then((() => {
-                this.mapPayload.set(this._createMiniMap());
-            })).catch((e => {
-                this.uiSession.log.error(`${e.message}`, {
-                    channelMask: server_editor_namespaceObject.LogChannel.All
-                });
-            })).finally((() => {
-                this.surfaceBlockColorCache.isUpdating = false;
-            }));
             this.mapSizeDropDown = minimapPane.addDropdown(this.mapSizeSelection, {
                 visible: true,
                 enable: true,
@@ -19166,6 +19985,7 @@ var __webpack_exports__ = {};
                     })).finally((() => {
                         this.surfaceBlockColorCache.isUpdating = false;
                     }));
+                    this.saveSettings();
                 }
             });
             this.refreshMapButton = minimapPane.addButton(this.uiSession.actionManager.createAction({
@@ -19220,7 +20040,12 @@ var __webpack_exports__ = {};
                 }
             });
             const teleportLimit = 3e7;
-            minimapPane.addVector3(playerLocation, {
+            const teleportSubPane = minimapPane.createSubPane({
+                layout: server_editor_namespaceObject.PaneLayoutType.Horizontal,
+                hasExpander: false,
+                hasMargins: false
+            });
+            teleportSubPane.addVector3(playerLocation, {
                 tooltip: "resourcePack.editor.goToMark.pane.location.tooltip",
                 min: {
                     x: -teleportLimit,
@@ -19231,6 +20056,28 @@ var __webpack_exports__ = {};
                     x: teleportLimit,
                     y: teleportLimit,
                     z: teleportLimit
+                },
+                style: {
+                    width: server_editor_namespaceObject.LayoutFlex.Grow,
+                    minWidth: 10
+                },
+                hasClearButton: false
+            });
+            teleportSubPane.addButton(this.uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    const panelLocation = playerLocation.value;
+                    this.teleportTo(panelLocation);
+                    this.telemetryManager.fireTelemetryEvent(NavigationTelemetry.TeleportToLocation);
+                }
+            }), {
+                icon: "pack://textures/editor/Teleport.png",
+                hiddenLabel: true,
+                shrinkToIcon: true,
+                title: "resourcePack.editor.goToMark.pane.teleport",
+                visible: true,
+                style: {
+                    verticalAlignment: server_editor_namespaceObject.LayoutAlignment.Center
                 }
             });
             this.updateHandle = server_namespaceObject.system.runInterval((() => {
@@ -19287,17 +20134,6 @@ var __webpack_exports__ = {};
                     this.uiSession.log.debug(`Cache Clean finished!: cache size ${Object.keys(cache.blocks).length} at ${Date.now().toString()}`);
                 }
             }), 20);
-            minimapPane.addButton(this.uiSession.actionManager.createAction({
-                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
-                onExecute: () => {
-                    const panelLocation = playerLocation.value;
-                    this.teleportTo(panelLocation);
-                    this.telemetryManager.fireTelemetryEvent(NavigationTelemetry.TeleportToLocation);
-                }
-            }), {
-                title: "resourcePack.editor.goToMark.pane.teleport",
-                visible: true
-            });
             minimapPane.addDivider();
         }
         buildUsersPane() {
@@ -19333,8 +20169,8 @@ var __webpack_exports__ = {};
                         size: 5
                     }, {
                         type: server_editor_namespaceObject.ListPaneEntryType.Text,
-                        size: "grow",
-                        alignment: server_editor_namespaceObject.LayoutAlignment.Left
+                        size: server_editor_namespaceObject.LayoutFlex.Grow,
+                        alignment: server_editor_namespaceObject.LayoutAlignment.Start
                     }, {
                         type: server_editor_namespaceObject.ListPaneEntryType.Image,
                         size: 4
@@ -19468,14 +20304,34 @@ var __webpack_exports__ = {};
                 blue: 1,
                 alpha: 1
             }, {
-                red: 0,
-                green: .5,
-                blue: 0,
-                alpha: 1
-            }, {
                 red: .5,
                 green: .5,
                 blue: .5,
+                alpha: 1
+            }, {
+                red: 0,
+                green: 0,
+                blue: 0,
+                alpha: 1
+            }, {
+                red: 1,
+                green: .75,
+                blue: .8,
+                alpha: 1
+            }, {
+                red: .6,
+                green: .4,
+                blue: .2,
+                alpha: 1
+            }, {
+                red: 1,
+                green: .5,
+                blue: .31,
+                alpha: 1
+            }, {
+                red: .75,
+                green: 1,
+                blue: 0,
                 alpha: 1
             } ];
             let hash = 0;
@@ -19556,10 +20412,11 @@ var __webpack_exports__ = {};
             });
             this.deleteConfirmDialog = this.uiSession.dialogManager.registerDialog({
                 uniqueId: "navigation:deleteConfirm",
-                width: 80,
-                height: 30
+                width: 80
             });
-            this.deleteConfirmDialog.contentPane.addText("editor.sharedUtils.modaldialogconfirmation.title");
+            this.deleteConfirmDialog.contentPane.addText("editor.sharedUtils.modaldialogconfirmation.title", {
+                border: false
+            });
             this.deleteConfirmDialog.controlPane.addButton((() => {
                 this.performBulkDelete();
                 this.deleteConfirmDialog?.sendDismiss();
@@ -19592,40 +20449,62 @@ var __webpack_exports__ = {};
             });
             locationPane.addToggleGroup(this.quickActionMode, {
                 entries: [ {
-                    icon: "pack://textures/editor/plus.png",
-                    tooltip: "resourcePack.editor.goToMark.pane.locationPane.store",
-                    value: 1
-                }, {
                     icon: "pack://textures/editor/Point-Subtract.png",
-                    value: 2
+                    value: 1
                 }, {
                     icon: "trashCanIcon",
                     tooltip: "resourcePack.editor.goToMark.pane.locationPane.delete",
-                    value: 3
+                    value: 2
                 } ],
                 onChange: newValue => {
                     switch (newValue) {
                       case 1:
-                        this.createNewLocation();
-                        break;
-
-                      case 2:
                         this.toggleSelectAll();
                         break;
 
-                      case 3:
+                      case 2:
                         this.deleteSelectedLocations();
                         break;
                     }
                     this.quickActionMode.set(0);
                 }
             });
+            const locationListHeaderPane = locationPane.createSubPane({
+                hasExpander: false,
+                hasMargins: false,
+                layout: server_editor_namespaceObject.PaneLayoutType.Horizontal
+            });
+            locationListHeaderPane.addText("", {
+                style: {
+                    width: server_editor_namespaceObject.LayoutFlex.Grow,
+                    minWidth: 0,
+                    verticalAlignment: server_editor_namespaceObject.LayoutAlignment.End
+                },
+                title: "resourcePack.editor.goToMark.pane.locationPane.listHeader",
+                border: false
+            });
+            locationListHeaderPane.addButton((() => {
+                this.createNewLocation();
+            }), {
+                tooltip: "resourcePack.editor.goToMark.pane.locationPane.store",
+                hiddenLabel: true,
+                shrinkToIcon: true,
+                icon: "pack://textures/editor/plus.png"
+            });
+            locationPane.addDivider();
             this.storedLocationsList = locationPane.addListPane({
                 height: 20,
                 onSlotClicked: slot => {
                     const userData = slot.getUserData();
                     this.selectedLocationIndex = userData;
                     this.updateLocationDetails();
+                    if (!slot.selected) {
+                        this.storedLocationsList?.selectSlot(slot.id, true);
+                        this.locationDetailsPane?.show();
+                    } else {
+                        slot.setSelected(false);
+                        this.locationDetailsPane?.hide();
+                    }
                 },
                 defaultSlots: this.createLocationSlots(),
                 layout: {
@@ -19639,19 +20518,17 @@ var __webpack_exports__ = {};
                         size: 4
                     }, {
                         type: server_editor_namespaceObject.ListPaneEntryType.Text,
-                        size: "grow",
-                        alignment: server_editor_namespaceObject.LayoutAlignment.Left
+                        size: server_editor_namespaceObject.LayoutFlex.Grow,
+                        alignment: server_editor_namespaceObject.LayoutAlignment.Start
                     } ]
                 }
             });
-            if (this.storedLocations.length > 0) {
-                const firstSlot = this.storedLocationsList.getSlotByIndex(0);
-                if (firstSlot) {
-                    firstSlot.setSelected(true);
+            this.locationDetailsPane = this.parentPane.drawerPane;
+            this.locationDetailsPane.onPropertyPaneVisibilityUpdated.subscribe((data => {
+                if (!data.isVisible) {
+                    this.storedLocationsList?.selectSlot("", true);
                 }
-            }
-            locationPane.addDivider();
-            this.locationDetailsPane = locationPane;
+            }));
             this.updateLocationDetails();
         }
         loadLocationsFromWorld() {
@@ -19743,6 +20620,7 @@ var __webpack_exports__ = {};
                 if (oldPositionInput) oldPositionInput.visible = false;
                 if (oldTeleportButton) oldTeleportButton.visible = false;
                 if (oldDeleteButton) oldDeleteButton.visible = false;
+                this.locationDetailsPane.hide();
                 return;
             }
             if (this.selectedLocationIndex >= this.storedLocations.length) {
@@ -19750,6 +20628,7 @@ var __webpack_exports__ = {};
             }
             const currentLocation = this.storedLocations[this.selectedLocationIndex];
             if (!currentLocation) {
+                this.locationDetailsPane.hide();
                 return;
             }
             const nameObservable = (0, server_editor_namespaceObject.makeObservable)(currentLocation.name);
@@ -20005,7 +20884,8 @@ var __webpack_exports__ = {};
             this.storedLocationsList.updateSlots(this.createLocationSlots());
             const slot = this.storedLocationsList.getSlotByIndex(this.selectedLocationIndex);
             if (slot) {
-                slot.setSelected(true);
+                this.storedLocationsList.selectSlot(slot.id, true);
+                this.locationDetailsPane?.show();
             }
         }
         storeLocationsToPlayer() {
@@ -20071,6 +20951,9 @@ var __webpack_exports__ = {};
             const maxHeight = me.dimension.heightRange.max;
             const dimensionID = DimensionIds[me.dimension.id];
             const cache = this.surfaceBlockColorCache;
+            if (cache.isUpdating) {
+                return;
+            }
             cache.center = currentPlayerLocation;
             cache.isUpdating = true;
             this.uiSession.log.debug(`Cache Update starts with cache size ${Object.keys(cache.blocks).length} at ${Date.now()}. Please wait for a while...`);
@@ -20213,6 +21096,44 @@ var __webpack_exports__ = {};
         isLocationMarkNearWhite(color) {
             return color.red >= .9 && color.blue >= .9 && color.green >= .9;
         }
+        loadSettings() {
+            try {
+                const option = {
+                    scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                    version: 0
+                };
+                const settingsGroup = this.persistenceManager.getGroup(STORED_LOCATION_GROUP_SETTINGS, option);
+                if (settingsGroup) {
+                    const storeItem = settingsGroup.fetchItem(STORED_LOCATION_GROUP_ITEM_SETTINGS);
+                    if (storeItem && storeItem.value) {
+                        this.mapSizeSelection.set(storeItem.value.mapSize);
+                        this.uiSession.log.info(`Found ${this.storedLocations.length} stored locations during initialization`);
+                    }
+                    settingsGroup.dispose();
+                }
+            } catch (e) {
+                this.uiSession.log.info(`Exception ${(0, server_editor_namespaceObject.stringFromException)(e)} occurred during initialization`);
+            }
+        }
+        saveSettings() {
+            try {
+                const option = {
+                    scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                    version: 0
+                };
+                const settingsGroup = this.persistenceManager.getOrCreateGroup(STORED_LOCATION_GROUP_SETTINGS, option);
+                if (settingsGroup) {
+                    const settings = {
+                        mapSize: this.mapSizeSelection.value
+                    };
+                    const storeItem = settingsGroup.getOrCreateItem(STORED_LOCATION_GROUP_ITEM_SETTINGS, settings);
+                    storeItem.commit();
+                    settingsGroup.dispose();
+                }
+            } catch (e) {
+                this.uiSession.log.info(`Exception ${(0, server_editor_namespaceObject.stringFromException)(e)} occurred during save`);
+            }
+        }
     }
     class WeatherBehavior {
         auxLog(logString, currentPlayer) {
@@ -20332,1583 +21253,6 @@ var __webpack_exports__ = {};
         }
         teardown() {
             this.resetMenuStates();
-        }
-    }
-    function VibrantVisuals_stringFromException(e) {
-        if (typeof e === "string") {
-            return e;
-        } else if (typeof e === "object" && e !== null && "message" in e) {
-            return e.message;
-        }
-        return "Unknown exception";
-    }
-    var ObservableUIControlType;
-    (function(ObservableUIControlType) {
-        ObservableUIControlType[ObservableUIControlType["Number"] = 0] = "Number";
-        ObservableUIControlType[ObservableUIControlType["String"] = 1] = "String";
-        ObservableUIControlType[ObservableUIControlType["Slider"] = 2] = "Slider";
-        ObservableUIControlType[ObservableUIControlType["Checkbox"] = 3] = "Checkbox";
-        ObservableUIControlType[ObservableUIControlType["ColorRGB"] = 4] = "ColorRGB";
-        ObservableUIControlType[ObservableUIControlType["ColorRGBA"] = 5] = "ColorRGBA";
-        ObservableUIControlType[ObservableUIControlType["Vector3"] = 6] = "Vector3";
-        ObservableUIControlType[ObservableUIControlType["Dropdown"] = 7] = "Dropdown";
-        ObservableUIControlType[ObservableUIControlType["ColorTimeline"] = 8] = "ColorTimeline";
-        ObservableUIControlType[ObservableUIControlType["NumberTimeline"] = 9] = "NumberTimeline";
-    })(ObservableUIControlType || (ObservableUIControlType = {}));
-    class DataItemGroupUIControlBase {
-        get type() {
-            throw new Error("Not implemented in base");
-        }
-        get group() {
-            throw new Error("Not implemented in base");
-        }
-        _insertDataIntoOriginalObject(_propertyPath, _newValue, _actualData, _observableUIControlType, _originalType) {
-            const fnInsertDataIntoObjectByPath = (_path, _value) => {
-                const pathParts = _path.split("/").filter(Boolean);
-                let data = _actualData;
-                for (let i = 0; i < pathParts.length; i++) {
-                    const part = pathParts[i];
-                    if (data[part] === undefined) {
-                        throw new Error(`Failed to find path element ${part}`);
-                    }
-                    if (i === pathParts.length - 1) {
-                        data[part] = _value;
-                        return true;
-                    }
-                    data = data[part];
-                }
-                throw new Error(`Failed to find path element ${_path}`);
-            };
-            switch (_observableUIControlType) {
-              case ObservableUIControlType.Number:
-              case ObservableUIControlType.Slider:
-                {
-                    if (typeof _newValue !== "number") {
-                        throw new Error(`Invalid number value for property ${_propertyPath}`);
-                    }
-                    switch (_originalType) {
-                      case OpNodeSourceType.INTEGER:
-                        fnInsertDataIntoObjectByPath(_propertyPath, Math.round(_newValue));
-                        break;
-
-                      case OpNodeSourceType.NUMBER:
-                        fnInsertDataIntoObjectByPath(_propertyPath, _newValue);
-                        break;
-
-                      default:
-                        throw new Error(`Invalid original type for property ${_propertyPath}`);
-                    }
-                }
-                break;
-
-              case ObservableUIControlType.Checkbox:
-                {
-                    if (typeof _newValue !== "boolean") {
-                        throw new Error(`Invalid number value for property ${_propertyPath}`);
-                    }
-                    fnInsertDataIntoObjectByPath(_propertyPath, _newValue);
-                }
-                break;
-
-              case ObservableUIControlType.String:
-                {
-                    if (typeof _newValue !== "string") {
-                        throw new Error(`Invalid string value for property ${_propertyPath}`);
-                    }
-                    if (_originalType !== OpNodeSourceType.STRING) {
-                        throw new Error(`Invalid original type for property ${_propertyPath}`);
-                    }
-                    fnInsertDataIntoObjectByPath(_propertyPath, _newValue);
-                }
-                break;
-
-              case ObservableUIControlType.ColorRGB:
-              case ObservableUIControlType.ColorRGBA:
-                {
-                    if (typeof _newValue !== "object") {
-                        throw new Error(`Invalid color value for property ${_propertyPath}`);
-                    }
-                    if (_originalType === OpNodeSourceType.ARRAY || _originalType === OpNodeSourceType.MAP) {
-                        if ("red" in _newValue && "green" in _newValue && "blue" in _newValue) {
-                            if (_originalType === OpNodeSourceType.ARRAY) {
-                                const colorComponents = [];
-                                colorComponents.push(Number(_newValue.red));
-                                colorComponents.push(Number(_newValue.green));
-                                colorComponents.push(Number(_newValue.blue));
-                                if (_observableUIControlType === ObservableUIControlType.ColorRGBA && "alpha" in _newValue) {
-                                    colorComponents.push(Number(_newValue.alpha));
-                                }
-                                for (let i = 0; i < colorComponents.length; i++) {
-                                    const keyName = `${_propertyPath}/${i}`;
-                                    fnInsertDataIntoObjectByPath(keyName, Math.round(colorComponents[i] * 255));
-                                }
-                            } else if (_originalType === OpNodeSourceType.MAP) {
-                                throw new Error(`Associative container of named RGB values not yet implemented`);
-                            }
-                        } else {
-                            throw new Error(`Invalid color value for property ${_propertyPath}`);
-                        }
-                    } else if (_originalType === OpNodeSourceType.STRING) {
-                        if ("red" in _newValue && "green" in _newValue && "blue" in _newValue) {
-                            const toHex = n => {
-                                const hex = Math.max(0, Math.min(255, Math.round(n * 255))).toString(16);
-                                return hex.length === 1 ? "0" + hex : hex;
-                            };
-                            const red = Number(_newValue.red);
-                            const green = Number(_newValue.green);
-                            const blue = Number(_newValue.blue);
-                            let hexString = "";
-                            if (_observableUIControlType === ObservableUIControlType.ColorRGBA && "alpha" in _newValue) {
-                                const alpha = Number(_newValue.alpha);
-                                hexString = `#${toHex(red)}${toHex(green)}${toHex(blue)}${toHex(alpha)}`;
-                            } else {
-                                hexString = `#${toHex(red)}${toHex(green)}${toHex(blue)}`;
-                            }
-                            fnInsertDataIntoObjectByPath(_propertyPath, hexString);
-                        } else {
-                            throw new Error(`Invalid color value for property ${_propertyPath}`);
-                        }
-                    } else {
-                        throw new Error(`Invalid original type for property ${_propertyPath}`);
-                    }
-                }
-                break;
-
-              case ObservableUIControlType.Vector3:
-                {
-                    if (typeof _newValue !== "object" && !Array.isArray(_newValue)) {
-                        throw new Error(`Invalid color value for property ${_propertyPath}`);
-                    }
-                    if (_originalType !== OpNodeSourceType.ARRAY && _originalType !== OpNodeSourceType.MAP) {
-                        throw new Error(`Invalid original type for property ${_propertyPath}`);
-                    }
-                    if ("x" in _newValue && "y" in _newValue && "z" in _newValue) {
-                        if (_originalType === OpNodeSourceType.ARRAY) {
-                            const vectorComponents = [];
-                            vectorComponents.push(Number(_newValue.x));
-                            vectorComponents.push(Number(_newValue.y));
-                            vectorComponents.push(Number(_newValue.z));
-                            for (let i = 0; i < vectorComponents.length; i++) {
-                                const keyName = `${_propertyPath}/${i}`;
-                                fnInsertDataIntoObjectByPath(keyName, vectorComponents[i]);
-                            }
-                        } else if (_originalType === OpNodeSourceType.MAP) {
-                            throw new Error(`Associative container of named XYZ values not yet implemented`);
-                        }
-                    } else {
-                        throw new Error(`Invalid color value for property ${_propertyPath}`);
-                    }
-                }
-                break;
-
-              case ObservableUIControlType.Dropdown:
-                {
-                    if (typeof _newValue !== "string") {
-                        throw new Error(`Invalid dropdown value for property ${_propertyPath}`);
-                    }
-                    if (_originalType !== OpNodeSourceType.STRING) {
-                        throw new Error(`Invalid original type for property ${_propertyPath}`);
-                    }
-                    fnInsertDataIntoObjectByPath(_propertyPath, _newValue);
-                }
-                break;
-
-              case ObservableUIControlType.ColorTimeline:
-                {
-                    if (typeof _newValue !== "object") {
-                        throw new Error(`Invalid colorTimeline value for property ${_propertyPath}`);
-                    }
-                    if (_originalType !== OpNodeSourceType.MAP) {
-                        throw new Error(`Invalid original type for property ${_propertyPath}`);
-                    }
-                    fnInsertDataIntoObjectByPath(_propertyPath, _newValue);
-                }
-                break;
-
-              case ObservableUIControlType.NumberTimeline:
-                {
-                    if (typeof _newValue !== "object") {
-                        throw new Error(`Invalid numberTimeline value for property ${_propertyPath}`);
-                    }
-                    if (_originalType !== OpNodeSourceType.MAP) {
-                        throw new Error(`Invalid original type for property ${_propertyPath}`);
-                    }
-                    fnInsertDataIntoObjectByPath(_propertyPath, _newValue);
-                }
-                break;
-
-              default:
-                throw new Error(`Invalid property bag type for property ${_propertyPath}`);
-            }
-            return true;
-        }
-    }
-    class DataItemGroupUIControlPropertyPane extends DataItemGroupUIControlBase {
-        get type() {
-            return DataItemGroupType.PropertyPane;
-        }
-        get group() {
-            return this._group;
-        }
-        get propertyPane() {
-            return this._uiPropertyPane;
-        }
-        constructor(group, _rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback, _helpString) {
-            super();
-            this._group = group;
-            this._helpString = _helpString;
-            const displayName = this.group.displayName;
-            const displayExpander = this.group.displayName.length > 0;
-            const toolTip = {
-                title: displayName,
-                description: [ _helpString ?? "" ]
-            };
-            this._uiPropertyPane = this.group.logicalGroupOnly ? _rootPane : _rootPane.createSubPane({
-                title: displayName,
-                hasExpander: displayExpander,
-                infoTooltip: _helpString !== undefined ? toolTip : undefined
-            });
-            if (!this._uiPropertyPane) {
-                throw new Error("Failed to create property pane");
-            }
-            const unsorted = group.tags.find((tag => tag === "unsorted")) !== undefined;
-            if (!unsorted) {
-                this.group.dataItems.sort(((a, b) => a._displayName.localeCompare(b._displayName)));
-            }
-            for (const item of this.group.dataItems) {
-                const localizedTitle = `${item._displayName}`;
-                const updateOriginalJSONData = newValue => {
-                    const observableControlType = item._observableControlType;
-                    const originalType = item._originalType;
-                    const isJSONDataInserted = this._insertDataIntoOriginalObject(item._observableName, newValue, _actualData, observableControlType, originalType);
-                    if (isJSONDataInserted && _dataItemChangedCallback) {
-                        _dataItemChangedCallback();
-                    }
-                };
-                switch (item._observableControlType) {
-                  case ObservableUIControlType.Number:
-                  case ObservableUIControlType.Slider:
-                    {
-                        const showSlider = item._observableControlType === ObservableUIControlType.Slider;
-                        _schemaInterface.debug(`Adding number property: ${item._observableName} as ${showSlider ? "slider" : "number"}`);
-                        const propItemOptions = {
-                            title: localizedTitle
-                        };
-                        if (item._min !== undefined && item._max !== undefined) {
-                            propItemOptions.min = item._min;
-                            propItemOptions.max = item._max;
-                            propItemOptions.variant = showSlider ? server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider : server_editor_namespaceObject.NumberPropertyItemVariant.InputField;
-                        }
-                        if (item._readonly) {
-                            propItemOptions.enable = false;
-                        }
-                        propItemOptions.onChange = (newValue, _oldValue) => {
-                            updateOriginalJSONData(newValue);
-                        };
-                        item._setOriginalJSONData = (observableTypes, propertyPath, newValue) => {
-                            observableTypes[propertyPath].set(newValue);
-                            updateOriginalJSONData(newValue);
-                        };
-                        if (item._helpString) {
-                            propItemOptions.tooltip = item._helpString;
-                        }
-                        const currentObservable = _observables[item._observableName];
-                        this._uiPropertyPane.addNumber(currentObservable, propItemOptions);
-                    }
-                    break;
-
-                  case ObservableUIControlType.String:
-                    {
-                        _schemaInterface.debug(`Adding string property: ${item._observableName}`);
-                        const propItemOptions = {
-                            title: localizedTitle,
-                            onChange: (newValue, _oldValue) => {
-                                updateOriginalJSONData(newValue);
-                            }
-                        };
-                        if (item._readonly) {
-                            propItemOptions.enable = false;
-                        }
-                        item._setOriginalJSONData = (observableTypes, propertyPath, newValue) => {
-                            observableTypes[propertyPath].set(newValue);
-                            updateOriginalJSONData(newValue);
-                        };
-                        if (item._helpString) {
-                            propItemOptions.tooltip = item._helpString;
-                        }
-                        const currentObservable = _observables[item._observableName];
-                        this._uiPropertyPane.addString(currentObservable, propItemOptions);
-                    }
-                    break;
-
-                  case ObservableUIControlType.ColorRGB:
-                  case ObservableUIControlType.ColorRGBA:
-                    {
-                        _schemaInterface.debug(`Adding color property: ${item._observableName}`);
-                        const propItemOptions = {
-                            title: localizedTitle,
-                            hiddenAlpha: item._observableControlType === ObservableUIControlType.ColorRGBA,
-                            variant: server_editor_namespaceObject.ColorPickerPropertyItemVariant.Inline,
-                            onChange: (newValue, _oldValue) => {
-                                updateOriginalJSONData(newValue);
-                            }
-                        };
-                        if (item._readonly) {
-                            propItemOptions.enable = false;
-                        }
-                        item._setOriginalJSONData = (observableTypes, propertyPath, newValue) => {
-                            observableTypes[propertyPath].set(newValue);
-                            updateOriginalJSONData(newValue);
-                        };
-                        if (item._helpString) {
-                            propItemOptions.tooltip = item._helpString;
-                        }
-                        const currentObservable = _observables[item._observableName];
-                        this._uiPropertyPane.addColorPicker(currentObservable, propItemOptions);
-                    }
-                    break;
-
-                  case ObservableUIControlType.Vector3:
-                    {
-                        _schemaInterface.debug(`Adding vector property: ${item._observableName}`);
-                        const propItemOptions = {
-                            title: localizedTitle,
-                            onChange: (newValue, _oldValue) => {
-                                updateOriginalJSONData(newValue);
-                            }
-                        };
-                        if (item._min !== undefined) {
-                            propItemOptions.min = {
-                                x: item._min,
-                                y: item._min,
-                                z: item._min
-                            };
-                        }
-                        if (item._max !== undefined) {
-                            propItemOptions.max = {
-                                x: item._max,
-                                y: item._max,
-                                z: item._max
-                            };
-                        }
-                        if (item._readonly) {
-                            propItemOptions.enable = false;
-                        }
-                        item._setOriginalJSONData = (observableTypes, propertyPath, newValue) => {
-                            observableTypes[propertyPath].set(newValue);
-                            updateOriginalJSONData(newValue);
-                        };
-                        if (item._helpString) {
-                            propItemOptions.tooltip = item._helpString;
-                        }
-                        const currentObservable = _observables[item._observableName];
-                        this._uiPropertyPane.addVector3(currentObservable, propItemOptions);
-                    }
-                    break;
-
-                  case ObservableUIControlType.Dropdown:
-                    {
-                        _schemaInterface.debug(`Adding dropdown property: ${item._observableName}`);
-                        if (item._enums === undefined || item._prettyEnums === undefined) {
-                            throw new Error("Dropdown property must have enums defined");
-                        }
-                        const comboDropdownItems = item._prettyEnums?.map(((v, i) => {
-                            const dropItem = {
-                                label: v,
-                                value: i
-                            };
-                            return dropItem;
-                        }));
-                        const propItemOptions = {
-                            title: localizedTitle,
-                            entries: comboDropdownItems,
-                            onChange: (newValue, _oldValue, _items) => {
-                                const dropDownNewValue = item._enums !== undefined ? item._enums[newValue] : newValue;
-                                updateOriginalJSONData(dropDownNewValue);
-                            }
-                        };
-                        if (item._readonly) {
-                            propItemOptions.enable = false;
-                        }
-                        item._setOriginalJSONData = (observableTypes, propertyPath, newValue) => {
-                            if (item._enums !== undefined) {
-                                const index = item._enums.indexOf(item._enums[newValue]);
-                                if (index !== -1) {
-                                    observableTypes[propertyPath].set(index);
-                                }
-                            }
-                            const dropDownNewValue = item._enums !== undefined ? item._enums[newValue] : "";
-                            updateOriginalJSONData(dropDownNewValue);
-                        };
-                        if (item._helpString) {
-                            propItemOptions.tooltip = item._helpString;
-                        }
-                        const currentObservable = _observables[item._observableName];
-                        this._uiPropertyPane.addDropdown(currentObservable, propItemOptions);
-                    }
-                    break;
-
-                  case ObservableUIControlType.Checkbox:
-                    {
-                        _schemaInterface.debug(`Adding checkbox property: ${item._observableName}`);
-                        const propItemOptions = {
-                            title: localizedTitle,
-                            onChange: (newValue, _oldValue) => {
-                                updateOriginalJSONData(newValue);
-                            }
-                        };
-                        if (item._readonly) {
-                            propItemOptions.enable = false;
-                        }
-                        item._setOriginalJSONData = (observableTypes, propertyPath, newValue) => {
-                            observableTypes[propertyPath].set(newValue);
-                            updateOriginalJSONData(newValue);
-                        };
-                        if (item._helpString) {
-                            propItemOptions.tooltip = item._helpString;
-                        }
-                        const currentObservable = _observables[item._observableName];
-                        this._uiPropertyPane.addBool(currentObservable, propItemOptions);
-                    }
-                    break;
-
-                  case ObservableUIControlType.ColorTimeline:
-                    throw new Error("ColorTimeline control cannot be used in a property pane");
-
-                  case ObservableUIControlType.NumberTimeline:
-                    throw new Error("NumberTimeline control cannot be used in a property pane");
-
-                  default:
-                    throw new Error(`invalid control type: ${item._observableControlType}`);
-                }
-            }
-        }
-    }
-    class DataItemGroupUIControlColorTimeline extends DataItemGroupUIControlBase {
-        get type() {
-            return DataItemGroupType.ColorTimeline;
-        }
-        get group() {
-            return this._group;
-        }
-        constructor(group, _rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback, _helpString) {
-            super();
-            this._isTimelinePreview = false;
-            this._group = group;
-            const displayName = group.displayName;
-            const displayExpander = true;
-            const toolTip = {
-                title: displayName,
-                description: [ _helpString ?? "" ]
-            };
-            this._uiPropertyPane = _rootPane.createSubPane({
-                title: displayName,
-                hasExpander: displayExpander,
-                infoTooltip: _helpString !== undefined ? toolTip : undefined
-            });
-            if (!this._uiPropertyPane) {
-                throw new Error("Failed to create property pane");
-            }
-            this._isTimelinePreview = group.tags.find((tag => tag === "previewTime")) !== undefined;
-            const unsorted = group.tags.find((tag => tag === "unsorted")) !== undefined;
-            if (!unsorted) {
-                this.group.dataItems.sort(((a, b) => a._displayName.localeCompare(b._displayName)));
-            }
-            const dataTable = [];
-            let colorValueTypes = undefined;
-            let itemIndex = 0;
-            for (const item of this.group.dataItems) {
-                if (item._observableControlType !== ObservableUIControlType.ColorRGBA && item._observableControlType !== ObservableUIControlType.ColorRGB) {
-                    throw new Error(`ColorTimeline control can only contain color data items.  Item ${item._observableName} is a ${item._observableControlType}`);
-                }
-                if (colorValueTypes === undefined) {
-                    colorValueTypes = item._observableControlType;
-                }
-                if (colorValueTypes !== item._observableControlType) {
-                    throw new Error("ColorTimeline control can only handle a container of the same color types - you can't mix RGB and RGBA value types");
-                }
-                item._setOriginalJSONData = (_o, _p, _v) => {};
-                const itemName = group.path + "/" + itemIndex.toString();
-                const currentObservable = _observables[item._observableName];
-                try {
-                    let time = parseFloat(item._displayName);
-                    if (time < 0 || time > 1) {
-                        _schemaInterface.error(`Warning: Time value in the ColorTimeline container should be between 0 and 1 [${itemName} = ${time}]`);
-                        time = Math.max(0, Math.min(1, time));
-                    }
-                    dataTable.push({
-                        id: itemName,
-                        time,
-                        value: currentObservable.value
-                    });
-                    _schemaInterface.debug(`Adding Key/Color property: ${itemName} -- [${time} = ${JSON.stringify(currentObservable.value)}]`);
-                } catch (_e) {
-                    _schemaInterface.error(`Failed to parse time value for item ${item._observableName} - ${VibrantVisuals_stringFromException(_e)}`);
-                    throw new Error("ColorTimeline control only supports numeric key values");
-                }
-                ++itemIndex;
-            }
-            const _rebuildContainerObject = _dataItems => {
-                const outMap = {};
-                for (const item of _dataItems) {
-                    const time = item.time;
-                    const colorValue = item.value;
-                    const red = Math.max(0, Math.min(255, Math.round(colorValue.red * 255)));
-                    const green = Math.max(0, Math.min(255, Math.round(colorValue.green * 255)));
-                    const blue = Math.max(0, Math.min(255, Math.round(colorValue.blue * 255)));
-                    const alpha = Math.max(0, Math.min(255, Math.round(colorValue.alpha * 255)));
-                    if (colorValueTypes === ObservableUIControlType.ColorRGBA) {
-                        outMap[time] = [ red, green, blue, alpha ];
-                    } else {
-                        outMap[time] = [ red, green, blue ];
-                    }
-                }
-                const outJSON = JSON.stringify(outMap);
-                _schemaInterface.debug(`Rebuilding container object: ${outJSON}`);
-                const isInserted = this._insertDataIntoOriginalObject(group.path, outMap, _actualData, ObservableUIControlType.ColorTimeline, OpNodeSourceType.MAP);
-                if (isInserted && _dataItemChangedCallback) {
-                    _dataItemChangedCallback();
-                }
-            };
-            this._uiCurrentTime = (0, server_editor_namespaceObject.makeObservable)(.4);
-            this._uiControl = this._uiPropertyPane.addColorTimeline(this._uiCurrentTime, {
-                entries: dataTable,
-                onNodeAdded: node => {
-                    _schemaInterface._debug?.(`Node added: ${node.id}`);
-                    _rebuildContainerObject(this._uiControl.getData());
-                },
-                onNodeChanged: node => {
-                    _schemaInterface._debug?.(`Node changed: ${node.id}`);
-                    _rebuildContainerObject(this._uiControl.getData());
-                },
-                onNodeRemoved: node => {
-                    _schemaInterface._debug?.(`Node removed: ${node.id}`);
-                    _rebuildContainerObject(this._uiControl.getData());
-                },
-                onTimeChanged: (time, _prev) => {
-                    _schemaInterface._debug?.(`Time changed: ${time}`);
-                    if (this._isTimelinePreview) {
-                        let gameTime = (time * 24e3 + 6e3) % 24e3;
-                        if (gameTime < 0) {
-                            gameTime += 24e3;
-                        }
-                        server_namespaceObject.system.sendScriptEvent("editor:agfxPreview:timeChanged", gameTime.toString());
-                    }
-                }
-            });
-        }
-    }
-    class DataItemGroupUIControlNumberTimeline extends DataItemGroupUIControlBase {
-        get type() {
-            return DataItemGroupType.NumberTimeline;
-        }
-        get group() {
-            return this._group;
-        }
-        constructor(group, _rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback, _helpString) {
-            super();
-            this._isTimelinePreview = false;
-            this._group = group;
-            const displayName = group.displayName;
-            const displayExpander = true;
-            const toolTip = {
-                title: displayName,
-                description: [ _helpString ?? "" ]
-            };
-            this._uiPropertyPane = _rootPane.createSubPane({
-                title: displayName,
-                hasExpander: displayExpander,
-                infoTooltip: _helpString !== undefined ? toolTip : undefined
-            });
-            if (!this._uiPropertyPane) {
-                throw new Error("Failed to create property pane");
-            }
-            this._isTimelinePreview = group.tags.find((tag => tag === "previewTime")) !== undefined;
-            const unsorted = group.tags.find((tag => tag === "unsorted")) !== undefined;
-            if (!unsorted) {
-                this.group.dataItems.sort(((a, b) => a._displayName.localeCompare(b._displayName)));
-            }
-            const dataTable = [];
-            let itemIndex = 0;
-            let minValueBounds;
-            let maxValueBounds;
-            let minValueFound = Number.MAX_SAFE_INTEGER;
-            let maxValueFound = Number.MIN_SAFE_INTEGER;
-            for (const item of this.group.dataItems) {
-                if (item._observableControlType !== ObservableUIControlType.Number) {
-                    throw new Error(`NumberTimeline control can only contain number data items.  Item ${item._observableName} is a ${item._observableControlType}`);
-                }
-                item._setOriginalJSONData = (_o, _p, _v) => {};
-                if (item._min !== undefined) {
-                    if (item._min < minValueFound) {
-                        minValueBounds = item._min;
-                    }
-                }
-                if (item._max !== undefined) {
-                    if (item._max > maxValueFound) {
-                        maxValueBounds = item._max;
-                    }
-                }
-                const itemName = group.path + "/" + itemIndex.toString();
-                const currentObservable = _observables[item._observableName];
-                try {
-                    let time = parseFloat(item._displayName);
-                    if (time < 0 || time > 1) {
-                        _schemaInterface.error(`Warning: Time value in the NumberTimeline container should be between 0 and 1 [${itemName} = ${time}]`);
-                        time = Math.max(0, Math.min(1, time));
-                    }
-                    const itemValue = currentObservable.value;
-                    if (itemValue < minValueFound) {
-                        minValueFound = itemValue;
-                    }
-                    if (itemValue > maxValueFound) {
-                        maxValueFound = itemValue;
-                    }
-                    dataTable.push({
-                        id: itemName,
-                        time,
-                        value: currentObservable.value
-                    });
-                    _schemaInterface.debug(`Adding Key/Number property: ${itemName} -- [${time} = ${JSON.stringify(currentObservable.value)}]`);
-                } catch (_e) {
-                    _schemaInterface.error(`Failed to parse time value for item ${item._observableName} - ${VibrantVisuals_stringFromException(_e)}`);
-                    throw new Error("NumberTimeline control only supports numeric key values");
-                }
-                ++itemIndex;
-            }
-            const _rebuildContainerObject = _dataItems => {
-                const outMap = {};
-                for (const item of _dataItems) {
-                    const time = item.time;
-                    const value = item.value;
-                    outMap[time] = value;
-                }
-                const outJSON = JSON.stringify(outMap);
-                _schemaInterface.debug(`Rebuilding container object: ${outJSON}`);
-                const isInserted = this._insertDataIntoOriginalObject(group.path, outMap, _actualData, ObservableUIControlType.NumberTimeline, OpNodeSourceType.MAP);
-                if (isInserted && _dataItemChangedCallback) {
-                    _dataItemChangedCallback();
-                }
-            };
-            this._uiCurrentTime = (0, server_editor_namespaceObject.makeObservable)(.4);
-            if (minValueBounds === undefined) {
-                minValueBounds = minValueFound;
-            }
-            if (maxValueBounds === undefined) {
-                maxValueBounds = maxValueFound;
-            }
-            this._uiControl = this._uiPropertyPane.addNumberTimeline(this._uiCurrentTime, {
-                entries: dataTable,
-                bounds: {
-                    minValue: minValueBounds,
-                    maxValue: maxValueBounds
-                },
-                gridSeparatorStepCount: {
-                    x: .1,
-                    y: 10
-                },
-                gridSeparatorSliceCount: {
-                    x: 5,
-                    y: 5
-                },
-                onNodeAdded: node => {
-                    _schemaInterface._debug?.(`Node added: ${node.id}`);
-                    _rebuildContainerObject(this._uiControl.getData());
-                },
-                onNodeChanged: node => {
-                    _schemaInterface._debug?.(`Node changed: ${node.id}`);
-                    _rebuildContainerObject(this._uiControl.getData());
-                },
-                onNodeRemoved: node => {
-                    _schemaInterface._debug?.(`Node removed: ${node.id}`);
-                    _rebuildContainerObject(this._uiControl.getData());
-                },
-                onTimeChanged: (time, _prev) => {
-                    _schemaInterface._debug?.(`Time changed: ${time}`);
-                    if (this._isTimelinePreview) {
-                        server_namespaceObject.system.sendScriptEvent("editor:agfxPreview:timeChanged", (time * 24e3).toString());
-                    }
-                }
-            });
-        }
-    }
-    var DataItemGroupType;
-    (function(DataItemGroupType) {
-        DataItemGroupType[DataItemGroupType["PropertyPane"] = 0] = "PropertyPane";
-        DataItemGroupType[DataItemGroupType["ColorTimeline"] = 1] = "ColorTimeline";
-        DataItemGroupType[DataItemGroupType["NumberTimeline"] = 2] = "NumberTimeline";
-    })(DataItemGroupType || (DataItemGroupType = {}));
-    class DataItemGroup {
-        constructor(_displayName, _path, _parentGroup, _type, _tags, _editorControlType, _helpString) {
-            this._tags = [];
-            this._displayName = _displayName;
-            this._path = _path;
-            this._dataItems = [];
-            this._parentGroup = _parentGroup;
-            this._logicalGroupOnly = false;
-            this._type = _type;
-            this._tags = _tags;
-            this._helpString = _helpString;
-            switch (_editorControlType ?? OpNodeEditorUIControlType.UNKNOWN) {
-              case OpNodeEditorUIControlType.COLOR_TIMELINE:
-                this._groupType = DataItemGroupType.ColorTimeline;
-                break;
-
-              case OpNodeEditorUIControlType.NUMBER_TIMELINE:
-                this._groupType = DataItemGroupType.NumberTimeline;
-                break;
-
-              default:
-                this._groupType = DataItemGroupType.PropertyPane;
-            }
-        }
-        get displayName() {
-            return this._displayName;
-        }
-        get path() {
-            return this._path;
-        }
-        get containerBounds() {
-            return this._containerBounds;
-        }
-        set containerBounds(value) {
-            this._containerBounds = value;
-        }
-        get propertyPane() {
-            if (this._UIControl && this._UIControl.type === DataItemGroupType.PropertyPane) {
-                return this._UIControl.propertyPane;
-            }
-            return undefined;
-        }
-        get logicalGroupOnly() {
-            return this._logicalGroupOnly;
-        }
-        set logicalGroupOnly(value) {
-            this._logicalGroupOnly = value;
-        }
-        get type() {
-            return this._type;
-        }
-        get groupType() {
-            return this._groupType;
-        }
-        get dataItems() {
-            return this._dataItems;
-        }
-        get tags() {
-            return this._tags;
-        }
-        createPropertyPane(_rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback) {
-            if (this._parentGroup) {
-                if (this._parentGroup.propertyPane) {
-                    _rootPane = this._parentGroup.propertyPane;
-                }
-            }
-            if (!_rootPane) {
-                throw new Error(`Missing parent property pane`);
-            }
-            if (this._UIControl) {
-                throw new Error("Property pane already created");
-            }
-            this._UIControl = new DataItemGroupUIControlPropertyPane(this, _rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback, this._helpString);
-        }
-        createColorTimeline(_rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback) {
-            if (this._parentGroup) {
-                if (this._parentGroup.propertyPane) {
-                    _rootPane = this._parentGroup.propertyPane;
-                }
-            }
-            if (!_rootPane) {
-                throw new Error(`Missing parent property pane`);
-            }
-            if (this._UIControl) {
-                throw new Error("Property pane already created");
-            }
-            this._UIControl = new DataItemGroupUIControlColorTimeline(this, _rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback, this._helpString);
-        }
-        createNumberTimeline(_rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback) {
-            if (this._parentGroup) {
-                if (this._parentGroup.propertyPane) {
-                    _rootPane = this._parentGroup.propertyPane;
-                }
-            }
-            if (!_rootPane) {
-                throw new Error(`Missing parent property pane`);
-            }
-            if (this._UIControl) {
-                throw new Error("Property pane already created");
-            }
-            this._UIControl = new DataItemGroupUIControlNumberTimeline(this, _rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback, this._helpString);
-        }
-        addNumberDataItem(_displayName, _observableName, _originalType, _min, _max, _readonly, _helpString) {
-            this._dataItems.push({
-                _displayName,
-                _observableName,
-                _observableControlType: ObservableUIControlType.Number,
-                _min,
-                _max,
-                _originalType,
-                _uiCollectionComponent: false,
-                _readonly: _readonly ?? false,
-                _helpString
-            });
-        }
-        addStringDataItem(_displayName, _observableName, _validationRegex, _readonly, _helpString) {
-            this._dataItems.push({
-                _displayName,
-                _observableName,
-                _observableControlType: ObservableUIControlType.String,
-                _validationRegex,
-                _originalType: OpNodeSourceType.STRING,
-                _uiCollectionComponent: false,
-                _readonly: _readonly ?? false,
-                _helpString
-            });
-        }
-        addSliderDataItem(_displayName, _observableName, _originalType, _min, _max, _helpString) {
-            this._dataItems.push({
-                _displayName,
-                _observableName,
-                _observableControlType: ObservableUIControlType.Slider,
-                _min,
-                _max,
-                _originalType,
-                _uiCollectionComponent: false,
-                _readonly: false,
-                _helpString
-            });
-        }
-        addColorDataItem(_displayName, _observableName, size, _originalType, _uiCollectionComponent, _helpString) {
-            this._dataItems.push({
-                _displayName,
-                _observableName,
-                _observableControlType: size === 4 ? ObservableUIControlType.ColorRGBA : ObservableUIControlType.ColorRGB,
-                _originalType,
-                _uiCollectionComponent,
-                _readonly: false,
-                _helpString
-            });
-        }
-        addVector3DataItem(_displayName, _observableName, _originalType, _min, _max, _readonly, _helpString) {
-            this._dataItems.push({
-                _displayName,
-                _observableName,
-                _observableControlType: ObservableUIControlType.Vector3,
-                _originalType,
-                _min,
-                _max,
-                _uiCollectionComponent: true,
-                _readonly: _readonly ?? false,
-                _helpString
-            });
-        }
-        addDropdownDataItem(_displayName, _observableName, _originalType, _enums, _prettyEnums, _readonly, _helpString) {
-            this._dataItems.push({
-                _displayName,
-                _observableName,
-                _observableControlType: ObservableUIControlType.Dropdown,
-                _originalType,
-                _uiCollectionComponent: false,
-                _readonly: _readonly ?? false,
-                _enums,
-                _prettyEnums,
-                _helpString
-            });
-        }
-        addCheckboxDataItem(_displayName, _observableName, _originalType, _readonly, _helpString) {
-            this._dataItems.push({
-                _displayName,
-                _observableName,
-                _observableControlType: ObservableUIControlType.Checkbox,
-                _originalType,
-                _uiCollectionComponent: false,
-                _readonly: _readonly ?? false,
-                _helpString
-            });
-        }
-        restoreData(_observables, _defaultObservable) {
-            for (const item of this._dataItems) {
-                const path = item._observableName;
-                const newValue = _defaultObservable[path];
-                if (item._setOriginalJSONData) {
-                    item._setOriginalJSONData(_observables, path, newValue);
-                }
-            }
-        }
-    }
-    class UIComponentMap {
-        constructor(session, data) {
-            this._editableProperties = {};
-            this._groups = [];
-            this._session = session;
-            this._dirty = false;
-            this._reverting = false;
-            this._currentData = JSON.parse(JSON.stringify(data));
-        }
-        get dirty() {
-            return this._dirty;
-        }
-        set dirty(value) {
-            this._dirty = value;
-        }
-        get reverting() {
-            return this._reverting;
-        }
-        set reverting(value) {
-            this._reverting = value;
-        }
-        get currentData() {
-            return this._currentData;
-        }
-        _findGroupFromPath(path) {
-            const lastSlash = path.lastIndexOf("/");
-            if (lastSlash <= 0) {
-                return undefined;
-            }
-            const parentPath = path.slice(0, lastSlash);
-            for (const group of this._groups) {
-                if (group.path === parentPath) {
-                    return group;
-                }
-            }
-            throw new Error(`Failed to find a parent group for a non-root data item (${path})`);
-            return undefined;
-        }
-        addDataItem(_path, _key, _type, _data, _properties) {
-            let parentGroup = this._findGroupFromPath(_path);
-            const fnConvertNodeTypeToDefaultEditor = _type => {
-                switch (_type) {
-                  case OpNodeSourceType.STRING:
-                    return OpNodeEditorUIControlType.TEXT;
-
-                  case OpNodeSourceType.NUMBER:
-                  case OpNodeSourceType.INTEGER:
-                    return OpNodeEditorUIControlType.FLOAT;
-
-                  case OpNodeSourceType.BOOLEAN:
-                    return OpNodeEditorUIControlType.CHECKBOX;
-
-                  default:
-                    return OpNodeEditorUIControlType.UNKNOWN;
-                }
-            };
-            let editorControl = fnConvertNodeTypeToDefaultEditor(_type);
-            const editorProperty = _properties.getProperty("OpPropertyEditorUIControl");
-            if (editorProperty) {
-                editorControl = editorProperty.controlType;
-            }
-            const labelAliases = _properties.getProperty("OpPropertyLabelAliases");
-            const prettify = _properties.getProperty("OpPropertyPrettifier");
-            const tagsProperty = _properties.getProperty("OpPropertyTags");
-            const helpProperty = _properties.getProperty("OpPropertyHelp");
-            const helpString = helpProperty?.help ?? undefined;
-            const aliasAndPrettify = _key => {
-                const alias = labelAliases?.getLabelAlias(_key) ?? _key;
-                const displayName = prettify?.prettify(alias) ?? alias;
-                return displayName;
-            };
-            const displayName = aliasAndPrettify(_key);
-            if (_type === OpNodeSourceType.NULL) {
-                throw new Error("I don't know what to do with nulls");
-            } else if (_type === OpNodeSourceType.OBJECT || _type === OpNodeSourceType.ARRAY || _type === OpNodeSourceType.MAP) {
-                const tags = tagsProperty?.tags ?? [];
-                this._groups.push(new DataItemGroup(displayName, _path, parentGroup, _type, tags, editorControl, helpString));
-                const containerBounds = {
-                    min: 0,
-                    max: 0
-                };
-                const arrayBoundsProperty = _properties.getProperty("OpPropertyArrayBounds");
-                if (arrayBoundsProperty) {
-                    if (arrayBoundsProperty.minItems !== undefined) {
-                        containerBounds.min = arrayBoundsProperty.minItems;
-                    }
-                    if (arrayBoundsProperty.maxItems !== undefined) {
-                        containerBounds.max = arrayBoundsProperty.maxItems;
-                    }
-                } else {
-                    const mapBoundsProperty = _properties.getProperty("OpPropertyMapBounds");
-                    if (mapBoundsProperty) {
-                        if (mapBoundsProperty.minProperties !== undefined) {
-                            containerBounds.min = mapBoundsProperty.minProperties;
-                        }
-                        if (mapBoundsProperty.maxProperties !== undefined) {
-                            containerBounds.max = mapBoundsProperty.maxProperties;
-                        }
-                    }
-                }
-                if (editorControl === OpNodeEditorUIControlType.COLOR || editorControl === OpNodeEditorUIControlType.VECTOR3) {
-                    if (containerBounds.min !== containerBounds.max || containerBounds.min !== 3 && containerBounds.min !== 4) {
-                        throw new Error(`Container bounds not specified - Path(${_path}), Key(${_key}) -- minItems and maxItems MUST be specified in the schema`);
-                    }
-                }
-                if (editorControl === OpNodeEditorUIControlType.COLOR) {
-                    this._groups[this._groups.length - 1].containerBounds = containerBounds;
-                    this._groups[this._groups.length - 1].logicalGroupOnly = true;
-                    const color = {
-                        Red: 0,
-                        Green: 0,
-                        Blue: 0,
-                        Alpha: 0
-                    };
-                    this._editableProperties[_path] = (0, server_editor_namespaceObject.makeObservable)(color);
-                } else if (editorControl === OpNodeEditorUIControlType.VECTOR3) {
-                    this._groups[this._groups.length - 1].containerBounds = containerBounds;
-                    this._groups[this._groups.length - 1].logicalGroupOnly = true;
-                    const vec3 = {
-                        x: 0,
-                        y: 0,
-                        z: 0
-                    };
-                    this._editableProperties[_path] = (0, server_editor_namespaceObject.makeObservable)(vec3);
-                } else if (editorControl === OpNodeEditorUIControlType.COLOR_TIMELINE) {
-                    this._groups[this._groups.length - 1].containerBounds = containerBounds;
-                    this._groups[this._groups.length - 1].logicalGroupOnly = true;
-                } else if (editorControl === OpNodeEditorUIControlType.NUMBER_TIMELINE) {
-                    this._groups[this._groups.length - 1].containerBounds = containerBounds;
-                    this._groups[this._groups.length - 1].logicalGroupOnly = true;
-                }
-            } else {
-                if (!parentGroup) {
-                    const tags = tagsProperty?.tags ?? [];
-                    const groupIndex = this._groups.push(new DataItemGroup("", _path, undefined, OpNodeSourceType.NULL, tags, OpNodeEditorUIControlType.UNKNOWN));
-                    parentGroup = this._groups[groupIndex - 1];
-                }
-                if (_type !== OpNodeSourceType.STRING && _type !== OpNodeSourceType.NUMBER && _type !== OpNodeSourceType.INTEGER && _type !== OpNodeSourceType.BOOLEAN) {
-                    return;
-                }
-                this._editableProperties[_path] = (0, server_editor_namespaceObject.makeObservable)(_data);
-                const regexValidator = _properties.getProperty("OpPropertyPattern")?.pattern;
-                const valueMin = _properties.getProperty("OpPropertyValueRange")?.min;
-                const valueMax = _properties.getProperty("OpPropertyValueRange")?.max;
-                const readonly = _properties.hasProperty("OpPropertyReadOnly");
-                switch (editorControl) {
-                  case OpNodeEditorUIControlType.COLOR_TIMELINE:
-                  case OpNodeEditorUIControlType.NUMBER_TIMELINE:
-                    break;
-
-                  case OpNodeEditorUIControlType.FLOAT:
-                    parentGroup.addNumberDataItem(displayName, _path, _type, valueMin, valueMax, readonly, helpString);
-                    break;
-
-                  case OpNodeEditorUIControlType.SLIDER:
-                    parentGroup.addSliderDataItem(displayName, _path, _type, valueMin, valueMax, helpString);
-                    break;
-
-                  case OpNodeEditorUIControlType.TEXT:
-                    parentGroup.addStringDataItem(displayName, _path, regexValidator, readonly, helpString);
-                    break;
-
-                  case OpNodeEditorUIControlType.CHECKBOX:
-                    parentGroup.addCheckboxDataItem(displayName, _path, _type, readonly, helpString);
-                    break;
-
-                  case OpNodeEditorUIControlType.COLOR:
-                    {
-                        const parentPath = parentGroup.path;
-                        if (_type === OpNodeSourceType.NUMBER || _type === OpNodeSourceType.INTEGER) {
-                            if (parentGroup.type !== OpNodeSourceType.ARRAY) {
-                                throw new Error(`Associative container of named RGB values not yet implemented`);
-                            }
-                            const colorSize = parentGroup.containerBounds?.max;
-                            if (!colorSize) {
-                                throw new Error(`Array bounds not specified - Path(${_path}), Key(${_key})`);
-                            }
-                            const index = Number(_key);
-                            if (index >= colorSize || index < 0) {
-                                throw new Error(`Array bounds exceeded - Path(${_path}), Key(${_key})`);
-                            } else if (index === colorSize - 1) {
-                                const componentData = [];
-                                for (let i = 0; i < colorSize; i++) {
-                                    const colorComponentPath = `${parentPath}/${i}`;
-                                    const colorComponent = this._editableProperties[colorComponentPath].value;
-                                    if (typeof colorComponent !== "number") {
-                                        throw new Error(`Invalid color component value at path ${colorComponentPath}`);
-                                    }
-                                    componentData.push(colorComponent / 255);
-                                }
-                                if (colorSize === 3) {
-                                    componentData.push(1);
-                                }
-                                const color = {
-                                    red: componentData[0],
-                                    green: componentData[1],
-                                    blue: componentData[2],
-                                    alpha: componentData[3]
-                                };
-                                this._editableProperties[parentPath] = (0, server_editor_namespaceObject.makeObservable)(color);
-                                const groupDisplayName = aliasAndPrettify(parentGroup.displayName);
-                                const _grandparentGroup = this._findGroupFromPath(parentPath) ?? parentGroup;
-                                _grandparentGroup.addColorDataItem(groupDisplayName, parentPath, colorSize, parentGroup.type, true, helpString);
-                            }
-                        } else if (_type === OpNodeSourceType.STRING) {
-                            const colorString = String(_data);
-                            const hexPattern = /^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$/;
-                            if (!hexPattern.test(colorString)) {
-                                throw new Error("Invalid color string format");
-                            }
-                            const componentData = [];
-                            let colorSize = 0;
-                            for (let i = 1; i < colorString.length; i += 2) {
-                                const component = parseInt(colorString.substring(i, i + 2), 16);
-                                componentData.push(component / 255);
-                                ++colorSize;
-                            }
-                            if (colorSize === 3) {
-                                componentData.push(1);
-                            }
-                            const color = {
-                                red: componentData[0],
-                                green: componentData[1],
-                                blue: componentData[2],
-                                alpha: componentData[3]
-                            };
-                            this._editableProperties[parentPath] = (0, server_editor_namespaceObject.makeObservable)(color);
-                            const groupDisplayName = aliasAndPrettify(parentGroup.displayName);
-                            const grandparentGroup = this._findGroupFromPath(parentPath) ?? parentGroup;
-                            grandparentGroup.addColorDataItem(groupDisplayName, parentPath, colorSize, parentGroup.type, true, helpString);
-                        }
-                    }
-                    break;
-
-                  case OpNodeEditorUIControlType.VECTOR3:
-                    {
-                        const parentPath = parentGroup.path;
-                        if (_type === OpNodeSourceType.NUMBER || _type === OpNodeSourceType.INTEGER) {
-                            if (parentGroup.type !== OpNodeSourceType.ARRAY) {
-                                throw new Error(`Associative container of named XYZ values not yet implemented`);
-                            }
-                            const index = Number(_key);
-                            if (index >= 3 || index < 0) {
-                                throw new Error(`Array bounds exceeded - Path(${_path}), Key(${_key})`);
-                            } else if (index === 2) {
-                                const componentData = [];
-                                for (let i = 0; i < 3; i++) {
-                                    const componentPath = `${parentPath}/${i}`;
-                                    const componentValue = this._editableProperties[componentPath].value;
-                                    if (typeof componentValue !== "number") {
-                                        throw new Error(`Invalid vector3 component value at path ${componentPath}`);
-                                    }
-                                    componentData.push(componentValue);
-                                }
-                                const vec3 = {
-                                    x: componentData[0],
-                                    y: componentData[1],
-                                    z: componentData[2]
-                                };
-                                this._editableProperties[parentPath] = (0, server_editor_namespaceObject.makeObservable)(vec3);
-                                const groupDisplayName = aliasAndPrettify(parentGroup.displayName);
-                                const _grandparentGroup = this._findGroupFromPath(parentPath) ?? parentGroup;
-                                _grandparentGroup.addVector3DataItem(groupDisplayName, parentPath, parentGroup.type, valueMin, valueMax, readonly, helpString);
-                            }
-                        }
-                    }
-                    break;
-
-                  case OpNodeEditorUIControlType.DROPDOWN:
-                    {
-                        const enumProperty = _properties.getProperty("OpPropertyEnum");
-                        if (enumProperty === undefined) {
-                            throw new Error("Control type is dropdown, but no enum values specified in schema");
-                        }
-                        enumProperty.prettifyEnums(aliasAndPrettify);
-                        const comboItems = enumProperty.enums ?? [];
-                        const prettyComboItems = enumProperty.prettyEnums ?? [];
-                        const index = enumProperty.getIndexOf(String(_data));
-                        if (index === -1) {
-                            throw new Error("Invalid enum value in data");
-                        }
-                        this._editableProperties[_path] = (0, server_editor_namespaceObject.makeObservable)(index);
-                        parentGroup.addDropdownDataItem(displayName, _path, _type, comboItems, prettyComboItems, readonly, helpString);
-                    }
-                    break;
-
-                  default:
-                    throw new Error(`Unknown control type encountered - ${JSON.stringify(editorControl)}`);
-                }
-            }
-        }
-        constructUIComponents(_rootPane, _schemaInterface) {
-            if (this._currentData === undefined) {
-                throw new Error("No data object to build UI components from");
-            }
-            if (_rootPane === undefined) {
-                throw new Error("No root pane to build UI components in");
-            }
-            for (const group of this._groups) {
-                switch (group.groupType) {
-                  case DataItemGroupType.PropertyPane:
-                    group.createPropertyPane(_rootPane, this._editableProperties, this._currentData, _schemaInterface, (() => {
-                        this._dirty = true;
-                    }));
-                    break;
-
-                  case DataItemGroupType.ColorTimeline:
-                    group.createColorTimeline(_rootPane, this._editableProperties, this._currentData, _schemaInterface, (() => {
-                        this._dirty = true;
-                    }));
-                    break;
-
-                  case DataItemGroupType.NumberTimeline:
-                    group.createNumberTimeline(_rootPane, this._editableProperties, this._currentData, _schemaInterface, (() => {
-                        this._dirty = true;
-                    }));
-                    break;
-                }
-            }
-        }
-        saveDefaultProperties() {
-            this._backupProperties = {};
-            for (const prop in this._editableProperties) {
-                this._backupProperties[prop] = this._editableProperties[prop].value;
-            }
-        }
-        restoreProperties() {
-            if (!this._backupProperties) {
-                throw new Error(`back up properties are not defined`);
-            }
-            for (const group of this._groups) {
-                group.restoreData(this._editableProperties, this._backupProperties);
-            }
-        }
-    }
-    var DeferredLightingTelemetry;
-    (function(DeferredLightingTelemetry) {
-        DeferredLightingTelemetry["ModeChanged"] = "ModeChanged";
-        DeferredLightingTelemetry["ResetSettings"] = "ResetSettings";
-        DeferredLightingTelemetry["ExportSettings"] = "ExportSettings";
-        DeferredLightingTelemetry["ErrorDataTransfer"] = "ErrorDataTransfer";
-    })(DeferredLightingTelemetry || (DeferredLightingTelemetry = {}));
-    const USE_MCTOOLS_STAGING = false;
-    class VibrantVisualsBehavior {
-        _logInfo(message) {
-            this._session.log.info(message);
-        }
-        _logError(message) {
-            this._session.log.error(message, {
-                channelMask: server_editor_namespaceObject.LogChannel.All
-            });
-        }
-        _logDebug(message) {
-            this._session.log.debug(message);
-        }
-        constructor(session) {
-            this._errorCollection = [];
-            this._session = session;
-            this._tickHandle = -1;
-            this._asyncOperationWorking = false;
-            this.telemetryManager = new TelemetryManager(session.extensionContext.player, TelemetrySource.DeferredLighting);
-            this._schemaInterface = new logInterface;
-            this._schemaInterface._debug = _msg => {};
-            this._schemaInterface._error = _msg => {
-                this._logError(_msg);
-                this._errorCollection.push(_msg);
-            };
-            this._schemaInterface._onStep = (_path, _key, _type, _data, _properties) => {
-                this._schemaInterface.debug(`Step: Path(${_path}) - Key(${_key}) - Type(${_type}) - Data(${JSON.stringify(_data)}), Properties(${_properties.toString()})`);
-                this._uiComponentMap?.addDataItem(_path, _key, _type, _data, _properties);
-            };
-            this._transferManager = server_editor_private_bindings_namespaceObject.editorInternal.getPlayerServices(this._session.extensionContext.player).dataTransfer;
-            const accessorList = this._transferManager.getRegisteredAccessors();
-            this._rootPane = this._session.createPropertyPane({
-                title: "resourcePack.editor.agfx.pane.title",
-                uniqueId: "editor:pane:agfxSettings",
-                infoTooltip: {
-                    description: [ {
-                        link: "https://aka.ms/BedrockEditorDeferredLighting",
-                        text: "resourcePack.editor.help.learnMore"
-                    } ]
-                }
-            });
-            const currentGraphicsMode = this._session.extensionContext.settings.graphics.get(server_editor_namespaceObject.GraphicsSettingsProperty.GraphicsMode);
-            const isDeferredRenderingEnabled = (0, server_editor_namespaceObject.makeObservable)(currentGraphicsMode === server_namespaceObject.GraphicsMode.Deferred);
-            const loadingOverlay = this._rootPane.createModalOverlayPane();
-            loadingOverlay.contentPane.addText("editor.vibrantVisuals.pane.graphicsProgress", {
-                alignment: server_editor_namespaceObject.LayoutAlignment.Center,
-                border: false
-            });
-            this._rootPane.addBool(isDeferredRenderingEnabled, {
-                title: "resourcePack.editor.agfx.pane.deferredToggle",
-                onChange: isDeferred => {
-                    if (this._graphicsChangeHandle !== undefined) {
-                        return;
-                    }
-                    loadingOverlay.show();
-                    this._graphicsChangeHandle = server_namespaceObject.system.runTimeout((() => {
-                        this._session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.GraphicsMode, isDeferred ? server_namespaceObject.GraphicsMode.Deferred : server_namespaceObject.GraphicsMode.Fancy);
-                    }), server_namespaceObject.TicksPerSecond);
-                }
-            });
-            this._rootPane.addText("resourcePack.editor.agfx.pane.enableText", {
-                visible: !isDeferredRenderingEnabled.value
-            });
-            this._rootSelectedAccessorIndex = (0, server_editor_namespaceObject.makeObservable)(-1);
-            this._rootPane.addButton((() => {
-                this._generateResourcePackPayload(this._transferManager).then((payload => {
-                    const base64Payload = toBase64(payload);
-                    const domain = USE_MCTOOLS_STAGING ? "https://silver-guide-3a7f4789.pages.github.io" : "https://mctools.dev";
-                    const url = domain + "/#open=gp/dlStarter&updatesJson=" + base64Payload;
-                    this._packPayload.set(url);
-                    this._packLink.visible = true;
-                })).catch((e => {
-                    this._logError("Failed to cook resource pack payload - " + VibrantVisuals_stringFromException(e));
-                    this._buildErrorUI("Failed to cook resource pack payload");
-                }));
-            }), {
-                title: "resourcePack.editor.vibrantVisuals.pane.generatePacks",
-                visible: isDeferredRenderingEnabled.value
-            });
-            this._packPayload = (0, server_editor_namespaceObject.makeObservable)("");
-            this._packLink = this._rootPane.addLink(this._packPayload, {
-                title: "Download Resource Pack"
-            });
-            this._packLink.visible = false;
-            this._rootPane.onPropertyPaneVisibilityUpdated.subscribe((eventData => {
-                if (eventData.isVisible && this._currentAccessor !== undefined) {
-                    const accessorName = this._currentAccessor;
-                    this._startDirtyWatcher(this._transferManager, accessorName);
-                } else {
-                    this._stopDirtyWatcher(this._transferManager, this._currentAccessor);
-                }
-            }));
-            const accessorDropdownItems = accessorList.map(((v, i) => {
-                const item = {
-                    label: v.nameStringId,
-                    value: i
-                };
-                return item;
-            }));
-            const localizedTitle = {
-                id: "resourcePack.editor.agfx.pane.settings_selector"
-            };
-            this._rootPane.addDropdown(this._rootSelectedAccessorIndex, {
-                title: localizedTitle,
-                entries: accessorDropdownItems,
-                visible: isDeferredRenderingEnabled.value,
-                onChange: (newValue, oldValue, items) => {
-                    const oldIndex = oldValue;
-                    const newIndex = newValue;
-                    if (oldIndex === newIndex) {
-                        return;
-                    }
-                    if (this._asyncOperationWorking) {
-                        this._logInfo("Async operation already in progress - ignoring request for now");
-                        this._rootSelectedAccessorIndex.set(oldIndex);
-                        return;
-                    }
-                    if (this._rootSelectedAccessorIndex.value < 0 || this._rootSelectedAccessorIndex.value >= accessorList.length) {
-                        this._logError("Invalid accessor index selected - this shouldn't be possible");
-                        return;
-                    }
-                    const accessor = accessorList[this._rootSelectedAccessorIndex.value];
-                    this._currentAccessor = accessor.uniqueId;
-                    this._changeDataAccessor(this._transferManager, accessor.uniqueId);
-                    this.telemetryManager.fireTelemetryEvent(DeferredLightingTelemetry.ModeChanged, {
-                        mode: accessor.uniqueId
-                    });
-                }
-            });
-            this._session.menuBar.getMenu(server_editor_namespaceObject.CoreMenuType.WorldOptions).then((menu => {
-                this._menu = menu.addItem({
-                    label: "resourcePack.editor.deferredLightingSettings.menu.title",
-                    uniqueId: "DeferredLightingSettingsMenuItem",
-                    tooltip: "resourcePack.editor.menuBar.vibrantVisuals.tooltip"
-                }, this._session.actionManager.createAction({
-                    actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
-                    onExecute: () => {
-                        this._rootPane.show();
-                    }
-                }));
-            })).catch((() => {
-                this._logError("Failed to add root menu item for this tool");
-            }));
-            this._addActionBarItem();
-        }
-        async _generateResourcePackPayload(transferManager) {
-            const rp = new Map;
-            const prefix = "/resource_packs/samp_dlstarter/";
-            const filepath_map = new Map([ [ "deferred_lighting::water_parameters", prefix + "water/water.json" ], [ "deferred_lighting::lighting_group", prefix + "lighting/global.json" ], [ "deferred_lighting::atmospheric_scattering", prefix + "atmospherics/atmospherics.json" ], [ "deferred_lighting::color_grading_parameters", prefix + "color_grading/color_grading.json" ], [ "deferred_lighting::point_lights", prefix + "point_lights/global.json" ], [ "deferred_lighting::shadows", prefix + "shadows/global.json" ], [ "deferred_lighting::cubemap", prefix + "cubemaps/cubemap.json" ] ]);
-            const accessorList = transferManager.getRegisteredAccessors();
-            for (const accessor of accessorList) {
-                try {
-                    const agfxData = await transferManager.requestData(accessor.uniqueId);
-                    const destinationPath = filepath_map.get(accessor.uniqueId);
-                    if (destinationPath === undefined) {
-                        this._logError(`No destination path found for accessor ${accessor.uniqueId}`);
-                        continue;
-                    }
-                    rp.set(destinationPath, agfxData.data);
-                } catch (e) {
-                    this._logError(`Failed to get data for accessor ${accessor.uniqueId} - ${VibrantVisuals_stringFromException(e)}`);
-                }
-            }
-            return JSON.stringify(Object.fromEntries(rp));
-        }
-        _buildErrorUI(msg) {
-            if (this._settingsPane) {
-                this._rootPane.removeSubPane(this._settingsPane);
-                this._settingsPane = undefined;
-            }
-            this._settingsPane = this._rootPane.createSubPane({
-                title: "resourcePack.editor.agfx.settings.error.title"
-            });
-            const errorMessages = msg.split("\n");
-            for (const msg of errorMessages) {
-                this._settingsPane.addText(msg, {
-                    border: false
-                });
-            }
-            this._asyncOperationWorking = false;
-        }
-        _changeDataAccessor(_transferManager, _accessorName) {
-            if (this._asyncOperationWorking) {
-                this._logError("Async operation already in progress - ignoring request");
-                return;
-            }
-            this._errorCollection = [];
-            this._destroySettingsPane();
-            this._asyncOperationWorking = true;
-            _transferManager.requestData(_accessorName).then((data => {
-                this._buildSettingsPane(data);
-                this._startDirtyWatcher(_transferManager, _accessorName);
-            })).catch((e => {
-                this._schemaInterface.error(`Failed to transfer data from client - ${VibrantVisuals_stringFromException(e)}`);
-                this.telemetryManager.fireTelemetryEvent(DeferredLightingTelemetry.ErrorDataTransfer);
-                this._buildErrorUI(this._errorCollection.join("\n"));
-            }));
-        }
-        _buildSettingsPane(data) {
-            this._schemaInterface.debug("Received data from transfer manager");
-            this._asyncOperationWorking = false;
-            let dataObject;
-            let schemaObject;
-            this._errorCollection = [];
-            this._uiComponentMap = undefined;
-            try {
-                dataObject = JSON.parse(data.data);
-                this._schemaInterface.debug("Parsed incoming JSON object - OK");
-                schemaObject = JSON.parse(data.schema);
-                this._schemaInterface.debug("Parsed incoming JSON schema - OK");
-                this._schemaInterface.debug(`Schema:\n$${String(data.schema)}\n-----------------------------------------------------------------------------`);
-                this._schemaInterface.debug(`Data:\n$${String(data.data)}\n-----------------------------------------------------------------------------`);
-            } catch (e) {
-                this._schemaInterface.error(`Failed to parse incoming JSON object - ${VibrantVisuals_stringFromException(e)}`);
-                this._buildErrorUI(this._errorCollection.join("\n"));
-                return;
-            }
-            this._uiComponentMap = new UIComponentMap(this._session, dataObject);
-            try {
-                const schemaBuilder = new SchemaValidatorBuilder(this._schemaInterface);
-                const builtSchema = schemaBuilder.build(schemaObject);
-                const validatedFlag = schemaBuilder.validate(dataObject);
-                if (!validatedFlag) {
-                    throw new Error("Failed to validate incoming JSON object");
-                }
-                this._uiComponentMap.saveDefaultProperties();
-            } catch (e) {
-                this._schemaInterface.error(`Failed to validate schema - ${VibrantVisuals_stringFromException(e)}`);
-                this._buildErrorUI(this._errorCollection.join("\n"));
-                this._uiComponentMap = undefined;
-                return;
-            }
-            try {
-                this._settingsPane = this._rootPane.createSubPane({
-                    title: "resourcePack.editor.agfx.pane.settings.title"
-                });
-                this._settingsPane.addButton((() => {
-                    if (this._currentAccessor !== undefined && this._uiComponentMap !== undefined) {
-                        this._destroySettingsPane();
-                        this._uiComponentMap.reverting = true;
-                        this._transferManager.requestData(this._currentAccessor, true).then((resp => {
-                            if (resp.collectionName === this._currentAccessor) {
-                                this._transferManager.sendData(this._currentAccessor, resp.data);
-                                this._buildSettingsPane(resp);
-                            }
-                        })).catch((() => {
-                            this._buildErrorUI("Unable to revert Vibrant Visuals configuration");
-                        }));
-                        this.telemetryManager.fireTelemetryEvent(DeferredLightingTelemetry.ResetSettings);
-                    }
-                }), {
-                    title: "resourcePack.editor.vibrantVisuals.pane.settings.restoreDefault"
-                });
-                this._settingsPane.addDivider();
-                this._uiComponentMap?.constructUIComponents(this._settingsPane, this._schemaInterface);
-                this._settingsPane.addDivider();
-                this._settingsPane.addButton((() => {
-                    if (this._uiComponentMap !== undefined) {
-                        this._logInfo("Exporting current settings to clipboard");
-                        const data = JSON.stringify(this._uiComponentMap.currentData, undefined, 2);
-                        this._transferManager.sendDataToClipboard(data);
-                        this.telemetryManager.fireTelemetryEvent(DeferredLightingTelemetry.ExportSettings);
-                    }
-                }), {
-                    title: "resourcePack.editor.agfx.pane.settings.export_to_clipboard"
-                });
-                this._settingsPane.addDivider();
-            } catch (e) {
-                this._schemaInterface.error(`Failed to build UI components - ${VibrantVisuals_stringFromException(e)}`);
-                this._buildErrorUI(this._errorCollection.join("\n"));
-                return;
-            }
-        }
-        _destroySettingsPane() {
-            if (this._settingsPane) {
-                this._rootPane.removeSubPane(this._settingsPane);
-                this._settingsPane = undefined;
-            }
-        }
-        _stopDirtyWatcher(_transferManager, _accessorName) {
-            if (this._tickHandle !== -1) {
-                server_namespaceObject.system.clearRun(this._tickHandle);
-                this._tickHandle = -1;
-            }
-            if (_accessorName !== undefined) {
-                this._schemaInterface.debug("closing session");
-                _transferManager.closeSession(_accessorName);
-            } else {
-                this._schemaInterface.debug("closing session - no accessor name");
-            }
-        }
-        _startDirtyWatcher(_transferManager, _accessorName) {
-            if (this._tickHandle !== -1) {
-                this._stopDirtyWatcher(_transferManager, this._currentAccessor);
-            }
-            if (this._tickHandle === -1) {
-                this._schemaInterface.debug("Starting dirty - opening session client");
-                _transferManager.openSession(_accessorName);
-                this._tickHandle = server_namespaceObject.system.runInterval((() => {
-                    if (this._uiComponentMap && this._uiComponentMap.dirty && !this._uiComponentMap.reverting) {
-                        this._uiComponentMap.dirty = false;
-                        this._schemaInterface.debug("Data is dirty - pushing to client");
-                        const data = JSON.stringify(this._uiComponentMap.currentData);
-                        _transferManager.sendData(_accessorName, data);
-                        this._packLink.visible = false;
-                    }
-                }), 1);
-            }
-        }
-        _addActionBarItem() {
-            const showVibrantVisualsPaneAction = this._session.actionManager.createAction({
-                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
-                onExecute: () => {
-                    this._rootPane.show();
-                }
-            });
-            this._session.actionBar.registerItem("editor:actionBarItem:vibrantVisuals", showVibrantVisualsPaneAction, {
-                label: "resourcePack.editor.menuBar.vibrantVisuals.title",
-                icon: "settingsIcon",
-                tooltipTitle: "resourcePack.editor.menuBar.vibrantVisuals.title",
-                tooltipDescription: "resourcePack.editor.menuBar.vibrantVisuals.tooltip",
-                enabled: true,
-                executeOnAdd: true
-            });
-        }
-        teardown() {
-            const transferManager = server_editor_private_bindings_namespaceObject.editorInternal.getPlayerServices(this._session.extensionContext.player).dataTransfer;
-            this._stopDirtyWatcher(transferManager, this._currentAccessor);
-            if (this._graphicsChangeHandle !== undefined) {
-                server_namespaceObject.system.clearRun(this._graphicsChangeHandle);
-            }
         }
     }
     const mapMarkerEntityName = "editor:ruler_idle";
@@ -22240,7 +21584,7 @@ var __webpack_exports__ = {};
                 groupSelectionMode: server_editor_namespaceObject.WidgetGroupSelectionMode.Multiple,
                 visible: true
             });
-            this._cursorProperties = uiSession.extensionContext.cursor.getProperties();
+            this._cursorProperties = uiSession.extensionContext.cursor.getDefaultProperties();
             if (this._cursorProperties.fillColor) {
                 delete this._cursorProperties.fillColor;
             }
@@ -22318,8 +21662,7 @@ var __webpack_exports__ = {};
             });
             this._tool.onModalToolActivation.subscribe((eventData => {
                 if (eventData.isActiveTool) {
-                    this._backedUpColors = backupColors(uiSession.extensionContext);
-                    uiSession.extensionContext.cursor.setProperties(this._cursorProperties);
+                    uiSession.extensionContext.cursor.pushPropertiesById(this._cursorProperties, RulerToolBehavior.MODAL_TOOL_ID);
                 } else {
                     if (this._tempTransactionData) {
                         this.cancelTransaction();
@@ -22327,10 +21670,7 @@ var __webpack_exports__ = {};
                     this._axisLocks.clear();
                     this._axisLockStartPosition = undefined;
                     this.updateAxisLockUI();
-                    if (this._backedUpColors) {
-                        restoreBackedUpColors(uiSession.extensionContext, this._backedUpColors);
-                        this._backedUpColors = undefined;
-                    }
+                    uiSession.extensionContext.cursor.popPropertiesById(RulerToolBehavior.MODAL_TOOL_ID);
                 }
             }));
             const pane = this.uiSession.createPropertyPane({
@@ -22397,7 +21737,7 @@ var __webpack_exports__ = {};
             this.updateAxisLockUI();
         }
         toggleAxisLock(axis) {
-            if (this.uiSession.toolRail.getSelectedToolId() !== this._tool.id) {
+            if (!this._tool.isActive) {
                 return;
             }
             if (this._axisLocks.has(axis)) {
@@ -23172,7 +22512,7 @@ var __webpack_exports__ = {};
                 label: "resourcePack.editor.toolRail.rulerTool.keyBinding.toggleTool.label",
                 tooltip: "resourcePack.editor.toolRail.rulerTool.keyBinding.toggleTool.tooltip"
             });
-            const tool = uiSession.toolRail.addTool("editor:modalTool:ruler", {
+            const tool = uiSession.toolRail.addTool(RulerToolBehavior.MODAL_TOOL_ID, {
                 title: "resourcePack.editor.toolRail.rulerTool.title",
                 icon: "pack://textures/editor/Ruler.png?filtering=point",
                 tooltip: {
@@ -23184,7 +22524,7 @@ var __webpack_exports__ = {};
             const executeAction = uiSession.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.MouseRayCastAction,
                 onExecute: (mouseRay, mouseProps) => {
-                    if (uiSession.toolRail.getSelectedToolId() !== this._tool.id || !mouseRay?.cursorBlockLocation) {
+                    if (!this._tool.isActive || !mouseRay?.cursorBlockLocation) {
                         return;
                     }
                     const targetLocation = mouseRay.cursorBlockLocation;
@@ -23430,7 +22770,7 @@ var __webpack_exports__ = {};
             }
         }
         deleteSelectedRulerLine() {
-            if (this.uiSession.toolRail.getSelectedToolId() !== this._tool.id) {
+            if (!this._tool.isActive) {
                 this.uiSession.log.debug("[RulerTool] Delete attempted but ruler tool not active");
                 return;
             }
@@ -23540,6 +22880,7 @@ var __webpack_exports__ = {};
         }
     }
     RulerToolBehavior.BEHAVIOR_NAME = "Ruler Tool";
+    RulerToolBehavior.MODAL_TOOL_ID = "editor:modalTool:ruler";
     class ExportBehavior {
         constructor(_uiSession, parentMenu) {
             this._uiSession = _uiSession;
@@ -23785,14 +23126,8 @@ var __webpack_exports__ = {};
                 if (data.isActiveTool) {
                     this._cursorModeControl.activateControl();
                     this._brushControl.activateControl();
-                    this._brushControl.activateVisualization();
                 } else {
                     this._onLeave();
-                }
-            }));
-            this._modeChangeEventSubscriptionHandle = this.session.extensionContext.afterEvents.modeChange.subscribe((_event => {
-                if (this._brushControl.isActive && this._paintingActive) {
-                    this._endPainting();
                 }
             }));
             this._paintingActive = false;
@@ -23879,17 +23214,12 @@ var __webpack_exports__ = {};
             }
             if (this._brushControl.isActive) {
                 this._brushControl.deactivateControl();
-                this._brushControl.deactivateVisualization();
             }
         }
         teardown() {
             this._onLeave();
             this._cursorModeControl.shutdown();
             this._brushControl.shutdown();
-            if (this._modeChangeEventSubscriptionHandle) {
-                this.session.extensionContext.afterEvents.modeChange.unsubscribe(this._modeChangeEventSubscriptionHandle);
-                this._modeChangeEventSubscriptionHandle = undefined;
-            }
         }
     }
     BrushPainterBehavior.BEHAVIOR_NAME = "Brush Paint";
@@ -24294,21 +23624,6 @@ var __webpack_exports__ = {};
                 return;
             }
             super.activateControl();
-            this._modeChangeEventSubscriptionHandle = this.session.extensionContext.afterEvents.modeChange.subscribe((event => {
-                this._editorMode = event.mode;
-                if (this._editorMode === server_editor_namespaceObject.EditorMode.Tool) {
-                    if (this.isActive) {
-                        this.session.log.debug("ClipboardPreviewControl::modeChangeEvent::Tool (isActive)");
-                        this.activateVisualization();
-                    } else {
-                        this.session.log.debug("ClipboardPreviewControl::modeChangeEvent::Tool");
-                        this.deactivateVisualization();
-                    }
-                } else {
-                    this.session.log.debug("ClipboardPreviewControl::modeChangeEvent::Crosshair");
-                    this.deactivateVisualization();
-                }
-            }));
             this._setupParametersFromClipboardItem();
             this._transferParametersToClipboardComponent();
             this._constructControlUI();
@@ -24320,10 +23635,6 @@ var __webpack_exports__ = {};
                 return;
             }
             super.deactivateControl();
-            if (this._modeChangeEventSubscriptionHandle) {
-                this.session.extensionContext.afterEvents.modeChange.unsubscribe(this._modeChangeEventSubscriptionHandle);
-                this._modeChangeEventSubscriptionHandle = undefined;
-            }
             this._destroyControlUI();
         }
         activateVisualization() {
@@ -24777,23 +24088,6 @@ var __webpack_exports__ = {};
                     this._onLeave();
                 }
             }));
-            this._modeChangeEventSubscriptionHandle = this.session.extensionContext.afterEvents.modeChange.subscribe((_event => {
-                if (_event.mode === server_editor_namespaceObject.EditorMode.Crosshair) {
-                    if (this._isActive) {
-                        this.session.log.debug("NewPastePreview::afterEvent::modeChange::Crosshair");
-                        this._cursorModeControl.deactivateControl();
-                        this._clipboardPreviewControl.deactivateVisualization();
-                        this._clipboardPreviewControl.deactivateControl();
-                    }
-                } else if (_event.mode === server_editor_namespaceObject.EditorMode.Tool) {
-                    if (this._isActive) {
-                        this.session.log.debug("NewPastePreview::afterEvent::modeChange::Tool");
-                        this._cursorModeControl.activateControl();
-                        this._clipboardPreviewControl.activateControl();
-                        this._clipboardPreviewControl.activateVisualization();
-                    }
-                }
-            }));
             this._registerMouseUpDownAction();
             this._registerKeyboardInputActions();
         }
@@ -24888,10 +24182,6 @@ var __webpack_exports__ = {};
             }
         }
         teardown() {
-            if (this._modeChangeEventSubscriptionHandle) {
-                this.session.extensionContext.afterEvents.modeChange.unsubscribe(this._modeChangeEventSubscriptionHandle);
-                this._modeChangeEventSubscriptionHandle = undefined;
-            }
             this._onLeave();
             this._cursorModeControl.shutdown();
             this._clipboardPreviewControl.shutdown();
@@ -25012,6 +24302,8 @@ var __webpack_exports__ = {};
         }
         teardown() {}
     }
+    const SmartFill_PERSISTENCE_GROUP_NAME = "editor:smartfill";
+    const SmartFill_PERSISTENCE_GROUPITEM_NAME = "smartfill_settings";
     const ALL_DIRECTIONS = [ direction_Direction.Up, direction_Direction.Down, direction_Direction.Left, direction_Direction.Right, direction_Direction.Forward, direction_Direction.Back ];
     var SmartFillTelemetry;
     (function(SmartFillTelemetry) {
@@ -25024,6 +24316,7 @@ var __webpack_exports__ = {};
             this._hullColor = this._session.extensionContext.settings.theme.resolveColorKey(server_editor_namespaceObject.ThemeSettingsColorKey.SelectionVolumeBorder);
             this._highlightOutlineColor = this._session.extensionContext.settings.theme.resolveColorKey(server_editor_namespaceObject.ThemeSettingsColorKey.SelectionVolumeOutlineBorder);
             this._highlightHullColor = this._session.extensionContext.settings.theme.resolveColorKey(server_editor_namespaceObject.ThemeSettingsColorKey.SelectionVolumeOutlineFill);
+            this._persistenceManager = getPersistenceManager(this._session.extensionContext.player);
             const dimensionBounds = this._session.extensionContext.blockUtilities.getDimensionLocationBoundingBox();
             const center = server_namespaceObject.BlockBoundingBoxUtils.getCenter(dimensionBounds);
             this._widgetGroup = this._session.extensionContext.widgetManager.createGroup({
@@ -25103,8 +24396,12 @@ var __webpack_exports__ = {};
             };
             this.visualizationPosition = lib.VECTOR3_ZERO;
             this.visualizationInProgress = false;
+            this.initSelectionInProcessing = false;
+            this.selectionMin = lib.VECTOR3_ZERO;
+            this.selectionMax = lib.VECTOR3_ZERO;
             this.REGION_HALF_EXTENT = 128;
             uiSession.log.debug(`Initializing ${SmartFillToolBehavior.BEHAVIOR_NAME}`);
+            this._persistenceManager = getPersistenceManager(uiSession.extensionContext.player);
             this.telemetryManager = new TelemetryManager(uiSession.extensionContext.player, TelemetrySource.SmartFill);
             this.cursorProperties = uiSession.extensionContext.cursor.getProperties();
             if (this.cursorProperties.fillColor) {
@@ -25116,14 +24413,28 @@ var __webpack_exports__ = {};
             this.cursorProperties.visible = true;
             this.currentAreaLimit = (0, server_editor_namespaceObject.makeObservable)(SmartFillToolBehavior.AREA_LIMIT);
             this.limitFillToSelection = (0, server_editor_namespaceObject.makeObservable)(false);
+            this.globalSelectionSet = new Vector3Pool;
+            this._loadSettings();
             this.tool = this.addTool(uiSession);
             this.pane = this.buildPane(uiSession, this.tool);
             this.tool.onModalToolActivation.subscribe((eventData => {
                 if (eventData.isActiveTool) {
-                    uiSession.extensionContext.cursor.setProperties(this.cursorProperties);
+                    uiSession.extensionContext.cursor.pushPropertiesById(this.cursorProperties, SmartFillToolBehavior.MODAL_TOOL_ID);
+                    if (this.limitFillToSelection.value) {
+                        this._initSelectionSet();
+                    }
                     this._setupVisualization();
                 } else {
+                    uiSession.extensionContext.cursor.popPropertiesById(SmartFillToolBehavior.MODAL_TOOL_ID);
                     this._destroyVisualization();
+                    this._clearSelectionSet();
+                }
+            }));
+            this.selectionChangeEventSubscriptionHandle = uiSession.extensionContext.afterEvents.SelectionChange.subscribe((() => {
+                this.visualization?.clearVolume();
+                if (this.limitFillToSelection.value) {
+                    this._clearSelectionSet();
+                    this._initSelectionSet();
                 }
             }));
         }
@@ -25211,6 +24522,11 @@ var __webpack_exports__ = {};
         teardown() {
             this.uiSession.log.debug(`Shutting down ${SmartFillToolBehavior.BEHAVIOR_NAME}`);
             this._destroyVisualization();
+            if (this.selectionChangeEventSubscriptionHandle) {
+                this.uiSession.extensionContext.afterEvents.SelectionChange.unsubscribe(this.selectionChangeEventSubscriptionHandle);
+                this.selectionChangeEventSubscriptionHandle = undefined;
+            }
+            this._clearSelectionSet();
         }
         addTool(uiSession) {
             const toolToggleAction = uiSession.actionManager.createAction({
@@ -25227,27 +24543,16 @@ var __webpack_exports__ = {};
                 label: "resourcePack.editor.toolRail.smartFillTool.keyBinding.toggleTool.title",
                 tooltip: "resourcePack.editor.toolRail.smartFillTool.keyBinding.toggleTool.tooltip"
             });
-            const tool = uiSession.toolRail.addTool("editor:modalTool:smartFill", {
+            const tool = uiSession.toolRail.addTool(SmartFillToolBehavior.MODAL_TOOL_ID, {
                 title: "resourcePack.editor.toolRail.smartFillTool.title",
                 icon: "pack://textures/editor/Fill.png?filtering=point",
                 tooltip: "resourcePack.editor.toolRail.smartFillTool.tooltip",
                 action: toolToggleAction
             });
-            tool.onModalToolActivation.subscribe((eventData => {
-                if (eventData.isActiveTool) {
-                    this.backedUpColors = backupColors(uiSession.extensionContext);
-                    uiSession.extensionContext.cursor.setProperties(this.cursorProperties);
-                } else {
-                    if (this.backedUpColors) {
-                        restoreBackedUpColors(uiSession.extensionContext, this.backedUpColors);
-                        this.backedUpColors = undefined;
-                    }
-                }
-            }));
             const executeAction = uiSession.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.MouseRayCastAction,
                 onExecute: async (mouseRay, mouseProps) => {
-                    if (mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton && mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonUp && uiSession.toolRail.getSelectedToolId() === this.tool.id) {
+                    if (mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton && mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonUp && this.tool.isActive) {
                         const fillVolume = this.visualization?.lastVolume;
                         if (fillVolume === undefined) {
                             return;
@@ -25265,19 +24570,38 @@ var __webpack_exports__ = {};
             const selection = await this.buildFloodSelectionFromLocation(uiSession, targetLocation, ALL_DIRECTIONS, this.currentAreaLimit.value);
             return selection;
         }
+        _clearSelectionSet() {
+            if (this.initialSelectionJobHandle !== undefined) {
+                server_namespaceObject.system.clearJob(this.initialSelectionJobHandle);
+                this.initialSelectionJobHandle = undefined;
+            }
+            this.initSelectionInProcessing = false;
+            this.globalSelectionSet.reset();
+        }
+        _initSelectionSet() {
+            const onSelectionInitial = () => {
+                if (!this.uiSession.extensionContext.selectionManager.volume.isEmpty) {
+                    this.initSelectionInProcessing = true;
+                    const selectionBounds = this.uiSession.extensionContext.selectionManager.volume.getBoundingBox();
+                    this.selectionMin = selectionBounds.min;
+                    this.selectionMax = selectionBounds.max;
+                    this.globalSelectionSet.init(selectionBounds.min, selectionBounds.max);
+                    const selectionVolume = new server_namespaceObject.BlockVolume(selectionBounds.min, selectionBounds.max);
+                    const iterator = selectionVolume.getBlockLocationIterator();
+                    for (const position of iterator) {
+                        this.globalSelectionSet.add(position);
+                    }
+                    this.initSelectionInProcessing = false;
+                }
+            };
+            if (!this.initialSelectionJobHandle && !this.initSelectionInProcessing) {
+                this.initialSelectionJobHandle = server_namespaceObject.system.runTimeout(onSelectionInitial, 2);
+            }
+        }
         async buildFloodSelectionFromLocation(uiSession, targetLocation, allowedDirections, areaLimit) {
             const consideredLocations = new Vector3Set;
             const addedLocations = new Vector3Set;
             const stack = [ targetLocation ];
-            const globalSelectionSet = new Vector3Set;
-            if (!uiSession.extensionContext.selectionManager.volume.isEmpty && this.limitFillToSelection.value) {
-                const selectionBounds = uiSession.extensionContext.selectionManager.volume.getBoundingBox();
-                const selectionVolume = new server_namespaceObject.BlockVolume(selectionBounds.min, selectionBounds.max);
-                const iterator = selectionVolume.getBlockLocationIterator();
-                for (const position of iterator) {
-                    globalSelectionSet.add(position);
-                }
-            }
             const outputVolume = new server_editor_namespaceObject.RelativeVolumeListBlockVolume;
             const BOX_SIZE = areaLimit;
             const min = lib.Vector3Utils.subtract(targetLocation, {
@@ -25300,7 +24624,17 @@ var __webpack_exports__ = {};
                 return outputVolume;
             }
             const operation = currentLocation => {
-                if (!server_namespaceObject.BlockBoundingBoxUtils.isInside(bounds, currentLocation) || this._fillRegion?.getBlockTypeId(currentLocation) !== targetBlock || !globalSelectionSet.isEmpty && !globalSelectionSet.contains(currentLocation)) {
+                if (this.limitFillToSelection.value && !this.uiSession.extensionContext.selectionManager.volume.isEmpty) {
+                    if (this.initSelectionInProcessing) {
+                        return;
+                    }
+                    const selectionBounds = this.uiSession.extensionContext.selectionManager.volume.getBoundingBox();
+                    if (!lib.Vector3Utils.equals(this.selectionMin, selectionBounds.min) || !lib.Vector3Utils.equals(this.selectionMax, selectionBounds.max)) {
+                        this._clearSelectionSet();
+                        this._initSelectionSet();
+                    }
+                }
+                if (!server_namespaceObject.BlockBoundingBoxUtils.isInside(bounds, currentLocation) || this._fillRegion?.getBlockTypeId(currentLocation) !== targetBlock || this.limitFillToSelection.value && !this.globalSelectionSet.contains(currentLocation)) {
                     return;
                 }
                 outputVolume.add(currentLocation);
@@ -25358,17 +24692,69 @@ var __webpack_exports__ = {};
                 min: 1,
                 title: "resourcePack.editor.toolRail.smartFillTool.areaLimit.title",
                 tooltip: "resourcePack.editor.toolRail.smartFillTool.areaLimit.tooltip",
-                variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider
+                variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
+                onChange: () => {
+                    this._saveSettings();
+                }
             });
             pane.addBool(this.limitFillToSelection, {
                 title: "resourcePack.editor.toolRail.smartFillTool.limitFillToSelection",
-                tooltip: "resourcePack.editor.toolRail.smartFillTool.limitFillToSelectionTooltip"
+                tooltip: "resourcePack.editor.toolRail.smartFillTool.limitFillToSelectionTooltip",
+                onChange: () => {
+                    if (this.limitFillToSelection.value) {
+                        this._initSelectionSet();
+                    } else {
+                        this._clearSelectionSet();
+                    }
+                    this._saveSettings();
+                }
             });
             tool.bindPropertyPane(pane);
             return pane;
         }
+        _loadSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getGroup(SmartFill_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const storeItem = group.fetchItem(SmartFill_PERSISTENCE_GROUPITEM_NAME);
+                if (storeItem && storeItem.value) {
+                    try {
+                        const storedSettings = storeItem.value;
+                        this.currentAreaLimit.set(storedSettings.currentAreaLimit);
+                        this.limitFillToSelection.set(storedSettings.limitFillToSelection);
+                    } catch (error) {
+                        this.uiSession.log.error("Fail to load the settings, error: " + stringFromException(error));
+                    }
+                }
+                group.dispose();
+            }
+        }
+        _saveSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getOrCreateGroup(SmartFill_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const settings = {
+                    currentAreaLimit: this.currentAreaLimit.value,
+                    limitFillToSelection: this.limitFillToSelection.value
+                };
+                const storeItem = group.getOrCreateItem(SmartFill_PERSISTENCE_GROUPITEM_NAME, settings);
+                if (storeItem) {
+                    storeItem.commit();
+                }
+                group.dispose();
+                return;
+            }
+            this.uiSession.log.error("Fail to save settings for SmartFill");
+        }
     }
     SmartFillToolBehavior.BEHAVIOR_NAME = "Smart Fill Tool";
+    SmartFillToolBehavior.MODAL_TOOL_ID = "editor:modalTool:smartFill";
     SmartFillToolBehavior.READ_OPERATION_NAME = "Smart-Fill-Read";
     SmartFillToolBehavior.WRITE_OPERATION_NAME = "Smart-Fill-Write";
     SmartFillToolBehavior.AREA_LIMIT = 16;
@@ -25406,6 +24792,8 @@ var __webpack_exports__ = {};
         TerrainTelemetry["StartPaining"] = "StartPaining";
         TerrainTelemetry["EndPainting"] = "EndPainting";
     })(TerrainTelemetry || (TerrainTelemetry = {}));
+    const Terrain_PERSISTENCE_GROUP_NAME = "editor:terrain";
+    const Terrain_PERSISTENCE_GROUPITEM_NAME = "terrain_settings";
     class TerrainBehavior {
         constructor(session) {
             this.BEHAVIOR_NAME = "Terrain";
@@ -25586,8 +24974,10 @@ var __webpack_exports__ = {};
             this._falloffVisualizerInstances = [];
             this._session = session;
             this._telemetryManager = new TelemetryManager(this._session.extensionContext.player, TelemetrySource.Terrain);
+            this._persistenceManager = getPersistenceManager(this._session.extensionContext.player);
             this._tool = this._initTool();
             this._toolPane = this._initPane();
+            this._loadSettings();
             this._cursorControl = this._initCursorControl(this.TERRAIN_SETTINGS_MAP[this._terrainDefaults.DEFAULT_MODE].cursorProperties);
             this._brushControl = this._initBrushControl(this.TERRAIN_SETTINGS_MAP[this._terrainDefaults.DEFAULT_MODE].paintMode, this.TERRAIN_SETTINGS_MAP[this._terrainDefaults.DEFAULT_MODE].brushShapes);
             this._widgetGroup = this._initVisualizer();
@@ -25595,7 +24985,6 @@ var __webpack_exports__ = {};
             this._tool.bindPropertyPane(this._toolPane);
             this._registerMousePaintInputs();
             this._brushOffsetBackup = this._session.extensionContext.brushShapeManager.getBrushShapeOffset();
-            this._cursorTargetBackup = this._session.extensionContext.cursor.getProperties().targetMode;
             this._tool.onModalToolActivation.subscribe((data => {
                 this._isActive = data.isActiveTool;
                 if (this._isActive) {
@@ -25605,17 +24994,6 @@ var __webpack_exports__ = {};
                 } else {
                     this._deactivateControls();
                     this._restoreBrushAndCursor();
-                }
-            }));
-            this._modeChangeEventSubscriptionHandle = this._session.extensionContext.afterEvents.modeChange.subscribe((_event => {
-                if (this._isActive && _event.mode === server_editor_namespaceObject.EditorMode.Tool) {
-                    this._session.extensionContext.brushShapeManager.activateBrushTool();
-                } else {
-                    this._widgetGroup.visible = false;
-                    if (this._isPainting) {
-                        this._endPainting();
-                    }
-                    this._session.extensionContext.brushShapeManager.deactivateBrushTool();
                 }
             }));
         }
@@ -25763,7 +25141,7 @@ var __webpack_exports__ = {};
                     }
                 }, {
                     value: TerrainMode.ElevationMode,
-                    icon: "pack://textures/editor/Terrain-Flatten-Both.png?filtering=point",
+                    icon: "pack://textures/editor/Terrain-Elevation.png?filtering=point",
                     tooltip: {
                         title: {
                             id: "resourcePack.editor.toolRail.Terrain.Elevation.mode.title",
@@ -25857,6 +25235,7 @@ var __webpack_exports__ = {};
                 onChange: newValue => {
                     this._flattenIntensity.set(newValue);
                     this._session.extensionContext.brushShapeManager.setTerrainStrength(newValue);
+                    this._saveSettings();
                 }
             }));
             this._flattenProperties.push(toolPane.addNumber(this._flattenSmoothing, {
@@ -25869,6 +25248,7 @@ var __webpack_exports__ = {};
                 onChange: newValue => {
                     this._flattenSmoothing.set(newValue);
                     this._session.extensionContext.brushShapeManager.setFlattenSmoothing(newValue);
+                    this._saveSettings();
                 }
             }));
             this._flattenProperties.push(toolPane.addBool(this._floorBlockOverride, {
@@ -25878,6 +25258,7 @@ var __webpack_exports__ = {};
                 onChange: newValue => {
                     this._floorBlockOverride.set(newValue);
                     this._session.extensionContext.brushShapeManager.setFloorBlockOverride(newValue);
+                    this._saveSettings();
                 }
             }));
             this._smoothenProperties.push(toolPane.addNumber(this._smoothRoughIntensity, {
@@ -25890,6 +25271,7 @@ var __webpack_exports__ = {};
                 onChange: newValue => {
                     this._smoothRoughIntensity.set(newValue);
                     this._session.extensionContext.brushShapeManager.setTerrainStrength(newValue);
+                    this._saveSettings();
                 }
             }));
             this._roughenProperties.push(toolPane.addNumber(this._smoothRoughIntensity, {
@@ -25914,7 +25296,7 @@ var __webpack_exports__ = {};
                         id: "resourcePack.editor.toolRail.Terrain.Raise.mode.title",
                         props: [ getInputMarkup("editor:terrainToolKeybinding:switchToRaise") ]
                     },
-                    icon: "pack://textures/editor/Terrain-Flatten-Up.png?filtering=point",
+                    icon: "pack://textures/editor/Terrain-Elevation-Raise.png?filtering=point",
                     tooltip: {
                         id: "resourcePack.editor.toolRail.Terrain.Raise.tooltip",
                         props: [ newLineMarkup + newLineMarkup, getInputMarkup("editor:terrainToolKeybinding:switchToRaise") ]
@@ -25925,7 +25307,7 @@ var __webpack_exports__ = {};
                         id: "resourcePack.editor.toolRail.Terrain.Lower.mode.title",
                         props: [ getInputMarkup("editor:terrainToolKeybinding:switchToLower") ]
                     },
-                    icon: "pack://textures/editor/Terrain-Flatten-Down.png?filtering=point",
+                    icon: "pack://textures/editor/Terrain-Elevation-Lower.png?filtering=point",
                     tooltip: {
                         id: "resourcePack.editor.toolRail.Terrain.Lower.tooltip",
                         props: [ newLineMarkup + newLineMarkup, getInputMarkup("editor:terrainToolKeybinding:switchToLower") ]
@@ -25945,6 +25327,7 @@ var __webpack_exports__ = {};
                 onChange: newValue => {
                     this._elevationIntensity.set(newValue);
                     this._session.extensionContext.brushShapeManager.setTerrainStrength(newValue);
+                    this._saveSettings();
                 }
             }));
             this._elevationProperties.push(toolPane.addNumber(this._elevationFalloff, {
@@ -26161,7 +25544,6 @@ var __webpack_exports__ = {};
             this._brushControl.switchBrushPaintMode(terrainSettings.paintMode);
             this._brushControl.updateBrushShapes(terrainSettings.brushShapes);
             this._brushControl.session.extensionContext.brushShapeManager.setBrushShapeOffset(terrainSettings.brushOffset);
-            this._cursorControl.forceTargetMode(terrainSettings.cursorProperties.targetMode ?? server_editor_namespaceObject.CursorTargetMode.Block);
             if (this._terrainMode.value === TerrainMode.FlattenMode) {
                 this._onFlattenModeChanged();
             } else if (this._terrainMode.value === TerrainMode.ElevationMode) {
@@ -26170,6 +25552,7 @@ var __webpack_exports__ = {};
             this._brushControl.session.extensionContext.brushShapeManager.setTerrainStrength(this._terrainMode.value === TerrainMode.FlattenMode ? this._flattenIntensity.value : this._terrainMode.value === TerrainMode.ElevationMode ? this._elevationIntensity.value : this._smoothRoughIntensity.value);
             this._updatePropertyVisibilities();
             this._toolPane.show();
+            this._saveSettings();
         }
         _onFlattenModeChanged() {
             const flattenSettings = this._flattenDefaults.SETTINGS_MAP[this._flattenMode.value];
@@ -26178,6 +25561,7 @@ var __webpack_exports__ = {};
             this._session.extensionContext.brushShapeManager.setFlattenSmoothing(this._flattenSmoothing.value);
             this._session.extensionContext.brushShapeManager.setFloorBlockOverride(this._floorBlockOverride.value);
             this._session.extensionContext.brushShapeManager.setFlattenMode(this._flattenMode.value);
+            this._saveSettings();
         }
         _onElevationModeChanged() {
             const elevationSettings = this._elevationDefaults.SETTINGS_MAP[this._elevationMode.value];
@@ -26205,13 +25589,9 @@ var __webpack_exports__ = {};
         }
         _backupBrushAndCursor() {
             this._brushOffsetBackup = this._session.extensionContext.brushShapeManager.getBrushShapeOffset();
-            this._cursorTargetBackup = this._session.extensionContext.cursor.getProperties().targetMode;
         }
         _restoreBrushAndCursor() {
             this._session.extensionContext.brushShapeManager.setBrushShapeOffset(this._brushOffsetBackup);
-            const cursorProps = this._session.extensionContext.cursor.getProperties();
-            cursorProps.targetMode = this._cursorTargetBackup;
-            this._session.extensionContext.cursor.setProperties(cursorProps);
         }
         _beginPainting() {
             if (this._isPainting || this._session.extensionContext.brushShapeManager.isBrushPaintBusy() || this._session.extensionContext.transactionManager.isBusy()) {
@@ -26251,19 +25631,70 @@ var __webpack_exports__ = {};
                 this._cursorControl.deactivateControl();
             }
             if (this._brushControl.isActive) {
-                this._brushControl.deactivateVisualization();
                 this._brushControl.deactivateControl();
             }
             this._widgetGroup.visible = false;
+        }
+        _loadSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getGroup(Terrain_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const storeItem = group.fetchItem(Terrain_PERSISTENCE_GROUPITEM_NAME);
+                if (storeItem && storeItem.value) {
+                    try {
+                        const storedSettings = storeItem.value;
+                        if (storedSettings.terrainMode !== undefined) {
+                            this._terrainMode.set(storedSettings.terrainMode);
+                        }
+                        if (storedSettings.flattenMode !== undefined) {
+                            this._flattenMode.set(storedSettings.flattenMode);
+                        }
+                        if (storedSettings.flattenSmoothing !== undefined) {
+                            this._flattenSmoothing.set(storedSettings.flattenSmoothing);
+                        }
+                        if (storedSettings.flattenIntensity !== undefined) {
+                            this._flattenIntensity.set(storedSettings.flattenIntensity);
+                        }
+                        if (storedSettings.floorBlockOverride !== undefined) {
+                            this._floorBlockOverride.set(storedSettings.floorBlockOverride);
+                        }
+                    } catch (error) {
+                        this._session.log.error("Fail to load the settings, error: " + stringFromException(error));
+                    }
+                }
+                group.dispose();
+            }
+        }
+        _saveSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getOrCreateGroup(Terrain_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const settings = {
+                    flattenIntensity: this._flattenIntensity.value,
+                    flattenSmoothing: this._flattenSmoothing.value,
+                    floorBlockOverride: this._floorBlockOverride.value,
+                    terrainMode: this._terrainMode.value,
+                    flattenMode: this._flattenMode.value
+                };
+                const storeItem = group.getOrCreateItem(Terrain_PERSISTENCE_GROUPITEM_NAME, settings);
+                if (storeItem) {
+                    storeItem.commit();
+                }
+                group.dispose();
+                return;
+            }
+            this._session.log.error("Fail to save settings for Terrain");
         }
         teardown() {
             this._deactivateControls();
             this._cursorControl.shutdown();
             this._brushControl.shutdown();
-            if (this._modeChangeEventSubscriptionHandle) {
-                this._session.extensionContext.afterEvents.modeChange.unsubscribe(this._modeChangeEventSubscriptionHandle);
-                this._modeChangeEventSubscriptionHandle = undefined;
-            }
             this._widgetGroup.deleteWidget(this._elevationVisualizerWidget);
             this._widgetGroup.deleteWidget(this._elevationFalloffVisualizerWidget);
             if (this._widgetGroup) {
@@ -26271,6 +25702,8 @@ var __webpack_exports__ = {};
             }
         }
     }
+    const ExtrudeTool_PERSISTENCE_GROUP_NAME = "editor:extrude";
+    const ExtrudeTool_PERSISTENCE_GROUPITEM_NAME = "extrude_settings";
     class ExtrudeTool_PreviewVolume {
         constructor(uiSession) {
             this._session = uiSession;
@@ -26404,6 +25837,7 @@ var __webpack_exports__ = {};
             this.selectStack = new Vector3Set;
             this.quickExtrudeFaceSelection = new Vector3Set;
             this.trackList = new Map;
+            this._persistenceManager = getPersistenceManager(uiSession.extensionContext.player);
             this.faceSize = (0, server_editor_namespaceObject.makeObservable)(ExtrudeTool.MAX_FACE_SIZE);
             this.contiguousSelectionType = (0, server_editor_namespaceObject.makeObservable)(ExtrudeTool_ContiguousSelectionType.SameBlock);
             this.layerCount = (0, server_editor_namespaceObject.makeObservable)(ExtrudeTool.MIN_LAYERS);
@@ -26417,9 +25851,10 @@ var __webpack_exports__ = {};
             this.searchRadius = (0, server_editor_namespaceObject.makeObservable)(ExtrudeTool.MIN_RADIUS);
             this.toleranceLevel = (0, server_editor_namespaceObject.makeObservable)(ExtrudeTool.MIN_TOLERANCE);
             this.telemetryManager = new TelemetryManager(uiSession.extensionContext.player, TelemetrySource.Extrude);
+            this._loadSettings();
             this.tool = this._createTool(uiSession);
             this.pane = this._createToolPane(uiSession);
-            this.cursorProperties = uiSession.extensionContext.cursor.getProperties();
+            this.cursorProperties = uiSession.extensionContext.cursor.getDefaultProperties();
             this.cursorProperties.outlineColor = {
                 red: 2,
                 green: 1,
@@ -26556,7 +25991,7 @@ var __webpack_exports__ = {};
                     uiSession.toolRail.setSelectedToolId(tool.id);
                 }
             });
-            const tool = uiSession.toolRail.addTool("editor:modalTool:extrude", {
+            const tool = uiSession.toolRail.addTool(ExtrudeTool.MODAL_TOOL_ID, {
                 title: "resourcePack.editor.toolRail.ExtrudeTool.title",
                 icon: "pack://textures/editor/Lift.png?filtering=point",
                 tooltip: {
@@ -26567,9 +26002,10 @@ var __webpack_exports__ = {};
             });
             tool.onModalToolActivation.subscribe((eventData => {
                 if (eventData.isActiveTool) {
-                    uiSession.extensionContext.cursor.setProperties(this.cursorProperties);
+                    uiSession.extensionContext.cursor.pushPropertiesById(this.cursorProperties, ExtrudeTool.MODAL_TOOL_ID);
                     this.quickExtrudePreviewActive = true;
                 } else {
+                    uiSession.extensionContext.cursor.popPropertiesById(ExtrudeTool.MODAL_TOOL_ID);
                     this.quickExtrudePreviewActive = false;
                     this._destroyFacePreview();
                     this._clearState();
@@ -26705,6 +26141,7 @@ var __webpack_exports__ = {};
             this.contiguousSelectionBlockListTable = parentPane.addBlockList(convertBlockTypesToBlockStrings(this.contiguousSelectionBlockList), {
                 onChange: newVal => {
                     this.contiguousSelectionBlockList = convertBlockStringsToBlockType(newVal);
+                    this._saveSettings();
                 }
             });
         }
@@ -26714,7 +26151,10 @@ var __webpack_exports__ = {};
                 min: ExtrudeTool.MIN_SAMPLES,
                 max: ExtrudeTool.MAX_SAMPLES,
                 variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
-                isInteger: true
+                isInteger: true,
+                onChange: (_newVal, _oldVal) => {
+                    this._saveSettings();
+                }
             });
             return trailingBlocksValue;
         }
@@ -26752,6 +26192,7 @@ var __webpack_exports__ = {};
                         } else {
                             this.contiguousSelectionBlockListTable.visible = false;
                         }
+                        this._saveSettings();
                     }
                 }
             });
@@ -26768,10 +26209,16 @@ var __webpack_exports__ = {};
                 min: ExtrudeTool.MIN_TOLERANCE,
                 max: ExtrudeTool.MAX_TOLERANCE,
                 variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
-                isInteger: true
+                isInteger: true,
+                onChange: () => {
+                    this._saveSettings();
+                }
             });
             const hasAdjacentBlocksItem = contiguousSelectionSettingsSubPane.addBool(this.hasAdjacentBlocks, {
-                title: "resourcePack.editor.toolRail.ExtrudeTool.pane.HasAdjacentBlocks.title"
+                title: "resourcePack.editor.toolRail.ExtrudeTool.pane.HasAdjacentBlocks.title",
+                onChange: () => {
+                    this._saveSettings();
+                }
             });
             toleranceItem.visible = false;
             hasAdjacentBlocksItem.visible = true;
@@ -26852,6 +26299,7 @@ var __webpack_exports__ = {};
                 } ],
                 onChange: () => {
                     this._createFacePreview();
+                    this._saveSettings();
                 }
             });
             this.quickExtrudeSettingsSubPane.addNumber(this.faceSize, {
@@ -26860,7 +26308,10 @@ var __webpack_exports__ = {};
                 min: ExtrudeTool.MIN_FACE_SIZE,
                 max: ExtrudeTool.MAX_FACE_SIZE,
                 variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
-                isInteger: true
+                isInteger: true,
+                onChange: () => {
+                    this._saveSettings();
+                }
             });
             this.quickExtrudeSettingsSubPane.addNumber(this.layerCount, {
                 title: "resourcePack.editor.toolRail.ExtrudeTool.pane.SelectionMode.LayerCount.title",
@@ -26868,7 +26319,10 @@ var __webpack_exports__ = {};
                 min: ExtrudeTool.MIN_LAYERS,
                 max: ExtrudeTool.MAX_LAYERS,
                 variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
-                isInteger: true
+                isInteger: true,
+                onChange: () => {
+                    this._saveSettings();
+                }
             });
             this._createContiguousSelectionPane(this.quickExtrudeSettingsSubPane);
             this.quickExtrudeSettingsSubPane.show();
@@ -26931,7 +26385,7 @@ var __webpack_exports__ = {};
             const executeAction = uiSession.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.MouseRayCastAction,
                 onExecute: (mouseRay, mouseProps) => {
-                    if (mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton && mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown && uiSession.toolRail.getSelectedToolId() === this.tool.id && mouseRay?.cursorBlockLocation) {
+                    if (mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton && mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown && this.tool.isActive && mouseRay?.cursorBlockLocation) {
                         try {
                             this._applyExtrude(mouseRay.location, mouseRay.direction, mouseRay.cursorBlockLocation);
                         } catch (e) {
@@ -27567,8 +27021,61 @@ var __webpack_exports__ = {};
                 }
             }
         }
+        _loadSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getGroup(ExtrudeTool_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const storeItem = group.fetchItem(ExtrudeTool_PERSISTENCE_GROUPITEM_NAME);
+                if (storeItem && storeItem.value) {
+                    try {
+                        const storedSettings = storeItem.value;
+                        this.faceSize.set(storedSettings.faceSize);
+                        this.contiguousSelectionType.set(storedSettings.contiguousSelection);
+                        this.layerCount.set(storedSettings.layerCount);
+                        this.hasAdjacentBlocks.set(storedSettings.hasAdjacentBlocks);
+                        this.quickExtrudeMode.set(storedSettings.mode);
+                        if (storedSettings.contiguousSelectionBlockList) {
+                            this.contiguousSelectionBlockList = storedSettings.contiguousSelectionBlockList;
+                        }
+                    } catch (error) {
+                        this.uiSession.log.error("Fail to load the settings, error: " + stringFromException(error));
+                    }
+                }
+                group.dispose();
+            }
+        }
+        _saveSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getOrCreateGroup(ExtrudeTool_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const settings = {
+                    faceSize: this.faceSize.value,
+                    contiguousSelection: this.contiguousSelectionType.value,
+                    layerCount: this.layerCount.value,
+                    hasAdjacentBlocks: this.hasAdjacentBlocks.value,
+                    mode: this.quickExtrudeMode.value
+                };
+                if (this.contiguousSelectionBlockList.length > 0) {
+                    settings.contiguousSelectionBlockList = this.contiguousSelectionBlockList;
+                }
+                const storeItem = group.getOrCreateItem(ExtrudeTool_PERSISTENCE_GROUPITEM_NAME, settings);
+                if (storeItem) {
+                    storeItem.commit();
+                }
+                group.dispose();
+                return;
+            }
+            this.uiSession.log.error("Fail to save settings for Extrude");
+        }
     }
     ExtrudeTool.BEHAVIOR_NAME = "Extrude Tool";
+    ExtrudeTool.MODAL_TOOL_ID = "editor:modalTool:extrude";
     ExtrudeTool.ENABLE_VISUALIZATION = true;
     ExtrudeTool.MIN_FACE_SIZE = 1;
     ExtrudeTool.MAX_FACE_SIZE = 32;
@@ -27581,6 +27088,8 @@ var __webpack_exports__ = {};
     ExtrudeTool.MIN_TOLERANCE = 1;
     ExtrudeTool.MAX_TOLERANCE = 16;
     ExtrudeTool.TICK_REFRESH_RATE = 5;
+    const RepeaterTool_PERSISTENCE_GROUP_NAME = "editor:repeater";
+    const RepeaterTool_PERSISTENCE_GROUPITEM_NAME = "repeater_settings";
     var RepeaterTelemetry;
     (function(RepeaterTelemetry) {
         RepeaterTelemetry["Repeat"] = "Repeat";
@@ -27634,15 +27143,18 @@ var __webpack_exports__ = {};
             this.gridSeparateRepetitionsY = (0, server_editor_namespaceObject.makeObservable)(RepeaterTool.DEFAULT_REPETITIONS);
             this.gridSeparateRepetitionsZ = (0, server_editor_namespaceObject.makeObservable)(RepeaterTool.DEFAULT_REPETITIONS);
             this.session = uiSession;
+            this._persistenceManager = getPersistenceManager(uiSession.extensionContext.player);
             uiSession.log.debug(`Initializing ${RepeaterTool.BEHAVIOR_NAME}`);
             this.telemetryManager = new TelemetryManager(uiSession.extensionContext.player, TelemetrySource.Repeater);
             this.visualizationWidgets = uiSession.extensionContext.widgetManager.createGroup({
                 groupSelectionMode: server_editor_namespaceObject.WidgetGroupSelectionMode.Multiple,
                 visible: true
             });
+            this._loadSettings();
             this.tool = this.createTool(uiSession);
             this.rootToolPane = this._createRootToolPane(uiSession);
             this._showHidePanes();
+            this._queueVisualizationRedraw(uiSession);
             this.tool.bindPropertyPane(this.rootToolPane);
         }
         createTool(uiSession) {
@@ -27679,13 +27191,6 @@ var __webpack_exports__ = {};
                 }
             }));
             this.selectionChangeEventSubscriptionHandle = uiSession.extensionContext.afterEvents.SelectionChange.subscribe((() => this._redrawVisualization(this.session)));
-            this.modeChangeEventSubscriptionHandle = this.session.extensionContext.afterEvents.modeChange.subscribe((event => {
-                if (event.mode === server_editor_namespaceObject.EditorMode.Crosshair) {
-                    this._clearVisualization();
-                } else if (event.mode === server_editor_namespaceObject.EditorMode.Tool) {
-                    this._queueVisualizationRedraw(uiSession);
-                }
-            }));
             return tool;
         }
         _clearVisualization() {
@@ -27982,6 +27487,7 @@ var __webpack_exports__ = {};
                 onChange: () => {
                     this._showHidePanes();
                     this._queueVisualizationRedraw(uiSession);
+                    this._saveSettings();
                 }
             });
             pane.addVector3(this.spacing, {
@@ -27990,6 +27496,7 @@ var __webpack_exports__ = {};
                 isInteger: true,
                 onChange: () => {
                     this._queueVisualizationRedraw(uiSession);
+                    this._saveSettings();
                 }
             });
             pane.endConstruct();
@@ -28009,6 +27516,7 @@ var __webpack_exports__ = {};
                 variant: server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider,
                 onChange: () => {
                     this._queueVisualizationRedraw(uiSession);
+                    this._saveSettings();
                 }
             });
             pane.endConstruct();
@@ -28024,6 +27532,7 @@ var __webpack_exports__ = {};
                 onChange: () => {
                     this._showHidePanes();
                     this._queueVisualizationRedraw(uiSession);
+                    this._saveSettings();
                 }
             });
             this.gridUniformSubPane = this._createGridUniformSubPane(uiSession, pane);
@@ -28047,6 +27556,7 @@ var __webpack_exports__ = {};
                     } else {
                         this._queueVisualizationRedraw(uiSession);
                     }
+                    this._saveSettings();
                 }
             });
             pane.addBool(this.gridUniformRepeatX, {
@@ -28058,6 +27568,7 @@ var __webpack_exports__ = {};
                         this._updateGridUniformLimit();
                         this._queueVisualizationRedraw(uiSession);
                     }
+                    this._saveSettings();
                 }
             });
             pane.addBool(this.gridUniformRepeatY, {
@@ -28069,6 +27580,7 @@ var __webpack_exports__ = {};
                         this._updateGridUniformLimit();
                         this._queueVisualizationRedraw(uiSession);
                     }
+                    this._saveSettings();
                 }
             });
             pane.addBool(this.gridUniformRepeatZ, {
@@ -28080,6 +27592,7 @@ var __webpack_exports__ = {};
                         this._updateGridUniformLimit();
                         this._queueVisualizationRedraw(uiSession);
                     }
+                    this._saveSettings();
                 }
             });
             pane.endConstruct();
@@ -28126,6 +27639,7 @@ var __webpack_exports__ = {};
                         this._updateGridSeparateLimits(server_editor_namespaceObject.Axis.X);
                         this._queueVisualizationRedraw(uiSession);
                     }
+                    this._saveSettings();
                 }
             });
             this.gridSeparateRepetitionsYUIElement = pane.addNumber(this.gridSeparateRepetitionsY, {
@@ -28141,6 +27655,7 @@ var __webpack_exports__ = {};
                         this._updateGridSeparateLimits(server_editor_namespaceObject.Axis.Y);
                         this._queueVisualizationRedraw(uiSession);
                     }
+                    this._saveSettings();
                 }
             });
             this.gridSeparateRepetitionsZUIElement = pane.addNumber(this.gridSeparateRepetitionsZ, {
@@ -28156,6 +27671,7 @@ var __webpack_exports__ = {};
                         this._updateGridSeparateLimits(server_editor_namespaceObject.Axis.Z);
                         this._queueVisualizationRedraw(uiSession);
                     }
+                    this._saveSettings();
                 }
             });
             pane.endConstruct();
@@ -28257,11 +27773,83 @@ var __webpack_exports__ = {};
             }
             this.commonPane?.show();
         }
-        teardown() {
-            if (this.modeChangeEventSubscriptionHandle) {
-                this.session.extensionContext.afterEvents.modeChange.unsubscribe(this.modeChangeEventSubscriptionHandle);
-                this.modeChangeEventSubscriptionHandle = undefined;
+        _loadSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getGroup(RepeaterTool_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const storeItem = group.fetchItem(RepeaterTool_PERSISTENCE_GROUPITEM_NAME);
+                if (storeItem && storeItem.value) {
+                    try {
+                        const storedSettings = storeItem.value;
+                        if (storedSettings.mode !== undefined) {
+                            this.toolMode.set(storedSettings.mode);
+                        }
+                        if (storedSettings.gridRepeatType !== undefined) {
+                            this.gridRepeatType.set(storedSettings.gridRepeatType);
+                        }
+                        if (storedSettings.lineRepetitions !== undefined) {
+                            this.lineRepetitions.set(storedSettings.lineRepetitions);
+                        }
+                        if (storedSettings.gridUniformRepetitions !== undefined) {
+                            this.gridUniformRepetitions.set(storedSettings.gridUniformRepetitions);
+                        }
+                        if (storedSettings.gridUniformRepeatX !== undefined) {
+                            this.gridUniformRepeatX.set(storedSettings.gridUniformRepeatX);
+                        }
+                        if (storedSettings.gridUniformRepeatY !== undefined) {
+                            this.gridUniformRepeatY.set(storedSettings.gridUniformRepeatY);
+                        }
+                        if (storedSettings.gridUniformRepeatZ !== undefined) {
+                            this.gridUniformRepeatZ.set(storedSettings.gridUniformRepeatZ);
+                        }
+                        if (storedSettings.gridSeparateRepetitionsX !== undefined) {
+                            this.gridSeparateRepetitionsX.set(storedSettings.gridSeparateRepetitionsX);
+                        }
+                        if (storedSettings.gridSeparateRepetitionsY !== undefined) {
+                            this.gridSeparateRepetitionsY.set(storedSettings.gridSeparateRepetitionsY);
+                        }
+                        if (storedSettings.gridSeparateRepetitionsZ !== undefined) {
+                            this.gridSeparateRepetitionsZ.set(storedSettings.gridSeparateRepetitionsZ);
+                        }
+                    } catch (error) {
+                        this.uiSession.log.error("Fail to load the settings, error: " + stringFromException(error));
+                    }
+                }
+                group.dispose();
             }
+        }
+        _saveSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getOrCreateGroup(RepeaterTool_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const settings = {
+                    mode: this.toolMode.value,
+                    lineRepetitions: this.lineRepetitions.value,
+                    gridRepeatType: this.gridRepeatType.value,
+                    gridUniformRepetitions: this.gridUniformRepetitions.value,
+                    gridUniformRepeatX: this.gridUniformRepeatX.value,
+                    gridUniformRepeatY: this.gridUniformRepeatY.value,
+                    gridUniformRepeatZ: this.gridUniformRepeatZ.value,
+                    gridSeparateRepetitionsX: this.gridSeparateRepetitionsX.value,
+                    gridSeparateRepetitionsY: this.gridSeparateRepetitionsY.value,
+                    gridSeparateRepetitionsZ: this.gridSeparateRepetitionsZ.value
+                };
+                const storeItem = group.getOrCreateItem(RepeaterTool_PERSISTENCE_GROUPITEM_NAME, settings);
+                if (storeItem) {
+                    storeItem.commit();
+                }
+                group.dispose();
+                return;
+            }
+            this.uiSession.log.error("Fail to save settings for RepeaterTool");
+        }
+        teardown() {
             if (this.selectionChangeEventSubscriptionHandle) {
                 this.session.extensionContext.afterEvents.SelectionChange.unsubscribe(this.selectionChangeEventSubscriptionHandle);
                 this.selectionChangeEventSubscriptionHandle = undefined;
@@ -28291,10 +27879,13 @@ var __webpack_exports__ = {};
     const MinFarmLength = 3;
     const MaxFarmWidth = 24;
     const MaxFarmLength = 24;
+    const FarmGenerator_PERSISTENCE_GROUP_NAME = "editor:farmGenerator";
+    const FarmGenerator_PERSISTENCE_GROUPITEM_NAME = "farm_generator_settings";
     class FarmGeneratorTool {
         constructor(uiSession) {
             this.uiSession = uiSession;
             this._tool = this.addFarmGeneratorTool(uiSession);
+            this._persistenceManager = getPersistenceManager(uiSession.extensionContext.player);
             this.telemetryManager = new TelemetryManager(uiSession.extensionContext.player, TelemetrySource.Farm);
             this._commonSettings = {
                 farmWidth: (0, server_editor_namespaceObject.makeObservable)(10),
@@ -28326,6 +27917,7 @@ var __webpack_exports__ = {};
                 visible: true,
                 fixedModeDistance: 5
             };
+            this.loadSettings();
             this.addFarmGeneratorSettingsPane(uiSession, this._tool);
             this._widgetGroup = uiSession.extensionContext.widgetManager.createGroup({
                 groupSelectionMode: server_editor_namespaceObject.WidgetGroupSelectionMode.Single,
@@ -28356,15 +27948,17 @@ var __webpack_exports__ = {};
                     blue: .09,
                     alpha: .2
                 },
-                minSize: {
-                    x: MinFarmWidth,
-                    y: 2,
-                    z: MinFarmLength
-                },
-                maxSize: {
-                    x: MaxFarmWidth,
-                    y: 2,
-                    z: MaxFarmLength
+                limit: {
+                    min: {
+                        x: MinFarmWidth,
+                        y: 2,
+                        z: MinFarmLength
+                    },
+                    max: {
+                        x: MaxFarmWidth,
+                        y: 2,
+                        z: MaxFarmLength
+                    }
                 },
                 boundsOffset: {
                     x: (this._commonSettings.farmWidth.value - 1) / -2,
@@ -28419,6 +28013,7 @@ var __webpack_exports__ = {};
                     if (mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton && mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown) {
                         this._onExecuteGenerator(mouseRay, uiSession);
                     }
+                    this.saveSettings();
                 }
             });
             tool.registerMouseButtonBinding(executeMouseAction);
@@ -28458,6 +28053,7 @@ var __webpack_exports__ = {};
                         y: -1,
                         z: (this._commonSettings.farmLength.value - 1) / -2
                     };
+                    this.saveSettings();
                 }
             });
             windowPane.addDropdown(this._commonSettings.fenceType, {
@@ -28495,31 +28091,58 @@ var __webpack_exports__ = {};
             });
             windowPane.addBool(this._commonSettings.irrigation, {
                 title: "resourcePack.editor.toolRail.FarmGenerator.pane.irrigation",
-                tooltip: "resourcePack.editor.toolRail.FarmGenerator.pane.irrigation.tooltip"
+                tooltip: "resourcePack.editor.toolRail.FarmGenerator.pane.irrigation.tooltip",
+                onChange: () => {
+                    this.saveSettings();
+                }
             });
             cropPane.addBool(this._cropSettings.wheat, {
-                title: "resourcePack.editor.toolRail.FarmGenerator.pane.crops.wheat"
+                title: "resourcePack.editor.toolRail.FarmGenerator.pane.crops.wheat",
+                onChange: () => {
+                    this.saveSettings();
+                }
             });
             cropPane.addBool(this._cropSettings.potato, {
-                title: "resourcePack.editor.toolRail.FarmGenerator.pane.crops.potato"
+                title: "resourcePack.editor.toolRail.FarmGenerator.pane.crops.potato",
+                onChange: () => {
+                    this.saveSettings();
+                }
             });
             cropPane.addBool(this._cropSettings.beetroot, {
-                title: "resourcePack.editor.toolRail.FarmGenerator.pane.crops.beets"
+                title: "resourcePack.editor.toolRail.FarmGenerator.pane.crops.beets",
+                onChange: () => {
+                    this.saveSettings();
+                }
             });
             cropPane.addBool(this._cropSettings.pumpkin, {
-                title: "resourcePack.editor.toolRail.FarmGenerator.pane.crops.pumpkin"
+                title: "resourcePack.editor.toolRail.FarmGenerator.pane.crops.pumpkin",
+                onChange: () => {
+                    this.saveSettings();
+                }
             });
             cropPane.addBool(this._cropSettings.carrot, {
-                title: "resourcePack.editor.toolRail.FarmGenerator.pane.crops.carrot"
+                title: "resourcePack.editor.toolRail.FarmGenerator.pane.crops.carrot",
+                onChange: () => {
+                    this.saveSettings();
+                }
             });
             animalPane.addBool(this._animalSettings.cow, {
-                title: "resourcePack.editor.toolRail.FarmGenerator.pane.animals.cow"
+                title: "resourcePack.editor.toolRail.FarmGenerator.pane.animals.cow",
+                onChange: () => {
+                    this.saveSettings();
+                }
             });
             animalPane.addBool(this._animalSettings.sheep, {
-                title: "resourcePack.editor.toolRail.FarmGenerator.pane.animals.sheep"
+                title: "resourcePack.editor.toolRail.FarmGenerator.pane.animals.sheep",
+                onChange: () => {
+                    this.saveSettings();
+                }
             });
             animalPane.addBool(this._animalSettings.pig, {
-                title: "resourcePack.editor.toolRail.FarmGenerator.pane.animals.pig"
+                title: "resourcePack.editor.toolRail.FarmGenerator.pane.animals.pig",
+                onChange: () => {
+                    this.saveSettings();
+                }
             });
             tool.bindPropertyPane(windowPane);
         }
@@ -28660,7 +28283,7 @@ var __webpack_exports__ = {};
                     uiSession.toolRail.setSelectedToolId(tool.id);
                 }
             });
-            const tool = uiSession.toolRail.addTool("editorCore:farmTool", {
+            const tool = uiSession.toolRail.addTool(FarmGeneratorTool.MODAL_TOOL_ID, {
                 title: "resourcePack.editor.toolRail.FarmGenerator.tool.title",
                 icon: "pack://textures/editor/Farm.png?filtering=point",
                 tooltip: {
@@ -28671,11 +28294,9 @@ var __webpack_exports__ = {};
             });
             tool.onModalToolActivation.subscribe((eventData => {
                 if (eventData.isActiveTool) {
-                    this._backedUpColors = backupColors(uiSession.extensionContext);
                     if (!this._cursorModeControl?.isActive) {
                         this._cursorModeControl?.activateControl();
                     }
-                    uiSession.extensionContext.cursor.setProperties(this._cursorProperties);
                     this._widgetGroup.visible = true;
                     this._widgetGroup.visibleBounds = true;
                 } else {
@@ -28683,10 +28304,6 @@ var __webpack_exports__ = {};
                     this._widgetGroup.visibleBounds = false;
                     if (this._cursorModeControl?.isActive) {
                         this._cursorModeControl?.deactivateControl();
-                    }
-                    if (this._backedUpColors) {
-                        restoreBackedUpColors(uiSession.extensionContext, this._backedUpColors);
-                        this._backedUpColors = undefined;
                     }
                 }
             }));
@@ -28700,7 +28317,68 @@ var __webpack_exports__ = {};
             });
             return tool;
         }
+        loadSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getGroup(FarmGenerator_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const storeItem = group.fetchItem(FarmGenerator_PERSISTENCE_GROUPITEM_NAME);
+                if (storeItem && storeItem.value) {
+                    try {
+                        const storedSettings = storeItem.value;
+                        this._commonSettings.farmLength.set(storedSettings.farmLength);
+                        this._commonSettings.farmWidth.set(storedSettings.farmWidth);
+                        this._commonSettings.irrigation.set(storedSettings.irrigation);
+                        this._commonSettings.fenceType.set(storedSettings.fenceType);
+                        this._cropSettings.wheat.set(storedSettings.wheat);
+                        this._cropSettings.pumpkin.set(storedSettings.pumpkin);
+                        this._cropSettings.potato.set(storedSettings.potato);
+                        this._cropSettings.carrot.set(storedSettings.carrot);
+                        this._cropSettings.beetroot.set(storedSettings.beetroot);
+                        this._animalSettings.pig.set(storedSettings.pig);
+                        this._animalSettings.sheep.set(storedSettings.sheep);
+                        this._animalSettings.cow.set(storedSettings.cow);
+                    } catch (error) {
+                        this.uiSession.log.error("Fail to load the settings, error: " + stringFromException(error));
+                    }
+                }
+                group.dispose();
+            }
+        }
+        saveSettings() {
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getOrCreateGroup(FarmGenerator_PERSISTENCE_GROUP_NAME, option);
+            if (group) {
+                const settings = {
+                    farmLength: this._commonSettings.farmLength.value,
+                    farmWidth: this._commonSettings.farmWidth.value,
+                    irrigation: this._commonSettings.irrigation.value,
+                    fenceType: this._commonSettings.fenceType.value,
+                    wheat: this._cropSettings.wheat.value,
+                    pumpkin: this._cropSettings.pumpkin.value,
+                    potato: this._cropSettings.potato.value,
+                    carrot: this._cropSettings.carrot.value,
+                    beetroot: this._cropSettings.beetroot.value,
+                    pig: this._animalSettings.pig.value,
+                    sheep: this._animalSettings.sheep.value,
+                    cow: this._animalSettings.cow.value
+                };
+                const storeItem = group.getOrCreateItem(FarmGenerator_PERSISTENCE_GROUPITEM_NAME, settings);
+                if (storeItem) {
+                    storeItem.commit();
+                }
+                group.dispose();
+                return;
+            }
+            this.uiSession.log.error("Fail to save settings for FarmGenerator");
+        }
     }
+    FarmGeneratorTool.MODAL_TOOL_ID = "editorCore:farmTool";
     function getRandomInt(upper) {
         return Math.floor(Math.random() * (upper + 1));
     }
@@ -28737,7 +28415,6 @@ var __webpack_exports__ = {};
             return lib_vanilla_MinecraftBlockTypes.OakFence;
         }
     }
-    const PERSISTENCE_KEY = "editor:settings";
     var SettingsTelemetry;
     (function(SettingsTelemetry) {
         SettingsTelemetry["ShowInvisibleBlocks"] = "ShowInvisibleBlocks";
@@ -28749,21 +28426,37 @@ var __webpack_exports__ = {};
         SettingsTelemetry["MuteSounds"] = "MuteSounds";
         SettingsTelemetry["ShowToastNotifications"] = "ShowToastNotifications";
     })(SettingsTelemetry || (SettingsTelemetry = {}));
+    const PERSISTENCE_GROUP = "editor:settings";
+    const PERSISTENCE_GROUP_ITEM_KEY = "settings";
     class SettingsBehavior {
         persistSettings() {
-            const persistentData = {
-                showInvisibleBlocks: this.mShowInvisibleBlocks.value,
-                showChunkBoundaries: this.mShowChunkBoundaries.value,
-                flySpeedMultiplier: this.mFlySpeedMultiplier.value,
-                showCompass: this.mShowCompass.value,
-                nightVision: this.mNightVision.value,
-                muteMusic: this.mMuteMusic.value,
-                muteSounds: this.mMuteSounds.value,
-                showToastNotifications: this.mShowToastNotifications.value
-            };
             this.session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.NightVision, this.mNightVision.value);
             try {
-                this.session.extensionContext.player.setDynamicProperty(PERSISTENCE_KEY, JSON.stringify(persistentData));
+                const option = {
+                    scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ClientGlobal,
+                    groupType: server_editor_private_bindings_namespaceObject.PersistenceGroupType.Replication,
+                    version: 0
+                };
+                const group = this._persistenceManager.getOrCreateGroup(PERSISTENCE_GROUP, option);
+                if (!group) {
+                    this.session.log.error(`Failed to get persist group of settings`, {
+                        channelMask: server_editor_namespaceObject.LogChannel.All
+                    });
+                    return;
+                }
+                const persistentDataItem = {
+                    showInvisibleBlocks: this.mShowInvisibleBlocks.value,
+                    showChunkBoundaries: this.mShowChunkBoundaries.value,
+                    flySpeedMultiplier: this.mFlySpeedMultiplier.value,
+                    showCompass: this.mShowCompass.value,
+                    nightVision: this.mNightVision.value,
+                    muteMusic: this.mMuteMusic.value,
+                    muteSounds: this.mMuteSounds.value,
+                    showToastNotifications: this.mShowToastNotifications.value
+                };
+                const groupItem = group.getOrCreateItem(PERSISTENCE_GROUP_ITEM_KEY, persistentDataItem);
+                groupItem.commit();
+                group.dispose();
             } catch (err) {
                 this.session.log.error(`Failed to persist settings: ${(0, server_editor_namespaceObject.stringFromException)(err)}`, {
                     channelMask: server_editor_namespaceObject.LogChannel.All
@@ -28772,17 +28465,27 @@ var __webpack_exports__ = {};
         }
         loadSettingsFromStorage() {
             try {
-                const persistentData = this.session.extensionContext.player.getDynamicProperty(PERSISTENCE_KEY);
-                if (persistentData) {
-                    const data = JSON.parse(persistentData);
-                    this.mShowInvisibleBlocks.set(data.showInvisibleBlocks);
-                    this.mShowChunkBoundaries.set(data.showChunkBoundaries);
-                    this.mFlySpeedMultiplier.set(data.flySpeedMultiplier);
-                    this.mShowCompass.set(data.showCompass);
-                    this.mNightVision.set(data.nightVision);
-                    this.mMuteMusic.set(data.muteMusic);
-                    this.mMuteSounds.set(data.muteSounds);
-                    this.mShowToastNotifications.set(data.showToastNotifications);
+                const option = {
+                    scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ClientGlobal,
+                    version: 0
+                };
+                this._persistenceManager.requestClientGroup(PERSISTENCE_GROUP, option, (persistenceGroup => {
+                    if (!persistenceGroup) {
+                        return;
+                    }
+                    const persistentDataItem = persistenceGroup.fetchItem(PERSISTENCE_GROUP_ITEM_KEY);
+                    if (!persistentDataItem || !persistentDataItem.value) {
+                        return;
+                    }
+                    this.mShowInvisibleBlocks.set(persistentDataItem.value.showInvisibleBlocks);
+                    this.mShowChunkBoundaries.set(persistentDataItem.value.showChunkBoundaries);
+                    this.mFlySpeedMultiplier.set(persistentDataItem.value.flySpeedMultiplier);
+                    this.mShowCompass.set(persistentDataItem.value.showCompass);
+                    this.mNightVision.set(persistentDataItem.value.nightVision);
+                    this.mMuteMusic.set(persistentDataItem.value.muteMusic);
+                    this.mMuteSounds.set(persistentDataItem.value.muteSounds);
+                    this.mShowToastNotifications.set(persistentDataItem.value.showToastNotifications);
+                    persistenceGroup.dispose();
                     this.session.extensionContext.settings.audio.set(server_editor_namespaceObject.AudioSettingsProperty.IsMusicMuted, this.mMuteMusic.value);
                     this.session.extensionContext.settings.audio.set(server_editor_namespaceObject.AudioSettingsProperty.AreSoundsMuted, this.mMuteSounds.value);
                     this.session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.ShowInvisibleBlocks, this.mShowInvisibleBlocks.value);
@@ -28791,7 +28494,7 @@ var __webpack_exports__ = {};
                     this.session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.ShowCompass, this.mShowCompass.value);
                     this.session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.NightVision, this.mNightVision.value);
                     this.session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.ShowToastNotifications, this.mShowToastNotifications.value);
-                }
+                }));
             } catch (err) {
                 this.session.log.error(`Failed to load settings: ${(0, server_editor_namespaceObject.stringFromException)(err)}`, {
                     channelMask: server_editor_namespaceObject.LogChannel.All
@@ -28808,6 +28511,7 @@ var __webpack_exports__ = {};
         constructor(session, _parentMenu) {
             this.session = session;
             this.telemetryManager = new TelemetryManager(session.extensionContext.player, TelemetrySource.Settings);
+            this._persistenceManager = getPersistenceManager(this.session.extensionContext.player);
             const showInvisibleBlocks = this.session.extensionContext.settings.graphics.get(server_editor_namespaceObject.GraphicsSettingsProperty.ShowInvisibleBlocks);
             const showChunkBoundaries = this.session.extensionContext.settings.graphics.get(server_editor_namespaceObject.GraphicsSettingsProperty.ShowChunkBoundaries);
             const flySpeedMultiplier = this.session.extensionContext.settings.speed.get(server_editor_namespaceObject.SpeedSettingsProperty.FlySpeedMultiplier);
@@ -29149,7 +28853,7 @@ var __webpack_exports__ = {};
             };
             uiSession.log.debug(`Initializing ${WorkbenchBehavior.BEHAVIOR_NAME}`);
             this.telemetryManager = new TelemetryManager(uiSession.extensionContext.player, TelemetrySource.Workbench);
-            this.cursorProperties = uiSession.extensionContext.cursor.getProperties();
+            this.cursorProperties = uiSession.extensionContext.cursor.getDefaultProperties();
             if (this.cursorProperties.fillColor) {
                 delete this.cursorProperties.fillColor;
             }
@@ -29185,10 +28889,6 @@ var __webpack_exports__ = {};
             if (this._cursorPropertyEventSub) {
                 this.uiSession.extensionContext.afterEvents.cursorPropertyChange.unsubscribe(this._cursorPropertyEventSub);
             }
-            if (this.backedUpColors) {
-                restoreBackedUpColors(this.uiSession.extensionContext, this.backedUpColors);
-                this.backedUpColors = undefined;
-            }
         }
         _addTool(uiSession) {
             const toolToggleAction = uiSession.actionManager.createAction({
@@ -29197,7 +28897,7 @@ var __webpack_exports__ = {};
                     uiSession.toolRail.setSelectedToolId(tool.id);
                 }
             });
-            const tool = uiSession.toolRail.addTool("editor:modalTool:Workbench", {
+            const tool = uiSession.toolRail.addTool(WorkbenchBehavior.MODAL_TOOL_ID, {
                 title: "resourcePack.editor.toolRail.WorkbenchTool.title",
                 icon: "pack://textures/editor/Workbench.png?filtering=point",
                 tooltip: {
@@ -29208,8 +28908,7 @@ var __webpack_exports__ = {};
             });
             tool.onModalToolActivation.subscribe((eventData => {
                 if (eventData.isActiveTool) {
-                    this.backedUpColors = backupColors(uiSession.extensionContext);
-                    uiSession.extensionContext.cursor.setProperties(this.cursorProperties);
+                    uiSession.extensionContext.cursor.pushPropertiesById(this.cursorProperties, WorkbenchBehavior.MODAL_TOOL_ID);
                     this._cursorPropertyEventSub = this.uiSession.extensionContext.afterEvents.cursorPropertyChange.subscribe((event => {
                         if (event.position !== undefined) {
                             this._highlightBlock(event.position.Position);
@@ -29219,10 +28918,7 @@ var __webpack_exports__ = {};
                     if (this._cursorPropertyEventSub) {
                         this.uiSession.extensionContext.afterEvents.cursorPropertyChange.unsubscribe(this._cursorPropertyEventSub);
                     }
-                    if (this.backedUpColors) {
-                        restoreBackedUpColors(uiSession.extensionContext, this.backedUpColors);
-                        this.backedUpColors = undefined;
-                    }
+                    uiSession.extensionContext.cursor.popPropertiesById(WorkbenchBehavior.MODAL_TOOL_ID);
                 }
             }));
             uiSession.inputManager.registerKeyBinding(server_editor_namespaceObject.EditorInputContext.GlobalToolMode, toolToggleAction, {
@@ -29254,7 +28950,7 @@ var __webpack_exports__ = {};
                 this._props.blockType.set(targetBlock.typeId);
                 if (enableBlockHighlight) {
                     this.cursorProperties.visible = true;
-                    this.uiSession.extensionContext.cursor.setProperties(this.cursorProperties);
+                    this.uiSession.extensionContext.cursor.updatePropertiesById(this.cursorProperties, WorkbenchBehavior.MODAL_TOOL_ID);
                     this._updateBlockInteractionCache(targetBlock);
                     const blockInteractions = this._blockInteractionMappingCache.get(targetBlock.typeId);
                     this._props.leftClick.set(blockInteractions?.leftClickProperty ?? "-");
@@ -29279,7 +28975,7 @@ var __webpack_exports__ = {};
                         this._controlLeftClickTextItem.visible = false;
                         this._shiftControlLeftClickTextItem.visible = false;
                     }
-                    this.uiSession.extensionContext.cursor.setProperties(this.cursorProperties);
+                    this.uiSession.extensionContext.cursor.updatePropertiesById(this.cursorProperties, WorkbenchBehavior.MODAL_TOOL_ID);
                 }
             }
         }
@@ -29466,7 +29162,7 @@ var __webpack_exports__ = {};
                 onExecute: (mouseRay, mouseProps) => {
                     const player = uiSession.extensionContext.player;
                     const targetBlock = player.dimension.getBlock(mouseRay.cursorBlockLocation);
-                    if (targetBlock && mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown && uiSession.toolRail.getSelectedToolId() === this.tool.id && !workbenchExcludedBlockList.includes(targetBlock.typeId)) {
+                    if (targetBlock && mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown && this.tool.isActive && !workbenchExcludedBlockList.includes(targetBlock.typeId)) {
                         const blocksToAlter = this._generateBlocksToAlterList(targetBlock, uiSession);
                         blocksToAlter.forEach((block => {
                             if (mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton && mouseProps.modifiers.shift && mouseProps.modifiers.ctrl) {
@@ -29666,6 +29362,7 @@ var __webpack_exports__ = {};
         }
     }
     WorkbenchBehavior.BEHAVIOR_NAME = "Block Changer";
+    WorkbenchBehavior.MODAL_TOOL_ID = "editor:modalTool:Workbench";
     const leftClickProperties = [ "minecraft:vertical_half", "top_slot_bit", "pillar_axis", "height", "candles", "turtle_egg_count", "cluster_count", "hanging", "wall_post_bit" ];
     const shiftLeftClickProperties = [ "upside_down_bit", "open_bit", "lit", "dripstone_thickness" ];
     const controlLeftClickProperties = [ "direction", "weirdo_direction", "facing_direction", "minecraft:cardinal_direction", "minecraft:block_face" ];
@@ -29739,6 +29436,22 @@ var __webpack_exports__ = {};
             this._isMoving.set(this._component.isMoving);
             componentPane.addBool(this._isMoving, {
                 title: "isMoving",
+                enable: false
+            });
+        }
+    }
+    class BlockRedstoneProducerComponentUI {
+        constructor() {
+            this._power = (0, server_editor_namespaceObject.makeObservable)(0);
+        }
+        construct(parentPane, component) {
+            this._component = component;
+            const componentPane = parentPane.createSubPane({
+                title: server_namespaceObject.BlockRedstoneProducerComponent.componentId
+            });
+            this._power.set(this._component.power);
+            componentPane.addNumber(this._power, {
+                title: "power",
                 enable: false
             });
         }
@@ -30566,7 +30279,7 @@ var __webpack_exports__ = {};
             });
         }
     }
-    const ComponentUICreationMap = new Map([ [ server_namespaceObject.BlockComponentTypes.FluidContainer, () => new BlockFluidContainerComponentUI ], [ server_namespaceObject.BlockComponentTypes.Piston, () => new BlockPistonComponentUI ], [ server_namespaceObject.BlockComponentTypes.Sign, () => new BlockSignComponentUI ], [ server_namespaceObject.EntityComponentTypes.AddRider, () => new EntityAddRiderComponentUI ], [ server_namespaceObject.EntityComponentTypes.Ageable, () => new EntityAgeableComponentUI ], [ server_namespaceObject.EntityComponentTypes.Breathable, () => new EntityBreathableComponentUI ], [ server_namespaceObject.EntityComponentTypes.Color, () => new EntityColorComponentUI ], [ server_namespaceObject.EntityComponentTypes.Equippable, () => new EntityEquippableComponentUI ], [ server_namespaceObject.EntityComponentTypes.FlyingSpeed, () => new EntityFlyingSpeedComponentUI ], [ server_namespaceObject.EntityComponentTypes.FrictionModifier, () => new EntityFrictionModifierComponentUI ], [ server_namespaceObject.EntityComponentTypes.Healable, () => new EntityHealableComponentUI ], [ server_namespaceObject.EntityComponentTypes.Inventory, () => new EntityInventoryComponentUI ], [ server_namespaceObject.EntityComponentTypes.Leashable, () => new EntityLeashableComponentUI ], [ server_namespaceObject.EntityComponentTypes.MarkVariant, () => new EntityMarkVariantComponentUI ], [ server_namespaceObject.EntityComponentTypes.Npc, () => new EntityNpcComponentUI ], [ server_namespaceObject.EntityComponentTypes.OnFire, () => new EntityOnFireComponentUI ], [ server_namespaceObject.EntityComponentTypes.Projectile, () => new EntityProjectileComponentUI ], [ server_namespaceObject.EntityComponentTypes.PushThrough, () => new EntityPushThroughComponentUI ], [ server_namespaceObject.EntityComponentTypes.Rideable, () => new EntityRideableComponentUI ], [ server_namespaceObject.EntityComponentTypes.Scale, () => new EntityScaleComponentUI ], [ server_namespaceObject.EntityComponentTypes.SkinId, () => new EntitySkinIdComponentUI ], [ server_namespaceObject.EntityComponentTypes.Strength, () => new EntityStrengthComponentUI ], [ server_namespaceObject.EntityComponentTypes.Tameable, () => new EntityTameableComponentUI ], [ server_namespaceObject.EntityComponentTypes.TameMount, () => new EntityTameMountComponentUI ], [ server_namespaceObject.EntityComponentTypes.TypeFamily, () => new EntityTypeFamilyComponentUI ], [ server_namespaceObject.EntityComponentTypes.Variant, () => new EntityVariantComponentUI ] ]);
+    const ComponentUICreationMap = new Map([ [ server_namespaceObject.BlockComponentTypes.FluidContainer, () => new BlockFluidContainerComponentUI ], [ server_namespaceObject.BlockComponentTypes.Piston, () => new BlockPistonComponentUI ], [ server_namespaceObject.BlockComponentTypes.RedstoneProducer, () => new BlockRedstoneProducerComponentUI ], [ server_namespaceObject.BlockComponentTypes.Sign, () => new BlockSignComponentUI ], [ server_namespaceObject.EntityComponentTypes.AddRider, () => new EntityAddRiderComponentUI ], [ server_namespaceObject.EntityComponentTypes.Ageable, () => new EntityAgeableComponentUI ], [ server_namespaceObject.EntityComponentTypes.Breathable, () => new EntityBreathableComponentUI ], [ server_namespaceObject.EntityComponentTypes.Color, () => new EntityColorComponentUI ], [ server_namespaceObject.EntityComponentTypes.Equippable, () => new EntityEquippableComponentUI ], [ server_namespaceObject.EntityComponentTypes.FlyingSpeed, () => new EntityFlyingSpeedComponentUI ], [ server_namespaceObject.EntityComponentTypes.FrictionModifier, () => new EntityFrictionModifierComponentUI ], [ server_namespaceObject.EntityComponentTypes.Healable, () => new EntityHealableComponentUI ], [ server_namespaceObject.EntityComponentTypes.Inventory, () => new EntityInventoryComponentUI ], [ server_namespaceObject.EntityComponentTypes.Leashable, () => new EntityLeashableComponentUI ], [ server_namespaceObject.EntityComponentTypes.MarkVariant, () => new EntityMarkVariantComponentUI ], [ server_namespaceObject.EntityComponentTypes.Npc, () => new EntityNpcComponentUI ], [ server_namespaceObject.EntityComponentTypes.OnFire, () => new EntityOnFireComponentUI ], [ server_namespaceObject.EntityComponentTypes.Projectile, () => new EntityProjectileComponentUI ], [ server_namespaceObject.EntityComponentTypes.PushThrough, () => new EntityPushThroughComponentUI ], [ server_namespaceObject.EntityComponentTypes.Rideable, () => new EntityRideableComponentUI ], [ server_namespaceObject.EntityComponentTypes.Scale, () => new EntityScaleComponentUI ], [ server_namespaceObject.EntityComponentTypes.SkinId, () => new EntitySkinIdComponentUI ], [ server_namespaceObject.EntityComponentTypes.Strength, () => new EntityStrengthComponentUI ], [ server_namespaceObject.EntityComponentTypes.Tameable, () => new EntityTameableComponentUI ], [ server_namespaceObject.EntityComponentTypes.TameMount, () => new EntityTameMountComponentUI ], [ server_namespaceObject.EntityComponentTypes.TypeFamily, () => new EntityTypeFamilyComponentUI ], [ server_namespaceObject.EntityComponentTypes.Variant, () => new EntityVariantComponentUI ] ]);
     function getEntityBlockComponentUIForComponent(component) {
         const uiConstructionFunction = ComponentUICreationMap.get(component.typeId);
         return uiConstructionFunction ? uiConstructionFunction() : undefined;
@@ -30587,7 +30300,7 @@ var __webpack_exports__ = {};
             this.targetRegion = undefined;
             uiSession.log.debug(`Initializing ${BlockInspectorBehavior.BEHAVIOR_NAME}`);
             this.telemetryManager = new TelemetryManager(uiSession.extensionContext.player, TelemetrySource.BlockInspector);
-            this.cursorProperties = uiSession.extensionContext.cursor.getProperties();
+            this.cursorProperties = uiSession.extensionContext.cursor.getDefaultProperties();
             if (this.cursorProperties.fillColor) {
                 delete this.cursorProperties.fillColor;
             }
@@ -30659,7 +30372,7 @@ var __webpack_exports__ = {};
                 label: "resourcePack.editor.toolRail.blockInspectorTool.keyBinding.toggleTool.title",
                 tooltip: "resourcePack.editor.toolRail.blockInspectorTool.keyBinding.toggleTool.tooltip"
             });
-            const tool = uiSession.toolRail.addTool("editor:modalTool:blockInspector", {
+            const tool = uiSession.toolRail.addTool(BlockInspectorBehavior.MODAL_TOOL_ID, {
                 title: "resourcePack.editor.toolRail.blockInspectorTool.title",
                 icon: "pack://textures/editor/block-inspector.png?filtering=point",
                 tooltip: {
@@ -30670,16 +30383,12 @@ var __webpack_exports__ = {};
             });
             tool.onModalToolActivation.subscribe((eventData => {
                 if (eventData.isActiveTool) {
-                    this.backedUpColors = backupColors(uiSession.extensionContext);
-                    uiSession.extensionContext.cursor.setProperties(this.cursorProperties);
+                    uiSession.extensionContext.cursor.pushPropertiesById(this.cursorProperties, BlockInspectorBehavior.MODAL_TOOL_ID);
                     if (this.targetLocation) {
                         this._prepareRegion(this.targetLocation);
                     }
                 } else {
-                    if (this.backedUpColors) {
-                        restoreBackedUpColors(uiSession.extensionContext, this.backedUpColors);
-                        this.backedUpColors = undefined;
-                    }
+                    uiSession.extensionContext.cursor.popPropertiesById(BlockInspectorBehavior.MODAL_TOOL_ID);
                     this._disposeRegion();
                 }
             }));
@@ -30689,7 +30398,7 @@ var __webpack_exports__ = {};
             const executeAction = uiSession.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.MouseRayCastAction,
                 onExecute: (mouseRay, mouseProps) => {
-                    if (mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton && mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown && uiSession.toolRail.getSelectedToolId() === this.tool.id && mouseRay?.cursorBlockLocation) {
+                    if (mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton && mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown && this.tool.isActive && mouseRay?.cursorBlockLocation) {
                         const cursorPos = uiSession.extensionContext.cursor.getPosition();
                         this._prepareRegion(cursorPos);
                     }
@@ -30965,7 +30674,7 @@ var __webpack_exports__ = {};
                 }
             });
             const turnIntoSubpane = propPane.createSubPane({
-                direction: server_editor_namespaceObject.LayoutDirection.Vertical,
+                layout: server_editor_namespaceObject.PaneLayoutType.Vertical,
                 hasExpander: true,
                 hasMargins: false,
                 title: "resourcePack.editor.toolRail.blockInspectorTool.jigsawProperties.turnsInto",
@@ -31026,17 +30735,17 @@ var __webpack_exports__ = {};
                         type: server_editor_namespaceObject.ListPaneEntryType.Image,
                         size: {
                             value: 4,
-                            type: "default"
+                            type: server_editor_namespaceObject.LayoutSizeType.Default
                         }
                     }, {
                         type: server_editor_namespaceObject.ListPaneEntryType.Text,
-                        size: "grow",
+                        size: server_editor_namespaceObject.LayoutFlex.Grow,
                         alignment: server_editor_namespaceObject.LayoutAlignment.Center
                     }, {
                         type: server_editor_namespaceObject.ListPaneEntryType.Button,
                         size: {
                             value: 30,
-                            type: "percentage"
+                            type: server_editor_namespaceObject.LayoutSizeType.Percentage
                         }
                     } ]
                 }
@@ -31090,6 +30799,7 @@ var __webpack_exports__ = {};
         }
     }
     BlockInspectorBehavior.BEHAVIOR_NAME = "Block Inspector";
+    BlockInspectorBehavior.MODAL_TOOL_ID = "editor:modalTool:blockInspector";
     const PreviewColor = {
         red: 0,
         green: .5,
@@ -31177,7 +30887,6 @@ var __webpack_exports__ = {};
                 visible: true,
                 fixedModeDistance: 5
             };
-            this._session.extensionContext.cursor.setProperties(this._cursorProperties);
             this._preview = new PreviewBoundingBox(this._session);
             this._preview.outlineColor = PreviewColor;
             this._preview.hullColor = FillColor;
@@ -31195,7 +30904,7 @@ var __webpack_exports__ = {};
                 label: "resourcePack.editor.toolRail.entityInspector.keyBinding.toggleTool.title",
                 tooltip: "resourcePack.editor.toolRail.entityInspector.keyBinding.toggleTool.tooltip"
             });
-            this._tool = this._session.toolRail.addTool("editor:EntityInspector", {
+            this._tool = this._session.toolRail.addTool(EntityInspector.MODAL_TOOL_ID, {
                 title: "resourcePack.editor.toolRail.entityInspector.tool.title",
                 icon: "pack://textures/editor/Entity-Edit.png?filtering=point",
                 tooltip: {
@@ -31204,6 +30913,13 @@ var __webpack_exports__ = {};
                 },
                 action: activationAction
             });
+            this._tool.onModalToolActivation.subscribe((evt => {
+                if (evt.isActiveTool) {
+                    this._session.extensionContext.cursor.pushPropertiesById(this._cursorProperties, EntityInspector.MODAL_TOOL_ID);
+                } else {
+                    this._session.extensionContext.cursor.popPropertiesById(EntityInspector.MODAL_TOOL_ID);
+                }
+            }));
             this._registerToolKeyBinding(this._session.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
@@ -31409,6 +31125,7 @@ var __webpack_exports__ = {};
             });
         }
     }
+    EntityInspector.MODAL_TOOL_ID = "editor:EntityInspector";
     var RealmsTelemetry;
     (function(RealmsTelemetry) {
         RealmsTelemetry["RealmUploadPaneOpened"] = "RealmUploadPaneOpened";
@@ -32524,11 +32241,6 @@ var __webpack_exports__ = {};
                 }
             });
             parentTool.registerMouseButtonBinding(paintAction);
-            this._handleEndPaintOnModeChange = session.extensionContext.afterEvents.modeChange.subscribe((_event => {
-                if (this._sharedBushControl.isActive && this._paintingActive) {
-                    this.endPainting();
-                }
-            }));
             const extensionContext = session.extensionContext;
             const log = session.log;
             const singlePressPaintAction = session.actionManager.createAction({
@@ -32561,10 +32273,6 @@ var __webpack_exports__ = {};
         }
         shutdown() {
             this._sharedBushControl.shutdown();
-            if (this._handleEndPaintOnModeChange) {
-                this._session.extensionContext.afterEvents.modeChange.unsubscribe(this._handleEndPaintOnModeChange);
-                this._handleEndPaintOnModeChange = undefined;
-            }
         }
         isControlActive() {
             return this._sharedBushControl.isActive;
@@ -32581,7 +32289,6 @@ var __webpack_exports__ = {};
                 this.endPainting();
             }
             this._sharedBushControl.deactivateControl();
-            this._sharedBushControl.deactivateVisualization();
         }
         beginPainting() {
             if (this._session.extensionContext.brushShapeManager.isBrushPaintBusy() || this._session.extensionContext.transactionManager.isBusy()) {
@@ -33111,23 +32818,47 @@ var __webpack_exports__ = {};
         constructor(session, key) {
             this._session = session;
             this._key = key;
+            this._persistenceManager = getPersistenceManager(session.extensionContext.player);
         }
         loadStorage(setter) {
-            const saveJsonStr = this._session.extensionContext.player.getDynamicProperty(this._key);
-            try {
-                if (saveJsonStr) {
-                    const saveState = JSON.parse(saveJsonStr);
-                    if (saveState !== undefined) {
-                        setter(saveState);
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getGroup(pencilPersistenceKey, option);
+            const errorMsg = "No stored pencil settings found";
+            if (group) {
+                const storeItem = group.fetchItem(this._key);
+                if (storeItem && storeItem.value) {
+                    try {
+                        setter(storeItem.value);
+                    } catch (error) {
+                        this._session.log.error("Fail to load the settings, error: " + stringFromException(error));
                     }
+                } else {
+                    this._session.log.info(errorMsg);
                 }
-            } catch (err) {
-                this._session.log.error(`Failed to load settings: ${stringFromException(err)}`);
+                group.dispose();
             }
         }
         saveStorage(data) {
-            const jsonString = JSON.stringify(data);
-            this._session.extensionContext.player.setDynamicProperty(this._key, jsonString);
+            const option = {
+                scope: server_editor_private_bindings_namespaceObject.PersistenceScope.ServerProject,
+                version: 0
+            };
+            const group = this._persistenceManager.getOrCreateGroup(pencilPersistenceKey, option);
+            const errorMsg = "Fail to store pencil settings";
+            if (!group) {
+                this._session.log.info(errorMsg);
+            } else {
+                const storeItem = group.getOrCreateItem(this._key, data);
+                if (storeItem && storeItem.value) {
+                    storeItem.commit();
+                } else {
+                    this._session.log.info(errorMsg);
+                }
+                group.dispose();
+            }
         }
     }
     const pencilPersistenceKey = "editor:pencil";
@@ -33139,8 +32870,7 @@ var __webpack_exports__ = {};
             const spaceBinding = _session.actionManager.createAction({
                 actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
                 onExecute: () => {
-                    const thisToolActive = _session.toolRail.getSelectedToolId() === pencilToolId;
-                    if (!thisToolActive) {
+                    if (!this._tool.isActive) {
                         _session.toolRail.setSelectedToolId(pencilToolId);
                     } else {
                         _session.toolRail.setSelectedToolId(brushToolId);
@@ -33183,7 +32913,7 @@ var __webpack_exports__ = {};
             });
             this._tool.bindPropertyPane(this._rootPane);
             const horizontalSubPane = this._rootPane.createSubPane({
-                direction: server_editor_namespaceObject.LayoutDirection.Horizontal,
+                layout: server_editor_namespaceObject.PaneLayoutType.Wrapping,
                 hasExpander: false
             });
             this._drawTypeSettings.addDrawModeToggle(horizontalSubPane);
@@ -33330,13 +33060,6 @@ var __webpack_exports__ = {};
             }));
             this.selectionChangeEventSubscriptionHandle = uiSession.extensionContext.afterEvents.SelectionChange.subscribe((() => {
                 this._redrawVisualization(this.uiSession);
-            }));
-            this.modeChangeEventSubscriptionHandle = this.uiSession.extensionContext.afterEvents.modeChange.subscribe((event => {
-                if (event.mode === server_editor_namespaceObject.EditorMode.Crosshair) {
-                    this._clearVisualization();
-                } else if (event.mode === server_editor_namespaceObject.EditorMode.Tool) {
-                    this._queueVisualizationRedraw(uiSession);
-                }
             }));
             this.tool.bindPropertyPane(pane);
         }
@@ -33675,10 +33398,6 @@ var __webpack_exports__ = {};
             }
         }
         teardown() {
-            if (this.modeChangeEventSubscriptionHandle) {
-                this.uiSession.extensionContext.afterEvents.modeChange.unsubscribe(this.modeChangeEventSubscriptionHandle);
-                this.modeChangeEventSubscriptionHandle = undefined;
-            }
             if (this.selectionChangeEventSubscriptionHandle) {
                 this.uiSession.extensionContext.afterEvents.SelectionChange.unsubscribe(this.selectionChangeEventSubscriptionHandle);
                 this.selectionChangeEventSubscriptionHandle = undefined;
@@ -33799,6 +33518,13 @@ var __webpack_exports__ = {};
                     } ]
                 }
             });
+            this._rootPropertyPane.onPropertyPaneVisibilityUpdated.subscribe((evt => {
+                if (!evt.isVisible) {
+                    if (this._inVoidWorld) {
+                        this._leaveVoidWorld();
+                    }
+                }
+            }));
             this._newTemplateDialog = new ModalDialogStringInput(this._uiSession, this._rootPropertyPane, (name => this._validateTemplateName(name)));
             this._newRegistryDialog = new ModalDialogStringInput(this._uiSession, this._rootPropertyPane, (name => this._validateRegistryName(name)));
             this._skipValidationModal = this._rootPropertyPane.createModalOverlayPane({});
@@ -33828,9 +33554,8 @@ var __webpack_exports__ = {};
         }
         teardown() {
             this._uiSession.log.debug(`Shutting down ${JigsawModeBehavior.BEHAVIOR_NAME}`);
-            if (this._paneChangedHandle) {
+            if (this._inVoidWorld) {
                 this._leaveVoidWorld();
-                server_namespaceObject.system.clearRun(this._paneChangedHandle);
             }
         }
         _validateRegistryName(name) {
@@ -33977,7 +33702,7 @@ var __webpack_exports__ = {};
         }
         generateRegistrySelectionSubpane() {
             this._registryDropdownSubpane = this._editingSubpane.createSubPane({
-                direction: server_editor_namespaceObject.LayoutDirection.Horizontal,
+                layout: server_editor_namespaceObject.PaneLayoutType.Wrapping,
                 hasExpander: false,
                 hasMargins: false
             });
@@ -33990,6 +33715,18 @@ var __webpack_exports__ = {};
                 }
             });
             this._registryDropdownSubpane.addButton((() => {
+                const currentFileName = this._editingTemplatePoolDropdown.getEntryByValue(this._editingTemplatePoolDropdown.value)?.label ?? "";
+                if (currentFileName) {
+                    this._updateFile(currentFileName);
+                }
+                const empty = [];
+                this._jigsawService.setRegistryData(this.currentRegistryName, this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.Processor] ?? empty, this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.Structure] ?? empty, this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.StructureSet] ?? empty, this._currentRegFiles[server_editor_private_bindings_namespaceObject.JigsawJsonType.TemplatePool] ?? empty).then((regList => {
+                    this._regNameList = regList;
+                    this.updateJigsawRegistryDropdown();
+                })).catch((error => {
+                    this._uiSession.log.error(`Export error : ${error}`);
+                    this._regNameList = [];
+                }));
                 this._newRegistryDialog.activate("", "resourcePack.editor.jigsaw.pane.registryCreation.title", "resourcePack.editor.jigsaw.pane.registryCreation.heading").then((name => {
                     this.handleRegistryCreateRequest(name);
                 })).catch((reason => {
@@ -33997,13 +33734,15 @@ var __webpack_exports__ = {};
                 }));
             }), {
                 icon: "plusIcon",
-                tooltip: "resourcePack.editor.jigsaw.pane.registryCreation.tooltip"
+                tooltip: "resourcePack.editor.jigsaw.pane.registryCreation.tooltip",
+                shrinkToIcon: true
             });
             this._registryDropdownSubpane.addButton((() => {
                 this.handleRegistryDeleteRequest();
             }), {
                 icon: "trashCanIcon",
-                tooltip: "resourcePack.editor.jigsaw.pane.registryDeletion.tooltip"
+                tooltip: "resourcePack.editor.jigsaw.pane.registryDeletion.tooltip",
+                shrinkToIcon: true
             });
         }
         updateJigsawRegistryDropdown() {
@@ -34020,7 +33759,7 @@ var __webpack_exports__ = {};
         }
         generateTemplatePoolSelectionSubpane() {
             this._templatePoolDropdownSubpane = this._editingSubpane.createSubPane({
-                direction: server_editor_namespaceObject.LayoutDirection.Horizontal,
+                layout: server_editor_namespaceObject.PaneLayoutType.Wrapping,
                 hasExpander: false,
                 hasMargins: false
             });
@@ -34107,9 +33846,6 @@ var __webpack_exports__ = {};
                 onExecute: () => {
                     if (this._inVoidWorld) {
                         this._leaveVoidWorld();
-                        if (this._paneChangedHandle !== undefined) {
-                            server_namespaceObject.system.clearRun(this._paneChangedHandle);
-                        }
                     }
                 }
             }), {
@@ -34183,7 +33919,7 @@ var __webpack_exports__ = {};
         }
         _addTemplatePoolElementSection(element, index) {
             const elementSubpane = this._editingTemplatePoolSubpane.createSubPane({
-                direction: server_editor_namespaceObject.LayoutDirection.Horizontal,
+                layout: server_editor_namespaceObject.PaneLayoutType.Wrapping,
                 hasExpander: false
             });
             this.refreshStructureIds();
@@ -34473,16 +34209,6 @@ var __webpack_exports__ = {};
                 });
                 if (!this._inVoidWorld) {
                     this._setupTemplateEditingEnvironment();
-                    this._paneChangedHandle = server_namespaceObject.system.runInterval((() => {
-                        const activeToolId = this._uiSession.toolRail.getSelectedToolId();
-                        const isAnyToolActive = activeToolId !== undefined && activeToolId.length > 0;
-                        if (isAnyToolActive) {
-                            this._leaveVoidWorld();
-                            if (this._paneChangedHandle !== undefined) {
-                                server_namespaceObject.system.clearRun(this._paneChangedHandle);
-                            }
-                        }
-                    }), server_namespaceObject.TicksPerSecond);
                 }
             })).catch((error => {
                 this._uiSession.log.error(`Jigsaw Generation error : ${error}`);
@@ -34583,10 +34309,21 @@ var __webpack_exports__ = {};
         _setupTemplateEditingEnvironment() {
             this._inVoidWorld = true;
             this._uiSession.toolRail.setSelectedToolId(undefined);
-            const originalCursorProperties = this._uiSession.extensionContext.cursor.getProperties();
+            this._toolChangedEventToken = this._uiSession.toolRail.onSelectedToolChanged.subscribe((evt => {
+                if (evt.tool !== undefined && this._inVoidWorld) {
+                    this._leaveVoidWorld();
+                }
+            }));
+            if (this._modeChangeEventSubscriptionHandle === undefined) {
+                this._modeChangeEventSubscriptionHandle = this._uiSession.extensionContext.afterEvents.modeChange.subscribe((evt => {
+                    if (evt.mode !== server_editor_namespaceObject.EditorMode.Tool && this._inVoidWorld) {
+                        this._leaveVoidWorld();
+                    }
+                }));
+            }
             const newCursorProperties = this._uiSession.extensionContext.cursor.getProperties();
             newCursorProperties.visible = false;
-            this._uiSession.extensionContext.cursor.setProperties(newCursorProperties);
+            this._uiSession.extensionContext.cursor.pushPropertiesById(newCursorProperties, JigsawModeBehavior.CURSOR_STATE_ID);
             this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableTerrainRendering, true);
             this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableEntityRendering, false);
             this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableWeatherRendering, true);
@@ -34659,6 +34396,14 @@ var __webpack_exports__ = {};
                 }
             });
             this._leaveVoidWorld = () => {
+                if (this._toolChangedEventToken) {
+                    this._toolChangedEventToken.unsubscribe();
+                    this._toolChangedEventToken = undefined;
+                }
+                if (this._modeChangeEventSubscriptionHandle !== undefined) {
+                    this._uiSession.extensionContext.afterEvents.modeChange.unsubscribe(this._modeChangeEventSubscriptionHandle);
+                    this._modeChangeEventSubscriptionHandle = undefined;
+                }
                 restoreWeatherChange(`EditorJigsaw-${this._uiSession.extensionContext.player.id}`);
                 restoreTimeOfDayChange(`EditorJigsaw-${this._uiSession.extensionContext.player.id}`);
                 this._widgetGroup.deleteWidget(gridWidget);
@@ -34667,7 +34412,7 @@ var __webpack_exports__ = {};
                     checkForBlocks: false,
                     keepVelocity: false
                 });
-                this._uiSession.extensionContext.cursor.setProperties(originalCursorProperties);
+                this._uiSession.extensionContext.cursor.popPropertiesById(JigsawModeBehavior.CURSOR_STATE_ID);
                 this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableTerrainRendering, false);
                 this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableEntityRendering, false);
                 this._uiSession.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableWeatherRendering, false);
@@ -34705,6 +34450,7 @@ var __webpack_exports__ = {};
         }
     }
     JigsawModeBehavior.BEHAVIOR_NAME = "JigsawMode";
+    JigsawModeBehavior.CURSOR_STATE_ID = "editor:jigsaw";
     JigsawModeBehavior.TEMPLATE_POOL = "Template Pool";
     JigsawModeBehavior.MINIMUM_WEIGHT = 1;
     JigsawModeBehavior.MAXIMUM_WEIGHT = 20;
@@ -35954,10 +35700,9 @@ var __webpack_exports__ = {};
                 throw new Error(`Template with ID ${this.currentSelectedTemplate.name} (${this.currentSelectedTemplate.displayName}) not found`);
             }
             const pane = this._createTemplateEditorPane();
-            const originalCursorProperties = this.session.extensionContext.cursor.getProperties();
             const newCursorProperties = this.session.extensionContext.cursor.getProperties();
             newCursorProperties.visible = false;
-            this.session.extensionContext.cursor.setProperties(newCursorProperties);
+            this.session.extensionContext.cursor.pushPropertiesById(newCursorProperties, PrefabTemplateEditorBehavior.CURSOR_STATE_ID);
             this.session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableTerrainRendering, true);
             this.session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableEntityRendering, false);
             this.session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableWeatherRendering, true);
@@ -36063,7 +35808,7 @@ var __webpack_exports__ = {};
                     checkForBlocks: false,
                     keepVelocity: false
                 });
-                this.session.extensionContext.cursor.setProperties(originalCursorProperties);
+                this.session.extensionContext.cursor.popPropertiesById(PrefabTemplateEditorBehavior.CURSOR_STATE_ID);
                 this.session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableTerrainRendering, false);
                 this.session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableEntityRendering, false);
                 this.session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.DisableWeatherRendering, false);
@@ -36112,6 +35857,7 @@ var __webpack_exports__ = {};
             return rootPropertyPane;
         }
     }
+    PrefabTemplateEditorBehavior.CURSOR_STATE_ID = "editor:prefabTemplateEditor";
     const _rotationOrder = [ server_namespaceObject.StructureRotation.None, server_namespaceObject.StructureRotation.Rotate90, server_namespaceObject.StructureRotation.Rotate180, server_namespaceObject.StructureRotation.Rotate270 ];
     function _getRotationFromOrderedIndex(index) {
         return _rotationOrder[index];
@@ -36826,7 +36572,7 @@ var __webpack_exports__ = {};
             this._rootPropertyPane.toggleSubPaneVisibility(this.stateData.uniqueId);
         }
         _addTool() {
-            const tool = this.session.toolRail.addTool("editor:tool:prefabInstanceEditor", {
+            const tool = this.session.toolRail.addTool(PrefabInstanceEditorBehavior.MODAL_TOOL_ID, {
                 title: "editor.prefabInstanceEditor.templatePicker.tool.rootPane",
                 icon: "blocksIcon",
                 tooltip: "editor.prefabTemplateEditor.tool.tooltip"
@@ -36895,9 +36641,8 @@ var __webpack_exports__ = {};
             return rootPropertyPane;
         }
         _setupEditingEnvironment() {
-            const originalCursorProperties = this.session.extensionContext.cursor.getProperties();
             const _setupCursor = () => {
-                const newCursorProperties = this.session.extensionContext.cursor.getProperties();
+                const newCursorProperties = this.session.extensionContext.cursor.getDefaultProperties();
                 newCursorProperties.visible = true;
                 newCursorProperties.targetMode = server_editor_namespaceObject.CursorTargetMode.Face;
                 newCursorProperties.outlineColor = {
@@ -36906,10 +36651,10 @@ var __webpack_exports__ = {};
                     blue: 0,
                     alpha: 1
                 };
-                this.session.extensionContext.cursor.setProperties(newCursorProperties);
+                this.session.extensionContext.cursor.pushPropertiesById(newCursorProperties, PrefabInstanceEditorBehavior.MODAL_TOOL_ID);
             };
             const _restoreCursor = () => {
-                this.session.extensionContext.cursor.setProperties(originalCursorProperties);
+                this.session.extensionContext.cursor.popPropertiesById(PrefabInstanceEditorBehavior.MODAL_TOOL_ID);
             };
             _setupCursor();
             this._onToolFocusGain = () => {
@@ -36948,6 +36693,7 @@ var __webpack_exports__ = {};
             }
         }
     }
+    PrefabInstanceEditorBehavior.MODAL_TOOL_ID = "editor:tool:prefabInstanceEditor";
     class PrefabBehavior {
         get prefabManager() {
             return this._prefabManager;
@@ -36988,6 +36734,4732 @@ var __webpack_exports__ = {};
             this._instanceEditor = undefined;
         }
     }
+    var ChunkOperationMode;
+    (function(ChunkOperationMode) {
+        ChunkOperationMode[ChunkOperationMode["Regeneration"] = 0] = "Regeneration";
+        ChunkOperationMode[ChunkOperationMode["Delete"] = 1] = "Delete";
+    })(ChunkOperationMode || (ChunkOperationMode = {}));
+    var ChunkRegenerationType;
+    (function(ChunkRegenerationType) {
+        ChunkRegenerationType[ChunkRegenerationType["List"] = 0] = "List";
+        ChunkRegenerationType[ChunkRegenerationType["World"] = 1] = "World";
+    })(ChunkRegenerationType || (ChunkRegenerationType = {}));
+    var ChunkManagerTelemetry;
+    (function(ChunkManagerTelemetry) {
+        ChunkManagerTelemetry["Regenerate"] = "Regenerate";
+        ChunkManagerTelemetry["Delete"] = "Delete";
+    })(ChunkManagerTelemetry || (ChunkManagerTelemetry = {}));
+    const CHUNK_SIZE = 16;
+    const PROGRESS_TICK_INTERVAL = server_namespaceObject.TicksPerSecond / 4;
+    class ChunkManagerBehavior {
+        constructor(_uiSession) {
+            this._uiSession = _uiSession;
+            this._operationMode = (0, server_editor_namespaceObject.makeObservable)(ChunkOperationMode.Regeneration);
+            this._regenerationPane = undefined;
+            this._regenerationType = (0, server_editor_namespaceObject.makeObservable)(ChunkRegenerationType.List);
+            this._listRegenerationExclusive = (0, server_editor_namespaceObject.makeObservable)(false);
+            this._deletePane = undefined;
+            this._progressModalText = (0, server_editor_namespaceObject.makeObservable)("");
+            this._newBoundsMin = (0, server_editor_namespaceObject.makeObservable)({
+                x: 0,
+                y: 0,
+                z: 0
+            });
+            this._newBoundsMax = (0, server_editor_namespaceObject.makeObservable)({
+                x: 0,
+                y: 0,
+                z: 0
+            });
+            this._tickHandle = undefined;
+            this._waitRegion = undefined;
+            this._operationRegions = [];
+            this._activeTelemetry = undefined;
+            this.telemetryManager = new TelemetryManager(this._uiSession.extensionContext.player, TelemetrySource.ChunkManagement);
+            this._regionManager = server_editor_private_bindings_namespaceObject.editorInternal.regionManager;
+            this._playerRegionManager = server_editor_private_bindings_namespaceObject.editorInternal.getPlayerServices(this._uiSession.extensionContext.player).regionManager;
+            this._widgetGroup = this._uiSession.extensionContext.widgetManager.createGroup({
+                visible: true
+            });
+            this._progressModal = this._uiSession.dialogManager.registerDialog({
+                canUserDismiss: false,
+                uniqueId: "editor:dialog:chunkManagementProgress"
+            });
+            this._progressModal.contentPane.addText(this._progressModalText);
+            this._progressModal.contentPane.addProgressIndicator({
+                progress: server_editor_namespaceObject.ProgressIndicatorPropertyItemVariant.Spinner,
+                hiddenLabel: true
+            });
+            this._pane = _uiSession.createPropertyPane({
+                title: ChunkManagerBehavior.BEHAVIOR_NAME,
+                uniqueId: "editor:pane:chunkManagement",
+                infoTooltip: {
+                    description: [ "resourcePack.editor.chunkManagement.tooltip", {
+                        link: "https://aka.ms/BedrockEditorChunkManagement",
+                        text: "resourcePack.editor.help.learnMore"
+                    } ]
+                }
+            });
+            const showPaneAction = this._uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    this._pane.show();
+                }
+            });
+            this._uiSession.actionBar.registerItem("editor:actionBarItem:chunkManagement", showPaneAction, {
+                label: "resourcePack.editor.chunkManagement.title",
+                icon: "worldIcon",
+                tooltipTitle: "resourcePack.editor.chunkManagement.title",
+                tooltipDescription: "resourcePack.editor.chunkManagement.tooltip",
+                enabled: true,
+                executeOnAdd: true
+            });
+            this._pane.onPropertyPaneVisibilityUpdated.subscribe((payload => {
+                this._widgetGroup.visible = payload.isVisible;
+            }));
+            this._modalOverlay = this._pane.createModalOverlayPane({
+                title: "resourcePack.editor.chunkManagement.warningModal.title"
+            });
+            this._modalOverlay.contentPane.addText("resourcePack.editor.chunkManagement.warningModal.message", {
+                border: false,
+                alignment: server_editor_namespaceObject.LayoutAlignment.Center
+            });
+            this._modalOverlay.controlPane.addButton((() => {
+                this._modalOverlay.hide();
+                this._prepareOperation();
+            }), {
+                title: "resourcePack.editor.chunkManagement.warningModal.confirm",
+                variant: server_editor_namespaceObject.ButtonVariant.Confirmation
+            });
+            this._modalOverlay.controlPane.addButton((() => {
+                this._modalOverlay.hide();
+            }), {
+                title: "resourcePack.editor.chunkManagement.warningModal.cancel",
+                variant: server_editor_namespaceObject.ButtonVariant.Destructive
+            });
+            this._buildUI();
+            this._uiSession.eventSubscriptionCache.subscribeToBedrockEvent("playerDimensionChange", (event => {
+                if (event.player.id === this._uiSession.extensionContext.player.id) {
+                    this._widgetGroup.delete();
+                    this._widgetGroup = this._uiSession.extensionContext.widgetManager.createGroup({
+                        visible: true
+                    });
+                    this._boundsListPane.updateSlots([]);
+                    this._updateUIState();
+                }
+            }));
+        }
+        teardown() {
+            if (this.selectionChangeEventSubscriptionHandle) {
+                this._uiSession.extensionContext.afterEvents.SelectionChange.unsubscribe(this.selectionChangeEventSubscriptionHandle);
+                this.selectionChangeEventSubscriptionHandle = undefined;
+            }
+            if (this._tickHandle !== undefined) {
+                server_namespaceObject.system.clearRun(this._tickHandle);
+                this._tickHandle = undefined;
+            }
+            this._clearOperationRegions();
+            if (this._waitRegion) {
+                this._waitRegion.dispose();
+                this._waitRegion = undefined;
+            }
+            this._activeTelemetry = undefined;
+            this._executedOperation = undefined;
+        }
+        createMenuItem(menu) {
+            const openMenuAction = this._uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    this._pane.show();
+                }
+            });
+            this._menuItem = menu.addItem({
+                label: ChunkManagerBehavior.BEHAVIOR_NAME
+            }, openMenuAction);
+        }
+        _buildUI() {
+            this._pane.addToggleGroup(this._operationMode, {
+                title: "resourcePack.editor.chunkManagement.pane.operationMode.title",
+                tooltip: "resourcePack.editor.chunkManagement.pane.operationMode.tooltip",
+                hiddenEntryLabels: false,
+                entries: [ {
+                    value: ChunkOperationMode.Regeneration,
+                    icon: "worldIcon",
+                    label: "resourcePack.editor.chunkManagement.pane.chunkRegeneration.title",
+                    tooltip: "resourcePack.editor.chunkManagement.pane.chunkRegeneration.tooltip"
+                }, {
+                    value: ChunkOperationMode.Delete,
+                    icon: "trashCanIcon",
+                    label: "resourcePack.editor.chunkManagement.pane.chunkDelete.title",
+                    tooltip: "resourcePack.editor.chunkManagement.pane.chunkDelete.tooltip"
+                } ],
+                onChange: mode => {
+                    if (mode === ChunkOperationMode.Regeneration) {
+                        this._regenerationPane?.show();
+                        this._deletePane?.hide();
+                    } else if (mode === ChunkOperationMode.Delete) {
+                        this._regenerationPane?.hide();
+                        this._deletePane?.show();
+                    }
+                    this._updateUIState();
+                }
+            });
+            this._buildOperationPane();
+            this._pane.addDivider();
+            this._buildRegionListPane();
+            this._updateUIState();
+            this.selectionChangeEventSubscriptionHandle = this._uiSession.extensionContext.afterEvents.SelectionChange.subscribe((() => {
+                if (this._addBoundsFromSelectionButtonItem) {
+                    this._addBoundsFromSelectionButtonItem.enable = !this._uiSession.extensionContext.selectionManager.volume.isEmpty;
+                }
+            }));
+        }
+        _buildOperationPane() {
+            this._regenerationPane = this._pane.createSubPane({
+                title: "resourcePack.editor.chunkManagement.pane.chunkRegeneration.title",
+                hasExpander: false
+            });
+            this._regenerationPane.addDropdown(this._regenerationType, {
+                title: "resourcePack.editor.chunkManagement.pane.chunkRegeneration.target.title",
+                tooltip: "resourcePack.editor.chunkManagement.pane.chunkRegeneration.target.tooltip",
+                entries: [ {
+                    label: "resourcePack.editor.chunkManagement.pane.chunkRegeneration.target.list",
+                    value: ChunkRegenerationType.List
+                }, {
+                    label: "resourcePack.editor.chunkManagement.pane.chunkRegeneration.target.world",
+                    value: ChunkRegenerationType.World
+                } ],
+                onChange: () => {
+                    this._updateUIState();
+                }
+            });
+            this._listRegenerationExclusivePropItem = this._regenerationPane.addBool(this._listRegenerationExclusive, {
+                title: "resourcePack.editor.chunkManagement.pane.chunkRegeneration.excludeList.title",
+                tooltip: "resourcePack.editor.chunkManagement.pane.chunkRegeneration.excludeList.tooltip",
+                visible: this._regenerationType.value === ChunkRegenerationType.World
+            });
+            this._regenerateButton = this._regenerationPane.addButton((() => this._showConfirmationModal()), {
+                title: "resourcePack.editor.chunkManagement.pane.chunkRegeneration.action",
+                variant: server_editor_namespaceObject.ButtonVariant.Confirmation
+            });
+            this._deletePane = this._pane.createSubPane({
+                title: "resourcePack.editor.chunkManagement.pane.chunkDelete.title",
+                hasExpander: false
+            });
+            this._deletePane.hide();
+            this._deleteButton = this._deletePane.addButton((() => this._showConfirmationModal()), {
+                title: "resourcePack.editor.chunkManagement.pane.chunkDelete.action",
+                variant: server_editor_namespaceObject.ButtonVariant.Confirmation
+            });
+        }
+        _buildRegionListPane() {
+            this._regionPane = this._pane.createSubPane({
+                title: "resourcePack.editor.chunkManagement.pane.regionList.title",
+                infoTooltip: {
+                    title: "resourcePack.editor.chunkManagement.pane.regionList.title",
+                    description: [ "resourcePack.editor.chunkManagement.pane.regionList.tooltip" ]
+                }
+            });
+            const newRegionPane = this._regionPane.createSubPane({
+                title: "resourcePack.editor.chunkManagement.pane.regionList.newRegion.title",
+                infoTooltip: {
+                    title: "resourcePack.editor.chunkManagement.pane.regionList.newRegion.title",
+                    description: [ "resourcePack.editor.chunkManagement.pane.regionList.newRegion.tooltip" ]
+                }
+            });
+            newRegionPane.addVector3(this._newBoundsMin, {
+                title: "resourcePack.editor.chunkManagement.pane.regionList.minBounds.title",
+                tooltip: "resourcePack.editor.chunkManagement.pane.regionList.minBounds.tooltip",
+                hasClearButton: false,
+                hideYAxis: true
+            });
+            newRegionPane.addVector3(this._newBoundsMax, {
+                title: "resourcePack.editor.chunkManagement.pane.regionList.maxBounds.title",
+                tooltip: "resourcePack.editor.chunkManagement.pane.regionList.maxBounds.tooltip",
+                hasClearButton: false,
+                hideYAxis: true
+            });
+            newRegionPane.addButton((() => {
+                if (this._newBoundsMin.value.x > this._newBoundsMax.value.x || this._newBoundsMin.value.z > this._newBoundsMax.value.z) {
+                    this._uiSession.log.error("Minimum region bounds cannot be larger than maximum", {
+                        channelMask: server_editor_namespaceObject.LogChannel.All
+                    });
+                    return;
+                }
+                this._addNewRegion(this._newBoundsMin.value.x, this._newBoundsMin.value.z, this._newBoundsMax.value.x, this._newBoundsMax.value.z);
+            }), {
+                title: "resourcePack.editor.chunkManagement.pane.regionList.addRegion.title",
+                tooltip: "resourcePack.editor.chunkManagement.pane.regionList.addRegion.tooltip"
+            });
+            this._addBoundsFromSelectionButtonItem = newRegionPane.addButton((() => {
+                if (this._uiSession.extensionContext.selectionManager.volume.isEmpty) {
+                    this._uiSession.log.warning("No selection volume available");
+                    return;
+                }
+                const selectionBounds = this._uiSession.extensionContext.selectionManager.volume.getBoundingBox();
+                this._addNewRegion(selectionBounds.min.x, selectionBounds.min.z, selectionBounds.max.x, selectionBounds.max.z);
+            }), {
+                title: "resourcePack.editor.chunkManagement.pane.regionList.addFromSelection.title",
+                tooltip: "resourcePack.editor.chunkManagement.pane.regionList.addFromSelection.tooltip",
+                enable: !this._uiSession.extensionContext.selectionManager.volume.isEmpty
+            });
+            this._regionPane.addDivider();
+            this._boundsListPane = this._regionPane.addListPane({
+                height: 50,
+                defaultSlots: [],
+                onSlotClicked: slot => {
+                    const slotData = slot.getUserData();
+                    if (slotData) {
+                        const widget = slotData.widget;
+                        if (widget) {
+                            const dimensionRange = this._uiSession.extensionContext.player.dimension.heightRange;
+                            const teleportYPos = (dimensionRange.max - dimensionRange.min) / 2 - 64;
+                            const teleportLocation = {
+                                ...widget.location,
+                                y: teleportYPos
+                            };
+                            this._uiSession.extensionContext.player.teleport(lib.Vector3Utils.subtract(teleportLocation, lib.Vector3Utils.scale(lib.VECTOR3_ONE, 5)), {
+                                facingLocation: lib.Vector3Utils.add(widget.location, {
+                                    x: CHUNK_SIZE / 2,
+                                    y: teleportYPos,
+                                    z: CHUNK_SIZE / 2
+                                })
+                            });
+                        }
+                    }
+                },
+                layout: {
+                    height: 4.4,
+                    clickable: true,
+                    entryLayout: [ {
+                        type: server_editor_namespaceObject.ListPaneEntryType.Text,
+                        size: server_editor_namespaceObject.LayoutFlex.Grow,
+                        alignment: server_editor_namespaceObject.LayoutAlignment.Start
+                    }, {
+                        type: server_editor_namespaceObject.ListPaneEntryType.Button,
+                        size: 4
+                    } ]
+                }
+            });
+        }
+        _prepareOperation() {
+            if (this._tickHandle !== undefined) {
+                return;
+            }
+            switch (this._operationMode.value) {
+              case ChunkOperationMode.Regeneration:
+                {
+                    const requestData = {
+                        operationId: guid(),
+                        state: "requested",
+                        target: this._regenerationType.value === ChunkRegenerationType.World ? "world" : "list",
+                        excludeBounds: this._shouldExcludeRegenerationBounds()
+                    };
+                    this.telemetryManager.fireTelemetryEvent(ChunkManagerTelemetry.Regenerate, requestData);
+                    this._activeTelemetry = [ ChunkManagerTelemetry.Regenerate, requestData ];
+                }
+                break;
+
+              case ChunkOperationMode.Delete:
+                {
+                    try {
+                        this._getBoundsList().forEach((bounds => {
+                            const operationRegion = this._playerRegionManager.leaseRegion({
+                                extentX: bounds.x,
+                                extentZ: bounds.z
+                            });
+                            this._operationRegions.push(operationRegion);
+                        }));
+                    } catch (e) {
+                        this._uiSession.log.error(e.message, {
+                            channelMask: server_editor_namespaceObject.LogChannel.All
+                        });
+                        return;
+                    }
+                    const requestData = {
+                        operationId: guid(),
+                        state: "requested"
+                    };
+                    this.telemetryManager.fireTelemetryEvent(ChunkManagerTelemetry.Delete, requestData);
+                    this._activeTelemetry = [ ChunkManagerTelemetry.Delete, requestData ];
+                }
+                break;
+
+              default:
+                {
+                    throw Error("Chunk Operation is not defined");
+                }
+                break;
+            }
+            this._showProgressModal();
+        }
+        _executeOperation() {
+            let executed = true;
+            switch (this._operationMode.value) {
+              case ChunkOperationMode.Regeneration:
+                {
+                    const bounds = this._regenerationType.value === ChunkRegenerationType.List ? this._getBoundsList() : [];
+                    try {
+                        this._regionManager.regenerateRegion(this._uiSession.extensionContext.player.dimension.id, bounds, this._shouldExcludeRegenerationBounds()).then((state => {
+                            if (state.isCompleted) {
+                                this._finalProcessedChunkCount = state.chunksProcessed;
+                                this._progressModalText.set(this._getProgressMessage(true));
+                            }
+                        })).catch((e => {
+                            this._uiSession.log.error(e.message, {
+                                channelMask: server_editor_namespaceObject.LogChannel.All
+                            });
+                            executed = false;
+                        }));
+                    } catch (e) {
+                        this._uiSession.log.error(e.message, {
+                            channelMask: server_editor_namespaceObject.LogChannel.All
+                        });
+                        executed = false;
+                    }
+                }
+                break;
+
+              case ChunkOperationMode.Delete:
+                {
+                    this._regionManager.pruneRegion(this._uiSession.extensionContext.player.dimension.id, this._getBoundsList()).then((state => {
+                        if (state.isCompleted) {
+                            this._finalProcessedChunkCount = state.chunksProcessed;
+                            this._progressModalText.set(this._getProgressMessage(true));
+                        }
+                    })).catch((e => {
+                        this._uiSession.log.error(e.message, {
+                            channelMask: server_editor_namespaceObject.LogChannel.All
+                        });
+                        executed = false;
+                    }));
+                }
+                break;
+
+              default:
+                {
+                    throw Error("Chunk Operation is not defined");
+                }
+                break;
+            }
+            return executed;
+        }
+        _showConfirmationModal() {
+            if (this._tickHandle !== undefined || this._regionManager.isProcessingChunks) {
+                this._uiSession.log.error("There is an active ongoing chunk operation", {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+                return;
+            }
+            const boundsList = this._getBoundsList();
+            if (boundsList.length === 0) {
+                if (this._operationMode.value === ChunkOperationMode.Regeneration && this._regenerationType.value === ChunkRegenerationType.List || this._operationMode.value === ChunkOperationMode.Delete) {
+                    this._uiSession.log.error("Chunk operation requires region list entries", {
+                        channelMask: server_editor_namespaceObject.LogChannel.All
+                    });
+                    return;
+                }
+            }
+            this._modalOverlay.show();
+        }
+        _shouldExcludeRegenerationBounds() {
+            return this._regenerationType.value === ChunkRegenerationType.World || this._listRegenerationExclusive.value;
+        }
+        _clearOperationRegions() {
+            this._operationRegions.forEach((region => region.dispose()));
+            this._operationRegions = [];
+        }
+        _showProgressModal() {
+            this._executedOperation = false;
+            this._progressModalText.set(this._getProgressMessage(true));
+            this._uiSession.dialogManager.activateDialog({
+                dialogId: this._progressModal.id
+            });
+            this._tickHandle = server_namespaceObject.system.runInterval((() => this._progressTick()), PROGRESS_TICK_INTERVAL);
+        }
+        _endProgressTick() {
+            if (this._tickHandle !== undefined) {
+                server_namespaceObject.system.clearRun(this._tickHandle);
+                this._tickHandle = undefined;
+                this._progressModal.sendDismiss();
+                this._finalProcessedChunkCount = undefined;
+                this._clearOperationRegions();
+                this._executedOperation = undefined;
+            }
+            if (this._progressEndTimeout !== undefined) {
+                server_namespaceObject.system.clearRun(this._progressEndTimeout);
+                this._progressEndTimeout = undefined;
+            }
+        }
+        _progressTick() {
+            if (this._tickHandle !== undefined) {
+                let isErrored = false;
+                if (!this._executedOperation) {
+                    let shouldExecute = false;
+                    if (this._operationRegions.length > 0 && !this._regionManager.isProcessingChunks) {
+                        shouldExecute = this._operationRegions.every((region => region.isAvailable()));
+                    } else {
+                        shouldExecute = true;
+                    }
+                    if (shouldExecute) {
+                        isErrored = !this._executeOperation();
+                        this._executedOperation = true;
+                    }
+                }
+                if (!this._waitRegion && !this._regionManager.isProcessingChunks && this._executedOperation) {
+                    this._clearOperationRegions();
+                    const playerPos = this._uiSession.extensionContext.player.location;
+                    this._waitRegion = this._playerRegionManager.leaseRegion({
+                        extentX: {
+                            min: playerPos.x - 100,
+                            max: playerPos.x + 100
+                        },
+                        extentZ: {
+                            min: playerPos.z - 100,
+                            max: playerPos.z + 100
+                        },
+                        availabilityMode: server_editor_private_bindings_namespaceObject.ProjectRegionAvailabilityMode.Loaded
+                    });
+                }
+                this._progressModalText.set(this._getProgressMessage(this._regionManager.isProcessingChunks));
+                if (this._waitRegion && this._waitRegion.isAvailable()) {
+                    if (this._activeTelemetry) {
+                        this.telemetryManager.fireTelemetryEvent(this._activeTelemetry[0], {
+                            ...this._activeTelemetry[1],
+                            state: "completed",
+                            processedChunks: this._finalProcessedChunkCount
+                        });
+                        this._activeTelemetry = undefined;
+                    }
+                    this._waitRegion.dispose();
+                    this._waitRegion = undefined;
+                    this._progressEndTimeout = server_namespaceObject.system.runTimeout((() => {
+                        this._endProgressTick();
+                    }), server_namespaceObject.TicksPerSecond * 2);
+                }
+                if (isErrored) {
+                    if (this._activeTelemetry) {
+                        this.telemetryManager.fireTelemetryEvent(this._activeTelemetry[0], {
+                            ...this._activeTelemetry[1],
+                            state: "error"
+                        });
+                        this._activeTelemetry = undefined;
+                    }
+                    this._uiSession.log.error("Chunk operation encountered an error", {
+                        channelMask: server_editor_namespaceObject.LogChannel.All
+                    });
+                    this._endProgressTick();
+                }
+            }
+        }
+        _addNewRegion(minX, minZ, maxX, maxZ) {
+            const heightRange = this._uiSession.extensionContext.player.dimension.heightRange;
+            const extents = {
+                x: {
+                    min: Math.floor(minX / CHUNK_SIZE) * CHUNK_SIZE,
+                    max: Math.floor(maxX / CHUNK_SIZE) * CHUNK_SIZE
+                },
+                z: {
+                    min: Math.floor(minZ / CHUNK_SIZE) * CHUNK_SIZE,
+                    max: Math.floor(maxZ / CHUNK_SIZE) * CHUNK_SIZE
+                }
+            };
+            const widget = this._widgetGroup.createWidget({
+                x: extents.x.min,
+                y: heightRange.min,
+                z: extents.z.min
+            }, {
+                visible: true,
+                selectable: false
+            });
+            const prim = new server_editor_namespaceObject.WidgetComponentRenderPrimitiveTypeBox({
+                x: 0,
+                y: 0,
+                z: 0
+            }, {
+                red: 0,
+                green: 1,
+                blue: 0,
+                alpha: 1
+            }, {
+                x: extents.x.max + CHUNK_SIZE - extents.x.min,
+                y: heightRange.max - heightRange.min,
+                z: extents.z.max + CHUNK_SIZE - extents.z.min
+            });
+            widget.addRenderPrimitiveComponent("outline", prim, {
+                visible: true
+            });
+            this._boundsListPane.addSlot({
+                entries: [ {
+                    type: server_editor_namespaceObject.ListPaneEntryType.Text
+                }, {
+                    type: server_editor_namespaceObject.ListPaneEntryType.Button,
+                    onClick: entry => {
+                        const slotData = entry.slot.getUserData();
+                        if (slotData) {
+                            slotData.widget?.delete();
+                        }
+                        this._boundsListPane.removeSlot(entry.slot.id);
+                        this._updateUIState();
+                    },
+                    icon: "trashCanIcon",
+                    variant: server_editor_namespaceObject.ButtonVariant.Destructive,
+                    tooltip: "resourcePack.editor.chunkManagement.pane.regionList.removeFromList.title"
+                } ],
+                options: {
+                    title: `X:${extents.x.min},${extents.x.max + CHUNK_SIZE} | Z:${extents.z.min},${extents.z.max + CHUNK_SIZE}`,
+                    userData: {
+                        extents,
+                        widget
+                    }
+                }
+            });
+            this._updateUIState();
+        }
+        _updateUIState() {
+            let canUseRegionList = true;
+            const hasListItem = this._boundsListPane.slotCount > 0;
+            if (this._operationMode.value === ChunkOperationMode.Delete) {
+                this._deleteButton.enable = hasListItem;
+                this._regionPane.show();
+            } else if (this._operationMode.value === ChunkOperationMode.Regeneration) {
+                this._regenerateButton.enable = this._regenerationType.value === ChunkRegenerationType.List ? hasListItem : true;
+                if (this._listRegenerationExclusivePropItem) {
+                    this._listRegenerationExclusivePropItem.visible = this._regenerationType.value === ChunkRegenerationType.List;
+                }
+                canUseRegionList = this._regenerationType.value !== ChunkRegenerationType.World;
+            }
+            if (this._widgetGroup) {
+                this._widgetGroup.visible = canUseRegionList;
+            }
+            canUseRegionList ? this._regionPane.show() : this._regionPane.hide();
+        }
+        _getProgressMessage(processing) {
+            if (processing || this._executedOperation === false) {
+                const processingState = this._regionManager.getChunkProcessingState();
+                const processedChunkCount = processingState?.chunksProcessed ?? 0;
+                if (processedChunkCount === 0) {
+                    return `resourcePack.editor.chunkManagement.operationModal.processingChunks`;
+                }
+                return {
+                    id: `resourcePack.editor.chunkManagement.operationModal.processingChunksCount`,
+                    props: [ `${processedChunkCount}` ]
+                };
+            } else {
+                if (this._waitRegion) {
+                    if (this._finalProcessedChunkCount === undefined) {
+                        return `resourcePack.editor.chunkManagement.operationModal.reloading`;
+                    }
+                    return {
+                        id: "resourcePack.editor.chunkManagement.operationModal.reloadingCount",
+                        props: [ `${this._finalProcessedChunkCount}` ]
+                    };
+                }
+                return "resourcePack.editor.chunkManagement.operationModal.completed";
+            }
+        }
+        _getBoundsList() {
+            const boundsList = [];
+            for (let i = 0; i < this._boundsListPane.slotCount; ++i) {
+                const slot = this._boundsListPane.getSlotByIndex(i);
+                const slotData = slot?.getUserData();
+                if (slotData) {
+                    boundsList.push(slotData.extents);
+                }
+            }
+            return boundsList;
+        }
+    }
+    ChunkManagerBehavior.BEHAVIOR_NAME = "resourcePack.editor.chunkManagement.title";
+    const FLOOD_REGION_SIDE = 1024;
+    var FloodToolTelemetry;
+    (function(FloodToolTelemetry) {
+        FloodToolTelemetry["WidgetCreated"] = "WidgetCreated";
+        FloodToolTelemetry["WidgetDeleted"] = "WidgetDeleted";
+        FloodToolTelemetry["WidgetRaised"] = "WidgetRaised";
+        FloodToolTelemetry["WidgetLowered"] = "WidgetLowered";
+        FloodToolTelemetry["FloodCalculated"] = "FloodCalculated";
+        FloodToolTelemetry["FloodApplied"] = "FloodApplied";
+        FloodToolTelemetry["FloodCanceled"] = "FloodCanceled";
+        FloodToolTelemetry["FluidTypeChanged"] = "FluidTypeChanged";
+        FloodToolTelemetry["BlockLimitReached"] = "BlockLimitReached";
+    })(FloodToolTelemetry || (FloodToolTelemetry = {}));
+    class FloodToolBehavior {
+        constructor(uiSession) {
+            this._blockLimitReached = false;
+            this._loweringWater = false;
+            this._currentYWaterLevel = 0;
+            this._raiseFluidBlockCheck = (region, block) => {
+                const perm = region.getBlockPermutation(block);
+                const blockId = region.getBlockTypeId(block);
+                if ((blockId === lib_vanilla_MinecraftBlockTypes.Air.toString() || !perm.isLiquidBlocking(server_namespaceObject.LiquidType.Water) || perm.canContainLiquid(server_namespaceObject.LiquidType.Water)) && blockId !== lib_vanilla_MinecraftBlockTypes.Water.toString()) {
+                    return true;
+                }
+                return false;
+            };
+            this._raiseFluidUpdateBlock = (region, block, waterlogged) => {
+                if (!waterlogged || region.getBlockTypeId(block) === lib_vanilla_MinecraftBlockTypes.Air.toString()) {
+                    region.setBlockType(block, this._props.fluidBlockType.value === 0 ? lib_vanilla_MinecraftBlockTypes.Water : lib_vanilla_MinecraftBlockTypes.Lava);
+                }
+            };
+            this._lowerFluidBlockCheck = (region, block) => {
+                if (region.getBlockTypeId(block) === lib_vanilla_MinecraftBlockTypes.Water.toString() || region.getBlockTypeId(block) === lib_vanilla_MinecraftBlockTypes.Lava.toString() || region.isBlockWaterLogged(block)) {
+                    return true;
+                }
+                return false;
+            };
+            this._lowerFluidUpdateBlock = (region, block, waterlogged) => {
+                if (waterlogged && region.getBlockTypeId(block) !== lib_vanilla_MinecraftBlockTypes.Air.toString()) {
+                    region.setBlockWaterlogged(block, false);
+                } else {
+                    region.setBlockType(block, lib_vanilla_MinecraftBlockTypes.Air.toString());
+                }
+            };
+            this._uiSession = uiSession;
+            this._progressNumber = (0, server_editor_namespaceObject.makeObservable)(0);
+            this._progressMessage = (0, server_editor_namespaceObject.makeObservable)("");
+            this._uiSession.log.debug(`Initializing ${FloodToolBehavior.BEHAVIOR_NAME}`);
+            this._telemetryManager = new TelemetryManager(this._uiSession.extensionContext.player, TelemetrySource.FloodTool);
+            this._props = {
+                fluidBlockType: (0, server_editor_namespaceObject.makeObservable)(0),
+                ignoreBlockLimit: (0, server_editor_namespaceObject.makeObservable)(false)
+            };
+            this._cursorProperties = this._uiSession.extensionContext.cursor.getProperties();
+            if (this._cursorProperties.fillColor) {
+                delete this._cursorProperties.fillColor;
+            }
+            this._cursorProperties.outlineColor = FloodToolBehavior.CURSOR_OUTLINE_COLOR;
+            this._cursorProperties.controlMode = server_editor_namespaceObject.CursorControlMode.KeyboardAndMouse;
+            this._cursorProperties.targetMode = server_editor_namespaceObject.CursorTargetMode.Block;
+            this._cursorProperties.projectThroughLiquid = false;
+            this._cursorProperties.visible = true;
+            this._uiSession.extensionContext.cursor.setProperties(this._cursorProperties);
+            this._tool = this.addTool(this._uiSession);
+            this.registerMouseAction(this._uiSession);
+            this._propertyPane = this.addFloodToolSettingsPane(this._uiSession);
+            this._tool.bindPropertyPane(this._propertyPane);
+            this._widgetGroup = this._uiSession.extensionContext.widgetManager.createGroup({
+                showBounds: false
+            });
+        }
+        teardown() {
+            if (this._widgetGizmo) {
+                this._widgetGizmo.delete();
+            }
+            if (this._widgetComponentBoundingBox) {
+                this._widgetComponentBoundingBox.delete();
+            }
+            if (this._widget) {
+                this._widget.delete();
+            }
+            if (this._calcFloodHandle) {
+                server_namespaceObject.system.clearJob(this._calcFloodHandle);
+            }
+            if (this._commitFloodHandle) {
+                server_namespaceObject.system.clearJob(this._commitFloodHandle);
+            }
+            this._uiSession.log.debug(`Shutting down ${FloodToolBehavior.BEHAVIOR_NAME}`);
+        }
+        addTool(uiSession) {
+            const toolToggleAction = uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    uiSession.toolRail.setSelectedToolId(tool.id);
+                }
+            });
+            const tool = uiSession.toolRail.addTool("editor:modalTool:flood", {
+                title: "resourcePack.editor.toolRail.floodTool.title",
+                icon: "pack://textures/editor/Flood-tool.png?filtering=point",
+                tooltip: "resourcePack.editor.toolRail.floodTool.tooltip"
+            });
+            tool.onModalToolActivation.subscribe((eventData => {
+                if (eventData.isActiveTool) {
+                    if (this._widgetGizmo) {
+                        this._createFloodRegion(this._widgetGizmo.location);
+                    }
+                    this._widgetGroup.visible = true;
+                    this._widgetGroup.visibleBounds = true;
+                    uiSession.extensionContext.cursor.setProperties(this._cursorProperties);
+                } else {
+                    this._widgetGroup.visible = false;
+                    this._widgetGroup.visibleBounds = false;
+                    if (this._floodRegion) {
+                        this._floodRegion.dispose();
+                        this._floodRegion = undefined;
+                    }
+                    if (this._calcFloodHandle) {
+                        server_namespaceObject.system.clearJob(this._calcFloodHandle);
+                    }
+                    if (this._commitFloodHandle) {
+                        server_namespaceObject.system.clearJob(this._commitFloodHandle);
+                    }
+                }
+            }));
+            uiSession.inputManager.registerKeyBinding(server_editor_namespaceObject.EditorInputContext.GlobalToolMode, toolToggleAction, {
+                key: server_editor_namespaceObject.KeyboardKey.KEY_F,
+                modifier: server_editor_namespaceObject.InputModifier.Control | server_editor_namespaceObject.InputModifier.Shift
+            });
+            const deleteGizmo = uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    if (this._widgetGizmo) {
+                        this._widgetGizmo.delete();
+                        this._telemetryManager.fireTelemetryEvent(FloodToolTelemetry.WidgetDeleted);
+                    }
+                    if (this._widgetComponentBoundingBox) {
+                        this._widgetComponentBoundingBox.delete();
+                    }
+                }
+            });
+            tool.registerKeyBinding(deleteGizmo, {
+                key: server_editor_namespaceObject.KeyboardKey.KEY_D,
+                modifier: server_editor_namespaceObject.InputModifier.Control
+            }, {
+                uniqueId: "editor:floodToolKeyBinding:deleteWidget",
+                label: "resourcePack.editor.toolRail.floodTool.keyBinding.deleteWidget.title",
+                tooltip: "resourcePack.editor.toolRail.floodTool.keyBinding.deleteWidget.tooltip"
+            });
+            const raiseGizmo = uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    if (this._widgetGizmo) {
+                        this._widgetGizmo.widget.location = {
+                            x: this._widgetGizmo.widget.location.x,
+                            y: this._widgetGizmo.widget.location.y + 1,
+                            z: this._widgetGizmo.widget.location.z
+                        };
+                        this._calculateFlood(this._widgetGizmo.widget.location);
+                        this._telemetryManager.fireTelemetryEvent(FloodToolTelemetry.WidgetRaised);
+                    }
+                }
+            });
+            tool.registerKeyBinding(raiseGizmo, {
+                key: server_editor_namespaceObject.KeyboardKey.PAGE_UP
+            }, {
+                uniqueId: "editor:floodToolKeyBinding:raiseWidget",
+                label: "resourcePack.editor.toolRail.floodTool.keyBinding.raiseWidget.title",
+                tooltip: "resourcePack.editor.toolRail.floodTool.keyBinding.raiseWidget.tooltip"
+            });
+            const lowerGizmo = uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    if (this._widgetGizmo) {
+                        this._widgetGizmo.widget.location = {
+                            x: this._widgetGizmo.widget.location.x,
+                            y: this._widgetGizmo.widget.location.y - 1,
+                            z: this._widgetGizmo.widget.location.z
+                        };
+                        this._calculateFlood(this._widgetGizmo.widget.location);
+                        this._telemetryManager.fireTelemetryEvent(FloodToolTelemetry.WidgetLowered);
+                    }
+                }
+            });
+            tool.registerKeyBinding(lowerGizmo, {
+                key: server_editor_namespaceObject.KeyboardKey.PAGE_DOWN
+            }, {
+                uniqueId: "editor:floodToolKeyBinding:lowerWidget",
+                label: "resourcePack.editor.toolRail.floodTool.keyBinding.lowerWidget.title",
+                tooltip: "resourcePack.editor.toolRail.floodTool.keyBinding.lowerWidget.tooltip"
+            });
+            return tool;
+        }
+        registerMouseAction(uiSession) {
+            const executeAction = uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.MouseRayCastAction,
+                onExecute: (mouseRay, mouseProps) => {
+                    if (mouseProps.mouseAction === server_editor_namespaceObject.MouseActionType.LeftButton && mouseProps.inputType === server_editor_namespaceObject.MouseInputType.ButtonDown && this._tool.isActive && mouseRay?.cursorBlockLocation) {
+                        const player = this._uiSession.extensionContext.player;
+                        const location = this._uiSession.extensionContext.cursor.getPosition();
+                        const cursorRegion = server_editor_private_bindings_namespaceObject.editorInternal.getPlayerServices(player).regionManager.getCursorRegion();
+                        let hasAirAround = false;
+                        try {
+                            hasAirAround = cursorRegion.getBlockTypeId(lib.Vector3Utils.add(location, lib.VECTOR3_UP)) === lib_vanilla_MinecraftBlockTypes.Air && cursorRegion.getBlockTypeId(lib.Vector3Utils.subtract(location, lib.VECTOR3_UP)) !== lib_vanilla_MinecraftBlockTypes.Air;
+                        } catch (e) {
+                            this._uiSession.log.error(`Could not create flood origin: ${stringFromException(e)}`, {
+                                channelMask: server_editor_namespaceObject.LogChannel.All
+                            });
+                            return;
+                        }
+                        if (hasAirAround && location) {
+                            if (this._widget) {
+                                this._widget.delete();
+                            }
+                            this._createFloodRegion(location);
+                            this._widget = this._widgetGroup.createWidget({
+                                x: location.x,
+                                y: location.y,
+                                z: location.z
+                            }, {
+                                visible: true,
+                                widgetName: "Flood Tool - Water Level Indicator"
+                            });
+                            this._widgetGizmo = this._widget.addGizmoComponent("floodToolGizmo", {
+                                enablePlanes: true,
+                                offset: {
+                                    x: 1,
+                                    y: 1,
+                                    z: 1
+                                },
+                                stateChangeEvent: data => {
+                                    if (data.eventType !== undefined && data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.OriginReleased) {
+                                        this._calculateFlood(data.widget.location);
+                                    }
+                                    if (data.eventType !== undefined && data.eventType === server_editor_namespaceObject.WidgetGizmoEventType.OriginGrabbed) {
+                                        this._widgetComponentBoundingBox.size = {
+                                            x: 100,
+                                            y: 1,
+                                            z: 100
+                                        };
+                                        this._widgetComponentBoundingBox.offset = {
+                                            x: -50,
+                                            y: -.2,
+                                            z: -50
+                                        };
+                                        this._widgetComponentBoundingBox.hullColor = FloodToolBehavior.VALID_OUTLINE_COLOR;
+                                    }
+                                }
+                            });
+                            this._widgetComponentBoundingBox = this._widget.addBoundingBox("floodToolBoundingBox", {
+                                x: 100,
+                                y: 1,
+                                z: 100
+                            }, {
+                                hullColor: FloodToolBehavior.VALID_OUTLINE_COLOR,
+                                offset: {
+                                    x: -50,
+                                    y: -.2,
+                                    z: -50
+                                },
+                                visible: true,
+                                showWorldIntersections: true
+                            });
+                            this._currentYWaterLevel = location.y;
+                            this._telemetryManager.fireTelemetryEvent(FloodToolTelemetry.WidgetCreated);
+                        }
+                    }
+                }
+            });
+            this._tool.registerMouseButtonBinding(executeAction);
+        }
+        addFloodToolSettingsPane(uiSession) {
+            const pane = uiSession.createPropertyPane({
+                title: "resourcePack.editor.toolRail.floodTool.pane.title",
+                infoTooltip: {
+                    description: [ "resourcePack.editor.toolRail.floodTool.pane.description", {
+                        link: "https://aka.ms/BedrockEditorFlood",
+                        text: "resourcePack.editor.help.learnMore"
+                    } ]
+                }
+            });
+            const activateProcessingFlood = () => {
+                const req = this._uiSession.dialogManager.activateDialog({
+                    dialogId: FloodToolBehavior.MODAL_DIALOG_ID,
+                    onResponse: resp => {
+                        if (resp.type === server_editor_namespaceObject.ModalDialogResponseType.Dismiss) {
+                            this._uiSession.log.debug(`Dismissing Flood modal dialog with id:${req.id}`);
+                        }
+                    }
+                });
+            };
+            pane.beginConstruct();
+            pane.addDropdown(this._props.fluidBlockType, {
+                title: "resourcePack.editor.toolRail.floodTool.pane.fluidType.title",
+                entries: [ {
+                    value: 0,
+                    label: "resourcePack.editor.toolRail.floodTool.pane.fluidType.water",
+                    imageData: {
+                        type: server_editor_namespaceObject.ImageResourceType.Block,
+                        path: "water"
+                    }
+                }, {
+                    value: 1,
+                    label: "resourcePack.editor.toolRail.floodTool.pane.fluidType.lava",
+                    imageData: {
+                        type: server_editor_namespaceObject.ImageResourceType.Block,
+                        path: "lava"
+                    }
+                } ],
+                onChange: () => {
+                    this._telemetryManager.fireTelemetryEvent(FloodToolTelemetry.FluidTypeChanged);
+                }
+            });
+            pane.addBool(this._props.ignoreBlockLimit, {
+                title: "resourcePack.editor.toolRail.floodTool.pane.ignoreBlockLimit.title",
+                tooltip: "resourcePack.editor.toolRail.floodTool.pane.ignoreBlockLimit.tooltip"
+            });
+            const applyFloodAction = uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    if (this._calcPromise === undefined) {
+                        return;
+                    }
+                    this._calcPromise.then((async () => {
+                        await new Promise(((resolve, reject) => {
+                            if (this._commitFloodHandle) {
+                                server_namespaceObject.system.clearJob(this._commitFloodHandle);
+                            }
+                            this._commitFloodHandle = server_namespaceObject.system.runJob(this._commitFluidLevel(resolve, reject, this._blockLimitReached, this._loweringWater ? this._lowerFluidUpdateBlock : this._raiseFluidUpdateBlock));
+                        }));
+                        this._telemetryManager.fireTelemetryEvent(FloodToolTelemetry.FloodApplied);
+                    })).catch((() => {}));
+                    activateProcessingFlood();
+                    this._rootPropertyPane.setActiveModalOverlay(this._processingCommitFlood.id);
+                }
+            });
+            pane.addButton(applyFloodAction, {
+                title: "resourcePack.editor.toolRail.floodTool.pane.applyFlood.title"
+            });
+            uiSession.inputManager.registerKeyBinding(server_editor_namespaceObject.EditorInputContext.GlobalToolMode, applyFloodAction, {
+                key: server_editor_namespaceObject.KeyboardKey.KEY_F,
+                modifier: server_editor_namespaceObject.InputModifier.Control
+            }, {
+                uniqueId: "editor:floodToolKeyBinding:applyFlood",
+                label: "resourcePack.editor.toolRail.floodTool.keyBinding.applyFlood.title",
+                tooltip: "resourcePack.editor.toolRail.floodTool.keyBinding.applyFlood.tooltip"
+            });
+            pane.endConstruct();
+            this._rootPropertyPane = pane;
+            this._createProcessingCommitFloodModalPane();
+            return pane;
+        }
+        _createProcessingCommitFloodModalPane() {
+            this._processingCommitFlood = this._uiSession.dialogManager.registerDialog({
+                title: "resourcePack.editor.toolRail.floodTool.modal.title",
+                uniqueId: FloodToolBehavior.MODAL_DIALOG_ID,
+                width: 75,
+                height: 20
+            });
+            this._processingCommitFlood.contentPane.addText(this._progressMessage, {
+                border: false,
+                alignment: server_editor_namespaceObject.LayoutAlignment.Center
+            });
+            this._processingCommitFlood.contentPane.addProgressIndicator({
+                variant: server_editor_namespaceObject.ProgressIndicatorPropertyItemVariant.ProgressBar,
+                progress: this._progressNumber
+            });
+            this._processingCommitFlood.contentPane.addButton((() => {
+                if (this._calcFloodHandle) {
+                    server_namespaceObject.system.clearJob(this._calcFloodHandle);
+                }
+                if (this._commitFloodHandle) {
+                    server_namespaceObject.system.clearJob(this._commitFloodHandle);
+                }
+                this._uiSession.extensionContext.transactionManager.commitTrackedChanges();
+                this._uiSession.extensionContext.transactionManager.commitOpenTransaction();
+                this._uiSession.extensionContext.transactionManager.undo();
+                this._uiSession.dialogManager.dismissActiveDialog();
+                this._telemetryManager.fireTelemetryEvent(FloodToolTelemetry.FloodCanceled);
+            }), {
+                variant: server_editor_namespaceObject.ButtonVariant.Destructive,
+                title: "resourcePack.editor.toolRail.floodTool.modal.cancel"
+            });
+        }
+        _createFloodRegion(location) {
+            if (this._floodRegion) {
+                this._floodRegion.dispose();
+            }
+            this._floodRegion = server_editor_private_bindings_namespaceObject.editorInternal.getPlayerServices(this._uiSession.extensionContext.player).regionManager.leaseRegion({
+                extentX: {
+                    min: location.x - FLOOD_REGION_SIDE / 2,
+                    max: location.x + FLOOD_REGION_SIDE / 2
+                },
+                extentZ: {
+                    min: location.z - FLOOD_REGION_SIDE / 2,
+                    max: location.z + FLOOD_REGION_SIDE / 2
+                }
+            });
+        }
+        _calculateFlood(location) {
+            if (!this._floodRegion) {
+                this._uiSession.log.error("Flood region not available", {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+                return;
+            }
+            this._floodRegion.waitUntilAvailable().then((() => {
+                if (location.y < this._currentYWaterLevel) {
+                    this._uiSession.log.debug("Attempting to lower the water level...");
+                    const aboveLocation = lib.Vector3Utils.add(location, {
+                        x: 0,
+                        y: 1,
+                        z: 0
+                    });
+                    if (this._floodRegion?.getBlockPermutation(aboveLocation).canContainLiquid(server_namespaceObject.LiquidType.Water) || this._floodRegion?.getBlockTypeId(aboveLocation) === lib_vanilla_MinecraftBlockTypes.Water.toString() || this._floodRegion?.getBlockTypeId(aboveLocation) === lib_vanilla_MinecraftBlockTypes.Lava.toString()) {
+                        this._calcPromise = new Promise(((resolve, reject) => {
+                            if (this._calcFloodHandle) {
+                                server_namespaceObject.system.clearJob(this._calcFloodHandle);
+                            }
+                            this._calcFloodHandle = server_namespaceObject.system.runJob(this._calculateFluidLevel(resolve, reject, {
+                                x: location.x,
+                                y: location.y + 1,
+                                z: location.z
+                            }, true, this._lowerFluidBlockCheck));
+                        }));
+                    }
+                } else if (location.y > this._currentYWaterLevel) {
+                    this._uiSession.log.debug("Attempting to raise the water level...");
+                    this._calcPromise = new Promise(((resolve, reject) => {
+                        if (this._calcFloodHandle) {
+                            server_namespaceObject.system.clearJob(this._calcFloodHandle);
+                        }
+                        this._calcFloodHandle = server_namespaceObject.system.runJob(this._calculateFluidLevel(resolve, reject, {
+                            x: location.x,
+                            y: location.y,
+                            z: location.z
+                        }, false, this._raiseFluidBlockCheck));
+                    }));
+                }
+            })).catch((error => {
+                this._uiSession.log.warning(`Flood operation: ${stringFromException(error)}`);
+            }));
+        }
+        * _calculateFluidLevel(jobCompleted, jobFailed, startingLocation, loweringWater, addBlockFunct) {
+            if (!this._floodRegion || !this._floodRegion.isAvailable()) {
+                jobFailed("Flood region failure");
+                return;
+            }
+            this._targetLocation = startingLocation;
+            this._minX = startingLocation.x;
+            this._minZ = startingLocation.z;
+            this._maxX = startingLocation.x;
+            this._maxZ = startingLocation.z;
+            if (loweringWater) {
+                this._progressMessage.set("resourcePack.editor.toolRail.floodTool.progress.friendlyCalculatingDrainMessage");
+            } else {
+                this._progressMessage.set("resourcePack.editor.toolRail.floodTool.progress.friendlyCalculatingFloodMessage");
+            }
+            let iterations = 0;
+            const q = [ startingLocation ];
+            this._visitedBlocks = new Map;
+            while (q.length > 0 && this._visitedBlocks.size < FloodToolBehavior.MAX_BFS_SIZE) {
+                const currentBlock = q.shift();
+                if (currentBlock && !this._visitedBlocks.get(lib.Vector3Utils.toString(currentBlock))?.visited) {
+                    if (currentBlock.y === startingLocation.y) {
+                        if (currentBlock.x > this._maxX) {
+                            this._maxX = currentBlock.x;
+                        }
+                        if (currentBlock.x < this._minX) {
+                            this._minX = currentBlock.x;
+                        }
+                        if (currentBlock.z > this._maxZ) {
+                            this._maxZ = currentBlock.z;
+                        }
+                        if (currentBlock.z < this._minZ) {
+                            this._minZ = currentBlock.z;
+                        }
+                    }
+                    iterations++;
+                    const permutation = this._floodRegion.getBlockPermutation(currentBlock);
+                    this._visitedBlocks.set(lib.Vector3Utils.toString(currentBlock), {
+                        visited: true,
+                        waterlogged: permutation.canContainLiquid(server_namespaceObject.LiquidType.Water) ?? false,
+                        loc: currentBlock
+                    });
+                    const targetBlockPlusX = {
+                        x: currentBlock.x + 1,
+                        y: currentBlock.y,
+                        z: currentBlock.z
+                    };
+                    const targetBlockMinusX = {
+                        x: currentBlock.x - 1,
+                        y: currentBlock.y,
+                        z: currentBlock.z
+                    };
+                    const targetBlockPlusZ = {
+                        x: currentBlock.x,
+                        y: currentBlock.y,
+                        z: currentBlock.z + 1
+                    };
+                    const targetBlockMinusZ = {
+                        x: currentBlock.x,
+                        y: currentBlock.y,
+                        z: currentBlock.z - 1
+                    };
+                    const targetBlockYChange = loweringWater ? lib.Vector3Utils.add(currentBlock, lib.VECTOR3_UP) : lib.Vector3Utils.subtract(currentBlock, lib.VECTOR3_UP);
+                    const blocks = [ targetBlockYChange, targetBlockMinusX, targetBlockMinusZ, targetBlockPlusX, targetBlockPlusZ ];
+                    for (const block of blocks) {
+                        if (this._floodRegion && addBlockFunct(this._floodRegion, block)) {
+                            q.push(block);
+                        }
+                    }
+                    if (iterations % FloodToolBehavior.GENERATOR_ITERATIONS_BEFORE_YIELD === 0) {
+                        const progress = this._visitedBlocks.size / FloodToolBehavior.MAX_BFS_SIZE * 50 / 100;
+                        this._progressNumber.set(progress);
+                        yield;
+                    }
+                }
+            }
+            this._blockLimitReached = q.length > 0;
+            this._loweringWater = loweringWater;
+            if (this._blockLimitReached) {
+                this._telemetryManager.fireTelemetryEvent(FloodToolTelemetry.BlockLimitReached);
+            }
+            this._telemetryManager.fireTelemetryEvent(FloodToolTelemetry.FloodCalculated);
+            if (this._widgetComponentBoundingBox) {
+                const sizeX = Math.max(1, Math.abs(this._maxX - this._minX) + 1);
+                const sizeZ = Math.max(1, Math.abs(this._maxZ - this._minZ) + 1);
+                if (sizeX > 100 || sizeZ > 100) {
+                    this._widgetComponentBoundingBox.size = {
+                        x: 100,
+                        y: 1,
+                        z: 100
+                    };
+                    this._widgetComponentBoundingBox.offset = {
+                        x: -50,
+                        y: -.2,
+                        z: -50
+                    };
+                } else {
+                    this._widgetComponentBoundingBox.size = {
+                        x: sizeX,
+                        y: 1,
+                        z: sizeZ
+                    };
+                    this._widgetComponentBoundingBox.offset = {
+                        x: this._minX - startingLocation.x,
+                        y: -.2,
+                        z: this._minZ - startingLocation.z
+                    };
+                }
+                if (this._blockLimitReached) {
+                    this._widgetComponentBoundingBox.hullColor = FloodToolBehavior.WARNING_OUTLINE_COLOR;
+                }
+            }
+            this._progressNumber.set(.5);
+            jobCompleted();
+        }
+        * _commitFluidLevel(jobCompleted, jobFailed, blockLimitReached, updateBlockFunct) {
+            if (!this._floodRegion || !this._floodRegion.isAvailable()) {
+                jobFailed("Flood Region not available");
+                this._processingCommitFlood.sendDismiss();
+                return;
+            }
+            if (this._loweringWater) {
+                this._progressMessage.set("resourcePack.editor.toolRail.floodTool.progress.friendlyDrainingMessage");
+            } else if (this._props.fluidBlockType.value === 0) {
+                this._progressMessage.set("resourcePack.editor.toolRail.floodTool.progress.friendlyFloodingWaterMessage");
+            } else {
+                this._progressMessage.set("resourcePack.editor.toolRail.floodTool.progress.friendlyFloodingLavaMessage");
+            }
+            let iterations = 0;
+            if (blockLimitReached && !this._props.ignoreBlockLimit.value) {
+                this._uiSession.log.warning("Unable to change water level due to number of blocks that need updated.", {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+                this._processingCommitFlood.sendDismiss();
+                jobFailed();
+            } else {
+                try {
+                    this._uiSession.extensionContext.transactionManager.openTransaction(UniqueIdUtils_createUniqueEditorString("Flood Tool"));
+                } catch (_e) {
+                    this._processingCommitFlood.sendDismiss();
+                    jobFailed(_e);
+                }
+                for (const value of this._visitedBlocks.values()) {
+                    iterations++;
+                    if (this._floodRegion) {
+                        this._uiSession.extensionContext.transactionManager.trackBlockChangeList([ value.loc ]);
+                        updateBlockFunct(this._floodRegion, value.loc, value.waterlogged);
+                    }
+                    if (iterations % FloodToolBehavior.GENERATOR_ITERATIONS_BEFORE_YIELD === 0) {
+                        const progress = (iterations / this._visitedBlocks.size * 50 + 50) / 100;
+                        this._progressNumber.set(progress);
+                        yield;
+                    }
+                }
+                this._uiSession.extensionContext.transactionManager.commitTrackedChanges();
+                this._uiSession.extensionContext.transactionManager.commitOpenTransaction();
+                this._uiSession.dialogManager.dismissActiveDialog();
+                this._currentYWaterLevel = this._loweringWater ? this._targetLocation.y - 1 : this._targetLocation.y;
+                this._visitedBlocks.clear();
+                jobCompleted();
+            }
+        }
+    }
+    FloodToolBehavior.BEHAVIOR_NAME = "Flood Tool";
+    FloodToolBehavior.MODAL_DIALOG_ID = "ProcessingFloodModalId";
+    FloodToolBehavior.MAX_BFS_SIZE = 12e4;
+    FloodToolBehavior.GENERATOR_ITERATIONS_BEFORE_YIELD = 1e3;
+    FloodToolBehavior.FLUID_BLOCKS = [ "water", "lava" ];
+    FloodToolBehavior.VALID_OUTLINE_COLOR = {
+        red: .5,
+        green: .5,
+        blue: .5,
+        alpha: 1
+    };
+    FloodToolBehavior.WARNING_OUTLINE_COLOR = {
+        red: .5,
+        green: .5,
+        blue: 0,
+        alpha: 1
+    };
+    FloodToolBehavior.CURSOR_OUTLINE_COLOR = {
+        red: 0,
+        green: .95,
+        blue: 1,
+        alpha: .88
+    };
+    function VibrantVisualsBiome_stringFromException(e) {
+        if (typeof e === "string") {
+            return e;
+        } else if (typeof e === "object" && e !== null && "message" in e) {
+            return e.message;
+        }
+        return "Unknown exception";
+    }
+    var ObservableUIControlType;
+    (function(ObservableUIControlType) {
+        ObservableUIControlType[ObservableUIControlType["Number"] = 0] = "Number";
+        ObservableUIControlType[ObservableUIControlType["String"] = 1] = "String";
+        ObservableUIControlType[ObservableUIControlType["Slider"] = 2] = "Slider";
+        ObservableUIControlType[ObservableUIControlType["Checkbox"] = 3] = "Checkbox";
+        ObservableUIControlType[ObservableUIControlType["ColorRGB"] = 4] = "ColorRGB";
+        ObservableUIControlType[ObservableUIControlType["ColorRGBA"] = 5] = "ColorRGBA";
+        ObservableUIControlType[ObservableUIControlType["Vector3"] = 6] = "Vector3";
+        ObservableUIControlType[ObservableUIControlType["Dropdown"] = 7] = "Dropdown";
+        ObservableUIControlType[ObservableUIControlType["ColorTimeline"] = 8] = "ColorTimeline";
+        ObservableUIControlType[ObservableUIControlType["NumberTimeline"] = 9] = "NumberTimeline";
+    })(ObservableUIControlType || (ObservableUIControlType = {}));
+    class DataItemGroupUIControlBase {
+        get type() {
+            throw new Error("Not implemented in base");
+        }
+        get group() {
+            throw new Error("Not implemented in base");
+        }
+        _insertDataIntoOriginalObject(_propertyPath, _newValue, _actualData, _observableUIControlType, _originalType) {
+            const fnInsertDataIntoObjectByPath = (_path, _value) => {
+                const pathParts = _path.split("/").filter(Boolean);
+                let data = _actualData;
+                for (let i = 0; i < pathParts.length; i++) {
+                    const part = pathParts[i];
+                    if (data[part] === undefined) {
+                        throw new Error(`Failed to find path element ${part}`);
+                    }
+                    if (i === pathParts.length - 1) {
+                        data[part] = _value;
+                        return true;
+                    }
+                    data = data[part];
+                }
+                throw new Error(`Failed to find path element ${_path}`);
+            };
+            switch (_observableUIControlType) {
+              case ObservableUIControlType.Number:
+              case ObservableUIControlType.Slider:
+                {
+                    if (typeof _newValue !== "number") {
+                        throw new Error(`Invalid number value for property ${_propertyPath}`);
+                    }
+                    switch (_originalType) {
+                      case OpNodeSourceType.INTEGER:
+                        fnInsertDataIntoObjectByPath(_propertyPath, Math.round(_newValue));
+                        break;
+
+                      case OpNodeSourceType.NUMBER:
+                        fnInsertDataIntoObjectByPath(_propertyPath, _newValue);
+                        break;
+
+                      default:
+                        throw new Error(`Invalid original type for property ${_propertyPath}`);
+                    }
+                }
+                break;
+
+              case ObservableUIControlType.Checkbox:
+                {
+                    if (typeof _newValue !== "boolean") {
+                        throw new Error(`Invalid number value for property ${_propertyPath}`);
+                    }
+                    fnInsertDataIntoObjectByPath(_propertyPath, _newValue);
+                }
+                break;
+
+              case ObservableUIControlType.String:
+                {
+                    if (typeof _newValue !== "string") {
+                        throw new Error(`Invalid string value for property ${_propertyPath}`);
+                    }
+                    if (_originalType !== OpNodeSourceType.STRING) {
+                        throw new Error(`Invalid original type for property ${_propertyPath}`);
+                    }
+                    fnInsertDataIntoObjectByPath(_propertyPath, _newValue);
+                }
+                break;
+
+              case ObservableUIControlType.ColorRGB:
+              case ObservableUIControlType.ColorRGBA:
+                {
+                    if (typeof _newValue !== "object") {
+                        throw new Error(`Invalid color value for property ${_propertyPath}`);
+                    }
+                    if (_originalType === OpNodeSourceType.ARRAY || _originalType === OpNodeSourceType.MAP) {
+                        if ("red" in _newValue && "green" in _newValue && "blue" in _newValue) {
+                            if (_originalType === OpNodeSourceType.ARRAY) {
+                                const colorComponents = [];
+                                colorComponents.push(Number(_newValue.red));
+                                colorComponents.push(Number(_newValue.green));
+                                colorComponents.push(Number(_newValue.blue));
+                                if (_observableUIControlType === ObservableUIControlType.ColorRGBA && "alpha" in _newValue) {
+                                    colorComponents.push(Number(_newValue.alpha));
+                                }
+                                for (let i = 0; i < colorComponents.length; i++) {
+                                    const keyName = `${_propertyPath}/${i}`;
+                                    fnInsertDataIntoObjectByPath(keyName, Math.round(colorComponents[i] * 255));
+                                }
+                            } else if (_originalType === OpNodeSourceType.MAP) {
+                                throw new Error(`Associative container of named RGB values not yet implemented`);
+                            }
+                        } else {
+                            throw new Error(`Invalid color value for property ${_propertyPath}`);
+                        }
+                    } else if (_originalType === OpNodeSourceType.STRING) {
+                        if ("red" in _newValue && "green" in _newValue && "blue" in _newValue) {
+                            const toHex = n => {
+                                const hex = Math.max(0, Math.min(255, Math.round(n * 255))).toString(16);
+                                return hex.length === 1 ? "0" + hex : hex;
+                            };
+                            const red = Number(_newValue.red);
+                            const green = Number(_newValue.green);
+                            const blue = Number(_newValue.blue);
+                            let hexString = "";
+                            if (_observableUIControlType === ObservableUIControlType.ColorRGBA && "alpha" in _newValue) {
+                                const alpha = Number(_newValue.alpha);
+                                hexString = `#${toHex(red)}${toHex(green)}${toHex(blue)}${toHex(alpha)}`;
+                            } else {
+                                hexString = `#${toHex(red)}${toHex(green)}${toHex(blue)}`;
+                            }
+                            fnInsertDataIntoObjectByPath(_propertyPath, hexString);
+                        } else {
+                            throw new Error(`Invalid color value for property ${_propertyPath}`);
+                        }
+                    } else {
+                        throw new Error(`Invalid original type for property ${_propertyPath}`);
+                    }
+                }
+                break;
+
+              case ObservableUIControlType.Vector3:
+                {
+                    if (typeof _newValue !== "object" && !Array.isArray(_newValue)) {
+                        throw new Error(`Invalid color value for property ${_propertyPath}`);
+                    }
+                    if (_originalType !== OpNodeSourceType.ARRAY && _originalType !== OpNodeSourceType.MAP) {
+                        throw new Error(`Invalid original type for property ${_propertyPath}`);
+                    }
+                    if ("x" in _newValue && "y" in _newValue && "z" in _newValue) {
+                        if (_originalType === OpNodeSourceType.ARRAY) {
+                            const vectorComponents = [];
+                            vectorComponents.push(Number(_newValue.x));
+                            vectorComponents.push(Number(_newValue.y));
+                            vectorComponents.push(Number(_newValue.z));
+                            for (let i = 0; i < vectorComponents.length; i++) {
+                                const keyName = `${_propertyPath}/${i}`;
+                                fnInsertDataIntoObjectByPath(keyName, vectorComponents[i]);
+                            }
+                        } else if (_originalType === OpNodeSourceType.MAP) {
+                            throw new Error(`Associative container of named XYZ values not yet implemented`);
+                        }
+                    } else {
+                        throw new Error(`Invalid color value for property ${_propertyPath}`);
+                    }
+                }
+                break;
+
+              case ObservableUIControlType.Dropdown:
+                {
+                    if (typeof _newValue !== "string") {
+                        throw new Error(`Invalid dropdown value for property ${_propertyPath}`);
+                    }
+                    if (_originalType !== OpNodeSourceType.STRING) {
+                        throw new Error(`Invalid original type for property ${_propertyPath}`);
+                    }
+                    fnInsertDataIntoObjectByPath(_propertyPath, _newValue);
+                }
+                break;
+
+              case ObservableUIControlType.ColorTimeline:
+                {
+                    if (typeof _newValue !== "object") {
+                        throw new Error(`Invalid colorTimeline value for property ${_propertyPath}`);
+                    }
+                    if (_originalType !== OpNodeSourceType.MAP) {
+                        throw new Error(`Invalid original type for property ${_propertyPath}`);
+                    }
+                    fnInsertDataIntoObjectByPath(_propertyPath, _newValue);
+                }
+                break;
+
+              case ObservableUIControlType.NumberTimeline:
+                {
+                    if (typeof _newValue !== "object") {
+                        throw new Error(`Invalid numberTimeline value for property ${_propertyPath}`);
+                    }
+                    if (_originalType !== OpNodeSourceType.MAP) {
+                        throw new Error(`Invalid original type for property ${_propertyPath}`);
+                    }
+                    fnInsertDataIntoObjectByPath(_propertyPath, _newValue);
+                }
+                break;
+
+              default:
+                throw new Error(`Invalid property bag type for property ${_propertyPath}`);
+            }
+            return true;
+        }
+    }
+    class DataItemGroupUIControlPropertyPane extends DataItemGroupUIControlBase {
+        get type() {
+            return DataItemGroupType.PropertyPane;
+        }
+        get group() {
+            return this._group;
+        }
+        get propertyPane() {
+            return this._uiPropertyPane;
+        }
+        constructor(group, _hasParentPane, _rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback, _helpString) {
+            super();
+            this._group = group;
+            this._helpString = _helpString;
+            const displayName = this.group.displayName;
+            const displayExpander = this.group.displayName.length > 0 && _hasParentPane;
+            const toolTip = {
+                title: displayName,
+                description: [ _helpString ?? "" ]
+            };
+            this._uiPropertyPane = this.group.logicalGroupOnly ? _rootPane : _rootPane.createSubPane({
+                title: displayName,
+                hasExpander: displayExpander,
+                hasMargins: displayExpander,
+                collapsed: true,
+                infoTooltip: _helpString !== undefined ? toolTip : undefined
+            });
+            if (!this._uiPropertyPane) {
+                throw new Error("Failed to create property pane");
+            }
+            const unsorted = group.tags.find((tag => tag === "unsorted")) !== undefined;
+            if (!unsorted) {
+                this.group.dataItems.sort(((a, b) => a._displayName.localeCompare(b._displayName)));
+            }
+            for (const item of this.group.dataItems) {
+                const localizedTitle = `${item._displayName}`;
+                const updateOriginalJSONData = newValue => {
+                    const observableControlType = item._observableControlType;
+                    const originalType = item._originalType;
+                    const isJSONDataInserted = this._insertDataIntoOriginalObject(item._observableName, newValue, _actualData, observableControlType, originalType);
+                    if (isJSONDataInserted && _dataItemChangedCallback) {
+                        _dataItemChangedCallback();
+                    }
+                };
+                switch (item._observableControlType) {
+                  case ObservableUIControlType.Number:
+                  case ObservableUIControlType.Slider:
+                    {
+                        const showSlider = item._observableControlType === ObservableUIControlType.Slider;
+                        _schemaInterface.debug(`Adding number property: ${item._observableName} as ${showSlider ? "slider" : "number"}`);
+                        const propItemOptions = {
+                            title: localizedTitle
+                        };
+                        if (item._min !== undefined && item._max !== undefined) {
+                            propItemOptions.min = item._min;
+                            propItemOptions.max = item._max;
+                            propItemOptions.variant = showSlider ? server_editor_namespaceObject.NumberPropertyItemVariant.InputFieldAndSlider : server_editor_namespaceObject.NumberPropertyItemVariant.InputField;
+                        }
+                        if (item._readonly) {
+                            propItemOptions.enable = false;
+                        }
+                        propItemOptions.onChange = (newValue, _oldValue) => {
+                            updateOriginalJSONData(newValue);
+                        };
+                        item._setOriginalJSONData = (observableTypes, propertyPath, newValue) => {
+                            observableTypes[propertyPath].set(newValue);
+                            updateOriginalJSONData(newValue);
+                        };
+                        if (item._helpString) {
+                            propItemOptions.tooltip = item._helpString;
+                        }
+                        const currentObservable = _observables[item._observableName];
+                        this._uiPropertyPane.addNumber(currentObservable, propItemOptions);
+                    }
+                    break;
+
+                  case ObservableUIControlType.String:
+                    {
+                        _schemaInterface.debug(`Adding string property: ${item._observableName}`);
+                        const propItemOptions = {
+                            title: localizedTitle,
+                            onChange: (newValue, _oldValue) => {
+                                updateOriginalJSONData(newValue);
+                            }
+                        };
+                        if (item._readonly) {
+                            propItemOptions.enable = false;
+                        }
+                        if (item._displayName === "format_version") {
+                            break;
+                        }
+                        item._setOriginalJSONData = (observableTypes, propertyPath, newValue) => {
+                            observableTypes[propertyPath].set(newValue);
+                            updateOriginalJSONData(newValue);
+                        };
+                        if (item._helpString) {
+                            propItemOptions.tooltip = item._helpString;
+                        }
+                        const currentObservable = _observables[item._observableName];
+                        this._uiPropertyPane.addString(currentObservable, propItemOptions);
+                    }
+                    break;
+
+                  case ObservableUIControlType.ColorRGB:
+                  case ObservableUIControlType.ColorRGBA:
+                    {
+                        _schemaInterface.debug(`Adding color property: ${item._observableName}`);
+                        const propItemOptions = {
+                            title: localizedTitle,
+                            hiddenAlpha: item._observableControlType === ObservableUIControlType.ColorRGBA,
+                            variant: server_editor_namespaceObject.ColorPickerPropertyItemVariant.Inline,
+                            onChange: (newValue, _oldValue) => {
+                                updateOriginalJSONData(newValue);
+                            }
+                        };
+                        if (item._readonly) {
+                            propItemOptions.enable = false;
+                        }
+                        item._setOriginalJSONData = (observableTypes, propertyPath, newValue) => {
+                            observableTypes[propertyPath].set(newValue);
+                            updateOriginalJSONData(newValue);
+                        };
+                        if (item._helpString) {
+                            propItemOptions.tooltip = item._helpString;
+                        }
+                        const currentObservable = _observables[item._observableName];
+                        this._uiPropertyPane.addColorPicker(currentObservable, propItemOptions);
+                    }
+                    break;
+
+                  case ObservableUIControlType.Vector3:
+                    {
+                        _schemaInterface.debug(`Adding vector property: ${item._observableName}`);
+                        const propItemOptions = {
+                            title: localizedTitle,
+                            onChange: (newValue, _oldValue) => {
+                                updateOriginalJSONData(newValue);
+                            }
+                        };
+                        if (item._min !== undefined) {
+                            propItemOptions.min = {
+                                x: item._min,
+                                y: item._min,
+                                z: item._min
+                            };
+                        }
+                        if (item._max !== undefined) {
+                            propItemOptions.max = {
+                                x: item._max,
+                                y: item._max,
+                                z: item._max
+                            };
+                        }
+                        if (item._readonly) {
+                            propItemOptions.enable = false;
+                        }
+                        item._setOriginalJSONData = (observableTypes, propertyPath, newValue) => {
+                            observableTypes[propertyPath].set(newValue);
+                            updateOriginalJSONData(newValue);
+                        };
+                        if (item._helpString) {
+                            propItemOptions.tooltip = item._helpString;
+                        }
+                        const currentObservable = _observables[item._observableName];
+                        this._uiPropertyPane.addVector3(currentObservable, propItemOptions);
+                    }
+                    break;
+
+                  case ObservableUIControlType.Dropdown:
+                    {
+                        _schemaInterface.debug(`Adding dropdown property: ${item._observableName}`);
+                        if (item._enums === undefined || item._prettyEnums === undefined) {
+                            throw new Error("Dropdown property must have enums defined");
+                        }
+                        const comboDropdownItems = item._prettyEnums?.map(((v, i) => {
+                            const dropItem = {
+                                label: v,
+                                value: i
+                            };
+                            return dropItem;
+                        }));
+                        const propItemOptions = {
+                            title: localizedTitle,
+                            entries: comboDropdownItems,
+                            onChange: (newValue, _oldValue, _items) => {
+                                const dropDownNewValue = item._enums !== undefined ? item._enums[newValue] : newValue;
+                                updateOriginalJSONData(dropDownNewValue);
+                            }
+                        };
+                        if (item._readonly) {
+                            propItemOptions.enable = false;
+                        }
+                        item._setOriginalJSONData = (observableTypes, propertyPath, newValue) => {
+                            if (item._enums !== undefined) {
+                                const index = item._enums.indexOf(item._enums[newValue]);
+                                if (index !== -1) {
+                                    observableTypes[propertyPath].set(index);
+                                }
+                            }
+                            const dropDownNewValue = item._enums !== undefined ? item._enums[newValue] : "";
+                            updateOriginalJSONData(dropDownNewValue);
+                        };
+                        if (item._helpString) {
+                            propItemOptions.tooltip = item._helpString;
+                        }
+                        const currentObservable = _observables[item._observableName];
+                        this._uiPropertyPane.addDropdown(currentObservable, propItemOptions);
+                    }
+                    break;
+
+                  case ObservableUIControlType.Checkbox:
+                    {
+                        _schemaInterface.debug(`Adding checkbox property: ${item._observableName}`);
+                        const propItemOptions = {
+                            title: localizedTitle,
+                            onChange: (newValue, _oldValue) => {
+                                updateOriginalJSONData(newValue);
+                            }
+                        };
+                        if (item._readonly) {
+                            propItemOptions.enable = false;
+                        }
+                        item._setOriginalJSONData = (observableTypes, propertyPath, newValue) => {
+                            observableTypes[propertyPath].set(newValue);
+                            updateOriginalJSONData(newValue);
+                        };
+                        if (item._helpString) {
+                            propItemOptions.tooltip = item._helpString;
+                        }
+                        const currentObservable = _observables[item._observableName];
+                        this._uiPropertyPane.addBool(currentObservable, propItemOptions);
+                    }
+                    break;
+
+                  case ObservableUIControlType.ColorTimeline:
+                    throw new Error("ColorTimeline control cannot be used in a property pane");
+
+                  case ObservableUIControlType.NumberTimeline:
+                    throw new Error("NumberTimeline control cannot be used in a property pane");
+
+                  default:
+                    throw new Error(`invalid control type: ${item._observableControlType}`);
+                }
+            }
+        }
+    }
+    class DataItemGroupUIControlColorTimeline extends DataItemGroupUIControlBase {
+        get type() {
+            return DataItemGroupType.ColorTimeline;
+        }
+        get group() {
+            return this._group;
+        }
+        constructor(group, _rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback, _helpString) {
+            super();
+            this._isTimelinePreview = false;
+            this._group = group;
+            const displayName = group.displayName;
+            const displayExpander = true;
+            const toolTip = {
+                title: displayName,
+                description: [ _helpString ?? "" ]
+            };
+            this._uiPropertyPane = _rootPane.createSubPane({
+                title: displayName,
+                hasExpander: displayExpander,
+                collapsed: true,
+                infoTooltip: _helpString !== undefined ? toolTip : undefined
+            });
+            if (!this._uiPropertyPane) {
+                throw new Error("Failed to create property pane");
+            }
+            this._isTimelinePreview = group.tags.find((tag => tag === "previewTime")) !== undefined;
+            const unsorted = group.tags.find((tag => tag === "unsorted")) !== undefined;
+            if (!unsorted) {
+                this.group.dataItems.sort(((a, b) => a._displayName.localeCompare(b._displayName)));
+            }
+            const dataTable = [];
+            let colorValueTypes = undefined;
+            let itemIndex = 0;
+            for (const item of this.group.dataItems) {
+                if (item._observableControlType !== ObservableUIControlType.ColorRGBA && item._observableControlType !== ObservableUIControlType.ColorRGB) {
+                    throw new Error(`ColorTimeline control can only contain color data items.  Item ${item._observableName} is a ${item._observableControlType}`);
+                }
+                if (colorValueTypes === undefined) {
+                    colorValueTypes = item._observableControlType;
+                }
+                if (colorValueTypes !== item._observableControlType) {
+                    throw new Error("ColorTimeline control can only handle a container of the same color types - you can't mix RGB and RGBA value types");
+                }
+                item._setOriginalJSONData = (_o, _p, _v) => {};
+                const itemName = group.path + "/" + itemIndex.toString();
+                const currentObservable = _observables[item._observableName];
+                try {
+                    let time = parseFloat(item._displayName);
+                    if (time < 0 || time > 1) {
+                        _schemaInterface.error(`Warning: Time value in the ColorTimeline container should be between 0 and 1 [${itemName} = ${time}]`);
+                        time = Math.max(0, Math.min(1, time));
+                    }
+                    dataTable.push({
+                        id: itemName,
+                        time,
+                        value: currentObservable.value
+                    });
+                    _schemaInterface.debug(`Adding Key/Color property: ${itemName} -- [${time} = ${JSON.stringify(currentObservable.value)}]`);
+                } catch (_e) {
+                    _schemaInterface.error(`Failed to parse time value for item ${item._observableName} - ${VibrantVisualsBiome_stringFromException(_e)}`);
+                    throw new Error("ColorTimeline control only supports numeric key values");
+                }
+                ++itemIndex;
+            }
+            const _rebuildContainerObject = _dataItems => {
+                const outMap = {};
+                for (const item of _dataItems) {
+                    const time = item.time;
+                    const colorValue = item.value;
+                    const red = Math.max(0, Math.min(255, Math.round(colorValue.red * 255)));
+                    const green = Math.max(0, Math.min(255, Math.round(colorValue.green * 255)));
+                    const blue = Math.max(0, Math.min(255, Math.round(colorValue.blue * 255)));
+                    const alpha = Math.max(0, Math.min(255, Math.round(colorValue.alpha * 255)));
+                    if (colorValueTypes === ObservableUIControlType.ColorRGBA) {
+                        outMap[time] = [ red, green, blue, alpha ];
+                    } else {
+                        outMap[time] = [ red, green, blue ];
+                    }
+                }
+                const outJSON = JSON.stringify(outMap);
+                _schemaInterface.debug(`Rebuilding container object: ${outJSON}`);
+                const isInserted = this._insertDataIntoOriginalObject(group.path, outMap, _actualData, ObservableUIControlType.ColorTimeline, OpNodeSourceType.MAP);
+                if (isInserted && _dataItemChangedCallback) {
+                    _dataItemChangedCallback();
+                }
+            };
+            this._uiCurrentTime = (0, server_editor_namespaceObject.makeObservable)(.4);
+            this._uiControl = this._uiPropertyPane.addColorTimeline(this._uiCurrentTime, {
+                entries: dataTable,
+                onNodeAdded: node => {
+                    _schemaInterface._debug?.(`Node added: ${node.id}`);
+                    _rebuildContainerObject(this._uiControl.getData());
+                },
+                onNodeChanged: node => {
+                    _schemaInterface._debug?.(`Node changed: ${node.id}`);
+                    _rebuildContainerObject(this._uiControl.getData());
+                },
+                onNodeRemoved: node => {
+                    _schemaInterface._debug?.(`Node removed: ${node.id}`);
+                    _rebuildContainerObject(this._uiControl.getData());
+                },
+                onTimeChanged: (time, _prev) => {
+                    _schemaInterface._debug?.(`Time changed: ${time}`);
+                    if (this._isTimelinePreview) {
+                        let gameTime = (time * 24e3 + 6e3) % 24e3;
+                        if (gameTime < 0) {
+                            gameTime += 24e3;
+                        }
+                        server_namespaceObject.system.sendScriptEvent("editor:agfxPreview:timeChanged", gameTime.toString());
+                    }
+                }
+            });
+        }
+    }
+    class DataItemGroupUIControlNumberTimeline extends DataItemGroupUIControlBase {
+        get type() {
+            return DataItemGroupType.NumberTimeline;
+        }
+        get group() {
+            return this._group;
+        }
+        constructor(group, _rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback, _helpString) {
+            super();
+            this._isTimelinePreview = false;
+            this._group = group;
+            const displayName = group.displayName;
+            const displayExpander = true;
+            const toolTip = {
+                title: displayName,
+                description: [ _helpString ?? "" ]
+            };
+            this._uiPropertyPane = _rootPane.createSubPane({
+                title: displayName,
+                hasExpander: displayExpander,
+                collapsed: true,
+                infoTooltip: _helpString !== undefined ? toolTip : undefined
+            });
+            if (!this._uiPropertyPane) {
+                throw new Error("Failed to create property pane");
+            }
+            this._isTimelinePreview = group.tags.find((tag => tag === "previewTime")) !== undefined;
+            const unsorted = group.tags.find((tag => tag === "unsorted")) !== undefined;
+            if (!unsorted) {
+                this.group.dataItems.sort(((a, b) => a._displayName.localeCompare(b._displayName)));
+            }
+            const dataTable = [];
+            let itemIndex = 0;
+            let minValueBounds;
+            let maxValueBounds;
+            let minValueFound = Number.MAX_SAFE_INTEGER;
+            let maxValueFound = Number.MIN_SAFE_INTEGER;
+            for (const item of this.group.dataItems) {
+                if (item._observableControlType !== ObservableUIControlType.Number) {
+                    throw new Error(`NumberTimeline control can only contain number data items.  Item ${item._observableName} is a ${item._observableControlType}`);
+                }
+                item._setOriginalJSONData = (_o, _p, _v) => {};
+                if (item._min !== undefined) {
+                    if (item._min < minValueFound) {
+                        minValueBounds = item._min;
+                    }
+                }
+                if (item._max !== undefined) {
+                    if (item._max > maxValueFound) {
+                        maxValueBounds = item._max;
+                    }
+                }
+                const itemName = group.path + "/" + itemIndex.toString();
+                const currentObservable = _observables[item._observableName];
+                try {
+                    let time = parseFloat(item._displayName);
+                    if (time < 0 || time > 1) {
+                        _schemaInterface.error(`Warning: Time value in the NumberTimeline container should be between 0 and 1 [${itemName} = ${time}]`);
+                        time = Math.max(0, Math.min(1, time));
+                    }
+                    const itemValue = currentObservable.value;
+                    if (itemValue < minValueFound) {
+                        minValueFound = itemValue;
+                    }
+                    if (itemValue > maxValueFound) {
+                        maxValueFound = itemValue;
+                    }
+                    dataTable.push({
+                        id: itemName,
+                        time,
+                        value: currentObservable.value
+                    });
+                    _schemaInterface.debug(`Adding Key/Number property: ${itemName} -- [${time} = ${JSON.stringify(currentObservable.value)}]`);
+                } catch (_e) {
+                    _schemaInterface.error(`Failed to parse time value for item ${item._observableName} - ${VibrantVisualsBiome_stringFromException(_e)}`);
+                    throw new Error("NumberTimeline control only supports numeric key values");
+                }
+                ++itemIndex;
+            }
+            const _rebuildContainerObject = _dataItems => {
+                const outMap = {};
+                for (const item of _dataItems) {
+                    const time = item.time;
+                    const value = item.value;
+                    outMap[time] = value;
+                }
+                const outJSON = JSON.stringify(outMap);
+                _schemaInterface.debug(`Rebuilding container object: ${outJSON}`);
+                const isInserted = this._insertDataIntoOriginalObject(group.path, outMap, _actualData, ObservableUIControlType.NumberTimeline, OpNodeSourceType.MAP);
+                if (isInserted && _dataItemChangedCallback) {
+                    _dataItemChangedCallback();
+                }
+            };
+            this._uiCurrentTime = (0, server_editor_namespaceObject.makeObservable)(.4);
+            if (minValueBounds === undefined) {
+                minValueBounds = minValueFound;
+            }
+            if (maxValueBounds === undefined) {
+                maxValueBounds = maxValueFound;
+            }
+            this._uiControl = this._uiPropertyPane.addNumberTimeline(this._uiCurrentTime, {
+                entries: dataTable,
+                bounds: {
+                    minValue: minValueBounds,
+                    maxValue: maxValueBounds
+                },
+                gridSeparatorStepCount: {
+                    x: .1,
+                    y: 10
+                },
+                gridSeparatorSliceCount: {
+                    x: 5,
+                    y: 5
+                },
+                onNodeAdded: node => {
+                    _schemaInterface._debug?.(`Node added: ${node.id}`);
+                    _rebuildContainerObject(this._uiControl.getData());
+                },
+                onNodeChanged: node => {
+                    _schemaInterface._debug?.(`Node changed: ${node.id}`);
+                    _rebuildContainerObject(this._uiControl.getData());
+                },
+                onNodeRemoved: node => {
+                    _schemaInterface._debug?.(`Node removed: ${node.id}`);
+                    _rebuildContainerObject(this._uiControl.getData());
+                },
+                onTimeChanged: (time, _prev) => {
+                    _schemaInterface._debug?.(`Time changed: ${time}`);
+                    if (this._isTimelinePreview) {
+                        server_namespaceObject.system.sendScriptEvent("editor:agfxPreview:timeChanged", (time * 24e3).toString());
+                    }
+                }
+            });
+        }
+    }
+    var DataItemGroupType;
+    (function(DataItemGroupType) {
+        DataItemGroupType[DataItemGroupType["PropertyPane"] = 0] = "PropertyPane";
+        DataItemGroupType[DataItemGroupType["ColorTimeline"] = 1] = "ColorTimeline";
+        DataItemGroupType[DataItemGroupType["NumberTimeline"] = 2] = "NumberTimeline";
+    })(DataItemGroupType || (DataItemGroupType = {}));
+    class DataItemGroup {
+        constructor(_displayName, _path, _parentGroup, _type, _tags, _editorControlType, _helpString) {
+            this._tags = [];
+            this._displayName = _displayName;
+            this._path = _path;
+            this._dataItems = [];
+            this._parentGroup = _parentGroup;
+            this._logicalGroupOnly = false;
+            this._type = _type;
+            this._tags = _tags;
+            this._helpString = _helpString;
+            switch (_editorControlType ?? OpNodeEditorUIControlType.UNKNOWN) {
+              case OpNodeEditorUIControlType.COLOR_TIMELINE:
+                this._groupType = DataItemGroupType.ColorTimeline;
+                break;
+
+              case OpNodeEditorUIControlType.NUMBER_TIMELINE:
+                this._groupType = DataItemGroupType.NumberTimeline;
+                break;
+
+              default:
+                this._groupType = DataItemGroupType.PropertyPane;
+            }
+        }
+        get displayName() {
+            return this._displayName;
+        }
+        get path() {
+            return this._path;
+        }
+        get containerBounds() {
+            return this._containerBounds;
+        }
+        set containerBounds(value) {
+            this._containerBounds = value;
+        }
+        get propertyPane() {
+            if (this._UIControl && this._UIControl.type === DataItemGroupType.PropertyPane) {
+                return this._UIControl.propertyPane;
+            }
+            return undefined;
+        }
+        get logicalGroupOnly() {
+            return this._logicalGroupOnly;
+        }
+        set logicalGroupOnly(value) {
+            this._logicalGroupOnly = value;
+        }
+        get type() {
+            return this._type;
+        }
+        get groupType() {
+            return this._groupType;
+        }
+        get dataItems() {
+            return this._dataItems;
+        }
+        get tags() {
+            return this._tags;
+        }
+        createPropertyPane(_rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback) {
+            if (this._parentGroup) {
+                if (this._parentGroup.propertyPane) {
+                    _rootPane = this._parentGroup.propertyPane;
+                }
+            }
+            if (!_rootPane) {
+                throw new Error(`Missing parent property pane`);
+            }
+            if (this._UIControl) {
+                throw new Error("Property pane already created");
+            }
+            this._UIControl = new DataItemGroupUIControlPropertyPane(this, this._parentGroup !== undefined, _rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback, this._helpString);
+        }
+        createColorTimeline(_rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback) {
+            if (this._parentGroup) {
+                if (this._parentGroup.propertyPane) {
+                    _rootPane = this._parentGroup.propertyPane;
+                }
+            }
+            if (!_rootPane) {
+                throw new Error(`Missing parent property pane`);
+            }
+            if (this._UIControl) {
+                throw new Error("Property pane already created");
+            }
+            this._UIControl = new DataItemGroupUIControlColorTimeline(this, _rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback, this._helpString);
+        }
+        createNumberTimeline(_rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback) {
+            if (this._parentGroup) {
+                if (this._parentGroup.propertyPane) {
+                    _rootPane = this._parentGroup.propertyPane;
+                }
+            }
+            if (!_rootPane) {
+                throw new Error(`Missing parent property pane`);
+            }
+            if (this._UIControl) {
+                throw new Error("Property pane already created");
+            }
+            this._UIControl = new DataItemGroupUIControlNumberTimeline(this, _rootPane, _observables, _actualData, _schemaInterface, _dataItemChangedCallback, this._helpString);
+        }
+        addNumberDataItem(_displayName, _observableName, _originalType, _min, _max, _readonly, _helpString) {
+            this._dataItems.push({
+                _displayName,
+                _observableName,
+                _observableControlType: ObservableUIControlType.Number,
+                _min,
+                _max,
+                _originalType,
+                _uiCollectionComponent: false,
+                _readonly: _readonly ?? false,
+                _helpString
+            });
+        }
+        addStringDataItem(_displayName, _observableName, _validationRegex, _readonly, _helpString) {
+            this._dataItems.push({
+                _displayName,
+                _observableName,
+                _observableControlType: ObservableUIControlType.String,
+                _validationRegex,
+                _originalType: OpNodeSourceType.STRING,
+                _uiCollectionComponent: false,
+                _readonly: _readonly ?? false,
+                _helpString
+            });
+        }
+        addSliderDataItem(_displayName, _observableName, _originalType, _min, _max, _helpString) {
+            this._dataItems.push({
+                _displayName,
+                _observableName,
+                _observableControlType: ObservableUIControlType.Slider,
+                _min,
+                _max,
+                _originalType,
+                _uiCollectionComponent: false,
+                _readonly: false,
+                _helpString
+            });
+        }
+        addColorDataItem(_displayName, _observableName, size, _originalType, _uiCollectionComponent, _helpString) {
+            this._dataItems.push({
+                _displayName,
+                _observableName,
+                _observableControlType: size === 4 ? ObservableUIControlType.ColorRGBA : ObservableUIControlType.ColorRGB,
+                _originalType,
+                _uiCollectionComponent,
+                _readonly: false,
+                _helpString
+            });
+        }
+        addVector3DataItem(_displayName, _observableName, _originalType, _min, _max, _readonly, _helpString) {
+            this._dataItems.push({
+                _displayName,
+                _observableName,
+                _observableControlType: ObservableUIControlType.Vector3,
+                _originalType,
+                _min,
+                _max,
+                _uiCollectionComponent: true,
+                _readonly: _readonly ?? false,
+                _helpString
+            });
+        }
+        addDropdownDataItem(_displayName, _observableName, _originalType, _enums, _prettyEnums, _readonly, _helpString) {
+            this._dataItems.push({
+                _displayName,
+                _observableName,
+                _observableControlType: ObservableUIControlType.Dropdown,
+                _originalType,
+                _uiCollectionComponent: false,
+                _readonly: _readonly ?? false,
+                _enums,
+                _prettyEnums,
+                _helpString
+            });
+        }
+        addCheckboxDataItem(_displayName, _observableName, _originalType, _readonly, _helpString) {
+            this._dataItems.push({
+                _displayName,
+                _observableName,
+                _observableControlType: ObservableUIControlType.Checkbox,
+                _originalType,
+                _uiCollectionComponent: false,
+                _readonly: _readonly ?? false,
+                _helpString
+            });
+        }
+        restoreData(_observables, _defaultObservable) {
+            for (const item of this._dataItems) {
+                const path = item._observableName;
+                const newValue = _defaultObservable[path];
+                if (item._setOriginalJSONData) {
+                    item._setOriginalJSONData(_observables, path, newValue);
+                }
+            }
+        }
+    }
+    class UIComponentMap {
+        constructor(session, data) {
+            this._editableProperties = {};
+            this._groups = [];
+            this._session = session;
+            this._dirty = false;
+            this._reverting = false;
+            this._currentData = JSON.parse(JSON.stringify(data));
+        }
+        get dirty() {
+            return this._dirty;
+        }
+        set dirty(value) {
+            this._dirty = value;
+        }
+        get reverting() {
+            return this._reverting;
+        }
+        set reverting(value) {
+            this._reverting = value;
+        }
+        get currentData() {
+            return this._currentData;
+        }
+        _findGroupFromPath(path) {
+            const lastSlash = path.lastIndexOf("/");
+            if (lastSlash <= 0) {
+                return undefined;
+            }
+            const parentPath = path.slice(0, lastSlash);
+            for (const group of this._groups) {
+                if (group.path === parentPath) {
+                    return group;
+                }
+            }
+            throw new Error(`Failed to find a parent group for a non-root data item (${path})`);
+            return undefined;
+        }
+        addDataItem(_path, _key, _type, _data, _properties) {
+            let parentGroup = this._findGroupFromPath(_path);
+            const fnConvertNodeTypeToDefaultEditor = _type => {
+                switch (_type) {
+                  case OpNodeSourceType.STRING:
+                    return OpNodeEditorUIControlType.TEXT;
+
+                  case OpNodeSourceType.NUMBER:
+                  case OpNodeSourceType.INTEGER:
+                    return OpNodeEditorUIControlType.FLOAT;
+
+                  case OpNodeSourceType.BOOLEAN:
+                    return OpNodeEditorUIControlType.CHECKBOX;
+
+                  default:
+                    return OpNodeEditorUIControlType.UNKNOWN;
+                }
+            };
+            let editorControl = fnConvertNodeTypeToDefaultEditor(_type);
+            const editorProperty = _properties.getProperty("OpPropertyEditorUIControl");
+            if (editorProperty) {
+                editorControl = editorProperty.controlType;
+            }
+            const labelAliases = _properties.getProperty("OpPropertyLabelAliases");
+            const prettify = _properties.getProperty("OpPropertyPrettifier");
+            const tagsProperty = _properties.getProperty("OpPropertyTags");
+            const helpProperty = _properties.getProperty("OpPropertyHelp");
+            const helpString = helpProperty?.help ?? undefined;
+            const aliasAndPrettify = _key => {
+                const alias = labelAliases?.getLabelAlias(_key) ?? _key;
+                const displayName = prettify?.prettify(alias) ?? alias;
+                return displayName;
+            };
+            const displayName = aliasAndPrettify(_key);
+            if (_type === OpNodeSourceType.NULL) {
+                throw new Error("I don't know what to do with nulls");
+            } else if (_type === OpNodeSourceType.OBJECT || _type === OpNodeSourceType.ARRAY || _type === OpNodeSourceType.MAP) {
+                const tags = tagsProperty?.tags ?? [];
+                this._groups.push(new DataItemGroup(displayName, _path, parentGroup, _type, tags, editorControl, helpString));
+                const containerBounds = {
+                    min: 0,
+                    max: 0
+                };
+                const arrayBoundsProperty = _properties.getProperty("OpPropertyArrayBounds");
+                if (arrayBoundsProperty) {
+                    if (arrayBoundsProperty.minItems !== undefined) {
+                        containerBounds.min = arrayBoundsProperty.minItems;
+                    }
+                    if (arrayBoundsProperty.maxItems !== undefined) {
+                        containerBounds.max = arrayBoundsProperty.maxItems;
+                    }
+                } else {
+                    const mapBoundsProperty = _properties.getProperty("OpPropertyMapBounds");
+                    if (mapBoundsProperty) {
+                        if (mapBoundsProperty.minProperties !== undefined) {
+                            containerBounds.min = mapBoundsProperty.minProperties;
+                        }
+                        if (mapBoundsProperty.maxProperties !== undefined) {
+                            containerBounds.max = mapBoundsProperty.maxProperties;
+                        }
+                    }
+                }
+                if (editorControl === OpNodeEditorUIControlType.COLOR || editorControl === OpNodeEditorUIControlType.VECTOR3) {
+                    if (containerBounds.min !== containerBounds.max || containerBounds.min !== 3 && containerBounds.min !== 4) {
+                        throw new Error(`Container bounds not specified - Path(${_path}), Key(${_key}) -- minItems and maxItems MUST be specified in the schema`);
+                    }
+                }
+                if (editorControl === OpNodeEditorUIControlType.COLOR) {
+                    this._groups[this._groups.length - 1].containerBounds = containerBounds;
+                    this._groups[this._groups.length - 1].logicalGroupOnly = true;
+                    const color = {
+                        Red: 0,
+                        Green: 0,
+                        Blue: 0,
+                        Alpha: 0
+                    };
+                    this._editableProperties[_path] = (0, server_editor_namespaceObject.makeObservable)(color);
+                } else if (editorControl === OpNodeEditorUIControlType.VECTOR3) {
+                    this._groups[this._groups.length - 1].containerBounds = containerBounds;
+                    this._groups[this._groups.length - 1].logicalGroupOnly = true;
+                    const vec3 = {
+                        x: 0,
+                        y: 0,
+                        z: 0
+                    };
+                    this._editableProperties[_path] = (0, server_editor_namespaceObject.makeObservable)(vec3);
+                } else if (editorControl === OpNodeEditorUIControlType.COLOR_TIMELINE) {
+                    this._groups[this._groups.length - 1].containerBounds = containerBounds;
+                    this._groups[this._groups.length - 1].logicalGroupOnly = true;
+                } else if (editorControl === OpNodeEditorUIControlType.NUMBER_TIMELINE) {
+                    this._groups[this._groups.length - 1].containerBounds = containerBounds;
+                    this._groups[this._groups.length - 1].logicalGroupOnly = true;
+                }
+            } else {
+                if (!parentGroup) {
+                    const tags = tagsProperty?.tags ?? [];
+                    const groupIndex = this._groups.push(new DataItemGroup("", _path, undefined, OpNodeSourceType.NULL, tags, OpNodeEditorUIControlType.UNKNOWN));
+                    parentGroup = this._groups[groupIndex - 1];
+                }
+                if (_type !== OpNodeSourceType.STRING && _type !== OpNodeSourceType.NUMBER && _type !== OpNodeSourceType.INTEGER && _type !== OpNodeSourceType.BOOLEAN) {
+                    return;
+                }
+                this._editableProperties[_path] = (0, server_editor_namespaceObject.makeObservable)(_data);
+                const regexValidator = _properties.getProperty("OpPropertyPattern")?.pattern;
+                const valueMin = _properties.getProperty("OpPropertyValueRange")?.min;
+                const valueMax = _properties.getProperty("OpPropertyValueRange")?.max;
+                const readonly = _properties.hasProperty("OpPropertyReadOnly");
+                switch (editorControl) {
+                  case OpNodeEditorUIControlType.COLOR_TIMELINE:
+                  case OpNodeEditorUIControlType.NUMBER_TIMELINE:
+                    break;
+
+                  case OpNodeEditorUIControlType.FLOAT:
+                    parentGroup.addNumberDataItem(displayName, _path, _type, valueMin, valueMax, readonly, helpString);
+                    break;
+
+                  case OpNodeEditorUIControlType.SLIDER:
+                    parentGroup.addSliderDataItem(displayName, _path, _type, valueMin, valueMax, helpString);
+                    break;
+
+                  case OpNodeEditorUIControlType.TEXT:
+                    parentGroup.addStringDataItem(displayName, _path, regexValidator, readonly, helpString);
+                    break;
+
+                  case OpNodeEditorUIControlType.CHECKBOX:
+                    parentGroup.addCheckboxDataItem(displayName, _path, _type, readonly, helpString);
+                    break;
+
+                  case OpNodeEditorUIControlType.COLOR:
+                    {
+                        const parentPath = parentGroup.path;
+                        if (_type === OpNodeSourceType.NUMBER || _type === OpNodeSourceType.INTEGER) {
+                            if (parentGroup.type !== OpNodeSourceType.ARRAY) {
+                                throw new Error(`Associative container of named RGB values not yet implemented`);
+                            }
+                            const colorSize = parentGroup.containerBounds?.max;
+                            if (!colorSize) {
+                                throw new Error(`Array bounds not specified - Path(${_path}), Key(${_key})`);
+                            }
+                            const index = Number(_key);
+                            if (index >= colorSize || index < 0) {
+                                throw new Error(`Array bounds exceeded - Path(${_path}), Key(${_key})`);
+                            } else if (index === colorSize - 1) {
+                                const componentData = [];
+                                for (let i = 0; i < colorSize; i++) {
+                                    const colorComponentPath = `${parentPath}/${i}`;
+                                    const colorComponent = this._editableProperties[colorComponentPath].value;
+                                    if (typeof colorComponent !== "number") {
+                                        throw new Error(`Invalid color component value at path ${colorComponentPath}`);
+                                    }
+                                    componentData.push(colorComponent / 255);
+                                }
+                                if (colorSize === 3) {
+                                    componentData.push(1);
+                                }
+                                const color = {
+                                    red: componentData[0],
+                                    green: componentData[1],
+                                    blue: componentData[2],
+                                    alpha: componentData[3]
+                                };
+                                this._editableProperties[parentPath] = (0, server_editor_namespaceObject.makeObservable)(color);
+                                const groupDisplayName = aliasAndPrettify(parentGroup.displayName);
+                                const _grandparentGroup = this._findGroupFromPath(parentPath) ?? parentGroup;
+                                _grandparentGroup.addColorDataItem(groupDisplayName, parentPath, colorSize, parentGroup.type, true, helpString);
+                            }
+                        } else if (_type === OpNodeSourceType.STRING) {
+                            const colorString = String(_data);
+                            const hexPattern = /^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$/;
+                            if (!hexPattern.test(colorString)) {
+                                throw new Error("Invalid color string format");
+                            }
+                            const componentData = [];
+                            let colorSize = 0;
+                            for (let i = 1; i < colorString.length; i += 2) {
+                                const component = parseInt(colorString.substring(i, i + 2), 16);
+                                componentData.push(component / 255);
+                                ++colorSize;
+                            }
+                            if (colorSize === 3) {
+                                componentData.push(1);
+                            }
+                            const color = {
+                                red: componentData[0],
+                                green: componentData[1],
+                                blue: componentData[2],
+                                alpha: componentData[3]
+                            };
+                            this._editableProperties[parentPath] = (0, server_editor_namespaceObject.makeObservable)(color);
+                            const groupDisplayName = aliasAndPrettify(parentGroup.displayName);
+                            const grandparentGroup = this._findGroupFromPath(parentPath) ?? parentGroup;
+                            grandparentGroup.addColorDataItem(groupDisplayName, parentPath, colorSize, parentGroup.type, true, helpString);
+                        }
+                    }
+                    break;
+
+                  case OpNodeEditorUIControlType.VECTOR3:
+                    {
+                        const parentPath = parentGroup.path;
+                        if (_type === OpNodeSourceType.NUMBER || _type === OpNodeSourceType.INTEGER) {
+                            if (parentGroup.type !== OpNodeSourceType.ARRAY) {
+                                throw new Error(`Associative container of named XYZ values not yet implemented`);
+                            }
+                            const index = Number(_key);
+                            if (index >= 3 || index < 0) {
+                                throw new Error(`Array bounds exceeded - Path(${_path}), Key(${_key})`);
+                            } else if (index === 2) {
+                                const componentData = [];
+                                for (let i = 0; i < 3; i++) {
+                                    const componentPath = `${parentPath}/${i}`;
+                                    const componentValue = this._editableProperties[componentPath].value;
+                                    if (typeof componentValue !== "number") {
+                                        throw new Error(`Invalid vector3 component value at path ${componentPath}`);
+                                    }
+                                    componentData.push(componentValue);
+                                }
+                                const vec3 = {
+                                    x: componentData[0],
+                                    y: componentData[1],
+                                    z: componentData[2]
+                                };
+                                this._editableProperties[parentPath] = (0, server_editor_namespaceObject.makeObservable)(vec3);
+                                const groupDisplayName = aliasAndPrettify(parentGroup.displayName);
+                                const _grandparentGroup = this._findGroupFromPath(parentPath) ?? parentGroup;
+                                _grandparentGroup.addVector3DataItem(groupDisplayName, parentPath, parentGroup.type, valueMin, valueMax, readonly, helpString);
+                            }
+                        }
+                    }
+                    break;
+
+                  case OpNodeEditorUIControlType.DROPDOWN:
+                    {
+                        const enumProperty = _properties.getProperty("OpPropertyEnum");
+                        if (enumProperty === undefined) {
+                            throw new Error("Control type is dropdown, but no enum values specified in schema");
+                        }
+                        enumProperty.prettifyEnums(aliasAndPrettify);
+                        const comboItems = enumProperty.enums ?? [];
+                        const prettyComboItems = enumProperty.prettyEnums ?? [];
+                        const index = enumProperty.getIndexOf(String(_data));
+                        if (index === -1) {
+                            throw new Error("Invalid enum value in data");
+                        }
+                        this._editableProperties[_path] = (0, server_editor_namespaceObject.makeObservable)(index);
+                        parentGroup.addDropdownDataItem(displayName, _path, _type, comboItems, prettyComboItems, readonly, helpString);
+                    }
+                    break;
+
+                  default:
+                    throw new Error(`Unknown control type encountered - ${JSON.stringify(editorControl)}`);
+                }
+            }
+        }
+        constructUIComponents(_rootPane, _schemaInterface) {
+            if (this._currentData === undefined) {
+                throw new Error("No data object to build UI components from");
+            }
+            if (_rootPane === undefined) {
+                throw new Error("No root pane to build UI components in");
+            }
+            for (const group of this._groups) {
+                switch (group.groupType) {
+                  case DataItemGroupType.PropertyPane:
+                    group.createPropertyPane(_rootPane, this._editableProperties, this._currentData, _schemaInterface, (() => {
+                        this._dirty = true;
+                    }));
+                    break;
+
+                  case DataItemGroupType.ColorTimeline:
+                    group.createColorTimeline(_rootPane, this._editableProperties, this._currentData, _schemaInterface, (() => {
+                        this._dirty = true;
+                    }));
+                    break;
+
+                  case DataItemGroupType.NumberTimeline:
+                    group.createNumberTimeline(_rootPane, this._editableProperties, this._currentData, _schemaInterface, (() => {
+                        this._dirty = true;
+                    }));
+                    break;
+                }
+            }
+        }
+        saveDefaultProperties() {
+            this._backupProperties = {};
+            for (const prop in this._editableProperties) {
+                this._backupProperties[prop] = this._editableProperties[prop].value;
+            }
+        }
+        restoreProperties() {
+            if (!this._backupProperties) {
+                throw new Error(`back up properties are not defined`);
+            }
+            for (const group of this._groups) {
+                group.restoreData(this._editableProperties, this._backupProperties);
+            }
+        }
+    }
+    var DeferredLightingTelemetry;
+    (function(DeferredLightingTelemetry) {
+        DeferredLightingTelemetry["ModeChanged"] = "ModeChanged";
+        DeferredLightingTelemetry["ResetSettings"] = "ResetSettings";
+        DeferredLightingTelemetry["ExportSettings"] = "ExportSettings";
+        DeferredLightingTelemetry["ErrorDataTransfer"] = "ErrorDataTransfer";
+    })(DeferredLightingTelemetry || (DeferredLightingTelemetry = {}));
+    const USE_MCTOOLS_STAGING = false;
+    const GLOBAL_ACCESSOR_CONFIGURATIONS = [ "deferred_lighting::shadows" ];
+    class VibrantVisualsPerBiomeBehavior {
+        _logInfo(message) {
+            this._session.log.info(message);
+        }
+        _logError(message) {
+            this._session.log.error(message, {
+                channelMask: server_editor_namespaceObject.LogChannel.All
+            });
+        }
+        _logDebug(message) {
+            this._session.log.debug(message);
+        }
+        constructor(session) {
+            this._errorCollection = [];
+            this._collectionNamespaces = [];
+            this._collectionNamespacesIndex = (0, server_editor_namespaceObject.makeObservable)(-1);
+            this._collectionIdentifiers = [];
+            this._newConfigDialogDropdownNamespaceIndex = (0, server_editor_namespaceObject.makeObservable)(-1);
+            this._newConfigNewNamespace = (0, server_editor_namespaceObject.makeObservable)("");
+            this._newConfigIdentifier = (0, server_editor_namespaceObject.makeObservable)("");
+            this._importFieldText = (0, server_editor_namespaceObject.makeObservable)("");
+            this._targetBiomeDropdownList = [];
+            this._targetBiomeDropdownIndex = (0, server_editor_namespaceObject.makeObservable)(-1);
+            this._targetBiomesByCurrentLocation = (0, server_editor_namespaceObject.makeObservable)(false);
+            this._session = session;
+            this._tickHandle = -1;
+            this._asyncOperationWorking = false;
+            this.telemetryManager = new TelemetryManager(session.extensionContext.player, TelemetrySource.DeferredLighting);
+            this._schemaInterface = new logInterface;
+            this._schemaInterface._debug = _msg => {};
+            this._schemaInterface._error = _msg => {
+                this._logError(_msg);
+                this._errorCollection.push(_msg);
+            };
+            this._schemaInterface._onStep = (_path, _key, _type, _data, _properties) => {
+                this._schemaInterface.debug(`Step: Path(${_path}) - Key(${_key}) - Type(${_type}) - Data(${JSON.stringify(_data)}), Properties(${_properties.toString()})`);
+                this._uiComponentMap?.addDataItem(_path, _key, _type, _data, _properties);
+            };
+            this._transferManager = server_editor_private_bindings_namespaceObject.editorInternal.getPlayerServices(this._session.extensionContext.player).dataTransfer;
+            this._accessorList = this._transferManager.getRegisteredAccessors();
+            this._rootPane = this._session.createPropertyPane({
+                title: "resourcePack.editor.agfx.pane.title",
+                uniqueId: "editor:pane:agfxSettingsBiome",
+                infoTooltip: {
+                    description: [ {
+                        link: "https://aka.ms/BedrockEditorDeferredLighting",
+                        text: "resourcePack.editor.help.learnMore"
+                    } ]
+                }
+            });
+            const currentGraphicsMode = this._session.extensionContext.settings.graphics.get(server_editor_namespaceObject.GraphicsSettingsProperty.GraphicsMode);
+            const isDeferredRenderingEnabled = (0, server_editor_namespaceObject.makeObservable)(currentGraphicsMode === server_namespaceObject.GraphicsMode.Deferred);
+            const loadingOverlay = this._rootPane.createModalOverlayPane();
+            loadingOverlay.contentPane.addText("editor.vibrantVisuals.pane.graphicsProgress", {
+                alignment: server_editor_namespaceObject.LayoutAlignment.Center,
+                border: false
+            });
+            this._rootPane.addBool(isDeferredRenderingEnabled, {
+                title: "resourcePack.editor.agfx.pane.deferredToggle",
+                onChange: isDeferred => {
+                    if (this._graphicsChangeHandle !== undefined) {
+                        return;
+                    }
+                    loadingOverlay.show();
+                    this._graphicsChangeHandle = server_namespaceObject.system.runTimeout((() => {
+                        this._session.extensionContext.settings.graphics.set(server_editor_namespaceObject.GraphicsSettingsProperty.GraphicsMode, isDeferred ? server_namespaceObject.GraphicsMode.Deferred : server_namespaceObject.GraphicsMode.Fancy);
+                    }), server_namespaceObject.TicksPerSecond);
+                },
+                variant: server_editor_namespaceObject.BoolPropertyItemVariant.ToggleSwitch,
+                tooltip: "resourcePack.editor.agfx.pane.deferredToggle.tooltip"
+            });
+            this._rootPane.addText("resourcePack.editor.agfx.pane.enableText", {
+                visible: !isDeferredRenderingEnabled.value
+            });
+            this._currentSettingNotPerBiomeText = this._rootPane.addText("The current Setting Group is a global configuration and is not configurable on a per-biome basis", {
+                visible: isDeferredRenderingEnabled.value && this._currentAccessor !== undefined && this._isAccessorGlobalConfiguration(this._currentAccessor)
+            });
+            this._rootPane.addText("");
+            this._rootSelectedAccessorIndex = (0, server_editor_namespaceObject.makeObservable)(-1);
+            this._collectionIdentifierIndex = (0, server_editor_namespaceObject.makeObservable)(-1);
+            this._targetBiomeDropdownList = server_namespaceObject.BiomeTypes.getAll();
+            const listOfBiomes = server_namespaceObject.BiomeTypes.getAll().map(((v, index) => {
+                const id = v.id.replace("minecraft:", "");
+                const item = {
+                    label: id.split("_").map((word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())).join(" "),
+                    value: index
+                };
+                return item;
+            }));
+            this._rootSelectedAccessorIndex.set(this._accessorList.findIndex((value => value.uniqueId.includes("lighting_group"))));
+            const accessor = this._accessorList[this._rootSelectedAccessorIndex.value];
+            this._currentAccessor = accessor.uniqueId;
+            this._targetBiomeDropdownIndex.set(listOfBiomes.findIndex((value => value.label.includes("Plains"))));
+            this._currentBiome = "minecraft:plains";
+            if (isDeferredRenderingEnabled.value) {
+                this._fetchAndApplyBiomeConfig(this._targetBiomeDropdownList[this._targetBiomeDropdownIndex.value].id);
+            }
+            this._targetBiomeDropdownItem = this._rootPane.addDropdown(this._targetBiomeDropdownIndex, {
+                title: "resourcePack.editor.vibrantVisuals.biome.targetBiome.title",
+                tooltip: "resourcePack.editor.vibrantVisuals.biome.targetBiome.tooltip",
+                enable: isDeferredRenderingEnabled.value,
+                visible: isDeferredRenderingEnabled.value,
+                entries: listOfBiomes,
+                onChange: newValue => {
+                    this._fetchAndApplyBiomeConfig(this._targetBiomeDropdownList[newValue].id);
+                    this._currentBiome = this._targetBiomeDropdownList[newValue].id;
+                }
+            });
+            this._targetBiomeCheckbox = this._rootPane.addBool(this._targetBiomesByCurrentLocation, {
+                title: "resourcePack.editor.vibrantVisuals.biome.targetBiomeByLocation.title",
+                tooltip: "resourcePack.editor.vibrantVisuals.biome.targetBiomeByLocation.tooltip",
+                visible: isDeferredRenderingEnabled.value,
+                onChange: newValue => {
+                    this._targetBiomeDropdownItem.enable = !newValue;
+                }
+            });
+            this._locationUpdateHandle = server_namespaceObject.system.runInterval((() => {
+                if (!isDeferredRenderingEnabled.value) {
+                    return;
+                }
+                if (!this._targetBiomesByCurrentLocation.value) {
+                    return;
+                }
+                const playerLocation = lib.Vector3Utils.floor(this._session.extensionContext.player.location);
+                const biome = server_namespaceObject.world.getDimension(this._session.extensionContext.player.dimension.id).getBiome(playerLocation);
+                if (this._targetBiomeDropdownIndex.value !== -1 && this._targetBiomeDropdownList[this._targetBiomeDropdownIndex.value].id === biome.id) {
+                    return;
+                }
+                const index = this._targetBiomeDropdownList.findIndex((val => val.id === biome.id));
+                this._targetBiomeDropdownIndex.set(index);
+                this._fetchAndApplyBiomeConfig(this._targetBiomeDropdownList[index].id);
+            }), 20);
+            this._collectionNamespacesDropdownElement = this._rootPane.addDropdown(this._collectionNamespacesIndex, {
+                title: "resourcePack.editor.vibrantVisuals.biome.nameSpaceForBiomeSelector.title",
+                tooltip: "resourcePack.editor.vibrantVisuals.biome.nameSpaceForBiomeSelector.tooltip",
+                entries: [],
+                enable: false,
+                visible: isDeferredRenderingEnabled.value,
+                onChange: newValue => {
+                    this._currentCollectionNamespace = this._collectionNamespaces[newValue];
+                    if (this._currentAccessor) {
+                        const elements = this._collectionIdentifiers.filter((value => {
+                            if (this._currentCollectionNamespace) {
+                                return this._getNamespace(value) === this._currentCollectionNamespace;
+                            }
+                            return this._currentAccessor && this._isAccessorGlobalConfiguration(this._currentAccessor);
+                        }));
+                        const mappedElements = elements.map(((name, index) => {
+                            const item = {
+                                label: this._cleanIdentifierString(name),
+                                value: Number(index)
+                            };
+                            return item;
+                        }));
+                        if (elements && elements.length > 0 && this._currentAccessor) {
+                            this._collectionIdentifiersElement?.updateEntries(mappedElements);
+                            this._collectionIdentifierIndex.set(0);
+                            this._changeCollectionIdentifier(this._transferManager, this._currentAccessor, elements[0]);
+                            this._changeBiomeMapping();
+                        }
+                    }
+                }
+            });
+            this._collectionIdentifiersElement = this._rootPane.addDropdown(this._collectionIdentifierIndex, {
+                title: "resourcePack.editor.vibrantVisuals.biome.configSetForBiomeSelector.title",
+                tooltip: "resourcePack.editor.vibrantVisuals.biome.configSetForBiomeSelector.tooltip",
+                entries: [],
+                visible: isDeferredRenderingEnabled.value,
+                enable: false,
+                onChange: (newValue, oldValue) => {
+                    const oldIndex = oldValue;
+                    const newIndex = newValue;
+                    if (oldIndex === newIndex) {
+                        return;
+                    }
+                    if (!this._currentAccessor) {
+                        return;
+                    }
+                    if (this._asyncOperationWorking) {
+                        this._logInfo("Async operation already in progress - ignoring request for now");
+                        this._collectionIdentifierIndex.set(oldIndex);
+                        return;
+                    }
+                    if (this._collectionIdentifierIndex.value < 0 || this._collectionIdentifierIndex.value >= this._collectionIdentifiers.length) {
+                        this._logError("Invalid accessor index selected - this shouldn't be possible");
+                        return;
+                    }
+                    const label = this._collectionIdentifiersElement.getEntryByIndex(newValue)?.label;
+                    if (!label) {
+                        return;
+                    }
+                    let identifier = this._prettyToProperIdentifierString(label);
+                    identifier = `${this._currentCollectionNamespace}:${identifier}`;
+                    const accessor = this._accessorList[this._rootSelectedAccessorIndex.value];
+                    this._currentAccessor = accessor.uniqueId;
+                    this._currentIdentifier = identifier;
+                    this._changeCollectionIdentifier(this._transferManager, accessor.uniqueId, identifier);
+                    this._changeBiomeMapping();
+                    this.telemetryManager.fireTelemetryEvent(DeferredLightingTelemetry.ModeChanged, {
+                        mode: accessor.uniqueId
+                    });
+                }
+            });
+            this._exportBiomeConfigMapping = this._rootPane.addButton((() => {
+                if (this._biomeConfigData !== undefined) {
+                    this._logInfo("Exporting current biome mappings to clipboard");
+                    const data = JSON.stringify(this._buildBiomeJSON(this._currentBiome, this._biomeConfigData), undefined, 2);
+                    this._transferManager.sendDataToClipboard(data);
+                    this.telemetryManager.fireTelemetryEvent(DeferredLightingTelemetry.ExportSettings);
+                }
+            }), {
+                title: "resourcePack.editor.vibrantVisuals.pane.exportBiomeToClipboard.title",
+                tooltip: "resourcePack.editor.vibrantVisuals.pane.exportBiomeToClipboard.tooltip",
+                visible: isDeferredRenderingEnabled.value && this._currentAccessor !== undefined && !this._isAccessorGlobalConfiguration(this._currentAccessor),
+                icon: "pack://textures/editor/VV-Copy-Clipboard.png?filtering=point",
+                shrinkToIcon: true
+            });
+            this._rootPane.addDivider().visible = isDeferredRenderingEnabled.value;
+            this._rootPane.onPropertyPaneVisibilityUpdated.subscribe((eventData => {
+                if (eventData.isVisible && this._currentAccessor !== undefined) {
+                    const accessorName = this._currentAccessor;
+                    this._startDirtyWatcher(this._transferManager, accessorName);
+                } else {
+                    this._stopDirtyWatcher(this._transferManager, this._currentAccessor);
+                }
+            }));
+            const accessorDropdownItems = this._accessorList.map(((v, i) => {
+                const item = {
+                    label: v.nameStringId,
+                    value: i
+                };
+                return item;
+            }));
+            this._accessorListPropertyItem = this._rootPane.addDropdown(this._rootSelectedAccessorIndex, {
+                title: "resourcePack.editor.vibrantVisuals.biome.settingGroup.title",
+                tooltip: "resourcePack.editor.vibrantVisuals.biome.settingGroup.tooltip",
+                entries: accessorDropdownItems,
+                visible: isDeferredRenderingEnabled.value,
+                enable: false,
+                onChange: (newValue, oldValue, items) => {
+                    const oldIndex = oldValue;
+                    const newIndex = newValue;
+                    if (oldIndex === newIndex) {
+                        return;
+                    }
+                    if (this._asyncOperationWorking) {
+                        this._logInfo("Async operation already in progress - ignoring request for now");
+                        this._rootSelectedAccessorIndex.set(oldIndex);
+                        return;
+                    }
+                    if (this._rootSelectedAccessorIndex.value < 0 || this._rootSelectedAccessorIndex.value >= this._accessorList.length) {
+                        this._logError("Invalid accessor index selected - this shouldn't be possible");
+                        return;
+                    }
+                    const accessor = this._accessorList[this._rootSelectedAccessorIndex.value];
+                    this._currentAccessor = accessor.uniqueId;
+                    this._changeDataAccessor(this._transferManager, accessor.uniqueId);
+                    this.telemetryManager.fireTelemetryEvent(DeferredLightingTelemetry.ModeChanged, {
+                        mode: accessor.uniqueId
+                    });
+                }
+            });
+            this._rootPane.addDivider().visible = isDeferredRenderingEnabled.value;
+            const buttonPane = this._rootPane.addButtonPane({
+                itemMinWidth: 2
+            });
+            const validateNamespace = namespace => {
+                if (namespace.includes("minecraft")) {
+                    return {
+                        valid: false,
+                        message: "Cannot use minecraft as a namespace"
+                    };
+                }
+                return validateIdentifierString(namespace);
+            };
+            this._newConfigDialog = this._session.dialogManager.registerDialog({
+                uniqueId: "vvbiome:newConfigDialog",
+                width: 80,
+                title: "resourcePack.editor.vibrantVisuals.newDialogPane.title"
+            });
+            this._newConfigDialogNamespacesDropdownElement = this._newConfigDialog.contentPane.addDropdown(this._newConfigDialogDropdownNamespaceIndex, {
+                title: "resourcePack.editor.vibrantVisuals.newDialogPane.namespaceDropdown.title",
+                entries: [],
+                enable: true,
+                visible: isDeferredRenderingEnabled.value,
+                inlineLabel: false,
+                onChange: newValue => {
+                    this._newConfigNewNamespace.set("");
+                }
+            });
+            this._newConfigDialog.contentPane.addString(this._newConfigNewNamespace, {
+                title: "resourcePack.editor.vibrantVisuals.newDialogPane.newNamespace.title",
+                inlineLabel: false,
+                tooltip: "resourcePack.editor.vibrantVisuals.newDialogPane.newNamespace.tooltip",
+                onChange: newValue => {
+                    if (newValue !== "") {
+                        this._newConfigDialogDropdownNamespaceIndex.set(-1);
+                        this._newConfigDialogNamespacesDropdownElement.enable = false;
+                    } else {
+                        this._newConfigDialogNamespacesDropdownElement.enable = true;
+                    }
+                }
+            });
+            this._newConfigDialog.contentPane.addString(this._newConfigIdentifier, {
+                title: "resourcePack.editor.vibrantVisuals.newDialogPane.newConfig.title",
+                inlineLabel: false,
+                tooltip: "resourcePack.editor.vibrantVisuals.newDialogPane.newConfig.tooltip"
+            });
+            this._importField = this._newConfigDialog.contentPane.addString(this._importFieldText, {
+                title: "resourcePack.editor.vibrantVisuals.newDialogPane.newConfig.importJSON.title",
+                tooltip: "resourcePack.editor.vibrantVisuals.newDialogPane.newConfig.importJSON.tooltip",
+                inlineLabel: false,
+                visible: false,
+                enable: false
+            });
+            const newConfigDialogButtonPane = this._newConfigDialog.controlPane.addButtonPane();
+            newConfigDialogButtonPane.addButton((() => {
+                const dialogDropdownNamespace = this._newConfigDialogNamespacesDropdownElement.getEntryByIndex(this._newConfigDialogDropdownNamespaceIndex.value)?.label;
+                const namespaceString = dialogDropdownNamespace ?? this._newConfigNewNamespace.value;
+                const identifierString = this._newConfigIdentifier.value;
+                const validNamespaceRes = validateNamespace(namespaceString);
+                const validIdentifierRes = validateIdentifierString(identifierString);
+                if (!validNamespaceRes.valid && validNamespaceRes.message) {
+                    this._session.log.error(validNamespaceRes.message, {
+                        channelMask: server_editor_namespaceObject.LogChannel.All
+                    });
+                    return;
+                }
+                if (!validIdentifierRes.valid && validIdentifierRes.message) {
+                    this._session.log.error(validIdentifierRes.message, {
+                        channelMask: server_editor_namespaceObject.LogChannel.All
+                    });
+                    return;
+                }
+                if (!this._uiComponentMap || !this._currentAccessor) {
+                    return;
+                }
+                let data = "";
+                const importing = this._importField.visible && this._importField.enable;
+                if (importing) {
+                    data = this._importFieldText.value;
+                } else {
+                    data = JSON.stringify(this._uiComponentMap.currentData);
+                }
+                const fullIdentifier = `${namespaceString}:${identifierString}`;
+                this._transferManager.createSetting(this._currentAccessor, fullIdentifier, data, false).then((resp => {
+                    if (resp.success) {
+                        if (!this._currentAccessor) {
+                            return;
+                        }
+                        this._transferManager.requestIdentifiers(this._currentAccessor).then((data => {
+                            if (!this._currentAccessor) {
+                                return;
+                            }
+                            this._collectionIdentifiers = data.identifiers;
+                            this._collectionNamespaces.length = 0;
+                            this._collectionIdentifiersElement.enable = true;
+                            this._newSettingButton.enable = true;
+                            for (const identifier of this._collectionIdentifiers) {
+                                const charIndex = identifier.indexOf(":");
+                                const str = identifier.substring(0, charIndex);
+                                if (!this._collectionNamespaces.includes(str)) {
+                                    this._collectionNamespaces.push(str);
+                                }
+                            }
+                            this._collectionNamespacesDropdownElement.updateEntries(this._collectionNamespaces.map(((value, index) => {
+                                const item = {
+                                    label: value,
+                                    value: index
+                                };
+                                return item;
+                            })));
+                            const creatableEntries = this._collectionNamespaces.filter((value => !value.includes("minecraft")));
+                            this._newConfigDialogNamespacesDropdownElement.updateEntries(creatableEntries.map(((value, index) => {
+                                const item = {
+                                    label: value,
+                                    value: index
+                                };
+                                return item;
+                            })));
+                            this._newConfigDialogNamespacesDropdownElement.enable = creatableEntries.length !== 0;
+                            const initialIndex = this._collectionNamespaces.findIndex((value => value === namespaceString));
+                            this._collectionNamespacesIndex.set(initialIndex);
+                            this._currentCollectionNamespace = this._collectionNamespaces[initialIndex];
+                            this._collectionNamespacesDropdownElement.enable = true;
+                            const elements = this._collectionIdentifiers.filter((value => {
+                                if (this._currentCollectionNamespace) {
+                                    return this._getNamespace(value) === this._currentCollectionNamespace;
+                                }
+                                return this._currentAccessor && this._isAccessorGlobalConfiguration(this._currentAccessor);
+                            }));
+                            const mappedElements = elements.map(((name, index) => {
+                                const item = {
+                                    label: this._cleanIdentifierString(name),
+                                    value: Number(index)
+                                };
+                                return item;
+                            }));
+                            if (elements && elements.length > 0 && this._currentAccessor) {
+                                this._collectionIdentifiersElement?.updateEntries(mappedElements);
+                                const index = elements.findIndex((value => value === fullIdentifier));
+                                this._collectionIdentifierIndex.set(index);
+                                this._currentIdentifier = fullIdentifier;
+                                this._changeCollectionIdentifier(this._transferManager, this._currentAccessor, fullIdentifier);
+                                this._changeBiomeMapping();
+                            }
+                        })).catch((e => {
+                            this._schemaInterface.error(`Failed to transfer data from client - ${VibrantVisualsBiome_stringFromException(e)}`);
+                        }));
+                    } else {
+                        if (importing) {
+                            this._schemaInterface.error(`Failed to create new setting - unable to read provided JSON for the current setting group.`);
+                        } else {
+                            this._schemaInterface.error(`Failed to transfer data from client - ${resp.message}`);
+                        }
+                    }
+                })).catch((err => {
+                    this._schemaInterface.error(`Failed to create new setting - ${VibrantVisualsBiome_stringFromException(err)}`);
+                }));
+                this._newConfigDialog.sendDismiss();
+            }), {
+                title: "resourcePack.editor.vibrantVisuals.newDialogPane.newConfig.save.title"
+            });
+            newConfigDialogButtonPane.addButton((() => {
+                this._newConfigDialog.sendDismiss();
+            }), {
+                title: "resourcePack.editor.vibrantVisuals.newDialogPane.newConfig.cancel.title"
+            });
+            this._newSettingButton = buttonPane.addButton((() => {
+                this._newConfigDialogDropdownNamespaceIndex.set(-1);
+                this._newConfigNewNamespace.set("");
+                this._newConfigIdentifier.set("");
+                this._importFieldText.set("");
+                this._importField.enable = false;
+                this._importField.visible = false;
+                this._session.dialogManager.activateDialog({
+                    dialogId: "vvbiome:newConfigDialog"
+                });
+            }), {
+                title: "resourcePack.editor.vibrantVisuals.pane.newButton.title",
+                tooltip: "resourcePack.editor.vibrantVisuals.pane.newButton.tooltip",
+                icon: "plusIcon",
+                enable: false,
+                visible: isDeferredRenderingEnabled.value,
+                shrinkToIcon: true
+            });
+            this._importButton = buttonPane.addButton((() => {
+                this._newConfigDialogDropdownNamespaceIndex.set(-1);
+                this._newConfigNewNamespace.set("");
+                this._newConfigIdentifier.set("");
+                this._importFieldText.set("");
+                this._importField.enable = true;
+                this._importField.visible = true;
+                this._session.dialogManager.activateDialog({
+                    dialogId: "vvbiome:newConfigDialog"
+                });
+            }), {
+                title: "resourcePack.editor.vibrantVisuals.pane.importButton.title",
+                tooltip: "resourcePack.editor.vibrantVisuals.newDialogPane.newConfig.importJSON.tooltip",
+                visible: isDeferredRenderingEnabled.value,
+                icon: "pack://textures/editor/VV-Import.png?filtering=point",
+                shrinkToIcon: true,
+                enable: false
+            });
+            buttonPane.addButton((() => {
+                if (this._uiComponentMap !== undefined) {
+                    this._logInfo("Exporting current settings to clipboard");
+                    const data = JSON.stringify(this._uiComponentMap.currentData, undefined, 2);
+                    this._transferManager.sendDataToClipboard(data);
+                    this.telemetryManager.fireTelemetryEvent(DeferredLightingTelemetry.ExportSettings);
+                }
+            }), {
+                tooltip: "resourcePack.editor.agfx.pane.settings.export_to_clipboard",
+                visible: isDeferredRenderingEnabled.value,
+                icon: "pack://textures/editor/VV-Copy-Clipboard.png?filtering=point",
+                shrinkToIcon: true
+            });
+            buttonPane.addButton((() => {
+                if (!this._biomeConfigData) {
+                    return;
+                }
+                this._generateResourcePackPayload(this._transferManager, this._biomeConfigData).then((payload => {
+                    const base64Payload = toBase64(payload);
+                    const domain = USE_MCTOOLS_STAGING ? "https://silver-guide-3a7f4789.pages.github.io" : "https://mctools.dev";
+                    const url = domain + "/#open=gp/dlStarter&updatesJson=" + base64Payload;
+                    this._packPayload.set(url);
+                    this._packLink.visible = true;
+                })).catch((e => {
+                    this._logError("Failed to cook resource pack payload - " + VibrantVisualsBiome_stringFromException(e));
+                    this._buildErrorUI("Failed to cook resource pack payload");
+                }));
+            }), {
+                tooltip: "resourcePack.editor.vibrantVisuals.pane.generatePacks",
+                visible: isDeferredRenderingEnabled.value,
+                icon: "pack://textures/editor/VV-Export.png?filtering=point",
+                shrinkToIcon: true
+            });
+            this._packPayload = (0, server_editor_namespaceObject.makeObservable)("");
+            this._packLink = this._rootPane.addLink(this._packPayload, {
+                title: "Download Resource Pack"
+            });
+            this._packLink.visible = false;
+            this._resetButton = buttonPane.addButton((() => {
+                if (this._currentAccessor !== undefined && this._uiComponentMap !== undefined) {
+                    this._destroySettingsPane();
+                    this._uiComponentMap.reverting = true;
+                    this._transferManager.requestData(this._currentAccessor, {
+                        useSnapshot: true,
+                        identifier: this._currentIdentifier
+                    }).then((resp => {
+                        if (resp.collectionName === this._currentAccessor) {
+                            this._transferManager.sendData(this._currentAccessor, resp.data, {
+                                identifier: this._currentIdentifier
+                            });
+                            this._buildSettingsPane(resp);
+                        }
+                    })).catch((() => {
+                        this._buildErrorUI("Unable to revert Vibrant Visuals configuration");
+                    }));
+                    this.telemetryManager.fireTelemetryEvent(DeferredLightingTelemetry.ResetSettings);
+                }
+            }), {
+                tooltip: "resourcePack.editor.vibrantVisuals.pane.settings.restoreDefault",
+                enable: false,
+                visible: isDeferredRenderingEnabled.value,
+                icon: "pack://textures/editor/VV-Reset.png?filtering=point",
+                shrinkToIcon: true
+            });
+            this._session.menuBar.getMenu(server_editor_namespaceObject.CoreMenuType.WorldOptions).then((menu => {
+                this._menu = menu.addItem({
+                    label: "resourcePack.editor.menuBar.vibrantVisuals.title",
+                    uniqueId: "DeferredLightingSettingsMenuItem",
+                    tooltip: "resourcePack.editor.menuBar.vibrantVisualsBiome.tooltip"
+                }, this._session.actionManager.createAction({
+                    actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                    onExecute: () => {
+                        this._rootPane.show();
+                    }
+                }));
+            })).catch((() => {
+                this._logError("Failed to add root menu item for this tool");
+            }));
+            this._addActionBarItem();
+        }
+        _fetchAndApplyBiomeConfig(biomeId) {
+            this._transferManager.requestBiomeConfig(biomeId).then((val => {
+                this._biomeConfigData = {
+                    ...val,
+                    color_grading: val.colorGrading,
+                    lighting_group: val.lightingGroup
+                };
+                if (this._rootSelectedAccessorIndex.value === -1) {
+                    this._rootSelectedAccessorIndex.set(0);
+                }
+                this._accessorListPropertyItem.enable = true;
+                const accessor = this._accessorList[this._rootSelectedAccessorIndex.value];
+                this._currentAccessor = accessor.uniqueId;
+                this._changeDataAccessor(this._transferManager, accessor.uniqueId);
+            })).catch((err => {
+                this._schemaInterface.error(`Failed to fetch biome config for ${biomeId}: ${VibrantVisualsBiome_stringFromException(err)}`);
+            }));
+        }
+        _isAccessorGlobalConfiguration(accessor) {
+            return GLOBAL_ACCESSOR_CONFIGURATIONS.includes(accessor);
+        }
+        async _generateResourcePackPayload(transferManager, biomeConfigData) {
+            const rp = new Map;
+            const prefix = "/resource_packs/samp_dlstarter/";
+            const filepath_map = new Map([ [ "deferred_lighting::water_parameters", prefix + "water/water.json" ], [ "deferred_lighting::lighting_group", prefix + "lighting/global.json" ], [ "deferred_lighting::atmospheric_scattering", prefix + "atmospherics/atmospherics.json" ], [ "deferred_lighting::color_grading_parameters", prefix + "color_grading/color_grading.json" ], [ "deferred_lighting::point_lights", prefix + "point_lights/global.json" ], [ "deferred_lighting::shadows", prefix + "shadows/global.json" ], [ "deferred_lighting::cubemap", prefix + "cubemaps/cubemap.json" ] ]);
+            const accessorList = transferManager.getRegisteredAccessors();
+            for (const accessor of accessorList) {
+                const accessorString = accessor.uniqueId.replace("deferred_lighting::", "");
+                const accessorToConfigKeyMap = {
+                    atmospheric_scattering: "atmospheric",
+                    color_grading_parameters: "color_grading",
+                    lighting_group: "lighting_group",
+                    cubemap: "cubemap",
+                    water_parameters: "water"
+                };
+                const configKey = accessorToConfigKeyMap[accessorString];
+                let identifier = "";
+                if (configKey && configKey in biomeConfigData) {
+                    identifier = biomeConfigData[configKey];
+                }
+                try {
+                    const agfxData = await transferManager.requestData(accessor.uniqueId, {
+                        identifier
+                    });
+                    const destinationPath = filepath_map.get(accessor.uniqueId);
+                    if (destinationPath === undefined) {
+                        this._logError(`No destination path found for accessor ${accessor.uniqueId}`);
+                        continue;
+                    }
+                    rp.set(destinationPath, agfxData.data);
+                } catch (e) {
+                    this._logError(`Failed to get data for accessor ${accessor.uniqueId} - ${VibrantVisualsBiome_stringFromException(e)}`);
+                }
+            }
+            return JSON.stringify(Object.fromEntries(rp));
+        }
+        _buildErrorUI(msg) {
+            if (this._settingsPane) {
+                this._rootPane.removeSubPane(this._settingsPane);
+                this._settingsPane = undefined;
+            }
+            this._settingsPane = this._rootPane.createSubPane({
+                title: "resourcePack.editor.agfx.settings.error.title"
+            });
+            const errorMessages = msg.split("\n");
+            for (const msg of errorMessages) {
+                this._settingsPane.addText(msg, {
+                    border: false
+                });
+            }
+            this._asyncOperationWorking = false;
+        }
+        _changeDataAccessor(_transferManager, _accessorName) {
+            if (this._asyncOperationWorking) {
+                this._logError("Async operation already in progress - ignoring request");
+                return;
+            }
+            this._errorCollection = [];
+            this._destroySettingsPane();
+            const isGlobalConfig = this._isAccessorGlobalConfiguration(_accessorName);
+            this._currentSettingNotPerBiomeText.visible = isGlobalConfig;
+            this._collectionIdentifiersElement.visible = !isGlobalConfig;
+            this._targetBiomeCheckbox.visible = !isGlobalConfig;
+            this._targetBiomeDropdownItem.visible = !isGlobalConfig;
+            this._collectionNamespacesDropdownElement.visible = !isGlobalConfig;
+            this._importButton.enable = !isGlobalConfig;
+            this._exportBiomeConfigMapping.visible = !isGlobalConfig;
+            _transferManager.requestIdentifiers(_accessorName).then((data => {
+                this._collectionIdentifiers = data.identifiers;
+                this._collectionNamespaces.length = 0;
+                this._processCollectionChanges(_accessorName);
+            })).catch((e => {
+                this._schemaInterface.error(`Failed to transfer data from client - ${VibrantVisualsBiome_stringFromException(e)}`);
+                this.telemetryManager.fireTelemetryEvent(DeferredLightingTelemetry.ErrorDataTransfer);
+                this._buildErrorUI(this._errorCollection.join("\n"));
+            }));
+        }
+        _processCollectionChanges(_accessorName) {
+            this._collectionIdentifiersElement.enable = true;
+            this._newSettingButton.enable = true;
+            for (const identifier of this._collectionIdentifiers) {
+                const namespace = this._getNamespace(identifier);
+                if (!this._collectionNamespaces.includes(namespace)) {
+                    this._collectionNamespaces.push(namespace);
+                }
+            }
+            this._collectionNamespacesDropdownElement.updateEntries(this._collectionNamespaces.map(((value, index) => {
+                const item = {
+                    label: value,
+                    value: index
+                };
+                return item;
+            })));
+            const creatableEntries = this._collectionNamespaces.filter((value => !value.includes("minecraft")));
+            this._newConfigDialogNamespacesDropdownElement.updateEntries(creatableEntries.map(((value, index) => {
+                const item = {
+                    label: value,
+                    value: index
+                };
+                return item;
+            })));
+            this._newConfigDialogNamespacesDropdownElement.enable = creatableEntries.length !== 0;
+            if (!this._biomeConfigData) {
+                return;
+            }
+            const accessorIndex = this._rootSelectedAccessorIndex.value;
+            const currentAccessor = this._accessorList[accessorIndex];
+            const biomeConfigIdentifier = Object.entries(this._biomeConfigData).find((val => currentAccessor.uniqueId.replace("deferred_lighting::", "").includes(val[0])))?.[1];
+            let initialIndex = 0;
+            if (!this._isAccessorGlobalConfiguration(_accessorName)) {
+                initialIndex = this._collectionNamespaces.findIndex((value => value === this._getNamespace(biomeConfigIdentifier)));
+            }
+            this._collectionNamespacesIndex.set(initialIndex);
+            this._currentCollectionNamespace = this._collectionNamespaces[initialIndex];
+            this._collectionNamespacesDropdownElement.enable = true;
+            const elements = this._collectionIdentifiers.filter((value => {
+                if (this._currentCollectionNamespace) {
+                    return value.includes(this._currentCollectionNamespace);
+                }
+                return this._currentAccessor && this._isAccessorGlobalConfiguration(this._currentAccessor);
+            }));
+            const mappedElements = elements.map(((name, index) => {
+                const item = {
+                    label: this._cleanIdentifierString(name),
+                    value: Number(index)
+                };
+                return item;
+            }));
+            if (elements && elements.length > 0 && this._currentAccessor) {
+                this._collectionIdentifiersElement?.updateEntries(mappedElements);
+                let index = 0;
+                if (!this._isAccessorGlobalConfiguration(_accessorName)) {
+                    index = elements.findIndex((value => value === biomeConfigIdentifier));
+                }
+                this._collectionIdentifierIndex.set(index);
+                const identifier = this._isAccessorGlobalConfiguration(_accessorName) ? "" : biomeConfigIdentifier;
+                this._changeCollectionIdentifier(this._transferManager, _accessorName, identifier);
+            }
+        }
+        _cleanIdentifierString(_identifier) {
+            let cleanedIdentifier = _identifier;
+            const charIndex = cleanedIdentifier.indexOf(":") + 1;
+            cleanedIdentifier = cleanedIdentifier.substring(charIndex, cleanedIdentifier.length);
+            cleanedIdentifier = cleanedIdentifier.replace(/_/g, " ");
+            cleanedIdentifier = cleanedIdentifier.replace(/\b\w/g, (function(l) {
+                return l.toUpperCase();
+            }));
+            return cleanedIdentifier;
+        }
+        _prettyToProperIdentifierString(_prettyIdentifier) {
+            let identifier = _prettyIdentifier.toLocaleLowerCase();
+            identifier = identifier.replace(/ /g, "_");
+            return identifier;
+        }
+        _changeCollectionIdentifier(_transferManager, _accessorName, _identifier) {
+            if (this._asyncOperationWorking) {
+                this._logError("Async operation already in progress - ignoring request");
+                return;
+            }
+            this._errorCollection = [];
+            this._destroySettingsPane();
+            this._currentIdentifier = _identifier;
+            this._resetButton.enable = true;
+            this._asyncOperationWorking = true;
+            _transferManager.requestData(_accessorName, {
+                identifier: _identifier
+            }).then((data => {
+                this._buildSettingsPane(data);
+                this._startDirtyWatcher(_transferManager, _accessorName);
+                _transferManager.sendData(_accessorName, data.data, {
+                    identifier: _identifier
+                });
+            })).catch((e => {
+                this._schemaInterface.error(`Failed to transfer data from client - ${VibrantVisualsBiome_stringFromException(e)}`);
+                this.telemetryManager.fireTelemetryEvent(DeferredLightingTelemetry.ErrorDataTransfer);
+                this._buildErrorUI(this._errorCollection.join("\n"));
+            }));
+        }
+        _buildSettingsPane(data) {
+            this._schemaInterface.debug("Received data from transfer manager");
+            this._asyncOperationWorking = false;
+            let dataObject;
+            let schemaObject;
+            this._errorCollection = [];
+            this._uiComponentMap = undefined;
+            try {
+                dataObject = JSON.parse(data.data);
+                this._schemaInterface.debug("Parsed incoming JSON object - OK");
+                schemaObject = JSON.parse(data.schema);
+                this._schemaInterface.debug("Parsed incoming JSON schema - OK");
+                this._schemaInterface.debug(`Schema:\n$${String(data.schema)}\n-----------------------------------------------------------------------------`);
+                this._schemaInterface.debug(`Data:\n$${String(data.data)}\n-----------------------------------------------------------------------------`);
+            } catch (e) {
+                this._schemaInterface.error(`Failed to parse incoming JSON object - ${VibrantVisualsBiome_stringFromException(e)}`);
+                this._buildErrorUI(this._errorCollection.join("\n"));
+                return;
+            }
+            this._uiComponentMap = new UIComponentMap(this._session, dataObject);
+            try {
+                const schemaBuilder = new SchemaValidatorBuilder(this._schemaInterface);
+                const builtSchema = schemaBuilder.build(schemaObject);
+                const validatedFlag = schemaBuilder.validate(dataObject);
+                if (!validatedFlag) {
+                    throw new Error("Failed to validate incoming JSON object");
+                }
+                this._uiComponentMap.saveDefaultProperties();
+            } catch (e) {
+                this._schemaInterface.error(`Failed to validate schema - ${VibrantVisualsBiome_stringFromException(e)}`);
+                this._buildErrorUI(this._errorCollection.join("\n"));
+                this._uiComponentMap = undefined;
+                return;
+            }
+            try {
+                this._settingsPane = this._rootPane.createSubPane({
+                    title: "resourcePack.editor.agfx.pane.settings.title",
+                    hasExpander: false
+                });
+                this._uiComponentMap?.constructUIComponents(this._settingsPane, this._schemaInterface);
+                this._settingsPane.addDivider();
+            } catch (e) {
+                this._schemaInterface.error(`Failed to build UI components - ${VibrantVisualsBiome_stringFromException(e)}`);
+                this._buildErrorUI(this._errorCollection.join("\n"));
+                return;
+            }
+        }
+        _destroySettingsPane() {
+            if (this._settingsPane) {
+                this._rootPane.removeSubPane(this._settingsPane);
+                this._settingsPane = undefined;
+            }
+        }
+        _stopDirtyWatcher(_transferManager, _accessorName) {
+            if (this._tickHandle !== -1) {
+                server_namespaceObject.system.clearRun(this._tickHandle);
+                this._tickHandle = -1;
+            }
+            if (_accessorName !== undefined) {
+                this._schemaInterface.debug("closing session");
+                _transferManager.closeSession(_accessorName);
+            } else {
+                this._schemaInterface.debug("closing session - no accessor name");
+            }
+        }
+        _startDirtyWatcher(_transferManager, _accessorName) {
+            if (this._tickHandle !== -1) {
+                this._stopDirtyWatcher(_transferManager, this._currentAccessor);
+            }
+            if (this._tickHandle === -1) {
+                this._schemaInterface.debug("Starting dirty - opening session client");
+                _transferManager.openSession(_accessorName);
+                this._tickHandle = server_namespaceObject.system.runInterval((() => {
+                    if (this._uiComponentMap && this._uiComponentMap.dirty && !this._uiComponentMap.reverting) {
+                        this._uiComponentMap.dirty = false;
+                        this._schemaInterface.debug("Data is dirty - pushing to client");
+                        const data = JSON.stringify(this._uiComponentMap.currentData);
+                        _transferManager.sendData(_accessorName, data, {
+                            identifier: this._currentIdentifier
+                        });
+                        this._packLink.visible = false;
+                    }
+                }), 1);
+            }
+        }
+        _addActionBarItem() {
+            const showVibrantVisualsPaneAction = this._session.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    this._rootPane.show();
+                }
+            });
+            this._session.actionBar.registerItem("editor:actionBarItem:vibrantVisualsBiome", showVibrantVisualsPaneAction, {
+                label: "resourcePack.editor.menuBar.vibrantVisuals.title",
+                icon: "pack://textures/editor/Vibrant-Visuals.png?filtering=point",
+                tooltipTitle: "resourcePack.editor.menuBar.vibrantVisuals.title",
+                tooltipDescription: "resourcePack.editor.menuBar.vibrantVisualsBiome.tooltip",
+                enabled: true,
+                executeOnAdd: true
+            });
+        }
+        _getNamespace(fullIdentifier) {
+            const charIndex = fullIdentifier.indexOf(":");
+            const str = fullIdentifier.substring(0, charIndex);
+            return str;
+        }
+        _changeBiomeMapping() {
+            const currentBiome = this._targetBiomeDropdownList[this._targetBiomeDropdownIndex.value].id;
+            if (this._biomeConfigData && this._currentAccessor && this._currentIdentifier) {
+                this._transferManager.changeBiomeMapping(currentBiome, this._currentAccessor, this._currentIdentifier);
+                const accessorString = this._currentAccessor.replace("deferred_lighting::", "");
+                const accessorToConfigKeyMap = {
+                    atmospheric_scattering: "atmospheric",
+                    color_grading_parameters: "color_grading",
+                    lighting_group: "lighting_group",
+                    cubemap: "cubemap",
+                    water_parameters: "water"
+                };
+                const configKey = accessorToConfigKeyMap[accessorString];
+                if (configKey && configKey in this._biomeConfigData) {
+                    this._biomeConfigData[configKey] = this._currentIdentifier;
+                }
+            }
+        }
+        _buildBiomeJSON(currentBiome, biomeConfigData) {
+            const data = {
+                description: {
+                    identifier: currentBiome
+                },
+                components: {
+                    "minecraft:atmosphere_identifier": {
+                        atmosphere_identifier: biomeConfigData.atmospheric
+                    },
+                    "minecraft:color_grading_identifier": {
+                        color_grading_identifier: biomeConfigData.color_grading
+                    },
+                    "minecraft:lighting_identifier": {
+                        lighting_identifier: biomeConfigData.lighting_group
+                    },
+                    "minecraft:water_identifier": {
+                        water_identifier: biomeConfigData.water
+                    },
+                    "minecraft:cubemap_identifier": {
+                        cubemap_identifier: biomeConfigData.cubemap
+                    }
+                }
+            };
+            const json = {
+                format_version: "1.21.90",
+                "minecraft:client_biome": data
+            };
+            return json;
+        }
+        teardown() {
+            const transferManager = server_editor_private_bindings_namespaceObject.editorInternal.getPlayerServices(this._session.extensionContext.player).dataTransfer;
+            if (this._locationUpdateHandle) {
+                server_namespaceObject.system.clearRun(this._locationUpdateHandle);
+            }
+            this._stopDirtyWatcher(transferManager, this._currentAccessor);
+            if (this._graphicsChangeHandle !== undefined) {
+                server_namespaceObject.system.clearRun(this._graphicsChangeHandle);
+            }
+        }
+    }
+    const MIN_TIME_DIFFERENCE_SECONDS = .05;
+    const STORED_CINEMATIC_PLAYER_PROPERTY_NAME = "cinematic:storedControlPoints";
+    const WIDGET_SHOW_DISTANCE = 2;
+    var SplineTypeDropdownSelection;
+    (function(SplineTypeDropdownSelection) {
+        SplineTypeDropdownSelection[SplineTypeDropdownSelection["CatmullRom"] = 0] = "CatmullRom";
+        SplineTypeDropdownSelection[SplineTypeDropdownSelection["Linear"] = 1] = "Linear";
+    })(SplineTypeDropdownSelection || (SplineTypeDropdownSelection = {}));
+    var CinematicTool_QuickActionMode;
+    (function(QuickActionMode) {
+        QuickActionMode[QuickActionMode["None"] = 0] = "None";
+        QuickActionMode[QuickActionMode["SelectAll"] = 1] = "SelectAll";
+        QuickActionMode[QuickActionMode["DeleteSelected"] = 2] = "DeleteSelected";
+    })(CinematicTool_QuickActionMode || (CinematicTool_QuickActionMode = {}));
+    const SPLINE_TYPE_CONFIGS = {
+        [SplineTypeDropdownSelection.CatmullRom]: {
+            minPoints: 4,
+            displayName: "CatmullRom",
+            splineClass: server_namespaceObject.CatmullRomSpline,
+            widgetSplineType: server_editor_namespaceObject.SplineType.Hermite
+        },
+        [SplineTypeDropdownSelection.Linear]: {
+            minPoints: 3,
+            displayName: "Linear",
+            splineClass: server_namespaceObject.LinearSpline,
+            widgetSplineType: server_editor_namespaceObject.SplineType.Line
+        }
+    };
+    class CinematicToolBehavior {
+        constructor(uiSession) {
+            this.uiSession = uiSession;
+            this.PROXIMITY_CHECK_INTERVAL_TICKS = 5;
+            this.controlPoints = [];
+            this.selectedControlPointIndex = -1;
+            this.nextControlPointId = 1;
+            this.quickActionMode = (0, server_editor_namespaceObject.makeObservable)(CinematicTool_QuickActionMode.None);
+            this.totalDuration = (0, server_editor_namespaceObject.makeObservable)(10);
+            this.selectedSplineTypeIndex = (0, server_editor_namespaceObject.makeObservable)(SplineTypeDropdownSelection.CatmullRom);
+            this.isAnimating = false;
+            this.SPLINE_UPDATE_DELAY_MS = 100;
+            uiSession.log.debug(`Initializing ${CinematicToolBehavior.BEHAVIOR_NAME}`);
+            this.widgetGroup = uiSession.extensionContext.widgetManager.createGroup({
+                groupSelectionMode: server_editor_namespaceObject.WidgetGroupSelectionMode.Multiple,
+                visible: false
+            });
+            this.loadControlPointsFromWorld();
+            this.pane = this._createPropertyPane();
+            this.tool = this._addTool(uiSession);
+            this.tool.bindPropertyPane(this.pane);
+            this._bindKeyboardShortcuts();
+            this._updatePlayAnimationButtonState();
+        }
+        teardown() {
+            this.uiSession.log.debug(`Shutting down ${CinematicToolBehavior.BEHAVIOR_NAME}`);
+            if (this.animationTimeoutId !== undefined) {
+                server_namespaceObject.system.clearRun(this.animationTimeoutId);
+                this.animationTimeoutId = undefined;
+            }
+            if (this.splineUpdateTimeoutId !== undefined) {
+                server_namespaceObject.system.clearRun(this.splineUpdateTimeoutId);
+                this.splineUpdateTimeoutId = undefined;
+            }
+            if (this.proximityCheckIntervalId !== undefined) {
+                server_namespaceObject.system.clearRun(this.proximityCheckIntervalId);
+                this.proximityCheckIntervalId = undefined;
+            }
+            if (this.moveToPointCameraTimeoutId !== undefined) {
+                server_namespaceObject.system.clearRun(this.moveToPointCameraTimeoutId);
+                this.moveToPointCameraTimeoutId = undefined;
+            }
+            if (this.moveToPointTeleportTimeoutId !== undefined) {
+                server_namespaceObject.system.clearRun(this.moveToPointTeleportTimeoutId);
+                this.moveToPointTeleportTimeoutId = undefined;
+            }
+            this._restoreHiddenWidget();
+            if (this.isAnimating) {
+                this._restoreCamera();
+            }
+            this._destroyAllWidgets();
+            try {
+                this.uiSession.extensionContext.widgetManager.deleteGroup(this.widgetGroup);
+            } catch {}
+        }
+        loadControlPointsFromWorld() {
+            try {
+                const player = this.uiSession.extensionContext.player;
+                const storedData = player.getDynamicProperty(STORED_CINEMATIC_PLAYER_PROPERTY_NAME);
+                if (!storedData) {
+                    return;
+                }
+                const data = JSON.parse(storedData);
+                if (data.controlPoints && Array.isArray(data.controlPoints)) {
+                    this.controlPoints = data.controlPoints.map((stored => ({
+                        id: stored.id,
+                        name: stored.name,
+                        position: stored.position,
+                        viewDirection: stored.viewDirection,
+                        playerRotation: stored.playerRotation,
+                        easingType: stored.easingType,
+                        timeSeconds: stored.timeSeconds,
+                        widget: undefined
+                    })));
+                    this.totalDuration.set(data.totalDuration || 10);
+                    this.selectedSplineTypeIndex.set(data.splineType || SplineTypeDropdownSelection.CatmullRom);
+                    if (this.controlPoints.length > 0) {
+                        const maxId = Math.max(...this.controlPoints.map((cp => {
+                            const match = cp.id.match(/cp_(\d+)/);
+                            return match ? parseInt(match[1]) : 0;
+                        })));
+                        this.nextControlPointId = maxId + 1;
+                    }
+                }
+            } catch (error) {
+                this.uiSession.log.info(`Failed to load control points from storage : ${(0, server_editor_namespaceObject.stringFromException)(error)}`);
+            }
+        }
+        storeControlPointsToWorld() {
+            const data = {
+                controlPoints: this.controlPoints.map((cp => ({
+                    id: cp.id,
+                    name: cp.name,
+                    position: cp.position,
+                    viewDirection: cp.viewDirection,
+                    playerRotation: cp.playerRotation,
+                    easingType: cp.easingType,
+                    timeSeconds: cp.timeSeconds
+                }))),
+                totalDuration: this.totalDuration.value,
+                splineType: this.selectedSplineTypeIndex.value
+            };
+            const player = this.uiSession.extensionContext.player;
+            player.setDynamicProperty(STORED_CINEMATIC_PLAYER_PROPERTY_NAME, JSON.stringify(data));
+        }
+        _bindKeyboardShortcuts() {
+            const deleteSelectedPointAction = this.uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    if (this.selectedControlPointIndex < 0 || this.selectedControlPointIndex >= this.controlPoints.length) {
+                        return;
+                    }
+                    this.uiSession.dialogManager.activateDialog({
+                        dialogId: "cinematic:singleDeleteConfirm"
+                    });
+                }
+            });
+            this.tool.registerKeyBinding(deleteSelectedPointAction, {
+                key: server_editor_namespaceObject.KeyboardKey.DELETE
+            }, {
+                uniqueId: "cinematic:keyBinding:deletePoint",
+                label: "resourcePack.editor.CinematicTool.keyBinding.deletePoint.title",
+                tooltip: "resourcePack.editor.CinematicTool.keyBinding.deletePoint.tooltip"
+            });
+        }
+        _addTool(uiSession) {
+            const tool = uiSession.toolRail.addTool("Cinematic Tool", {
+                title: "resourcePack.editor.CinematicTool.title",
+                icon: "pack://textures/editor/Camera.png?filtering=point",
+                tooltip: "resourcePack.editor.CinematicTool.tooltip"
+            });
+            let isFirstActivation = true;
+            tool.onModalToolActivation.subscribe((eventData => {
+                if (eventData.isActiveTool) {
+                    this.widgetGroup.visible = true;
+                    if (isFirstActivation) {
+                        this._createAllControlPointWidgets();
+                        this._updateSplineVisualization();
+                        this._refreshControlPointsList();
+                        isFirstActivation = false;
+                    }
+                } else {
+                    this.widgetGroup.visible = false;
+                    if (this.moveToPointCameraTimeoutId !== undefined) {
+                        server_namespaceObject.system.clearRun(this.moveToPointCameraTimeoutId);
+                        this.moveToPointCameraTimeoutId = undefined;
+                    }
+                    if (this.moveToPointTeleportTimeoutId !== undefined) {
+                        server_namespaceObject.system.clearRun(this.moveToPointTeleportTimeoutId);
+                        this.moveToPointTeleportTimeoutId = undefined;
+                    }
+                    if (this.splineUpdateTimeoutId !== undefined) {
+                        server_namespaceObject.system.clearRun(this.splineUpdateTimeoutId);
+                        this.splineUpdateTimeoutId = undefined;
+                    }
+                    if (this.isAnimating) {
+                        this._stopAnimation();
+                    }
+                    this._restoreHiddenWidget();
+                }
+            }));
+            return tool;
+        }
+        _createPropertyPane() {
+            const pane = this.uiSession.createPropertyPane({
+                title: "resourcePack.editor.CinematicTool.title",
+                uniqueId: "editor:pane:cinematicTool",
+                infoTooltip: {
+                    description: [ "resourcePack.editor.CinematicTool.tooltip", {
+                        link: "https://aka.ms/BedrockEditorCameraTool",
+                        text: "resourcePack.editor.help.learnMore"
+                    } ]
+                }
+            });
+            pane.addDropdown(this.selectedSplineTypeIndex, {
+                title: "resourcePack.editor.CinematicTool.pane.splineType",
+                tooltip: "resourcePack.editor.CinematicTool.pane.splineType.tooltip",
+                entries: [ {
+                    label: "resourcePack.editor.CinematicTool.pane.splineType.catmullRom",
+                    value: SplineTypeDropdownSelection.CatmullRom
+                }, {
+                    label: "resourcePack.editor.CinematicTool.pane.splineType.linear",
+                    value: SplineTypeDropdownSelection.Linear
+                } ],
+                onChange: _ => {
+                    this._updatePlayAnimationButtonState();
+                    this._updateSplineVisualization();
+                    this.storeControlPointsToWorld();
+                }
+            });
+            pane.addNumber(this.totalDuration, {
+                title: "resourcePack.editor.CinematicTool.pane.totalDuration",
+                tooltip: "resourcePack.editor.CinematicTool.pane.totalDuration.tooltip",
+                min: 1,
+                max: 300,
+                onChange: _ => {
+                    this._redistributeTimeValues();
+                    this.storeControlPointsToWorld();
+                }
+            });
+            this.playAnimationButton = pane.addButton(this.uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => this._playAnimation()
+            }), {
+                title: "resourcePack.editor.CinematicTool.pane.playAnimation",
+                variant: server_editor_namespaceObject.ButtonVariant.Primary,
+                visible: true,
+                enable: false
+            });
+            this.stopAnimationButton = pane.addButton(this.uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => this._stopAnimation()
+            }), {
+                title: "resourcePack.editor.CinematicTool.pane.stopAnimation",
+                variant: server_editor_namespaceObject.ButtonVariant.Secondary,
+                visible: false
+            });
+            this.exportCodeButton = pane.addButton(this.uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => this._exportAnimationCode()
+            }), {
+                title: "resourcePack.editor.CinematicTool.pane.exportCode",
+                variant: server_editor_namespaceObject.ButtonVariant.Secondary,
+                visible: true
+            });
+            pane.addDivider();
+            const pointDetailsPane = pane.createSubPane({
+                title: "resourcePack.editor.CinematicTool.pane.pointDetails.title",
+                collapsed: false
+            });
+            this._buildControlPointsList(pointDetailsPane);
+            this.controlPointDetailsPane = pane.drawerPane;
+            this.controlPointDetailsPane.onPropertyPaneVisibilityUpdated.subscribe((data => {
+                if (!data.isVisible) {
+                    this.controlPointsList?.selectSlot("", true);
+                }
+            }));
+            this._updateControlPointDetails();
+            return pane;
+        }
+        _buildControlPointsList(parentPane) {
+            this.deleteConfirmDialog = this.uiSession.dialogManager.registerDialog({
+                uniqueId: "cinematic:deleteConfirm",
+                width: 80
+            });
+            this.deleteConfirmDialog.contentPane.addText({
+                id: "resourcePack.editor.CinematicTool.dialog.deleteConfirm"
+            }, {
+                border: false
+            });
+            this.deleteConfirmDialog.controlPane.addButton((() => {
+                this._performBulkDelete();
+                this.deleteConfirmDialog?.sendDismiss();
+            }), {
+                title: "resourcePack.editor.CinematicTool.dialog.yes",
+                variant: server_editor_namespaceObject.ButtonVariant.Primary
+            });
+            this.deleteConfirmDialog.controlPane.addButton((() => {
+                this.deleteConfirmDialog?.sendDismiss();
+            }), {
+                title: "resourcePack.editor.CinematicTool.dialog.cancel",
+                variant: server_editor_namespaceObject.ButtonVariant.Secondary
+            });
+            this.singleDeleteConfirmDialog = this.uiSession.dialogManager.registerDialog({
+                uniqueId: "cinematic:singleDeleteConfirm",
+                width: 80
+            });
+            this.singleDeleteConfirmDialog.contentPane.addText({
+                id: "resourcePack.editor.CinematicTool.dialog.deleteSingle"
+            }, {
+                border: false
+            });
+            this.singleDeleteConfirmDialog.controlPane.addButton((() => {
+                this._deleteCurrentControlPoint();
+                this.singleDeleteConfirmDialog?.sendDismiss();
+            }), {
+                title: "resourcePack.editor.CinematicTool.dialog.yes",
+                variant: server_editor_namespaceObject.ButtonVariant.Primary
+            });
+            this.singleDeleteConfirmDialog.controlPane.addButton((() => this.singleDeleteConfirmDialog?.sendDismiss()), {
+                title: "resourcePack.editor.CinematicTool.dialog.cancel",
+                variant: server_editor_namespaceObject.ButtonVariant.Secondary
+            });
+            parentPane.addToggleGroup(this.quickActionMode, {
+                entries: [ {
+                    icon: "pack://textures/editor/Activate.png",
+                    tooltip: "resourcePack.editor.CinematicTool.pane.selectAll.tooltip",
+                    value: CinematicTool_QuickActionMode.SelectAll
+                }, {
+                    icon: "trashCanIcon",
+                    tooltip: "resourcePack.editor.CinematicTool.pane.deleteSelected.tooltip",
+                    value: CinematicTool_QuickActionMode.DeleteSelected
+                } ],
+                onChange: newValue => {
+                    switch (newValue) {
+                      case CinematicTool_QuickActionMode.SelectAll:
+                        this._toggleSelectAll();
+                        break;
+
+                      case CinematicTool_QuickActionMode.DeleteSelected:
+                        this._deleteSelectedControlPoints();
+                        break;
+                    }
+                    this.quickActionMode.set(CinematicTool_QuickActionMode.None);
+                }
+            });
+            const controlPointListHeaderPane = parentPane.createSubPane({
+                hasExpander: false,
+                hasMargins: false,
+                layout: server_editor_namespaceObject.PaneLayoutType.Horizontal
+            });
+            controlPointListHeaderPane.addText("", {
+                style: {
+                    width: server_editor_namespaceObject.LayoutFlex.Grow,
+                    minWidth: 0,
+                    verticalAlignment: server_editor_namespaceObject.LayoutAlignment.End
+                },
+                title: "resourcePack.editor.CinematicTool.pane.controlPoints",
+                tooltip: "resourcePack.editor.CinematicTool.pane.controlPoints.tooltip",
+                border: false
+            });
+            controlPointListHeaderPane.addButton((() => {
+                this._addControlPoint();
+            }), {
+                tooltip: "resourcePack.editor.CinematicTool.pane.addPoint.tooltip",
+                hiddenLabel: true,
+                shrinkToIcon: true,
+                icon: "pack://textures/editor/plus.png"
+            });
+            parentPane.addDivider();
+            this.controlPointsList = parentPane.addListPane({
+                height: 20,
+                onSlotClicked: slot => {
+                    const userData = slot.getUserData();
+                    this.selectedControlPointIndex = userData;
+                    this._updateControlPointDetails();
+                    if (!slot.selected) {
+                        this.controlPointsList?.selectSlot(slot.id, true);
+                        this.controlPointDetailsPane?.show();
+                    } else {
+                        slot.setSelected(false);
+                        this.controlPointDetailsPane?.hide();
+                    }
+                },
+                defaultSlots: this._createControlPointSlots(),
+                layout: {
+                    height: 4.4,
+                    clickable: true,
+                    entryLayout: [ {
+                        type: server_editor_namespaceObject.ListPaneEntryType.Bool,
+                        size: 6
+                    }, {
+                        type: server_editor_namespaceObject.ListPaneEntryType.Text,
+                        size: server_editor_namespaceObject.LayoutFlex.Grow,
+                        alignment: server_editor_namespaceObject.LayoutAlignment.Start
+                    }, {
+                        type: server_editor_namespaceObject.ListPaneEntryType.Button,
+                        size: 4
+                    } ]
+                }
+            });
+        }
+        _createControlPointSlots() {
+            return this.controlPoints.map(((cp, index) => ({
+                entries: [ {
+                    type: server_editor_namespaceObject.ListPaneEntryType.Bool,
+                    value: false
+                }, {
+                    type: server_editor_namespaceObject.ListPaneEntryType.Text,
+                    value: cp.name
+                }, {
+                    type: server_editor_namespaceObject.ListPaneEntryType.Button,
+                    tooltip: "resourcePack.editor.CinematicTool.pane.moveToPoint",
+                    icon: "pack://textures/editor/Teleport.png",
+                    onClick: () => {
+                        this.selectedControlPointIndex = index;
+                        this._moveToSelectedPoint();
+                    }
+                } ],
+                options: {
+                    userData: index
+                }
+            })));
+        }
+        _updatePlayAnimationButtonState() {
+            const config = SPLINE_TYPE_CONFIGS[this.selectedSplineTypeIndex.value];
+            const hasEnoughPoints = this.controlPoints.length >= config.minPoints;
+            if (this.playAnimationButton) {
+                this.playAnimationButton.enable = hasEnoughPoints;
+            }
+        }
+        _updateControlPointDetails() {
+            if (!this.controlPointDetailsPane) {
+                return;
+            }
+            this._cleanupDetailInputs();
+            if (this.controlPoints.length === 0 || this.selectedControlPointIndex < 0) {
+                this.controlPointDetailsPane.hide();
+                return;
+            }
+            if (this.selectedControlPointIndex >= this.controlPoints.length) {
+                this.selectedControlPointIndex = this.controlPoints.length - 1;
+            }
+            const selectedPoint = this.controlPoints[this.selectedControlPointIndex];
+            if (!selectedPoint) {
+                this.controlPointDetailsPane.hide();
+                return;
+            }
+            this.nameObservable = (0, server_editor_namespaceObject.makeObservable)(selectedPoint.name);
+            this.positionObservable = (0, server_editor_namespaceObject.makeObservable)(selectedPoint.position);
+            this.viewDirectionObservable = (0, server_editor_namespaceObject.makeObservable)(selectedPoint.viewDirection);
+            this.timeObservable = (0, server_editor_namespaceObject.makeObservable)(selectedPoint.timeSeconds);
+            const easingTypes = Object.values(server_namespaceObject.EasingType);
+            const easingIndex = easingTypes.indexOf(selectedPoint.easingType);
+            this.easingIndexObservable = (0, server_editor_namespaceObject.makeObservable)(easingIndex);
+            this.nameInput = this.controlPointDetailsPane.addString(this.nameObservable, {
+                title: "resourcePack.editor.CinematicTool.pane.pointName",
+                tooltip: "resourcePack.editor.CinematicTool.pane.pointName.tooltip",
+                onChange: value => {
+                    selectedPoint.name = value;
+                    this._refreshControlPointsList();
+                    this._updateSelectedWidgetText();
+                    this.storeControlPointsToWorld();
+                }
+            });
+            const player = this.uiSession.extensionContext.player;
+            const heightRangeMin = player.dimension.heightRange.min;
+            const heightRangeMax = player.dimension.heightRange.max;
+            this.positionInput = this.controlPointDetailsPane.addVector3(this.positionObservable, {
+                title: "resourcePack.editor.CinematicTool.pane.position",
+                tooltip: "resourcePack.editor.CinematicTool.pane.position.tooltip",
+                isInteger: true,
+                min: {
+                    x: -3e6,
+                    y: heightRangeMin,
+                    z: -3e6
+                },
+                max: {
+                    x: 3e6,
+                    y: heightRangeMax,
+                    z: 3e6
+                },
+                onChange: value => {
+                    selectedPoint.position = {
+                        ...value
+                    };
+                    this._updateSelectedWidget();
+                    this._updateSplineVisualization();
+                    this.storeControlPointsToWorld();
+                }
+            });
+            this.viewDirectionInput = this.controlPointDetailsPane.addVector2(this.viewDirectionObservable, {
+                title: "resourcePack.editor.CinematicTool.pane.rotation",
+                tooltip: "resourcePack.editor.CinematicTool.pane.rotation.tooltip",
+                min: {
+                    x: -90,
+                    y: 0
+                },
+                max: {
+                    x: 90,
+                    y: 360
+                },
+                onChange: value => {
+                    selectedPoint.viewDirection = {
+                        x: Math.round(value.x * 100) / 100,
+                        y: Math.round(value.y * 100) / 100
+                    };
+                    this._updateSelectedWidgetText();
+                    this.storeControlPointsToWorld();
+                }
+            });
+            const easingEntries = [];
+            easingTypes.forEach(((type, index) => {
+                easingEntries.push({
+                    label: type,
+                    value: index
+                });
+            }));
+            this.easingDropdown = this.controlPointDetailsPane.addDropdown(this.easingIndexObservable, {
+                title: "resourcePack.editor.CinematicTool.pane.easingType",
+                tooltip: "resourcePack.editor.CinematicTool.pane.easingType.tooltip",
+                entries: easingEntries,
+                onChange: value => {
+                    selectedPoint.easingType = easingTypes[value];
+                    this.storeControlPointsToWorld();
+                }
+            });
+            this.timeInput = this.controlPointDetailsPane.addNumber(this.timeObservable, {
+                title: "resourcePack.editor.CinematicTool.pane.timestamp",
+                tooltip: "resourcePack.editor.CinematicTool.pane.timestamp.tooltip",
+                min: 0,
+                max: this.totalDuration.value,
+                onChange: value => {
+                    selectedPoint.timeSeconds = Math.round(value * 100) / 100;
+                    this._sortControlPointTimes();
+                    this._refreshControlPointsList();
+                    this._updateAllWidgets();
+                    this.storeControlPointsToWorld();
+                }
+            });
+            this.updateLocationButton = this.controlPointDetailsPane.addButton(this.uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => this._updatePointToPlayerLocation()
+            }), {
+                title: "resourcePack.editor.CinematicTool.pane.updateLocation",
+                variant: server_editor_namespaceObject.ButtonVariant.Secondary,
+                visible: true
+            });
+            this.moveToPointButton = this.controlPointDetailsPane.addButton(this.uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => this._moveToSelectedPoint()
+            }), {
+                title: "resourcePack.editor.CinematicTool.pane.moveToPoint",
+                visible: true
+            });
+            this.deleteButton = this.controlPointDetailsPane.addButton(this.uiSession.actionManager.createAction({
+                actionType: server_editor_namespaceObject.ActionTypes.NoArgsAction,
+                onExecute: () => {
+                    if (this.selectedControlPointIndex < 0 || this.selectedControlPointIndex >= this.controlPoints.length) {
+                        this.uiSession.log.info("No selected control point to delete");
+                        return;
+                    }
+                    this.uiSession.dialogManager.activateDialog({
+                        dialogId: "cinematic:singleDeleteConfirm"
+                    });
+                }
+            }), {
+                title: "resourcePack.editor.CinematicTool.pane.deletePoint",
+                visible: true
+            });
+        }
+        _toggleSelectAll() {
+            if (!this.controlPointsList) {
+                return;
+            }
+            let hasUnchecked = false;
+            for (let i = 0; i < this.controlPoints.length; i++) {
+                const slot = this.controlPointsList.getSlotByIndex(i);
+                if (slot) {
+                    const checkbox = slot.getEntry(0);
+                    if (checkbox && !checkbox.value) {
+                        hasUnchecked = true;
+                        break;
+                    }
+                }
+            }
+            for (let i = 0; i < this.controlPoints.length; i++) {
+                const slot = this.controlPointsList.getSlotByIndex(i);
+                if (slot) {
+                    const checkbox = slot.getEntry(0);
+                    if (checkbox) {
+                        checkbox.setValue(hasUnchecked);
+                    }
+                }
+            }
+        }
+        _deleteSelectedControlPoints() {
+            const selectedIndices = this._getSelectedControlPointIndices();
+            if (selectedIndices.length === 0) {
+                this.uiSession.log.info("No control points selected for deletion");
+                return;
+            }
+            this.uiSession.dialogManager.activateDialog({
+                dialogId: "cinematic:deleteConfirm"
+            });
+        }
+        _performBulkDelete() {
+            const selectedIndices = this._getSelectedControlPointIndices();
+            if (selectedIndices.length === 0) {
+                return;
+            }
+            for (let i = selectedIndices.length - 1; i >= 0; i--) {
+                const index = selectedIndices[i];
+                const cp = this.controlPoints[index];
+                if (cp.widget) {
+                    try {
+                        cp.widget.delete();
+                    } catch {}
+                }
+                this.controlPoints.splice(index, 1);
+            }
+            this.selectedControlPointIndex = this.controlPoints.length > 0 ? 0 : -1;
+            this._refreshUIState();
+            this.uiSession.log.info(`Deleted ${selectedIndices.length} control points`);
+        }
+        _deleteCurrentControlPoint() {
+            if (this.selectedControlPointIndex < 0 || this.selectedControlPointIndex >= this.controlPoints.length) {
+                this.uiSession.log.info("No selected control point to delete");
+                return;
+            }
+            const deleted = this.controlPoints[this.selectedControlPointIndex];
+            if (deleted.widget) {
+                try {
+                    deleted.widget.delete();
+                } catch {}
+            }
+            this.controlPoints.splice(this.selectedControlPointIndex, 1);
+            if (this.controlPoints.length === 0) {
+                this.selectedControlPointIndex = -1;
+            } else if (this.selectedControlPointIndex >= this.controlPoints.length) {
+                this.selectedControlPointIndex = this.controlPoints.length - 1;
+            }
+            this._refreshUIState();
+            this.uiSession.log.info(`Deleted control point: ${deleted.name}`);
+        }
+        _getSelectedControlPointIndices() {
+            const selectedIndices = [];
+            if (!this.controlPointsList) {
+                return selectedIndices;
+            }
+            for (let i = 0; i < this.controlPoints.length; i++) {
+                const slot = this.controlPointsList.getSlotByIndex(i);
+                if (slot) {
+                    const checkbox = slot.getEntry(0);
+                    if (checkbox?.value) {
+                        selectedIndices.push(i);
+                    }
+                }
+            }
+            return selectedIndices;
+        }
+        _refreshControlPointsList() {
+            if (!this.controlPointsList) {
+                return;
+            }
+            this.controlPointsList.updateSlots(this._createControlPointSlots());
+            const slot = this.controlPointsList.getSlotByIndex(this.selectedControlPointIndex);
+            if (slot) {
+                this.controlPointsList.selectSlot(slot.id, true);
+                this.controlPointDetailsPane?.show();
+            }
+        }
+        _createControlPointWidget(controlPoint) {
+            const widget = this.widgetGroup.createWidget(controlPoint.position, {
+                selectable: true,
+                snapToBlockLocation: false,
+                visible: true,
+                collisionRadius: .5,
+                widgetName: `Cinematic Control Point - ${controlPoint.name}`,
+                stateChangeEvent: data => {
+                    const currentIndex = this.controlPoints.findIndex((cp => cp.id === controlPoint.id));
+                    if (currentIndex === -1) {
+                        return;
+                    }
+                    if (data.mouseEvent !== undefined) {
+                        const isMousePress = data.mouseEvent.action === server_editor_namespaceObject.WidgetMouseButtonActionType.Pressed;
+                        const isLeftClick = !data.mouseEvent.shiftPressed && !data.mouseEvent.controlPressed && !data.mouseEvent.altPressed;
+                        if (isMousePress && isLeftClick) {
+                            if (this.selectedControlPointIndex !== currentIndex) {
+                                this.selectedControlPointIndex = currentIndex;
+                                this._updateControlPointDetails();
+                                const slot = this.controlPointsList?.getSlotByIndex(currentIndex);
+                                if (slot) {
+                                    this.controlPointsList?.selectSlot(slot.id, true);
+                                    this.controlPointDetailsPane?.show();
+                                }
+                            }
+                        }
+                    }
+                    if (data.location !== undefined) {
+                        controlPoint.position = {
+                            ...data.location
+                        };
+                        const textComponent = widget.getComponent("info_text");
+                        if (textComponent) {
+                            const infoText = this._formatControlPointInfo(controlPoint);
+                            textComponent.label = infoText;
+                        }
+                        if (currentIndex === this.selectedControlPointIndex && this.positionObservable) {
+                            this.positionObservable.set({
+                                ...data.location
+                            });
+                        }
+                        this._debouncedSplineUpdate();
+                        this.storeControlPointsToWorld();
+                    }
+                    if (data.selected !== undefined) {
+                        if (data.selected) {
+                            if (this.selectedControlPointIndex !== currentIndex) {
+                                this.selectedControlPointIndex = currentIndex;
+                                this._updateControlPointDetails();
+                                const slot = this.controlPointsList?.getSlotByIndex(currentIndex);
+                                if (slot) {
+                                    this.controlPointsList?.selectSlot(slot.id, true);
+                                    this.controlPointDetailsPane?.show();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            widget.addGizmoComponent("control_point_gizmo", {
+                offset: {
+                    x: 0,
+                    y: 0,
+                    z: 0
+                },
+                visible: true
+            });
+            const infoText = this._formatControlPointInfo(controlPoint);
+            widget.addTextComponent("info_text", infoText, {
+                offset: {
+                    x: 0,
+                    y: 1,
+                    z: 0
+                },
+                visible: true
+            });
+            widget.addGuideComponent("control_point_guide");
+            return widget;
+        }
+        _debouncedSplineUpdate() {
+            if (this.splineUpdateTimeoutId !== undefined) {
+                server_namespaceObject.system.clearRun(this.splineUpdateTimeoutId);
+            }
+            this.splineUpdateTimeoutId = server_namespaceObject.system.runTimeout((() => {
+                this._updateSplineVisualization();
+                this.splineUpdateTimeoutId = undefined;
+            }), this.SPLINE_UPDATE_DELAY_MS / 1e3 * server_namespaceObject.TicksPerSecond);
+        }
+        _formatControlPointInfo(controlPoint) {
+            const pos = lib.Vector3Utils.toString(controlPoint.position, {
+                decimals: 1
+            });
+            const rot = `Pitch:${controlPoint.viewDirection.x.toFixed(2)}° Yaw:${controlPoint.viewDirection.y.toFixed(2)}°`;
+            const time = `T:${controlPoint.timeSeconds.toFixed(2)}s`;
+            return `${controlPoint.name}\n${pos}\n${rot}\n${time}`;
+        }
+        _createAllControlPointWidgets() {
+            this._destroyAllControlPointWidgets();
+            this.controlPoints.forEach((cp => {
+                cp.widget = this._createControlPointWidget(cp);
+            }));
+        }
+        _destroyAllControlPointWidgets() {
+            this.controlPoints.forEach((cp => {
+                if (cp.widget) {
+                    try {
+                        cp.widget.delete();
+                    } catch {}
+                    cp.widget = undefined;
+                }
+            }));
+        }
+        _updateSplineVisualization() {
+            if (this.splineWidget) {
+                try {
+                    this.splineWidget.delete();
+                } catch {}
+                this.splineWidget = undefined;
+                this.splineComponent = undefined;
+            }
+            if (this.controlPoints.length < 2) {
+                return;
+            }
+            const firstPoint = this.controlPoints[0];
+            this.splineWidget = this.widgetGroup.createWidget(firstPoint.position, {
+                selectable: false,
+                snapToBlockLocation: false,
+                visible: true,
+                collisionRadius: 0,
+                widgetName: "Cinematic Spline Path"
+            });
+            const config = SPLINE_TYPE_CONFIGS[this.selectedSplineTypeIndex.value];
+            this.splineComponent = this.splineWidget.addSplineComponent("path_spline", {
+                splineType: config.widgetSplineType,
+                controlPoints: [],
+                offset: {
+                    x: 0,
+                    y: 0,
+                    z: 0
+                }
+            });
+            const widgetList = this.controlPoints.map((cp => cp.widget)).filter((widget => widget !== undefined));
+            if (widgetList.length > 0) {
+                this.splineComponent.setControlPoints(widgetList);
+            }
+        }
+        _updateAllWidgets() {
+            this.controlPoints.forEach((cp => {
+                if (cp.widget) {
+                    cp.widget.location = cp.position;
+                    const textComponent = cp.widget.getComponent("info_text");
+                    if (textComponent) {
+                        const infoText = this._formatControlPointInfo(cp);
+                        textComponent.label = infoText;
+                    }
+                } else {
+                    cp.widget = this._createControlPointWidget(cp);
+                }
+            }));
+            this._updateSplineVisualization();
+        }
+        _destroyAllWidgets() {
+            this._destroyAllControlPointWidgets();
+            if (this.splineWidget) {
+                try {
+                    this.splineWidget.delete();
+                } catch {}
+                this.splineWidget = undefined;
+                this.splineComponent = undefined;
+            }
+        }
+        _updateSelectedWidget() {
+            const selectedPoint = this.controlPoints[this.selectedControlPointIndex];
+            if (selectedPoint && selectedPoint.widget) {
+                selectedPoint.widget.location = selectedPoint.position;
+                this._updateSelectedWidgetText();
+            }
+        }
+        _updateSelectedWidgetText() {
+            const selectedPoint = this.controlPoints[this.selectedControlPointIndex];
+            if (selectedPoint && selectedPoint.widget) {
+                const textComponent = selectedPoint.widget.getComponent("info_text");
+                if (textComponent) {
+                    const infoText = this._formatControlPointInfo(selectedPoint);
+                    textComponent.label = infoText;
+                }
+            }
+        }
+        _refreshUIState(recreateWidgets = true) {
+            this._refreshControlPointsList();
+            this._updateControlPointDetails();
+            if (recreateWidgets) {
+                this._createAllControlPointWidgets();
+            }
+            this._updateSplineVisualization();
+            this._updatePlayAnimationButtonState();
+            this.storeControlPointsToWorld();
+        }
+        _normalizeYaw(angle) {
+            return (angle % 360 + 360) % 360;
+        }
+        _addControlPoint() {
+            const player = this.uiSession.extensionContext.player;
+            const playerRotation = player.getRotation();
+            const viewDirection = player.getViewDirection();
+            const yaw = Math.atan2(-viewDirection.x, -viewDirection.z) * (180 / Math.PI);
+            const horizontalDistance = Math.sqrt(viewDirection.x * viewDirection.x + viewDirection.z * viewDirection.z);
+            const pitch = Math.atan2(viewDirection.y, horizontalDistance) * (180 / Math.PI);
+            const baseName = "Point";
+            const uniqueName = this._handleDuplicatePointName(baseName);
+            const newPoint = {
+                id: `cp_${this.nextControlPointId++}`,
+                name: uniqueName,
+                position: {
+                    ...player.location
+                },
+                viewDirection: {
+                    x: Math.round(pitch * 100) / 100,
+                    y: Math.round(this._normalizeYaw(yaw) * 100) / 100
+                },
+                playerRotation: {
+                    x: Math.round(playerRotation.x * 100) / 100,
+                    y: Math.round(playerRotation.y * 100) / 100
+                },
+                easingType: server_namespaceObject.EasingType.Linear,
+                timeSeconds: Math.round(this.totalDuration.value * 100) / 100
+            };
+            this.controlPoints.push(newPoint);
+            newPoint.widget = this._createControlPointWidget(newPoint);
+            this.selectedControlPointIndex = this.controlPoints.length - 1;
+            this._refreshUIState(false);
+            this.uiSession.log.info(`Added control point: ${newPoint.name}`);
+        }
+        _hideControlPointWidget(controlPointId) {
+            const controlPoint = this.controlPoints.find((cp => cp.id === controlPointId));
+            if (controlPoint?.widget) {
+                const gizmoComponent = controlPoint.widget.getComponent("control_point_gizmo");
+                if (gizmoComponent) {
+                    gizmoComponent.visible = false;
+                }
+                this.hiddenWidgetControlPointId = controlPointId;
+            }
+        }
+        _restoreHiddenWidget() {
+            if (this.hiddenWidgetControlPointId) {
+                const controlPoint = this.controlPoints.find((cp => cp.id === this.hiddenWidgetControlPointId));
+                if (controlPoint?.widget) {
+                    const gizmoComponent = controlPoint.widget.getComponent("control_point_gizmo");
+                    if (gizmoComponent) {
+                        gizmoComponent.visible = true;
+                    }
+                }
+                this.hiddenWidgetControlPointId = undefined;
+            }
+            if (this.proximityCheckIntervalId !== undefined) {
+                server_namespaceObject.system.clearRun(this.proximityCheckIntervalId);
+                this.proximityCheckIntervalId = undefined;
+            }
+        }
+        _startProximityCheck(targetPosition) {
+            if (this.proximityCheckIntervalId !== undefined) {
+                server_namespaceObject.system.clearRun(this.proximityCheckIntervalId);
+            }
+            this.proximityCheckIntervalId = server_namespaceObject.system.runInterval((() => {
+                const player = this.uiSession.extensionContext.player;
+                const delta = lib.Vector3Utils.subtract(player.location, targetPosition);
+                const distance = lib.Vector3Utils.magnitude(delta);
+                if (distance > WIDGET_SHOW_DISTANCE) {
+                    this._restoreHiddenWidget();
+                }
+            }), this.PROXIMITY_CHECK_INTERVAL_TICKS);
+        }
+        _moveToSelectedPoint() {
+            const selectedPoint = this.controlPoints[this.selectedControlPointIndex];
+            if (!selectedPoint) return;
+            if (this.moveToPointCameraTimeoutId !== undefined) {
+                server_namespaceObject.system.clearRun(this.moveToPointCameraTimeoutId);
+                this.moveToPointCameraTimeoutId = undefined;
+            }
+            if (this.moveToPointTeleportTimeoutId !== undefined) {
+                server_namespaceObject.system.clearRun(this.moveToPointTeleportTimeoutId);
+                this.moveToPointTeleportTimeoutId = undefined;
+            }
+            this._restoreHiddenWidget();
+            this._hideControlPointWidget(selectedPoint.id);
+            const player = this.uiSession.extensionContext.player;
+            const playerPosition = player.location;
+            const playerHeadPosition = player.getHeadLocation();
+            const cameraHeadOffset = {
+                x: 0,
+                y: .1,
+                z: 0
+            };
+            const playerCameraPosition = lib.Vector3Utils.add(playerHeadPosition, cameraHeadOffset);
+            const playerCameraDelta = lib.Vector3Utils.subtract(playerCameraPosition, playerPosition);
+            const easeTimeInSeconds = .75;
+            const targetPosition = selectedPoint.position;
+            const targetRotation = selectedPoint.playerRotation;
+            this.moveToPointCameraTimeoutId = server_namespaceObject.system.runTimeout((() => {
+                this.moveToPointCameraTimeoutId = undefined;
+                const cameraPositionOptions = {
+                    easeOptions: {
+                        easeTime: easeTimeInSeconds,
+                        easeType: server_namespaceObject.EasingType.InOutQuad
+                    },
+                    rotation: {
+                        x: targetRotation.x,
+                        y: targetRotation.y
+                    },
+                    location: targetPosition
+                };
+                player.camera.setCamera("minecraft:free", cameraPositionOptions);
+            }), .1 * server_namespaceObject.TicksPerSecond);
+            const newPlayerPositionTarget = lib.Vector3Utils.subtract(targetPosition, playerCameraDelta);
+            this.moveToPointTeleportTimeoutId = server_namespaceObject.system.runTimeout((() => {
+                this.moveToPointTeleportTimeoutId = undefined;
+                player.camera.setCamera("minecraft:first_person");
+                player.teleport(newPlayerPositionTarget, {
+                    rotation: {
+                        x: targetRotation.x,
+                        y: targetRotation.y
+                    }
+                });
+                this._startProximityCheck(targetPosition);
+            }), easeTimeInSeconds * server_namespaceObject.TicksPerSecond);
+        }
+        _updatePointToPlayerLocation() {
+            const selectedPoint = this.controlPoints[this.selectedControlPointIndex];
+            if (!selectedPoint) {
+                this.uiSession.log.info("No control point selected");
+                return;
+            }
+            const player = this.uiSession.extensionContext.player;
+            selectedPoint.position = {
+                ...player.location
+            };
+            const viewDirection = player.getViewDirection();
+            const yaw = Math.atan2(-viewDirection.x, -viewDirection.z) * (180 / Math.PI);
+            const horizontalDistance = Math.sqrt(viewDirection.x * viewDirection.x + viewDirection.z * viewDirection.z);
+            const pitch = Math.atan2(viewDirection.y, horizontalDistance) * (180 / Math.PI);
+            selectedPoint.viewDirection = {
+                x: Math.round(pitch * 100) / 100,
+                y: Math.round(this._normalizeYaw(yaw) * 100) / 100
+            };
+            const playerRotation = player.getRotation();
+            selectedPoint.playerRotation = {
+                x: Math.round(playerRotation.x * 100) / 100,
+                y: Math.round(playerRotation.y * 100) / 100
+            };
+            if (this.positionObservable) {
+                this.positionObservable.set({
+                    ...selectedPoint.position
+                });
+            }
+            if (this.viewDirectionObservable) {
+                this.viewDirectionObservable.set({
+                    ...selectedPoint.viewDirection
+                });
+            }
+            this._updateSelectedWidget();
+            this._updateSelectedWidgetText();
+            this._updateSplineVisualization();
+            this.storeControlPointsToWorld();
+        }
+        _sortControlPointTimes() {
+            this.controlPoints.sort(((a, b) => a.timeSeconds - b.timeSeconds));
+        }
+        _sortAndNormalizeControlPointTimes() {
+            this.controlPoints.sort(((a, b) => a.timeSeconds - b.timeSeconds));
+            if (this.controlPoints.length > 0) {
+                this.controlPoints[0].timeSeconds = 0;
+                if (this.controlPoints.length > 1) {
+                    this.controlPoints[this.controlPoints.length - 1].timeSeconds = Math.round(this.totalDuration.value * 100) / 100;
+                }
+            }
+            this.storeControlPointsToWorld();
+            this.controlPoints.forEach((cp => {
+                if (cp.widget) {
+                    const textComponent = cp.widget.getComponent("info_text");
+                    if (textComponent) {
+                        const infoText = this._formatControlPointInfo(cp);
+                        textComponent.label = infoText;
+                    }
+                }
+            }));
+            this._updateControlPointDetails();
+        }
+        _handleDuplicatePointName(baseName) {
+            let newName = baseName;
+            let increment = 1;
+            while (this.controlPoints.some((cp => cp.name === newName))) {
+                newName = `${baseName}_${increment}`;
+                increment++;
+            }
+            return newName;
+        }
+        _redistributeTimeValues() {
+            const duration = this.totalDuration.value;
+            const pointCount = this.controlPoints.length;
+            if (pointCount <= 1) {
+                if (pointCount === 1) {
+                    this.controlPoints[0].timeSeconds = 0;
+                }
+                this._updateControlPointDetails();
+                return;
+            }
+            this.controlPoints.forEach(((point, index) => {
+                const rawTime = duration * index / (pointCount - 1);
+                point.timeSeconds = Math.round(rawTime * 100) / 100;
+            }));
+            this._updateControlPointDetails();
+        }
+        _shortestYawDelta(fromYaw, toYaw) {
+            let delta = this._normalizeYaw(toYaw) - this._normalizeYaw(fromYaw);
+            if (delta > 180) {
+                delta -= 360;
+            } else if (delta < -180) {
+                delta += 360;
+            }
+            return delta;
+        }
+        _unwrapRotationKeyframes(keyframes) {
+            if (keyframes.length <= 1) {
+                return keyframes;
+            }
+            const unwrapped = [];
+            let accumulatedYaw = keyframes[0].rotation.y;
+            unwrapped.push({
+                ...keyframes[0],
+                rotation: {
+                    ...keyframes[0].rotation
+                }
+            });
+            for (let i = 1; i < keyframes.length; i++) {
+                accumulatedYaw += this._shortestYawDelta(accumulatedYaw, keyframes[i].rotation.y);
+                unwrapped.push({
+                    ...keyframes[i],
+                    rotation: {
+                        x: keyframes[i].rotation.x,
+                        y: accumulatedYaw,
+                        z: keyframes[i].rotation.z
+                    }
+                });
+            }
+            return unwrapped;
+        }
+        _playAnimation() {
+            if (!this._validateMinimumControlPoints("Animation failed")) {
+                return;
+            }
+            this._sortAndNormalizeControlPointTimes();
+            const validation = this._validateControlPointTimes();
+            if (!validation.valid) {
+                this.uiSession.log.error(`Animation failed: ${validation.errorMessage}`, {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+                return;
+            }
+            const lengthValidation = this._validateSplineLength();
+            if (!lengthValidation.valid) {
+                this.uiSession.log.error(`Animation failed: ${lengthValidation.errorMessage}`, {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+                return;
+            }
+            const player = this.uiSession.extensionContext.player;
+            const currentRotation = player.getRotation();
+            this.previousCameraState = {
+                location: {
+                    ...player.location
+                },
+                rotation: currentRotation
+            };
+            const config = SPLINE_TYPE_CONFIGS[this.selectedSplineTypeIndex.value];
+            const SplineClass = config.splineClass;
+            const spline = new SplineClass;
+            spline.controlPoints = this.controlPoints.map((cp => cp.position));
+            const progressKeyFrames = this.controlPoints.map(((cp, index) => ({
+                alpha: this.controlPoints.length > 1 ? index / (this.controlPoints.length - 1) : 0,
+                timeSeconds: cp.timeSeconds,
+                easingFunc: cp.easingType
+            })));
+            const rotationKeyFrames = this.controlPoints.map((cp => ({
+                rotation: {
+                    x: cp.viewDirection.x,
+                    y: cp.viewDirection.y,
+                    z: 0
+                },
+                timeSeconds: cp.timeSeconds,
+                easingFunc: cp.easingType
+            })));
+            const unwrappedRotationKeyFrames = this._unwrapRotationKeyframes(rotationKeyFrames);
+            const animationOptions = {
+                totalTimeSeconds: this.totalDuration.value,
+                animation: {
+                    progressKeyFrames,
+                    rotationKeyFrames: unwrappedRotationKeyFrames
+                }
+            };
+            player.camera.setCamera("minecraft:free", {
+                location: this.controlPoints[0].position,
+                rotation: this.controlPoints[0].viewDirection
+            });
+            player.camera.playAnimation(spline, animationOptions);
+            this.isAnimating = true;
+            if (this.playAnimationButton) {
+                this.playAnimationButton.visible = false;
+            }
+            if (this.stopAnimationButton) {
+                this.stopAnimationButton.visible = true;
+            }
+            if (this.animationTimeoutId !== undefined) {
+                server_namespaceObject.system.clearRun(this.animationTimeoutId);
+            }
+            this.animationTimeoutId = server_namespaceObject.system.runTimeout((() => {
+                this._restoreCamera();
+            }), (this.totalDuration.value + .1) * server_namespaceObject.TicksPerSecond);
+        }
+        _stopAnimation() {
+            const player = this.uiSession.extensionContext.player;
+            if (this.animationTimeoutId !== undefined) {
+                server_namespaceObject.system.clearRun(this.animationTimeoutId);
+                this.animationTimeoutId = undefined;
+            }
+            player.camera.clear();
+            this._restoreCamera();
+        }
+        _restoreCamera() {
+            const player = this.uiSession.extensionContext.player;
+            player.camera.setCamera("minecraft:first_person");
+            if (this.previousCameraState) {
+                player.teleport(this.previousCameraState.location, {
+                    rotation: this.previousCameraState.rotation
+                });
+            }
+            this.isAnimating = false;
+            this.animationTimeoutId = undefined;
+            this.previousCameraState = undefined;
+            if (this.playAnimationButton) {
+                this.playAnimationButton.visible = true;
+            }
+            if (this.stopAnimationButton) {
+                this.stopAnimationButton.visible = false;
+            }
+        }
+        _calculateUnwrappedYaws() {
+            if (this.controlPoints.length === 0) {
+                return [];
+            }
+            const unwrappedYaws = [ this.controlPoints[0].viewDirection.y ];
+            let accumulatedYaw = this.controlPoints[0].viewDirection.y;
+            for (let i = 1; i < this.controlPoints.length; i++) {
+                accumulatedYaw += this._shortestYawDelta(accumulatedYaw, this.controlPoints[i].viewDirection.y);
+                unwrappedYaws.push(accumulatedYaw);
+            }
+            return unwrappedYaws;
+        }
+        _exportAnimationCode() {
+            if (!this._validateMinimumControlPoints("Export failed")) {
+                return;
+            }
+            this._sortAndNormalizeControlPointTimes();
+            const validation = this._validateControlPointTimes();
+            if (!validation.valid) {
+                this.uiSession.log.error(`Export failed: ${validation.errorMessage}`, {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+                return;
+            }
+            const lengthValidation = this._validateSplineLength();
+            if (!lengthValidation.valid) {
+                this.uiSession.log.error(`Export failed: ${lengthValidation.errorMessage}`, {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+                return;
+            }
+            const config = SPLINE_TYPE_CONFIGS[this.selectedSplineTypeIndex.value];
+            const splineType = config.splineClass.name;
+            const controlPointsCode = this.controlPoints.map((cp => `        { x: ${cp.position.x}, y: ${cp.position.y}, z: ${cp.position.z} }, // ${cp.name}`)).join("\n");
+            const progressKeyFramesCode = this.controlPoints.map(((cp, index) => {
+                const alpha = this.controlPoints.length > 1 ? index / (this.controlPoints.length - 1) : 0;
+                return `        { alpha: ${alpha}, timeSeconds: ${cp.timeSeconds.toFixed(2)}, easingFunc: EasingType.${cp.easingType} }`;
+            })).join(",\n");
+            const unwrappedYaws = this._calculateUnwrappedYaws();
+            const rotationKeyFramesCode = this.controlPoints.map(((cp, index) => `        { rotation: { x: ${cp.viewDirection.x.toFixed(2)}, y: ${unwrappedYaws[index].toFixed(2)}, z: 0 }, timeSeconds: ${cp.timeSeconds.toFixed(2)}, easingFunc: EasingType.${cp.easingType} }`)).join(",\n");
+            const code = `// Generated Cinematic Animation Function\nimport { Player, ${splineType}, AnimationOptions, EasingType } from '@minecraft/server';\n\n/**\n * Plays a cinematic camera animation for the specified player\n * @param player - The player to play the animation for\n * @returns void\n */\nexport function playCinematicAnimation(player: Player): void {\n    const spline = new ${splineType}();\n    spline.controlPoints = [\n${controlPointsCode}\n    ];\n\n    const progressKeyFrames = [\n${progressKeyFramesCode}\n    ];\n\n    const rotationKeyFrames = [\n${rotationKeyFramesCode}\n    ];\n\n    const animationOptions: AnimationOptions = {\n        totalTimeSeconds: ${this.totalDuration.value.toFixed(2)},\n        animation: {\n            progressKeyFrames: progressKeyFrames,\n            rotationKeyFrames: rotationKeyFrames\n        }\n    };\n\n    // Set initial camera position and rotation\n    player.camera.setCamera('minecraft:free', {\n        location: { x: ${this.controlPoints[0].position.x}, y: ${this.controlPoints[0].position.y}, z: ${this.controlPoints[0].position.z} },\n        rotation: { x: ${this.controlPoints[0].viewDirection.x.toFixed(2)}, y: ${this.controlPoints[0].viewDirection.y.toFixed(2)} }\n    });\n\n    // Play the animation\n    player.camera.playAnimation(spline, animationOptions);\n}`;
+            const transferManager = server_editor_private_bindings_namespaceObject.editorInternal.getPlayerServices(this.uiSession.extensionContext.player).dataTransfer;
+            transferManager.sendDataToClipboard(code);
+            this.uiSession.log.info("Animation function has been copied to clipboard.", {
+                channelMask: server_editor_namespaceObject.LogChannel.All
+            });
+        }
+        _validateMinimumControlPoints(actionName) {
+            const config = SPLINE_TYPE_CONFIGS[this.selectedSplineTypeIndex.value];
+            if (this.controlPoints.length < config.minPoints) {
+                const errorMessage = actionName ? `${actionName}: ${config.displayName} spline requires at least ${config.minPoints} control points` : `${config.displayName} spline requires at least ${config.minPoints} control points`;
+                this.uiSession.log.error(errorMessage, {
+                    channelMask: server_editor_namespaceObject.LogChannel.All
+                });
+                return false;
+            }
+            return true;
+        }
+        _validateControlPointTimes(excludeIndex) {
+            const sortedPoints = [ ...this.controlPoints ].filter(((_, index) => index !== excludeIndex)).sort(((a, b) => a.timeSeconds - b.timeSeconds));
+            for (let i = 1; i < sortedPoints.length; i++) {
+                const timeDiff = sortedPoints[i].timeSeconds - sortedPoints[i - 1].timeSeconds;
+                if (timeDiff < MIN_TIME_DIFFERENCE_SECONDS) {
+                    const errorMessage = timeDiff === 0 ? `Multiple control points have the same time value (${sortedPoints[i].timeSeconds.toFixed(2)}s). Each control point must have a unique time value with at least ${MIN_TIME_DIFFERENCE_SECONDS}s difference.` : `Time difference between "${sortedPoints[i - 1].name}" and "${sortedPoints[i].name}" is ${timeDiff.toFixed(2)}s. Minimum required is ${MIN_TIME_DIFFERENCE_SECONDS}s.`;
+                    return {
+                        valid: false,
+                        errorMessage
+                    };
+                }
+            }
+            return {
+                valid: true
+            };
+        }
+        _validateSplineLength() {
+            let totalLength = 0;
+            for (let i = 0; i < this.controlPoints.length - 1; i++) {
+                const delta = lib.Vector3Utils.subtract(this.controlPoints[i + 1].position, this.controlPoints[i].position);
+                totalLength += lib.Vector3Utils.magnitude(delta);
+            }
+            if (totalLength < .001) {
+                return {
+                    valid: false,
+                    errorMessage: "Control points are too close together. The spline path must have a non-zero length."
+                };
+            }
+            return {
+                valid: true
+            };
+        }
+        _cleanupDetailInputs() {
+            const inputs = [ this.nameInput, this.positionInput, this.viewDirectionInput, this.easingDropdown, this.timeInput, this.moveToPointButton, this.deleteButton, this.updateLocationButton ];
+            inputs.forEach((input => {
+                if (input) input.visible = false;
+            }));
+        }
+    }
+    CinematicToolBehavior.BEHAVIOR_NAME = "Cinematic Tool";
     function createCoreUI(uiSession) {
         if (!uiSession.scratchStorage) {
             throw new Error("Core UI initialization order incorrect");
@@ -37181,6 +41653,7 @@ var __webpack_exports__ = {};
     }
     function registerCoreEditorExtension() {
         (0, server_editor_namespaceObject.registerEditorExtension)("CoreEditor", (uiSession => {
+            const baseSession = uiSession;
             uiSession.log.debug(`Initializing ${uiSession.extensionContext.extensionInfo.name} extension`);
             uiSession.scratchStorage = {
                 cleanupHandles: []
@@ -37203,11 +41676,13 @@ var __webpack_exports__ = {};
             const navigation = new NavigationBehavior(uiSession, uiSession.scratchStorage.coreMenuItems.worldOptions);
             const locateTool = new LocateTool(uiSession, uiSession.scratchStorage.coreMenuItems.worldOptions);
             const timeOfDay = new TimeOfDayBehavior(uiSession, uiSession.scratchStorage.coreMenuItems.worldOptions);
-            const vibrantVisuals = new VibrantVisualsBehavior(uiSession);
+            const vvBiomeBehavior = new VibrantVisualsPerBiomeBehavior(uiSession);
             const jigsawMode = new JigsawModeBehavior(uiSession);
             const prefabBehavior = new PrefabBehavior(uiSession);
             const weather = new WeatherBehavior(uiSession, uiSession.scratchStorage.coreMenuItems.worldOptions);
             addDimensionsMenuItems(uiSession, uiSession.scratchStorage.coreMenuItems.worldOptions);
+            const chunkManager = new ChunkManagerBehavior(baseSession);
+            chunkManager.createMenuItem(uiSession.scratchStorage.coreMenuItems.worldOptions);
             const exportBehavior = new ExportBehavior(uiSession, uiSession.scratchStorage.coreMenuItems.file);
             const smartFill = new SmartFillToolBehavior(uiSession);
             const terrain = new TerrainBehavior(uiSession);
@@ -37218,7 +41693,9 @@ var __webpack_exports__ = {};
             const workbench = new WorkbenchBehavior(uiSession);
             const farmGeneratorTool = new FarmGeneratorTool(uiSession);
             const blockInspector = new BlockInspectorBehavior(uiSession);
+            const floodTool = new FloodToolBehavior(uiSession);
             const scaleTool = new ScaleToolBehavior(uiSession);
+            const cinematicTool = new CinematicToolBehavior(uiSession);
             const realmsUploadPane = new RealmsUpload(uiSession, uiSession.scratchStorage.coreMenuItems.file);
             const viewSettings = new SettingsBehavior(uiSession, uiSession.scratchStorage.coreMenuItems.file);
             const orbitLocation = new OrbitLocationBehavior(uiSession);
@@ -37233,7 +41710,7 @@ var __webpack_exports__ = {};
                 tooltip: "resourcePack.editor.menuBar.file.saveAndExit.tooltip"
             }, saveAndExitAction);
             uiSession.log.debug("CoreEditor Extension Initialized\n");
-            return [ selectionBehavior, uiSession.scratchStorage.deleteBehavior, uiSession.scratchStorage.playerCountBehavior, uiSession.scratchStorage.pauseBehavior, uiSession.scratchStorage.newPastePreview, uiSession.scratchStorage.copyPasteBehavior, transactions, playtest, navigationStack, line, summonTool, timeOfDay, navigation, weather, vibrantVisuals, jigsawMode, prefabBehavior, rulerTool, exportBehavior, brushPainter, locateTool, smartFill, terrain, extrudeTool, repeaterTool, farmGeneratorTool, viewSettings, workbench, blockInspector, entityInspector, realmsUploadPane, orbitLocation, pencilTool, scaleTool ];
+            return [ selectionBehavior, uiSession.scratchStorage.deleteBehavior, uiSession.scratchStorage.playerCountBehavior, uiSession.scratchStorage.pauseBehavior, uiSession.scratchStorage.newPastePreview, uiSession.scratchStorage.copyPasteBehavior, transactions, playtest, navigationStack, line, summonTool, timeOfDay, navigation, weather, vvBiomeBehavior, jigsawMode, prefabBehavior, rulerTool, exportBehavior, brushPainter, locateTool, smartFill, terrain, extrudeTool, repeaterTool, farmGeneratorTool, viewSettings, workbench, blockInspector, entityInspector, realmsUploadPane, orbitLocation, pencilTool, floodTool, scaleTool, cinematicTool ];
         }), (uiSession => {
             uiSession.log.debug(`Shutting down ${uiSession.extensionContext.extensionInfo.name} Extension\n`);
             if (uiSession.scratchStorage) {
@@ -37280,6 +41757,9 @@ var __webpack_exports__ = {};
             }), easeTimeInSeconds * server_namespaceObject.TicksPerSecond);
         }
     }
+    function euclideanToManhattanDistance(euclideanDistance) {
+        return euclideanDistance * Math.sqrt(3);
+    }
     function registerGrappleExtension() {
         (0, server_editor_namespaceObject.registerEditorExtension)("Grapple", (uiSession => {
             uiSession.log.debug(`Initializing ${uiSession.extensionContext.extensionInfo.name} extension`);
@@ -37287,7 +41767,7 @@ var __webpack_exports__ = {};
                 latestRunId: undefined,
                 easeTimeInSeconds: .75,
                 playerFOV: 66,
-                grappleDistance: 100,
+                grappleDistance: uiSession.extensionContext.cursor.maxViewBlockDistance,
                 cameraHeadOffset: {
                     x: 0,
                     y: .1,
@@ -37308,7 +41788,8 @@ var __webpack_exports__ = {};
                     let positionTarget = uiSession.extensionContext.player.location;
                     if (cursorRay.hit === true) {
                         const blockHit = uiSession.extensionContext.player.dimension.getBlockFromRay(cursorRay.start, normalizedDirection, {
-                            includePassableBlocks: true
+                            includePassableBlocks: true,
+                            maxDistance: euclideanToManhattanDistance(uiSession.extensionContext.cursor.maxViewBlockDistance)
                         });
                         if (blockHit?.block) {
                             cameraTarget = blockHit.block.center();
