@@ -2,15 +2,26 @@ import { system, world } from '@minecraft/server';
 import * as net from '@minecraft/server-net';
 import { http } from '@minecraft/server-net';
 import { Router } from './ipc/router';
+return;
 system.afterEvents.scriptEventReceive.subscribe(e => {
     if (e.id == "leaf:req2") {
+        if(world.getDynamicProperty('disableNetworking')) return;
         system.sendScriptEvent('leaf:req1', 'meow')
+    }
+    if(e.id == "feathernet:disable_networking") {
+        system.sendScriptEvent('leaf:req3', 'meow')
+        world.setDynamicProperty('disableNetworking',true)
+    }
+    if(e.id == "feathernet:enable_networking") {
+        system.sendScriptEvent('leaf:req1', 'meow')
+        world.setDynamicProperty('disableNetworking',false)
     }
 })
 system.waitTicks(0).then(() => {
     let router = new Router("LeafNetCli");
     // @ts-ignore
     router.registerListener("leafnet:req", async (payload) => {
+        if(world.getDynamicProperty('disableNetworking') == true) return false;
         try {
             
             let data = JSON.parse(payload);
