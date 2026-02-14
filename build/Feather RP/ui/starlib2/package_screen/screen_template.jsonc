@@ -83,6 +83,8 @@
     "form_template": {
         "type": "panel",
         "size": "$form_size",
+        // "max_size": ["100%c", "100%c"],
+        "min_size": [225, 200],
         "$form_size|default": [
             300,
             255
@@ -102,6 +104,8 @@
                     "$FORM_TEMPLATE_sub_content_control|default": "global.empty_panel",
                     "$FORM_TEMPLATE_background_control|default": "style.image",
                     "$FORM_TEMPLATE_between_contents_padding_texture|default": "",
+                    "$DEBUG_LABEL_TEXT|default": "Default Label",
+                    "$FORM_TEMPLATE_extra_bindings|default": [],
                     "$FORM_TEMPLATE_between_contents_padding_size|default": [
                         0,
                         0
@@ -126,6 +130,7 @@
                                     "fill"
                                 ],
                                 "controls": [
+
                                     {
                                         "content@$FORM_TEMPLATE_content_control": {
                                             "size": "$FORM_TEMPLATE_content_size",
@@ -142,8 +147,49 @@
                                     },
                                     {
                                         "background@$FORM_TEMPLATE_background_control": {
-                                            "texture": "$FORM_TEMPLATE_background_texture",
-                                            "$FORM_TEMPLATE_background_texture|default": ""
+                                            "$FORM_TEMPLATE_background_texture|default": "",
+                                            "bindings": [
+                                                                        {
+                            "binding_type": "global",
+                            "binding_name": "#title_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('\b' + #title_text - $cherryuinext_flag)",
+							"target_property_name": "#data"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('§r' + '%.101s' * #data - '\b' - '\t' + '§r')",
+                            "target_property_name": "#form_title"
+                        },
+                        {
+                            "binding_type": "view",
+                            // "source_property_name": "(('§r' + '%.151s' * #data - '%.101s' * #data) - '\b' - '\t' + '§r')",
+                            "source_property_name": "('%.151s' * #data - '%.101s' * #data - '\t' - '\b')",
+                            "target_property_name": "#header_texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.201s' * #data - '%.151s' * #data - '\t' - '\b')",
+                            "target_property_name": "#texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.251s' * #data - '%.201s' * #data - '\t')",
+                            "target_property_name": "#header_button_texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.301s' * #data - '%.251s' * #data - '\t')",
+                            "target_property_name": "#default_button_texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.351s' * #data - '%.301s' * #data - '\t')",
+                            "target_property_name": "#disabled_button_texture"
+                        }
+                                            ]
                                         }
                                     }
                                 ]
@@ -161,6 +207,7 @@
                             "sub_content_control@$FORM_TEMPLATE_sub_content_control": {}
                         }
                     ],
+                    "bindings": "$FORM_TEMPLATE_extra_bindings",
                     "layer": 16
                 }
             },
@@ -306,6 +353,7 @@
         ],
         "$SCROLLING_CONTENT_form_text_control|default": "starlib_pkg_screen_common.form_text_template",
         "$SCROLLING_CONTENT_main_control|default": "global.button_factory",
+        "$DEBUG_LABEL_TEXT|default": "Meow mrrp nya mrrp",
         "controls": [
             {
                 "form_text": {
@@ -317,6 +365,58 @@
                     "controls": [
                         {
                             "form_text@$SCROLLING_CONTENT_form_text_control": {}
+                        //     "form_text@style.label": {
+                        //         "bindings": [
+                        //                                                 {
+                        //     "binding_type": "global",
+                        //     "binding_name": "#title_text"
+                        // },
+                        // {
+                        //     "binding_type": "view",
+                        //     "source_property_name": "('\b' + #title_text - $cherryuinext_flag)",
+						// 	"target_property_name": "#data"
+                        // },
+                        // {
+                        //     "binding_type": "view",
+                        //     "source_property_name": "('§r' + '%.101s' * #data - '\b' - '\t' + '§r')",
+                        //     "target_property_name": "#form_title"
+                        // },
+                        // {
+                        //     "binding_type": "view",
+                        //     // "source_property_name": "(('§r' + '%.151s' * #data - '%.101s' * #data) - '\b' - '\t' + '§r')",
+                        //     "source_property_name": "('%.151s' * #data - '%.101s' * #data - '\t' - '\b')",
+                        //     "target_property_name": "#header_texture"
+                        // },
+                        // {
+                        //     "binding_type": "view",
+                        //     "source_property_name": "('%.201s' * #data - '%.151s' * #data - '\t' - '\b')",
+                        //     "target_property_name": "#border_texture"
+                        // },
+                        // {
+                        //     "binding_type": "view",
+                        //     "source_property_name": "('%.251s' * #data - '%.201s' * #data - '\t')",
+                        //     "target_property_name": "#header_button_texture"
+                        // },
+                        // {
+                        //     "binding_type": "view",
+                        //     "source_property_name": "('%.301s' * #data - '%.251s' * #data - '\t')",
+                        //     "target_property_name": "#default_button_texture"
+                        // },
+                        // {
+                        //     "binding_type": "view",
+                        //     "source_property_name": "('%.351s' * #data - '%.301s' * #data - '\t')",
+                        //     "target_property_name": "#disabled_button_texture"
+                        // },
+                        // {
+                        //     "binding_type": "view",
+                        //     "source_property_name": "('%.401s' * #data - '%.351s' * #data - '\t')",
+                        //     "target_property_name": "#hover_texture"
+                        // }
+                        //                     ],
+                        //         "text": "#hover_texture",
+                        //         "text_alignment": "left"
+                        //     }
+
                         }
                     ]
                 }

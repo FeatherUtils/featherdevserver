@@ -89,5 +89,7 @@
 
   "$notification_flag_0e34fd": "§N§O§T§I§F§I§C§A§T§I§O§N",
 
-  "$material_resin_color": [ 0.980, 0.431, 0.576 ]
+  "$material_resin_color": [ 0.980, 0.431, 0.576 ],
+  "$light_mode": false,
+  "$cherryuinext_flag": "§f§0§0"
 }

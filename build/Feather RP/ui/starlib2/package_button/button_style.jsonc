@@ -26,12 +26,127 @@
             }
         ]
     },
+    "common_button_style2": {
+        "type": "panel",
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "$BUTTON_STYLE_default|default": "starlib_pkg_button_style.button_style_template",
+        "$BUTTON_STYLE_default_texture|default": "textures/ui/Black",
+        "controls": "$BUTTON_STYLE_variables",
+        "$BUTTON_STYLE_variables|default": [
+            {
+                "default_default@$BUTTON_STYLE_default": {
+                    // "bindings": [
+                    //     {
+                    //         "binding_type": "global",
+                    //         "binding_name": "#title_text"
+                    //     },
+                    //     {
+                    //         "binding_type": "view",
+                    //         "source_property_name": "('\b' + #title_text - $cherryuinext_flag)",
+					// 		"target_property_name": "#data"
+                    //     },
+                    //     {
+                    //         "binding_type": "view",
+                    //         "source_property_name": "('§r' + '%.101s' * #data - '\b' - '\t' + '§r')",
+                    //         "target_property_name": "#form_title"
+                    //     },
+                    //     {
+                    //         "binding_type": "view",
+                    //         // "source_property_name": "(('§r' + '%.151s' * #data - '%.101s' * #data) - '\b' - '\t' + '§r')",
+                    //         "source_property_name": "('%.151s' * #data - '%.101s' * #data - '\t' - '\b')",
+                    //         "target_property_name": "#header_texture"
+                    //     },
+                    //     {
+                    //         "binding_type": "view",
+                    //         "source_property_name": "('%.201s' * #data - '%.151s' * #data - '\t' - '\b')",
+                    //         "target_property_name": "#border_texture"
+                    //     },
+                    //     {
+                    //         "binding_type": "view",
+                    //         "source_property_name": "('%.251s' * #data - '%.201s' * #data - '\t')",
+                    //         "target_property_name": "#header_button_texture"
+                    //     },
+                    //     {
+                    //         "binding_type": "view",
+                    //         "source_property_name": "('%.301s' * #data - '%.251s' * #data - '\t')",
+                    //         "target_property_name": "#default_button_texture"
+                    //     },
+                    //     {
+                    //         "binding_type": "view",
+                    //         "source_property_name": "('%.351s' * #data - '%.301s' * #data - '\t')",
+                    //         "target_property_name": "#disabled_button_texture"
+                    //     },
+                    //     {
+                    //         "binding_type": "view",
+                    //         "source_property_name": "('%.401s' * #data - '%.351s' * #data - '\t')",
+                    //         "target_property_name": "#hover_button_texture"
+                    //     }
+                    // ]
+                }
+            }
+        ]
+    },
     "button_style_template@style.image": {
         "bindings": "$bindings",
         "$bindings|default": [],
         "layer": "$layer",
         "$layer|default": 24
     },
+    "button_style_template2@style.image": {
+        "bindings": [
+                        {
+                            "binding_type": "global",
+                            "binding_name": "#title_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('\b' + #title_text - $cherryuinext_flag)",
+							"target_property_name": "#data"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('§r' + '%.101s' * #data - '\b' - '\t' + '§r')",
+                            "target_property_name": "#form_title"
+                        },
+                        {
+                            "binding_type": "view",
+                            // "source_property_name": "(('§r' + '%.151s' * #data - '%.101s' * #data) - '\b' - '\t' + '§r')",
+                            "source_property_name": "('%.151s' * #data - '%.101s' * #data - '\t' - '\b')",
+                            "target_property_name": "#header_texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.201s' * #data - '%.151s' * #data - '\t' - '\b')",
+                            "target_property_name": "#border_texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.251s' * #data - '%.201s' * #data - '\t')",
+                            "target_property_name": "#texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.301s' * #data - '%.251s' * #data - '\t')",
+                            "target_property_name": "#default_button_texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.351s' * #data - '%.301s' * #data - '\t')",
+                            "target_property_name": "#disabled_button_texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.401s' * #data - '%.351s' * #data - '\t')",
+                            "target_property_name": "#hover_button_texture"
+                        }
+        ],
+        "layer": "$layer",
+        "$layer|default": 24
+    },
+    
     "style_variable@starlib_pkg_button_style.button_style_template": {
         "$key|default": "",
         "$bindings": [
@@ -72,6 +187,70 @@
             }
         ]
     },
+    "yes@starlib_pkg_button_style.common_button_style": {
+        "$BUTTON_STYLE_disabled_variable_key|default": "",
+        "$BUTTON_STYLE_variables": [
+            {
+                "default": {
+                    "type": "panel",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "bindings": "$bindings",
+                    "$bindings": [
+                        {
+                            "binding_collection_name": "form_buttons",
+                            "binding_name": "#form_button_text",
+                            "binding_type": "collection"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "((#form_button_text - $BUTTON_STYLE_disabled_variable_key) = #form_button_text)",
+                            "target_property_name": "#visible"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "((#form_button_text - $BUTTON_STYLE_disabled_variable_key) = #form_button_text)",
+                            "target_property_name": "#enabled"
+                        }
+                    ],
+                    // "controls": "$BUTTON_STYLE_default_variable_controls",
+                    "controls": [
+                        {
+                            "default_default@style.image": {
+                                "layer": 24,
+                                "$layer": 24,
+                                "bindings": [
+                                        {
+                            "binding_collection_name": "form_buttons",
+                            "binding_name": "#form_button_text",
+                            "binding_type": "collection"
+                                        },
+                                        {
+                                            "binding_type": "view",
+                                            "source_property_name": "('\b' + #form_button_text)",
+                                            "target_property_name": "#data"
+                                        },
+                                        {
+                                            "binding_type": "view",
+                                            "source_property_name": "('§r' + '%.301s' * #data - '\b' - '\t' + '§r')",
+                                            "target_property_name": "#button_text"
+                                        },
+                                        {
+                                            "binding_type": "view",
+                                            // "source_property_name": "(('§r' + '%.151s' * #data - '%.101s' * #data) - '\b' - '\t' + '§r')",
+                                            "source_property_name": "('%.451s' * #data - '%.301s' * #data - '\t' - '\b')",
+                                            "target_property_name": "#texture"
+                                        }
+                                ]
+                            }
+                        }
+                ]
+        }
+    }
+    ]
+},
     "disabled_variable_button_style@starlib_pkg_button_style.common_button_style": {
         "$BUTTON_STYLE_disabled_variable_key|default": "",
         "$BUTTON_STYLE_variables": [

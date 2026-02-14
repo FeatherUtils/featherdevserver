@@ -158,13 +158,13 @@ export class ActionForm {
     header(text) {
         try {
             this.form.header(text);
-        } catch {}
+        } catch { }
     }
     label(text) {
         // return;
         try {
             this.form.label(text);
-        } catch {}
+        } catch { }
     }
     divider() {
         // return;
@@ -183,8 +183,8 @@ export class ActionForm {
         // world.sendMessage(`Disabled Button: ${diButton}`)
         // world.sendMessage(`Hovered Button: ${hoButton}`)
         // world.sendMessage(`Paperdoll Button: ${paperdoll}`)
-        for(const t of themes) {
-            if(title.includes(t[0])) title = title.replaceAll(t[0], '')
+        for (const t of themes) {
+            if (title.includes(t[0])) title = title.replaceAll(t[0], '')
         }
         title = title.replaceAll(NUT_UI_THEMED, '')
         let res = NUT_UI_TAG + adjustTextLength(title, 100) + adjustTextLength(header, 50) + adjustTextLength(border, 50) + adjustTextLength(hButton, 50) + adjustTextLength(deButton, 50) + adjustTextLength(diButton, 50) + adjustTextLength(hoButton, 50) + adjustTextLength(paperdoll, 50)
@@ -203,7 +203,7 @@ export class ActionForm {
                 `titleText: ${titleText}, at params[0] is not a String!`
             );
         this.titleText = `§r${titleText}`;
-        if(titleText.includes(NUT_UI_TAG)) {
+        if (titleText.includes(NUT_UI_TAG)) {
             this.cherry = true;
             let header = 'textures/example/header';
             let paperdoll = 'textures/example/paperdoll'
@@ -213,18 +213,18 @@ export class ActionForm {
             let diButton = 'textures/example/button_disabled';
             let hoButton = 'textures/example/button_hover';
 
-            if(titleText.includes(NUT_UI_THEMED)) {
-                for(const theme of themes) {
-                    if(titleText.includes(theme[0])) {
+            if (titleText.includes(NUT_UI_THEMED)) {
+                for (const theme of themes) {
+                    if (titleText.includes(theme[0])) {
                         header = theme[2]
                         // TAG, NAME, TEXTURE, AUTHOR, BORDER, HEADER BUTTON, DEFAULT BUTTON, DISABLED BUTTON, HOVER BUTTON, PAPERDOLL, OUTLINE
-                        if(theme.length > 4 && theme[4]) border = theme[4]
-                        if(theme.length > 5 && theme[5]) hButton = theme[5]
-                        if(theme.length > 6 && theme[6]) deButton = theme[6]
-                        if(theme.length > 7 && theme[7]) diButton = theme[7]
-                        if(theme.length > 8 && theme[8]) hoButton = theme[8]
-                        if(theme.length > 9 && theme[9]) paperdoll = theme[9]
-                        this.chtheme = Math.max(themes.findIndex(_=>_[0] == theme[0]), 0);
+                        if (theme.length > 4 && theme[4]) border = theme[4]
+                        if (theme.length > 5 && theme[5]) hButton = theme[5]
+                        if (theme.length > 6 && theme[6]) deButton = theme[6]
+                        if (theme.length > 7 && theme[7]) diButton = theme[7]
+                        if (theme.length > 8 && theme[8]) hoButton = theme[8]
+                        if (theme.length > 9 && theme[9]) paperdoll = theme[9]
+                        this.chtheme = Math.max(themes.findIndex(_ => _[0] == theme[0]), 0);
                     }
                 }
             }
@@ -254,25 +254,25 @@ export class ActionForm {
     btnCherry(text, bg) {
         // world.sendMessage(`${text.length}`)
         bg = this.deButton;
-        if(!this.cherry) return text;
-        if(text.includes(NUT_UI_HEADER_BUTTON)) return text;
+        if (!this.cherry) return text;
+        if (text.includes(NUT_UI_HEADER_BUTTON)) return text;
         let outline = 'textures/example/button_outline'
-        if(themes[this.chtheme ? this.chtheme : 0] && themes[this.chtheme ? this.chtheme : 0].length > 10 && themes[this.chtheme ? this.chtheme : 0][10]) outline = themes[this.chtheme ? this.chtheme : 0][10];
+        if (themes[this.chtheme ? this.chtheme : 0] && themes[this.chtheme ? this.chtheme : 0].length > 10 && themes[this.chtheme ? this.chtheme : 0][10]) outline = themes[this.chtheme ? this.chtheme : 0][10];
         // world.sendMessage(outline)
-        if(text.includes("§o§1")) bg = outline
+        if (text.includes("§o§1")) bg = outline
         // console.warn(JSON.stringify(themes[this.chtheme ? this.chtheme : 0]))
-        if(text.includes(NUT_UI_ALT)) {
-            for(const theme of themes) {
-                if(text.includes(theme[0])) {
+        if (text.includes(NUT_UI_ALT)) {
+            for (const theme of themes) {
+                if (text.includes(theme[0])) {
                     bg = theme[2];
                     // world.sendMessage(bg)
                 }
 
             }
         }
-        if(text.includes("§c§h§e§1")) bg = 'textures/example/buttoncherry'
-        if(text.includes("§l§e§f§1")) bg = 'textures/example/buttonleaf'
-        if(!bg) bg = `textures/example/button`;
+        if (text.includes("§c§h§e§1")) bg = 'textures/example/buttoncherry'
+        if (text.includes("§l§e§f§1")) bg = 'textures/example/buttonleaf'
+        if (!bg) bg = `textures/example/button`;
         let res = adjustTextLength(text, 300) + adjustTextLength(bg, 150)
         // world.sendMessage(res)
         // world.sendMessage(`${res.length}`)
@@ -293,16 +293,16 @@ export class ActionForm {
             throw new Error(
                 `iconPath: ${defaultValue}, at params[1] is defined and is not a String!`
             );
-        if(iconPath && typeof iconPath === 'string' && iconPath.startsWith('.')) iconPath = icons.resolve(iconPath.substring(1))
+        if (iconPath && typeof iconPath === 'string' && iconPath.startsWith('.')) iconPath = icons.resolve(iconPath.substring(1))
         if (callback && !(callback instanceof Function))
             throw new Error(
                 `callback at params[2] is defined and is not a Function!`
             );
         this.callbacks.push(callback);
         let lightText = text;
-        lightText = !lightText.includes(NUT_UI_ALT) && !lightText.includes(NUT_UI_DISBALE_BTN) ? `§0${lightText.replace(/§[0-9a-juqnvmt]/gi, (a)=>{
+        lightText = !lightText.includes(NUT_UI_ALT) && !lightText.includes(NUT_UI_DISBALE_BTN) ? `§0${lightText.replace(/§[0-9a-juqnvmt]/gi, (a) => {
             let code = colors.getVariants(a)
-            if(code) {
+            if (code) {
                 return code.darker;
             }
             return a;
@@ -379,17 +379,17 @@ export class ModalForm {
     header(text) {
         try {
             this.form.header(text);
-        } catch {}
+        } catch { }
     }
     label(text) {
         try {
             this.form.label(text);
-        } catch {}
+        } catch { }
     }
     divider() {
         try {
             this.form.divider();
-        } catch {}
+        } catch { }
     }
     // use({display, handler}) {
     //     display(this);
@@ -455,19 +455,19 @@ export class ModalForm {
                 throw new Error(`index: ${i}, in params[1] is not an Object!`);
         });
         const optionStrings = options.map((opt, i) => {
-            if(opt instanceof Object) {
+            if (opt instanceof Object) {
                 let { option } = opt;
                 if (typeof option !== "string")
                     throw new Error(
                         `property option: ${option}, at index: ${i}, in params[1] is not a String!`
                     );
                 return option;
-            } else if(typeof opt == "string") {
+            } else if (typeof opt == "string") {
                 return opt;
             }
         });
         const optionCallbacks = options.map((opt) => {
-            if(!(opt instanceof Object)) return;
+            if (!(opt instanceof Object)) return;
             let { callback } = opt;
             if (callback && !(callback instanceof Function))
                 throw new Error(

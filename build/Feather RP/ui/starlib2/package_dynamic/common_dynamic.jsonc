@@ -50,7 +50,9 @@
                                         }
                                     },
                                     {
-                                        "title@$DYNAMIC_HEADER_title_control": {}
+                                        "title@$DYNAMIC_HEADER_title_control": {
+                                            "shadow": true
+                                        }
                                     }
                                 ]
                             }

@@ -105,7 +105,7 @@
 					"anchor_from": "top_right",
 					"anchor_to": "top_right",
 					"size": ["100%c + 18px", "100%cm + 12px"],
-					"min_size": ["100%c + 18px", 34],
+					"min_size": ["100%c + 18px", 38],
 					"controls": [
 						{
 							"notification_text_panel": {
@@ -191,7 +191,7 @@
 							"notification_icon_texture": {
 								"type": "image",
 								"layer": 1,
-								"size": [16, 16],
+								"size": [20, 20],
 								"anchor_from": "top_left",
 								"anchor_to": "top_left",
 								"offset": [9, 9],

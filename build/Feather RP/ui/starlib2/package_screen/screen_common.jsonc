@@ -10,17 +10,55 @@
 {
     "namespace": "starlib_pkg_screen_common",
     "title_template@style.label": {
-        "text": "#title_text",
+        // "text": "#title_text",
         "max_size": [
             "100%",
             "100%"
         ],
-        "bindings": [
-            {
-                "binding_name": "#title_text",
-                "binding_type": "global"
-            }
-        ]
+"bindings": [
+                                                                        {
+                            "binding_type": "global",
+                            "binding_name": "#title_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('\b' + #title_text - $cherryuinext_flag)",
+							"target_property_name": "#data"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('§r' + '%.101s' * #data - '\b' - '\t' + '§r')",
+                            "target_property_name": "#form_title"
+                        },
+                        {
+                            "binding_type": "view",
+                            // "source_property_name": "(('§r' + '%.151s' * #data - '%.101s' * #data) - '\b' - '\t' + '§r')",
+                            "source_property_name": "('%.151s' * #data - '%.101s' * #data - '\t' - '\b')",
+                            "target_property_name": "#header_texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.201s' * #data - '%.151s' * #data - '\t' - '\b')",
+                            "target_property_name": "#border_texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.251s' * #data - '%.201s' * #data - '\t')",
+                            "target_property_name": "#header_button_texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.301s' * #data - '%.251s' * #data - '\t')",
+                            "target_property_name": "#default_button_texture"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "('%.351s' * #data - '%.301s' * #data - '\t')",
+                            "target_property_name": "#disabled_button_texture"
+                        }
+                    ],
+                                "text": "#form_title"
+
     },
     "close_button_template@common.button": {
         "$pressed_button_name": "button.menu_exit",

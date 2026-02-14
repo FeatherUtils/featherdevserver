@@ -21,3 +21,13 @@ rm -rf build/Feather\ BP/.git
 cd build
 
 zip -r Feather.mcaddon Feather\ BP Feather\ RP
+
+cd /root/featherdevserver/development_behavior_packs/Feather\ BP
+git add .
+git commit -m "Build_$timestamp"
+git push
+
+cd /root/featherdevserver/
+git add .
+git commit -m "Build_$timestamp"
+git push

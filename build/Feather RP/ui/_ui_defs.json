@@ -1,5 +1,6 @@
 {
 	"ui_defs": [
+		"ui/color_variables.json",
 		"ui/chest_server_form.json",
 		"ui/server_form_grid.json",
 		"ui/server_form_fullscreen.json",
