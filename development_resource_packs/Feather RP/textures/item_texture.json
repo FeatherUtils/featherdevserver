@@ -5,6 +5,9 @@
     "floating_text_spawn_egg": {
       "textures": "textures/items/floating_text_spawn_egg"
     },
+    "builder": {
+      "textures": "textures/feather_icons/FeatherBuilder"
+    },
     "lock": {
       "textures": "textures/items/lock"
     },

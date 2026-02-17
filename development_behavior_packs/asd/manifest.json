@@ -6,8 +6,8 @@
     ]
   },
   "header": {
-    "name": "Feather BDS Networking",
-    "description": "BDS Helper for FeatherNetworking",
+    "name": "Feather BDS Helper",
+    "description": "BDS Helper for Feather Essentials",
     "min_engine_version": [
       1,
       20,
