@@ -104,10 +104,6 @@ let leafIconPack = new Map([
     "textures/azalea_icons/9"
   ],
   [
-    "action edit",
-    "textures/azalea_icons/action edit"
-  ],
-  [
     "ActionBlue",
     "textures/azalea_icons/ActionBlue"
   ],
@@ -124,10 +120,6 @@ let leafIconPack = new Map([
     "textures/azalea_icons/Actions Edit"
   ],
   [
-    "actions",
-    "textures/azalea_icons/actions"
-  ],
-  [
     "ActionsAll",
     "textures/azalea_icons/ActionsAll"
   ],
@@ -140,32 +132,16 @@ let leafIconPack = new Map([
     "textures/azalea_icons/Add Button"
   ],
   [
-    "Add condition",
-    "textures/azalea_icons/Add condition"
-  ],
-  [
     "Add Form(the one with buttons)",
     "textures/azalea_icons/Add Form(the one with buttons)"
   ],
   [
-    "add text box",
-    "textures/azalea_icons/add text box"
+    "Add condition",
+    "textures/azalea_icons/Add condition"
   ],
   [
     "AddItem",
     "textures/azalea_icons/AddItem"
-  ],
-  [
-    "add_button",
-    "textures/azalea_icons/add_button"
-  ],
-  [
-    "add_header",
-    "textures/azalea_icons/add_header"
-  ],
-  [
-    "add_label",
-    "textures/azalea_icons/add_label"
   ],
   [
     "AdminPlayerIcon",
@@ -180,8 +156,8 @@ let leafIconPack = new Map([
     "textures/azalea_icons/Azalea"
   ],
   [
-    "button extra config",
-    "textures/azalea_icons/button extra config"
+    "Bottom",
+    "textures/azalea_icons/Bottom"
   ],
   [
     "BuyItem",
@@ -196,12 +172,8 @@ let leafIconPack = new Map([
     "textures/azalea_icons/Chat"
   ],
   [
-    "chatrankformat",
-    "textures/azalea_icons/chatrankformat"
-  ],
-  [
-    "Chest maker icon",
-    "textures/azalea_icons/Chest maker icon"
+    "CherryCloud",
+    "textures/azalea_icons/CherryCloud"
   ],
   [
     "Chest UI ADD advanced",
@@ -210,6 +182,10 @@ let leafIconPack = new Map([
   [
     "Chest UI ADD",
     "textures/azalea_icons/Chest UI ADD"
+  ],
+  [
+    "Chest maker icon",
+    "textures/azalea_icons/Chest maker icon"
   ],
   [
     "Chest",
@@ -248,24 +224,8 @@ let leafIconPack = new Map([
     "textures/azalea_icons/Conditions"
   ],
   [
-    "confetti - Copy",
-    "textures/azalea_icons/confetti - Copy"
-  ],
-  [
-    "confetti",
-    "textures/azalea_icons/confetti"
-  ],
-  [
     "Copy and paste BUTTON into ui",
     "textures/azalea_icons/Copy and paste BUTTON into ui"
-  ],
-  [
-    "crates(little changes)",
-    "textures/azalea_icons/crates(little changes)"
-  ],
-  [
-    "credits(little changes)",
-    "textures/azalea_icons/credits(little changes)"
   ],
   [
     "CustomCommandMAKER",
@@ -296,20 +256,20 @@ let leafIconPack = new Map([
     "textures/azalea_icons/DeleteShop"
   ],
   [
-    "devices(little changes)",
-    "textures/azalea_icons/devices(little changes)"
-  ],
-  [
     "DevSettings",
     "textures/azalea_icons/DevSettings"
+  ],
+  [
+    "DevSettings2 - Copy",
+    "textures/azalea_icons/DevSettings2 - Copy"
   ],
   [
     "DevSettings2",
     "textures/azalea_icons/DevSettings2"
   ],
   [
-    "disable button",
-    "textures/azalea_icons/disable button"
+    "DevSettingsClickyClick",
+    "textures/azalea_icons/DevSettingsClickyClick"
   ],
   [
     "Down-Trashy-Edition",
@@ -318,10 +278,6 @@ let leafIconPack = new Map([
   [
     "Down",
     "textures/azalea_icons/Down"
-  ],
-  [
-    "dropdown",
-    "textures/azalea_icons/dropdown"
   ],
   [
     "DuplicateDown",
@@ -340,10 +296,6 @@ let leafIconPack = new Map([
     "textures/azalea_icons/DuplicateUp"
   ],
   [
-    "economy settings",
-    "textures/azalea_icons/economy settings"
-  ],
-  [
     "Edit advanced condition",
     "textures/azalea_icons/Edit advanced condition"
   ],
@@ -356,20 +308,8 @@ let leafIconPack = new Map([
     "textures/azalea_icons/Edit cooldown"
   ],
   [
-    "edit display",
-    "textures/azalea_icons/edit display"
-  ],
-  [
-    "edit model form",
-    "textures/azalea_icons/edit model form"
-  ],
-  [
     "Edit required moon phase",
     "textures/azalea_icons/Edit required moon phase"
-  ],
-  [
-    "edit text",
-    "textures/azalea_icons/edit text"
   ],
   [
     "Edit timeframe (ingame)",
@@ -392,24 +332,12 @@ let leafIconPack = new Map([
     "textures/azalea_icons/EditUi"
   ],
   [
-    "enable button",
-    "textures/azalea_icons/enable button"
-  ],
-  [
-    "export",
-    "textures/azalea_icons/export"
-  ],
-  [
     "ExtIcon",
     "textures/azalea_icons/ExtIcon"
   ],
   [
     "Extra UI settings",
     "textures/azalea_icons/Extra UI settings"
-  ],
-  [
-    "extraTools(Little chages)",
-    "textures/azalea_icons/extraTools(Little chages)"
   ],
   [
     "FormsV2",
@@ -424,24 +352,8 @@ let leafIconPack = new Map([
     "textures/azalea_icons/Gen"
   ],
   [
-    "getHELP",
-    "textures/azalea_icons/getHELP"
-  ],
-  [
-    "gift",
-    "textures/azalea_icons/gift"
-  ],
-  [
     "Gui maker icon",
     "textures/azalea_icons/Gui maker icon"
-  ],
-  [
-    "header",
-    "textures/azalea_icons/header"
-  ],
-  [
-    "header2",
-    "textures/azalea_icons/header2"
   ],
   [
     "If",
@@ -458,10 +370,6 @@ let leafIconPack = new Map([
   [
     "Info",
     "textures/azalea_icons/Info"
-  ],
-  [
-    "label",
-    "textures/azalea_icons/label"
   ],
   [
     "LeafIcon",
@@ -492,14 +400,6 @@ let leafIconPack = new Map([
     "textures/azalea_icons/MainSettings"
   ],
   [
-    "manage",
-    "textures/azalea_icons/manage"
-  ],
-  [
-    "move button to other ui",
-    "textures/azalea_icons/move button to other ui"
-  ],
-  [
     "NoTexture",
     "textures/azalea_icons/NoTexture"
   ],
@@ -512,20 +412,12 @@ let leafIconPack = new Map([
     "textures/azalea_icons/Pencil"
   ],
   [
-    "playershop2",
-    "textures/azalea_icons/playershop2"
-  ],
-  [
     "Quest",
     "textures/azalea_icons/Quest"
   ],
   [
     "RainbowPaintBrush",
     "textures/azalea_icons/RainbowPaintBrush"
-  ],
-  [
-    "remove action",
-    "textures/azalea_icons/remove action"
   ],
   [
     "Remove condition",
@@ -536,16 +428,12 @@ let leafIconPack = new Map([
     "textures/azalea_icons/RemoveItem"
   ],
   [
-    "ReportedPlayer",
-    "textures/azalea_icons/ReportedPlayer"
-  ],
-  [
     "ReportShop",
     "textures/azalea_icons/ReportShop"
   ],
   [
-    "request",
-    "textures/azalea_icons/request"
+    "ReportedPlayer",
+    "textures/azalea_icons/ReportedPlayer"
   ],
   [
     "RequestIncoming",
@@ -556,24 +444,8 @@ let leafIconPack = new Map([
     "textures/azalea_icons/RequestOutgoing"
   ],
   [
-    "resetchatrankformat",
-    "textures/azalea_icons/resetchatrankformat"
-  ],
-  [
-    "rewards",
-    "textures/azalea_icons/rewards"
-  ],
-  [
     "Save",
     "textures/azalea_icons/Save"
-  ],
-  [
-    "send",
-    "textures/azalea_icons/send"
-  ],
-  [
-    "server",
-    "textures/azalea_icons/server"
   ],
   [
     "SetDiscount",
@@ -604,8 +476,8 @@ let leafIconPack = new Map([
     "textures/azalea_icons/Slider command"
   ],
   [
-    "slider",
-    "textures/azalea_icons/slider"
+    "TPA",
+    "textures/azalea_icons/TPA"
   ],
   [
     "TabUI",
@@ -620,8 +492,8 @@ let leafIconPack = new Map([
     "textures/azalea_icons/Toggle tag"
   ],
   [
-    "TPA",
-    "textures/azalea_icons/TPA"
+    "Top",
+    "textures/azalea_icons/Top"
   ],
   [
     "UI Copy and paste",
@@ -648,24 +520,8 @@ let leafIconPack = new Map([
     "textures/azalea_icons/Use dataset"
   ],
   [
-    "view reports",
-    "textures/azalea_icons/view reports"
-  ],
-  [
     "View",
     "textures/azalea_icons/View"
-  ],
-  [
-    "visable",
-    "textures/azalea_icons/visable"
-  ],
-  [
-    "vote",
-    "textures/azalea_icons/vote"
-  ],
-  [
-    "vote2",
-    "textures/azalea_icons/vote2"
   ],
   [
     "WarpEditor-old",
@@ -678,6 +534,218 @@ let leafIconPack = new Map([
   [
     "Wrench",
     "textures/azalea_icons/Wrench"
+  ],
+  [
+    "accept",
+    "textures/azalea_icons/accept"
+  ],
+  [
+    "action edit",
+    "textures/azalea_icons/action edit"
+  ],
+  [
+    "actions",
+    "textures/azalea_icons/actions"
+  ],
+  [
+    "add text box",
+    "textures/azalea_icons/add text box"
+  ],
+  [
+    "add_button",
+    "textures/azalea_icons/add_button"
+  ],
+  [
+    "add_header",
+    "textures/azalea_icons/add_header"
+  ],
+  [
+    "add_label",
+    "textures/azalea_icons/add_label"
+  ],
+  [
+    "button extra config",
+    "textures/azalea_icons/button extra config"
+  ],
+  [
+    "chatrankformat",
+    "textures/azalea_icons/chatrankformat"
+  ],
+  [
+    "confetti - Copy",
+    "textures/azalea_icons/confetti - Copy"
+  ],
+  [
+    "confetti",
+    "textures/azalea_icons/confetti"
+  ],
+  [
+    "copy",
+    "textures/azalea_icons/copy"
+  ],
+  [
+    "crates(little changes)",
+    "textures/azalea_icons/crates(little changes)"
+  ],
+  [
+    "credits(little changes)",
+    "textures/azalea_icons/credits(little changes)"
+  ],
+  [
+    "deny",
+    "textures/azalea_icons/deny"
+  ],
+  [
+    "devices(little changes)",
+    "textures/azalea_icons/devices(little changes)"
+  ],
+  [
+    "dfsgh",
+    "textures/azalea_icons/dfsgh"
+  ],
+  [
+    "disable button",
+    "textures/azalea_icons/disable button"
+  ],
+  [
+    "dropdown",
+    "textures/azalea_icons/dropdown"
+  ],
+  [
+    "economy settings",
+    "textures/azalea_icons/economy settings"
+  ],
+  [
+    "edit display",
+    "textures/azalea_icons/edit display"
+  ],
+  [
+    "edit model form",
+    "textures/azalea_icons/edit model form"
+  ],
+  [
+    "edit text",
+    "textures/azalea_icons/edit text"
+  ],
+  [
+    "enable button",
+    "textures/azalea_icons/enable button"
+  ],
+  [
+    "export",
+    "textures/azalea_icons/export"
+  ],
+  [
+    "extraTools(Little chages)",
+    "textures/azalea_icons/extraTools(Little chages)"
+  ],
+  [
+    "getHELP",
+    "textures/azalea_icons/getHELP"
+  ],
+  [
+    "gift",
+    "textures/azalea_icons/gift"
+  ],
+  [
+    "header",
+    "textures/azalea_icons/header"
+  ],
+  [
+    "header2",
+    "textures/azalea_icons/header2"
+  ],
+  [
+    "help",
+    "textures/azalea_icons/help"
+  ],
+  [
+    "incoming_req",
+    "textures/azalea_icons/incoming_req"
+  ],
+  [
+    "label",
+    "textures/azalea_icons/label"
+  ],
+  [
+    "main",
+    "textures/azalea_icons/main"
+  ],
+  [
+    "manage",
+    "textures/azalea_icons/manage"
+  ],
+  [
+    "misc",
+    "textures/azalea_icons/misc"
+  ],
+  [
+    "move button to other ui",
+    "textures/azalea_icons/move button to other ui"
+  ],
+  [
+    "outgoing_req",
+    "textures/azalea_icons/outgoing_req"
+  ],
+  [
+    "playershop2",
+    "textures/azalea_icons/playershop2"
+  ],
+  [
+    "pride_heart",
+    "textures/azalea_icons/pride_heart"
+  ],
+  [
+    "remove action",
+    "textures/azalea_icons/remove action"
+  ],
+  [
+    "request",
+    "textures/azalea_icons/request"
+  ],
+  [
+    "resetchatrankformat",
+    "textures/azalea_icons/resetchatrankformat"
+  ],
+  [
+    "rewards",
+    "textures/azalea_icons/rewards"
+  ],
+  [
+    "send",
+    "textures/azalea_icons/send"
+  ],
+  [
+    "send_req",
+    "textures/azalea_icons/send_req"
+  ],
+  [
+    "server",
+    "textures/azalea_icons/server"
+  ],
+  [
+    "slider",
+    "textures/azalea_icons/slider"
+  ],
+  [
+    "toasty",
+    "textures/azalea_icons/toasty"
+  ],
+  [
+    "view reports",
+    "textures/azalea_icons/view reports"
+  ],
+  [
+    "visable",
+    "textures/azalea_icons/visable"
+  ],
+  [
+    "vote",
+    "textures/azalea_icons/vote"
+  ],
+  [
+    "vote2",
+    "textures/azalea_icons/vote2"
   ]
 ])]
 ]);

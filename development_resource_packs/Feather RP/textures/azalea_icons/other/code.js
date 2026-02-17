@@ -5,1603 +5,1603 @@ let rpgiabIconPack = new Map([
     ["pack_data", new Map([
   [
     "2d",
-    "textures/leaf_icons/2d"
+    "textures/azalea_icons/other/2d"
   ],
   [
     "accept",
-    "textures/leaf_icons/accept"
+    "textures/azalea_icons/other/accept"
   ],
   [
     "add",
-    "textures/leaf_icons/add"
+    "textures/azalea_icons/other/add"
   ],
   [
     "ambient_occlusion",
-    "textures/leaf_icons/ambient_occlusion"
+    "textures/azalea_icons/other/ambient_occlusion"
   ],
   [
     "ambient_occlusion_voxel",
-    "textures/leaf_icons/ambient_occlusion_voxel"
+    "textures/azalea_icons/other/ambient_occlusion_voxel"
   ],
   [
     "ammo",
-    "textures/leaf_icons/ammo"
+    "textures/azalea_icons/other/ammo"
   ],
   [
     "angle",
-    "textures/leaf_icons/angle"
+    "textures/azalea_icons/other/angle"
   ],
   [
     "anim_frame",
-    "textures/leaf_icons/anim_frame"
+    "textures/azalea_icons/other/anim_frame"
   ],
   [
     "anim_frame_add",
-    "textures/leaf_icons/anim_frame_add"
+    "textures/azalea_icons/other/anim_frame_add"
   ],
   [
     "anim_frame_character",
-    "textures/leaf_icons/anim_frame_character"
+    "textures/azalea_icons/other/anim_frame_character"
   ],
   [
     "anim_frame_delete",
-    "textures/leaf_icons/anim_frame_delete"
+    "textures/azalea_icons/other/anim_frame_delete"
   ],
   [
     "anim_frame_duplicate",
-    "textures/leaf_icons/anim_frame_duplicate"
+    "textures/azalea_icons/other/anim_frame_duplicate"
   ],
   [
     "anim_frame_edit",
-    "textures/leaf_icons/anim_frame_edit"
+    "textures/azalea_icons/other/anim_frame_edit"
   ],
   [
     "anim_frame_move_left",
-    "textures/leaf_icons/anim_frame_move_left"
+    "textures/azalea_icons/other/anim_frame_move_left"
   ],
   [
     "anim_frame_move_right",
-    "textures/leaf_icons/anim_frame_move_right"
+    "textures/azalea_icons/other/anim_frame_move_right"
   ],
   [
     "anim_frame_speed",
-    "textures/leaf_icons/anim_frame_speed"
+    "textures/azalea_icons/other/anim_frame_speed"
   ],
   [
     "anvil_in",
-    "textures/leaf_icons/anvil_in"
+    "textures/azalea_icons/other/anvil_in"
   ],
   [
     "anvil_out",
-    "textures/leaf_icons/anvil_out"
+    "textures/azalea_icons/other/anvil_out"
   ],
   [
     "arguments",
-    "textures/leaf_icons/arguments"
+    "textures/azalea_icons/other/arguments"
   ],
   [
     "arrow_blue_first",
-    "textures/leaf_icons/arrow_blue_first"
+    "textures/azalea_icons/other/arrow_blue_first"
   ],
   [
     "arrow_blue_last",
-    "textures/leaf_icons/arrow_blue_last"
+    "textures/azalea_icons/other/arrow_blue_last"
   ],
   [
     "arrow_blue_left",
-    "textures/leaf_icons/arrow_blue_left"
+    "textures/azalea_icons/other/arrow_blue_left"
   ],
   [
     "arrow_blue_right",
-    "textures/leaf_icons/arrow_blue_right"
+    "textures/azalea_icons/other/arrow_blue_right"
   ],
   [
     "arrow_branch",
-    "textures/leaf_icons/arrow_branch"
+    "textures/azalea_icons/other/arrow_branch"
   ],
   [
     "arrow_down",
-    "textures/leaf_icons/arrow_down"
+    "textures/azalea_icons/other/arrow_down"
   ],
   [
     "arrow_in",
-    "textures/leaf_icons/arrow_in"
+    "textures/azalea_icons/other/arrow_in"
   ],
   [
     "arrow_in_out",
-    "textures/leaf_icons/arrow_in_out"
+    "textures/azalea_icons/other/arrow_in_out"
   ],
   [
     "arrow_left",
-    "textures/leaf_icons/arrow_left"
+    "textures/azalea_icons/other/arrow_left"
   ],
   [
     "arrow_left_right",
-    "textures/leaf_icons/arrow_left_right"
+    "textures/azalea_icons/other/arrow_left_right"
   ],
   [
     "arrow_lower",
-    "textures/leaf_icons/arrow_lower"
+    "textures/azalea_icons/other/arrow_lower"
   ],
   [
     "arrow_lower_step",
-    "textures/leaf_icons/arrow_lower_step"
+    "textures/azalea_icons/other/arrow_lower_step"
   ],
   [
     "arrow_out",
-    "textures/leaf_icons/arrow_out"
+    "textures/azalea_icons/other/arrow_out"
   ],
   [
     "arrow_play",
-    "textures/leaf_icons/arrow_play"
+    "textures/azalea_icons/other/arrow_play"
   ],
   [
     "arrow_prompt",
-    "textures/leaf_icons/arrow_prompt"
+    "textures/azalea_icons/other/arrow_prompt"
   ],
   [
     "arrow_raise",
-    "textures/leaf_icons/arrow_raise"
+    "textures/azalea_icons/other/arrow_raise"
   ],
   [
     "arrow_raise_step",
-    "textures/leaf_icons/arrow_raise_step"
+    "textures/azalea_icons/other/arrow_raise_step"
   ],
   [
     "arrow_refresh",
-    "textures/leaf_icons/arrow_refresh"
+    "textures/azalea_icons/other/arrow_refresh"
   ],
   [
     "arrow_right",
-    "textures/leaf_icons/arrow_right"
+    "textures/azalea_icons/other/arrow_right"
   ],
   [
     "arrow_rotate_anticlockwise",
-    "textures/leaf_icons/arrow_rotate_anticlockwise"
+    "textures/azalea_icons/other/arrow_rotate_anticlockwise"
   ],
   [
     "arrow_rotate_clockwise",
-    "textures/leaf_icons/arrow_rotate_clockwise"
+    "textures/azalea_icons/other/arrow_rotate_clockwise"
   ],
   [
     "arrow_speed",
-    "textures/leaf_icons/arrow_speed"
+    "textures/azalea_icons/other/arrow_speed"
   ],
   [
     "arrow_switch",
-    "textures/leaf_icons/arrow_switch"
+    "textures/azalea_icons/other/arrow_switch"
   ],
   [
     "arrow_up",
-    "textures/leaf_icons/arrow_up"
+    "textures/azalea_icons/other/arrow_up"
   ],
   [
     "arrow_up_down",
-    "textures/leaf_icons/arrow_up_down"
+    "textures/azalea_icons/other/arrow_up_down"
   ],
   [
     "attach",
-    "textures/leaf_icons/attach"
+    "textures/azalea_icons/other/attach"
   ],
   [
     "autotile",
-    "textures/leaf_icons/autotile"
+    "textures/azalea_icons/other/autotile"
   ],
   [
     "blip_orange",
-    "textures/leaf_icons/blip_orange"
+    "textures/azalea_icons/other/blip_orange"
   ],
   [
     "bomb",
-    "textures/leaf_icons/bomb"
+    "textures/azalea_icons/other/bomb"
   ],
   [
     "book",
-    "textures/leaf_icons/book"
+    "textures/azalea_icons/other/book"
   ],
   [
     "boolean",
-    "textures/leaf_icons/boolean"
+    "textures/azalea_icons/other/boolean"
   ],
   [
     "button",
-    "textures/leaf_icons/button"
+    "textures/azalea_icons/other/button"
   ],
   [
     "button_xbox_a",
-    "textures/leaf_icons/button_xbox_a"
+    "textures/azalea_icons/other/button_xbox_a"
   ],
   [
     "button_xbox_b",
-    "textures/leaf_icons/button_xbox_b"
+    "textures/azalea_icons/other/button_xbox_b"
   ],
   [
     "button_xbox_x",
-    "textures/leaf_icons/button_xbox_x"
+    "textures/azalea_icons/other/button_xbox_x"
   ],
   [
     "button_xbox_y",
-    "textures/leaf_icons/button_xbox_y"
+    "textures/azalea_icons/other/button_xbox_y"
   ],
   [
     "camera",
-    "textures/leaf_icons/camera"
+    "textures/azalea_icons/other/camera"
   ],
   [
     "camera_add",
-    "textures/leaf_icons/camera_add"
+    "textures/azalea_icons/other/camera_add"
   ],
   [
     "camera_edit",
-    "textures/leaf_icons/camera_edit"
+    "textures/azalea_icons/other/camera_edit"
   ],
   [
     "camera_first_person",
-    "textures/leaf_icons/camera_first_person"
+    "textures/azalea_icons/other/camera_first_person"
   ],
   [
     "camera_free",
-    "textures/leaf_icons/camera_free"
+    "textures/azalea_icons/other/camera_free"
   ],
   [
     "camera_isometric",
-    "textures/leaf_icons/camera_isometric"
+    "textures/azalea_icons/other/camera_isometric"
   ],
   [
     "camera_lock",
-    "textures/leaf_icons/camera_lock"
+    "textures/azalea_icons/other/camera_lock"
   ],
   [
     "camera_move",
-    "textures/leaf_icons/camera_move"
+    "textures/azalea_icons/other/camera_move"
   ],
   [
     "camera_reset",
-    "textures/leaf_icons/camera_reset"
+    "textures/azalea_icons/other/camera_reset"
   ],
   [
     "camera_rotate",
-    "textures/leaf_icons/camera_rotate"
+    "textures/azalea_icons/other/camera_rotate"
   ],
   [
     "character",
-    "textures/leaf_icons/character"
+    "textures/azalea_icons/other/character"
   ],
   [
     "character_add",
-    "textures/leaf_icons/character_add"
+    "textures/azalea_icons/other/character_add"
   ],
   [
     "character_dialogue",
-    "textures/leaf_icons/character_dialogue"
+    "textures/azalea_icons/other/character_dialogue"
   ],
   [
     "character_edit",
-    "textures/leaf_icons/character_edit"
+    "textures/azalea_icons/other/character_edit"
   ],
   [
     "character_heart",
-    "textures/leaf_icons/character_heart"
+    "textures/azalea_icons/other/character_heart"
   ],
   [
     "character_item_get",
-    "textures/leaf_icons/character_item_get"
+    "textures/azalea_icons/other/character_item_get"
   ],
   [
     "character_lock",
-    "textures/leaf_icons/character_lock"
+    "textures/azalea_icons/other/character_lock"
   ],
   [
     "character_move",
-    "textures/leaf_icons/character_move"
+    "textures/azalea_icons/other/character_move"
   ],
   [
     "character_npc",
-    "textures/leaf_icons/character_npc"
+    "textures/azalea_icons/other/character_npc"
   ],
   [
     "character_question",
-    "textures/leaf_icons/character_question"
+    "textures/azalea_icons/other/character_question"
   ],
   [
     "character_rotate",
-    "textures/leaf_icons/character_rotate"
+    "textures/azalea_icons/other/character_rotate"
   ],
   [
     "character_stop",
-    "textures/leaf_icons/character_stop"
+    "textures/azalea_icons/other/character_stop"
   ],
   [
     "checkbox",
-    "textures/leaf_icons/checkbox"
+    "textures/azalea_icons/other/checkbox"
   ],
   [
     "checkbox_off",
-    "textures/leaf_icons/checkbox_off"
+    "textures/azalea_icons/other/checkbox_off"
   ],
   [
     "checkmark",
-    "textures/leaf_icons/checkmark"
+    "textures/azalea_icons/other/checkmark"
   ],
   [
     "chest",
-    "textures/leaf_icons/chest"
+    "textures/azalea_icons/other/chest"
   ],
   [
     "chest_checkmark",
-    "textures/leaf_icons/chest_checkmark"
+    "textures/azalea_icons/other/chest_checkmark"
   ],
   [
     "chest_delete",
-    "textures/leaf_icons/chest_delete"
+    "textures/azalea_icons/other/chest_delete"
   ],
   [
     "chest_disable",
-    "textures/leaf_icons/chest_disable"
+    "textures/azalea_icons/other/chest_disable"
   ],
   [
     "chest_enable",
-    "textures/leaf_icons/chest_enable"
+    "textures/azalea_icons/other/chest_enable"
   ],
   [
     "chest_item",
-    "textures/leaf_icons/chest_item"
+    "textures/azalea_icons/other/chest_item"
   ],
   [
     "clear",
-    "textures/leaf_icons/clear"
+    "textures/azalea_icons/other/clear"
   ],
   [
     "clipboard",
-    "textures/leaf_icons/clipboard"
+    "textures/azalea_icons/other/clipboard"
   ],
   [
     "clock",
-    "textures/leaf_icons/clock"
+    "textures/azalea_icons/other/clock"
   ],
   [
     "clock_play",
-    "textures/leaf_icons/clock_play"
+    "textures/azalea_icons/other/clock_play"
   ],
   [
     "clock_stop",
-    "textures/leaf_icons/clock_stop"
+    "textures/azalea_icons/other/clock_stop"
   ],
   [
     "coins",
-    "textures/leaf_icons/coins"
+    "textures/azalea_icons/other/coins"
   ],
   [
     "collapse",
-    "textures/leaf_icons/collapse"
+    "textures/azalea_icons/other/collapse"
   ],
   [
     "color_edit",
-    "textures/leaf_icons/color_edit"
+    "textures/azalea_icons/other/color_edit"
   ],
   [
     "color_swatch",
-    "textures/leaf_icons/color_swatch"
+    "textures/azalea_icons/other/color_swatch"
   ],
   [
     "comment",
-    "textures/leaf_icons/comment"
+    "textures/azalea_icons/other/comment"
   ],
   [
     "computer",
-    "textures/leaf_icons/computer"
+    "textures/azalea_icons/other/computer"
   ],
   [
     "console",
-    "textures/leaf_icons/console"
+    "textures/azalea_icons/other/console"
   ],
   [
     "credits",
-    "textures/leaf_icons/credits"
+    "textures/azalea_icons/other/credits"
   ],
   [
     "crosshair",
-    "textures/leaf_icons/crosshair"
+    "textures/azalea_icons/other/crosshair"
   ],
   [
     "cursor",
-    "textures/leaf_icons/cursor"
+    "textures/azalea_icons/other/cursor"
   ],
   [
     "delete",
-    "textures/leaf_icons/delete"
+    "textures/azalea_icons/other/delete"
   ],
   [
     "dialogue",
-    "textures/leaf_icons/dialogue"
+    "textures/azalea_icons/other/dialogue"
   ],
   [
     "dialogue_add",
-    "textures/leaf_icons/dialogue_add"
+    "textures/azalea_icons/other/dialogue_add"
   ],
   [
     "dialogue_page",
-    "textures/leaf_icons/dialogue_page"
+    "textures/azalea_icons/other/dialogue_page"
   ],
   [
     "dialogue_start",
-    "textures/leaf_icons/dialogue_start"
+    "textures/azalea_icons/other/dialogue_start"
   ],
   [
     "dice",
-    "textures/leaf_icons/dice"
+    "textures/azalea_icons/other/dice"
   ],
   [
     "discord_logo",
-    "textures/leaf_icons/discord_logo"
+    "textures/azalea_icons/other/discord_logo"
   ],
   [
     "disk",
-    "textures/leaf_icons/disk"
+    "textures/azalea_icons/other/disk"
   ],
   [
     "disk_load",
-    "textures/leaf_icons/disk_load"
+    "textures/azalea_icons/other/disk_load"
   ],
   [
     "disk_multiple",
-    "textures/leaf_icons/disk_multiple"
+    "textures/azalea_icons/other/disk_multiple"
   ],
   [
     "disk_save",
-    "textures/leaf_icons/disk_save"
+    "textures/azalea_icons/other/disk_save"
   ],
   [
     "door",
-    "textures/leaf_icons/door"
+    "textures/azalea_icons/other/door"
   ],
   [
     "enemy",
-    "textures/leaf_icons/enemy"
+    "textures/azalea_icons/other/enemy"
   ],
   [
     "enemy_add",
-    "textures/leaf_icons/enemy_add"
+    "textures/azalea_icons/other/enemy_add"
   ],
   [
     "entity",
-    "textures/leaf_icons/entity"
+    "textures/azalea_icons/other/entity"
   ],
   [
     "entity_bounds",
-    "textures/leaf_icons/entity_bounds"
+    "textures/azalea_icons/other/entity_bounds"
   ],
   [
     "entity_delete",
-    "textures/leaf_icons/entity_delete"
+    "textures/azalea_icons/other/entity_delete"
   ],
   [
     "entity_move",
-    "textures/leaf_icons/entity_move"
+    "textures/azalea_icons/other/entity_move"
   ],
   [
     "exclamation",
-    "textures/leaf_icons/exclamation"
+    "textures/azalea_icons/other/exclamation"
   ],
   [
     "exit",
-    "textures/leaf_icons/exit"
+    "textures/azalea_icons/other/exit"
   ],
   [
     "expand",
-    "textures/leaf_icons/expand"
+    "textures/azalea_icons/other/expand"
   ],
   [
     "expression",
-    "textures/leaf_icons/expression"
+    "textures/azalea_icons/other/expression"
   ],
   [
     "eye",
-    "textures/leaf_icons/eye"
-  ],
-  [
-    "eyedropper",
-    "textures/leaf_icons/eyedropper"
+    "textures/azalea_icons/other/eye"
   ],
   [
     "eye_height",
-    "textures/leaf_icons/eye_height"
+    "textures/azalea_icons/other/eye_height"
   ],
   [
     "eye_hide",
-    "textures/leaf_icons/eye_hide"
+    "textures/azalea_icons/other/eye_hide"
   ],
   [
     "eye_lock",
-    "textures/leaf_icons/eye_lock"
+    "textures/azalea_icons/other/eye_lock"
   ],
   [
     "eye_show",
-    "textures/leaf_icons/eye_show"
+    "textures/azalea_icons/other/eye_show"
+  ],
+  [
+    "eyedropper",
+    "textures/azalea_icons/other/eyedropper"
   ],
   [
     "fade_in",
-    "textures/leaf_icons/fade_in"
+    "textures/azalea_icons/other/fade_in"
   ],
   [
     "fade_out",
-    "textures/leaf_icons/fade_out"
+    "textures/azalea_icons/other/fade_out"
   ],
   [
     "flag_blue",
-    "textures/leaf_icons/flag_blue"
+    "textures/azalea_icons/other/flag_blue"
   ],
   [
     "flip_horizontal",
-    "textures/leaf_icons/flip_horizontal"
+    "textures/azalea_icons/other/flip_horizontal"
   ],
   [
     "folder",
-    "textures/leaf_icons/folder"
+    "textures/azalea_icons/other/folder"
   ],
   [
     "folder_image",
-    "textures/leaf_icons/folder_image"
+    "textures/azalea_icons/other/folder_image"
   ],
   [
     "folder_page",
-    "textures/leaf_icons/folder_page"
+    "textures/azalea_icons/other/folder_page"
   ],
   [
     "folder_search",
-    "textures/leaf_icons/folder_search"
+    "textures/azalea_icons/other/folder_search"
   ],
   [
     "folder_settings",
-    "textures/leaf_icons/folder_settings"
+    "textures/azalea_icons/other/folder_settings"
   ],
   [
     "folder_up",
-    "textures/leaf_icons/folder_up"
+    "textures/azalea_icons/other/folder_up"
   ],
   [
     "folder_voxel",
-    "textures/leaf_icons/folder_voxel"
+    "textures/azalea_icons/other/folder_voxel"
   ],
   [
     "font",
-    "textures/leaf_icons/font"
+    "textures/azalea_icons/other/font"
   ],
   [
     "font_size",
-    "textures/leaf_icons/font_size"
+    "textures/azalea_icons/other/font_size"
   ],
   [
     "fullscreen",
-    "textures/leaf_icons/fullscreen"
+    "textures/azalea_icons/other/fullscreen"
   ],
   [
     "function",
-    "textures/leaf_icons/function"
+    "textures/azalea_icons/other/function"
   ],
   [
     "gear",
-    "textures/leaf_icons/gear"
+    "textures/azalea_icons/other/gear"
   ],
   [
     "glow",
-    "textures/leaf_icons/glow"
+    "textures/azalea_icons/other/glow"
   ],
   [
     "godot_logo",
-    "textures/leaf_icons/godot_logo"
+    "textures/azalea_icons/other/godot_logo"
   ],
   [
     "gradient_red",
-    "textures/leaf_icons/gradient_red"
+    "textures/azalea_icons/other/gradient_red"
   ],
   [
     "grid",
-    "textures/leaf_icons/grid"
+    "textures/azalea_icons/other/grid"
   ],
   [
     "grid_height",
-    "textures/leaf_icons/grid_height"
+    "textures/azalea_icons/other/grid_height"
   ],
   [
     "grid_tile",
-    "textures/leaf_icons/grid_tile"
+    "textures/azalea_icons/other/grid_tile"
   ],
   [
     "grid_tile_place",
-    "textures/leaf_icons/grid_tile_place"
+    "textures/azalea_icons/other/grid_tile_place"
   ],
   [
     "ground",
-    "textures/leaf_icons/ground"
+    "textures/azalea_icons/other/ground"
   ],
   [
     "group",
-    "textures/leaf_icons/group"
+    "textures/azalea_icons/other/group"
   ],
   [
     "group_add",
-    "textures/leaf_icons/group_add"
+    "textures/azalea_icons/other/group_add"
   ],
   [
     "group_delete",
-    "textures/leaf_icons/group_delete"
+    "textures/azalea_icons/other/group_delete"
   ],
   [
     "group_edit",
-    "textures/leaf_icons/group_edit"
+    "textures/azalea_icons/other/group_edit"
   ],
   [
     "group_mesh",
-    "textures/leaf_icons/group_mesh"
+    "textures/azalea_icons/other/group_mesh"
   ],
   [
     "group_tiles",
-    "textures/leaf_icons/group_tiles"
+    "textures/azalea_icons/other/group_tiles"
   ],
   [
     "hand",
-    "textures/leaf_icons/hand"
+    "textures/azalea_icons/other/hand"
   ],
   [
     "hand_add",
-    "textures/leaf_icons/hand_add"
+    "textures/azalea_icons/other/hand_add"
   ],
   [
     "hand_delete",
-    "textures/leaf_icons/hand_delete"
+    "textures/azalea_icons/other/hand_delete"
   ],
   [
     "hand_move",
-    "textures/leaf_icons/hand_move"
+    "textures/azalea_icons/other/hand_move"
   ],
   [
     "heart",
-    "textures/leaf_icons/heart"
+    "textures/azalea_icons/other/heart"
   ],
   [
     "heart_add",
-    "textures/leaf_icons/heart_add"
+    "textures/azalea_icons/other/heart_add"
   ],
   [
     "heart_delete",
-    "textures/leaf_icons/heart_delete"
+    "textures/azalea_icons/other/heart_delete"
   ],
   [
     "help",
-    "textures/leaf_icons/help"
+    "textures/azalea_icons/other/help"
   ],
   [
     "hourglass",
-    "textures/leaf_icons/hourglass"
+    "textures/azalea_icons/other/hourglass"
   ],
   [
     "image",
-    "textures/leaf_icons/image"
+    "textures/azalea_icons/other/image"
   ],
   [
     "image_add",
-    "textures/leaf_icons/image_add"
+    "textures/azalea_icons/other/image_add"
   ],
   [
     "image_dimensions",
-    "textures/leaf_icons/image_dimensions"
+    "textures/azalea_icons/other/image_dimensions"
   ],
   [
     "image_hand",
-    "textures/leaf_icons/image_hand"
+    "textures/azalea_icons/other/image_hand"
   ],
   [
     "import_export",
-    "textures/leaf_icons/import_export"
+    "textures/azalea_icons/other/import_export"
   ],
   [
     "information",
-    "textures/leaf_icons/information"
+    "textures/azalea_icons/other/information"
   ],
   [
     "interact",
-    "textures/leaf_icons/interact"
+    "textures/azalea_icons/other/interact"
   ],
   [
     "inventory",
-    "textures/leaf_icons/inventory"
+    "textures/azalea_icons/other/inventory"
   ],
   [
     "inventory_hide",
-    "textures/leaf_icons/inventory_hide"
+    "textures/azalea_icons/other/inventory_hide"
   ],
   [
     "inventory_show",
-    "textures/leaf_icons/inventory_show"
+    "textures/azalea_icons/other/inventory_show"
   ],
   [
     "itch_logo",
-    "textures/leaf_icons/itch_logo"
+    "textures/azalea_icons/other/itch_logo"
   ],
   [
     "item",
-    "textures/leaf_icons/item"
+    "textures/azalea_icons/other/item"
   ],
   [
     "item_add",
-    "textures/leaf_icons/item_add"
+    "textures/azalea_icons/other/item_add"
   ],
   [
     "item_delete",
-    "textures/leaf_icons/item_delete"
+    "textures/azalea_icons/other/item_delete"
   ],
   [
     "item_drop",
-    "textures/leaf_icons/item_drop"
+    "textures/azalea_icons/other/item_drop"
   ],
   [
     "item_stack",
-    "textures/leaf_icons/item_stack"
+    "textures/azalea_icons/other/item_stack"
   ],
   [
     "joystick",
-    "textures/leaf_icons/joystick"
+    "textures/azalea_icons/other/joystick"
   ],
   [
     "jump",
-    "textures/leaf_icons/jump"
-  ],
-  [
-    "keyboard",
-    "textures/leaf_icons/keyboard"
+    "textures/azalea_icons/other/jump"
   ],
   [
     "key_c",
-    "textures/leaf_icons/key_c"
+    "textures/azalea_icons/other/key_c"
   ],
   [
     "key_t",
-    "textures/leaf_icons/key_t"
+    "textures/azalea_icons/other/key_t"
+  ],
+  [
+    "keyboard",
+    "textures/azalea_icons/other/keyboard"
   ],
   [
     "ladder",
-    "textures/leaf_icons/ladder"
+    "textures/azalea_icons/other/ladder"
   ],
   [
     "ladder_character",
-    "textures/leaf_icons/ladder_character"
+    "textures/azalea_icons/other/ladder_character"
   ],
   [
     "ladder_down",
-    "textures/leaf_icons/ladder_down"
+    "textures/azalea_icons/other/ladder_down"
   ],
   [
     "ladder_lock",
-    "textures/leaf_icons/ladder_lock"
+    "textures/azalea_icons/other/ladder_lock"
   ],
   [
     "ladder_none",
-    "textures/leaf_icons/ladder_none"
+    "textures/azalea_icons/other/ladder_none"
   ],
   [
     "ladder_up",
-    "textures/leaf_icons/ladder_up"
+    "textures/azalea_icons/other/ladder_up"
   ],
   [
     "ladder_up_down",
-    "textures/leaf_icons/ladder_up_down"
+    "textures/azalea_icons/other/ladder_up_down"
   ],
   [
     "laser",
-    "textures/leaf_icons/laser"
+    "textures/azalea_icons/other/laser"
   ],
   [
     "library",
-    "textures/leaf_icons/library"
+    "textures/azalea_icons/other/library"
   ],
   [
     "light",
-    "textures/leaf_icons/light"
+    "textures/azalea_icons/other/light"
   ],
   [
     "light_add",
-    "textures/leaf_icons/light_add"
+    "textures/azalea_icons/other/light_add"
   ],
   [
     "light_energy",
-    "textures/leaf_icons/light_energy"
+    "textures/azalea_icons/other/light_energy"
   ],
   [
     "light_fade",
-    "textures/leaf_icons/light_fade"
+    "textures/azalea_icons/other/light_fade"
   ],
   [
     "light_negative",
-    "textures/leaf_icons/light_negative"
+    "textures/azalea_icons/other/light_negative"
   ],
   [
     "light_off",
-    "textures/leaf_icons/light_off"
+    "textures/azalea_icons/other/light_off"
   ],
   [
     "light_on_off",
-    "textures/leaf_icons/light_on_off"
+    "textures/azalea_icons/other/light_on_off"
   ],
   [
     "light_range",
-    "textures/leaf_icons/light_range"
+    "textures/azalea_icons/other/light_range"
   ],
   [
     "link",
-    "textures/leaf_icons/link"
+    "textures/azalea_icons/other/link"
   ],
   [
     "link_add",
-    "textures/leaf_icons/link_add"
+    "textures/azalea_icons/other/link_add"
   ],
   [
     "link_box",
-    "textures/leaf_icons/link_box"
+    "textures/azalea_icons/other/link_box"
   ],
   [
     "link_delete",
-    "textures/leaf_icons/link_delete"
+    "textures/azalea_icons/other/link_delete"
   ],
   [
     "link_eye",
-    "textures/leaf_icons/link_eye"
+    "textures/azalea_icons/other/link_eye"
   ],
   [
     "linux_logo",
-    "textures/leaf_icons/linux_logo"
+    "textures/azalea_icons/other/linux_logo"
   ],
   [
     "loading_screen",
-    "textures/leaf_icons/loading_screen"
+    "textures/azalea_icons/other/loading_screen"
   ],
   [
     "location",
-    "textures/leaf_icons/location"
+    "textures/azalea_icons/other/location"
   ],
   [
     "location_character",
-    "textures/leaf_icons/location_character"
+    "textures/azalea_icons/other/location_character"
   ],
   [
     "location_enemy",
-    "textures/leaf_icons/location_enemy"
+    "textures/azalea_icons/other/location_enemy"
   ],
   [
     "location_hand",
-    "textures/leaf_icons/location_hand"
+    "textures/azalea_icons/other/location_hand"
   ],
   [
     "lock",
-    "textures/leaf_icons/lock"
+    "textures/azalea_icons/other/lock"
   ],
   [
     "lock_vertical",
-    "textures/leaf_icons/lock_vertical"
+    "textures/azalea_icons/other/lock_vertical"
   ],
   [
     "mac_logo",
-    "textures/leaf_icons/mac_logo"
+    "textures/azalea_icons/other/mac_logo"
   ],
   [
     "magnifier",
-    "textures/leaf_icons/magnifier"
+    "textures/azalea_icons/other/magnifier"
   ],
   [
     "magnifier_zoom_in",
-    "textures/leaf_icons/magnifier_zoom_in"
+    "textures/azalea_icons/other/magnifier_zoom_in"
   ],
   [
     "magnifier_zoom_out",
-    "textures/leaf_icons/magnifier_zoom_out"
+    "textures/azalea_icons/other/magnifier_zoom_out"
   ],
   [
     "main_menu",
-    "textures/leaf_icons/main_menu"
+    "textures/azalea_icons/other/main_menu"
   ],
   [
     "map",
-    "textures/leaf_icons/map"
+    "textures/azalea_icons/other/map"
   ],
   [
     "map_add",
-    "textures/leaf_icons/map_add"
+    "textures/azalea_icons/other/map_add"
   ],
   [
     "map_fog",
-    "textures/leaf_icons/map_fog"
+    "textures/azalea_icons/other/map_fog"
   ],
   [
     "map_link",
-    "textures/leaf_icons/map_link"
+    "textures/azalea_icons/other/map_link"
   ],
   [
     "map_reset",
-    "textures/leaf_icons/map_reset"
+    "textures/azalea_icons/other/map_reset"
   ],
   [
     "map_start",
-    "textures/leaf_icons/map_start"
+    "textures/azalea_icons/other/map_start"
   ],
   [
     "margin_bottom",
-    "textures/leaf_icons/margin_bottom"
+    "textures/azalea_icons/other/margin_bottom"
   ],
   [
     "margin_left",
-    "textures/leaf_icons/margin_left"
+    "textures/azalea_icons/other/margin_left"
   ],
   [
     "margin_right",
-    "textures/leaf_icons/margin_right"
+    "textures/azalea_icons/other/margin_right"
   ],
   [
     "margin_top",
-    "textures/leaf_icons/margin_top"
+    "textures/azalea_icons/other/margin_top"
   ],
   [
     "margin_top_left",
-    "textures/leaf_icons/margin_top_left"
+    "textures/azalea_icons/other/margin_top_left"
   ],
   [
     "mesh_default",
-    "textures/leaf_icons/mesh_default"
+    "textures/azalea_icons/other/mesh_default"
   ],
   [
     "mesh_marching",
-    "textures/leaf_icons/mesh_marching"
+    "textures/azalea_icons/other/mesh_marching"
   ],
   [
     "mesh_preview",
-    "textures/leaf_icons/mesh_preview"
+    "textures/azalea_icons/other/mesh_preview"
   ],
   [
     "message",
-    "textures/leaf_icons/message"
+    "textures/azalea_icons/other/message"
   ],
   [
     "missing",
-    "textures/leaf_icons/missing"
+    "textures/azalea_icons/other/missing"
   ],
   [
     "model_edit",
-    "textures/leaf_icons/model_edit"
+    "textures/azalea_icons/other/model_edit"
   ],
   [
     "mouse",
-    "textures/leaf_icons/mouse"
+    "textures/azalea_icons/other/mouse"
   ],
   [
     "mouse_eye",
-    "textures/leaf_icons/mouse_eye"
+    "textures/azalea_icons/other/mouse_eye"
   ],
   [
     "mouse_free",
-    "textures/leaf_icons/mouse_free"
+    "textures/azalea_icons/other/mouse_free"
   ],
   [
     "move_interact",
-    "textures/leaf_icons/move_interact"
+    "textures/azalea_icons/other/move_interact"
   ],
   [
     "music",
-    "textures/leaf_icons/music"
+    "textures/azalea_icons/other/music"
   ],
   [
     "music_play",
-    "textures/leaf_icons/music_play"
+    "textures/azalea_icons/other/music_play"
   ],
   [
     "navigation",
-    "textures/leaf_icons/navigation"
+    "textures/azalea_icons/other/navigation"
   ],
   [
     "navigation_adjacent",
-    "textures/leaf_icons/navigation_adjacent"
+    "textures/azalea_icons/other/navigation_adjacent"
   ],
   [
     "node",
-    "textures/leaf_icons/node"
+    "textures/azalea_icons/other/node"
   ],
   [
     "node_add",
-    "textures/leaf_icons/node_add"
+    "textures/azalea_icons/other/node_add"
   ],
   [
     "node_copy",
-    "textures/leaf_icons/node_copy"
+    "textures/azalea_icons/other/node_copy"
   ],
   [
     "node_library",
-    "textures/leaf_icons/node_library"
+    "textures/azalea_icons/other/node_library"
   ],
   [
     "node_link",
-    "textures/leaf_icons/node_link"
+    "textures/azalea_icons/other/node_link"
   ],
   [
     "noise",
-    "textures/leaf_icons/noise"
+    "textures/azalea_icons/other/noise"
   ],
   [
     "number",
-    "textures/leaf_icons/number"
+    "textures/azalea_icons/other/number"
   ],
   [
     "object",
-    "textures/leaf_icons/object"
+    "textures/azalea_icons/other/object"
   ],
   [
     "object_add",
-    "textures/leaf_icons/object_add"
+    "textures/azalea_icons/other/object_add"
   ],
   [
     "object_hand",
-    "textures/leaf_icons/object_hand"
+    "textures/azalea_icons/other/object_hand"
   ],
   [
     "offset_horizontal",
-    "textures/leaf_icons/offset_horizontal"
+    "textures/azalea_icons/other/offset_horizontal"
   ],
   [
     "offset_vertical",
-    "textures/leaf_icons/offset_vertical"
+    "textures/azalea_icons/other/offset_vertical"
   ],
   [
     "package",
-    "textures/leaf_icons/package"
+    "textures/azalea_icons/other/package"
   ],
   [
     "page_add",
-    "textures/leaf_icons/page_add"
+    "textures/azalea_icons/other/page_add"
   ],
   [
     "page_copy",
-    "textures/leaf_icons/page_copy"
+    "textures/azalea_icons/other/page_copy"
   ],
   [
     "page_data",
-    "textures/leaf_icons/page_data"
+    "textures/azalea_icons/other/page_data"
   ],
   [
     "page_edit",
-    "textures/leaf_icons/page_edit"
+    "textures/azalea_icons/other/page_edit"
   ],
   [
     "page_voxel",
-    "textures/leaf_icons/page_voxel"
+    "textures/azalea_icons/other/page_voxel"
   ],
   [
     "paint_can",
-    "textures/leaf_icons/paint_can"
+    "textures/azalea_icons/other/paint_can"
   ],
   [
     "palette",
-    "textures/leaf_icons/palette"
+    "textures/azalea_icons/other/palette"
   ],
   [
     "party",
-    "textures/leaf_icons/party"
+    "textures/azalea_icons/other/party"
   ],
   [
     "party_add",
-    "textures/leaf_icons/party_add"
+    "textures/azalea_icons/other/party_add"
   ],
   [
     "party_delete",
-    "textures/leaf_icons/party_delete"
+    "textures/azalea_icons/other/party_delete"
   ],
   [
     "party_reset",
-    "textures/leaf_icons/party_reset"
+    "textures/azalea_icons/other/party_reset"
   ],
   [
     "pause",
-    "textures/leaf_icons/pause"
+    "textures/azalea_icons/other/pause"
   ],
   [
     "pencil",
-    "textures/leaf_icons/pencil"
+    "textures/azalea_icons/other/pencil"
   ],
   [
     "platform",
-    "textures/leaf_icons/platform"
+    "textures/azalea_icons/other/platform"
   ],
   [
     "play",
-    "textures/leaf_icons/play"
+    "textures/azalea_icons/other/play"
   ],
   [
     "portrait",
-    "textures/leaf_icons/portrait"
+    "textures/azalea_icons/other/portrait"
   ],
   [
     "portrait_left",
-    "textures/leaf_icons/portrait_left"
+    "textures/azalea_icons/other/portrait_left"
   ],
   [
     "portrait_right",
-    "textures/leaf_icons/portrait_right"
+    "textures/azalea_icons/other/portrait_right"
   ],
   [
     "potion",
-    "textures/leaf_icons/potion"
+    "textures/azalea_icons/other/potion"
   ],
   [
     "progress_bar",
-    "textures/leaf_icons/progress_bar"
+    "textures/azalea_icons/other/progress_bar"
   ],
   [
     "properties",
-    "textures/leaf_icons/properties"
+    "textures/azalea_icons/other/properties"
   ],
   [
     "properties_edit",
-    "textures/leaf_icons/properties_edit"
+    "textures/azalea_icons/other/properties_edit"
   ],
   [
     "properties_insert",
-    "textures/leaf_icons/properties_insert"
+    "textures/azalea_icons/other/properties_insert"
   ],
   [
     "puzzle",
-    "textures/leaf_icons/puzzle"
+    "textures/azalea_icons/other/puzzle"
   ],
   [
     "redo",
-    "textures/leaf_icons/redo"
+    "textures/azalea_icons/other/redo"
   ],
   [
     "rpgiab_logo",
-    "textures/leaf_icons/rpgiab_logo"
+    "textures/azalea_icons/other/rpgiab_logo"
   ],
   [
     "scissors",
-    "textures/leaf_icons/scissors"
+    "textures/azalea_icons/other/scissors"
   ],
   [
     "script",
-    "textures/leaf_icons/script"
+    "textures/azalea_icons/other/script"
   ],
   [
     "script_add",
-    "textures/leaf_icons/script_add"
+    "textures/azalea_icons/other/script_add"
   ],
   [
     "script_code",
-    "textures/leaf_icons/script_code"
+    "textures/azalea_icons/other/script_code"
   ],
   [
     "script_delete",
-    "textures/leaf_icons/script_delete"
+    "textures/azalea_icons/other/script_delete"
   ],
   [
     "script_edit",
-    "textures/leaf_icons/script_edit"
+    "textures/azalea_icons/other/script_edit"
   ],
   [
     "script_lightning",
-    "textures/leaf_icons/script_lightning"
+    "textures/azalea_icons/other/script_lightning"
   ],
   [
     "script_lightning_add",
-    "textures/leaf_icons/script_lightning_add"
+    "textures/azalea_icons/other/script_lightning_add"
   ],
   [
     "script_lightning_edit",
-    "textures/leaf_icons/script_lightning_edit"
+    "textures/azalea_icons/other/script_lightning_edit"
   ],
   [
     "script_start",
-    "textures/leaf_icons/script_start"
+    "textures/azalea_icons/other/script_start"
   ],
   [
     "script_text",
-    "textures/leaf_icons/script_text"
+    "textures/azalea_icons/other/script_text"
   ],
   [
     "script_text_add",
-    "textures/leaf_icons/script_text_add"
+    "textures/azalea_icons/other/script_text_add"
   ],
   [
     "script_text_checkmark",
-    "textures/leaf_icons/script_text_checkmark"
+    "textures/azalea_icons/other/script_text_checkmark"
   ],
   [
     "script_text_delete",
-    "textures/leaf_icons/script_text_delete"
+    "textures/azalea_icons/other/script_text_delete"
   ],
   [
     "select_edit",
-    "textures/leaf_icons/select_edit"
+    "textures/azalea_icons/other/select_edit"
   ],
   [
     "settings_gear",
-    "textures/leaf_icons/settings_gear"
+    "textures/azalea_icons/other/settings_gear"
   ],
   [
     "settings_save",
-    "textures/leaf_icons/settings_save"
+    "textures/azalea_icons/other/settings_save"
   ],
   [
     "shadow",
-    "textures/leaf_icons/shadow"
+    "textures/azalea_icons/other/shadow"
   ],
   [
     "shadow_darkness",
-    "textures/leaf_icons/shadow_darkness"
+    "textures/azalea_icons/other/shadow_darkness"
   ],
   [
     "shield",
-    "textures/leaf_icons/shield"
+    "textures/azalea_icons/other/shield"
   ],
   [
     "ship",
-    "textures/leaf_icons/ship"
+    "textures/azalea_icons/other/ship"
   ],
   [
     "skull",
-    "textures/leaf_icons/skull"
+    "textures/azalea_icons/other/skull"
   ],
   [
     "skull_delete",
-    "textures/leaf_icons/skull_delete"
+    "textures/azalea_icons/other/skull_delete"
   ],
   [
     "sound",
-    "textures/leaf_icons/sound"
+    "textures/azalea_icons/other/sound"
   ],
   [
     "star",
-    "textures/leaf_icons/star"
+    "textures/azalea_icons/other/star"
   ],
   [
     "steam_logo",
-    "textures/leaf_icons/steam_logo"
+    "textures/azalea_icons/other/steam_logo"
   ],
   [
     "stop",
-    "textures/leaf_icons/stop"
+    "textures/azalea_icons/other/stop"
   ],
   [
     "stop_sign",
-    "textures/leaf_icons/stop_sign"
+    "textures/azalea_icons/other/stop_sign"
   ],
   [
     "string",
-    "textures/leaf_icons/string"
+    "textures/azalea_icons/other/string"
   ],
   [
     "surface_edges",
-    "textures/leaf_icons/surface_edges"
+    "textures/azalea_icons/other/surface_edges"
   ],
   [
     "sword",
-    "textures/leaf_icons/sword"
-  ],
-  [
-    "swords",
-    "textures/leaf_icons/swords"
+    "textures/azalea_icons/other/sword"
   ],
   [
     "sword_blood",
-    "textures/leaf_icons/sword_blood"
+    "textures/azalea_icons/other/sword_blood"
   ],
   [
     "sword_eye",
-    "textures/leaf_icons/sword_eye"
+    "textures/azalea_icons/other/sword_eye"
   ],
   [
     "sword_hit",
-    "textures/leaf_icons/sword_hit"
+    "textures/azalea_icons/other/sword_hit"
   ],
   [
     "sword_link",
-    "textures/leaf_icons/sword_link"
+    "textures/azalea_icons/other/sword_link"
   ],
   [
     "sword_reset",
-    "textures/leaf_icons/sword_reset"
+    "textures/azalea_icons/other/sword_reset"
   ],
   [
     "sword_start",
-    "textures/leaf_icons/sword_start"
+    "textures/azalea_icons/other/sword_start"
   ],
   [
     "sword_stop",
-    "textures/leaf_icons/sword_stop"
+    "textures/azalea_icons/other/sword_stop"
+  ],
+  [
+    "swords",
+    "textures/azalea_icons/other/swords"
   ],
   [
     "tab",
-    "textures/leaf_icons/tab"
+    "textures/azalea_icons/other/tab"
   ],
   [
     "tag_blue",
-    "textures/leaf_icons/tag_blue"
+    "textures/azalea_icons/other/tag_blue"
   ],
   [
     "tag_id",
-    "textures/leaf_icons/tag_id"
+    "textures/azalea_icons/other/tag_id"
   ],
   [
     "terrain",
-    "textures/leaf_icons/terrain"
+    "textures/azalea_icons/other/terrain"
   ],
   [
     "terrain_follow",
-    "textures/leaf_icons/terrain_follow"
+    "textures/azalea_icons/other/terrain_follow"
   ],
   [
     "terrain_precise",
-    "textures/leaf_icons/terrain_precise"
+    "textures/azalea_icons/other/terrain_precise"
   ],
   [
     "terrain_smooth_curve",
-    "textures/leaf_icons/terrain_smooth_curve"
+    "textures/azalea_icons/other/terrain_smooth_curve"
   ],
   [
     "terrain_smooth_linear",
-    "textures/leaf_icons/terrain_smooth_linear"
+    "textures/azalea_icons/other/terrain_smooth_linear"
   ],
   [
     "text",
-    "textures/leaf_icons/text"
+    "textures/azalea_icons/other/text"
   ],
   [
     "text_align_center",
-    "textures/leaf_icons/text_align_center"
+    "textures/azalea_icons/other/text_align_center"
   ],
   [
     "text_bullets",
-    "textures/leaf_icons/text_bullets"
+    "textures/azalea_icons/other/text_bullets"
   ],
   [
     "text_eye",
-    "textures/leaf_icons/text_eye"
+    "textures/azalea_icons/other/text_eye"
   ],
   [
     "text_field",
-    "textures/leaf_icons/text_field"
+    "textures/azalea_icons/other/text_field"
   ],
   [
     "text_line_numbers",
-    "textures/leaf_icons/text_line_numbers"
+    "textures/azalea_icons/other/text_line_numbers"
   ],
   [
     "text_line_spacing",
-    "textures/leaf_icons/text_line_spacing"
+    "textures/azalea_icons/other/text_line_spacing"
   ],
   [
     "tile",
-    "textures/leaf_icons/tile"
+    "textures/azalea_icons/other/tile"
   ],
   [
     "tile_add",
-    "textures/leaf_icons/tile_add"
+    "textures/azalea_icons/other/tile_add"
   ],
   [
     "tile_enter",
-    "textures/leaf_icons/tile_enter"
+    "textures/azalea_icons/other/tile_enter"
   ],
   [
     "tile_exclamation",
-    "textures/leaf_icons/tile_exclamation"
+    "textures/azalea_icons/other/tile_exclamation"
   ],
   [
     "tile_exit",
-    "textures/leaf_icons/tile_exit"
+    "textures/azalea_icons/other/tile_exit"
   ],
   [
     "tile_impassable",
-    "textures/leaf_icons/tile_impassable"
+    "textures/azalea_icons/other/tile_impassable"
   ],
   [
     "tile_passable",
-    "textures/leaf_icons/tile_passable"
+    "textures/azalea_icons/other/tile_passable"
   ],
   [
     "tile_stop",
-    "textures/leaf_icons/tile_stop"
-  ],
-  [
-    "tools",
-    "textures/leaf_icons/tools"
+    "textures/azalea_icons/other/tile_stop"
   ],
   [
     "tool_items",
-    "textures/leaf_icons/tool_items"
+    "textures/azalea_icons/other/tool_items"
+  ],
+  [
+    "tools",
+    "textures/azalea_icons/other/tools"
   ],
   [
     "transparency",
-    "textures/leaf_icons/transparency"
+    "textures/azalea_icons/other/transparency"
   ],
   [
     "tree_collapse",
-    "textures/leaf_icons/tree_collapse"
+    "textures/azalea_icons/other/tree_collapse"
   ],
   [
     "tree_expand",
-    "textures/leaf_icons/tree_expand"
+    "textures/azalea_icons/other/tree_expand"
   ],
   [
     "trello_logo",
-    "textures/leaf_icons/trello_logo"
+    "textures/azalea_icons/other/trello_logo"
   ],
   [
     "twitter_logo",
-    "textures/leaf_icons/twitter_logo"
+    "textures/azalea_icons/other/twitter_logo"
   ],
   [
     "ui",
-    "textures/leaf_icons/ui"
+    "textures/azalea_icons/other/ui"
   ],
   [
     "ui_inventory",
-    "textures/leaf_icons/ui_inventory"
+    "textures/azalea_icons/other/ui_inventory"
   ],
   [
     "ui_toolbar",
-    "textures/leaf_icons/ui_toolbar"
+    "textures/azalea_icons/other/ui_toolbar"
   ],
   [
     "undo",
-    "textures/leaf_icons/undo"
+    "textures/azalea_icons/other/undo"
   ],
   [
     "unlock",
-    "textures/leaf_icons/unlock"
+    "textures/azalea_icons/other/unlock"
   ],
   [
     "variable",
-    "textures/leaf_icons/variable"
+    "textures/azalea_icons/other/variable"
   ],
   [
     "variable_return",
-    "textures/leaf_icons/variable_return"
+    "textures/azalea_icons/other/variable_return"
   ],
   [
     "voxel",
-    "textures/leaf_icons/voxel"
+    "textures/azalea_icons/other/voxel"
   ],
   [
     "voxel_add",
-    "textures/leaf_icons/voxel_add"
+    "textures/azalea_icons/other/voxel_add"
   ],
   [
     "voxel_editor",
-    "textures/leaf_icons/voxel_editor"
+    "textures/azalea_icons/other/voxel_editor"
   ],
   [
     "voxel_outlines",
-    "textures/leaf_icons/voxel_outlines"
+    "textures/azalea_icons/other/voxel_outlines"
   ],
   [
     "voxel_paint",
-    "textures/leaf_icons/voxel_paint"
+    "textures/azalea_icons/other/voxel_paint"
   ],
   [
     "warning",
-    "textures/leaf_icons/warning"
+    "textures/azalea_icons/other/warning"
   ],
   [
     "weapons",
-    "textures/leaf_icons/weapons"
+    "textures/azalea_icons/other/weapons"
   ],
   [
     "weather_fog",
-    "textures/leaf_icons/weather_fog"
+    "textures/azalea_icons/other/weather_fog"
   ],
   [
     "weather_sun",
-    "textures/leaf_icons/weather_sun"
+    "textures/azalea_icons/other/weather_sun"
   ],
   [
     "widget",
-    "textures/leaf_icons/widget"
+    "textures/azalea_icons/other/widget"
   ],
   [
     "widget_height",
-    "textures/leaf_icons/widget_height"
+    "textures/azalea_icons/other/widget_height"
   ],
   [
     "widget_hide",
-    "textures/leaf_icons/widget_hide"
+    "textures/azalea_icons/other/widget_hide"
   ],
   [
     "widget_lock",
-    "textures/leaf_icons/widget_lock"
+    "textures/azalea_icons/other/widget_lock"
   ],
   [
     "widget_save",
-    "textures/leaf_icons/widget_save"
+    "textures/azalea_icons/other/widget_save"
   ],
   [
     "widget_show",
-    "textures/leaf_icons/widget_show"
+    "textures/azalea_icons/other/widget_show"
   ],
   [
     "widget_width",
-    "textures/leaf_icons/widget_width"
-  ],
-  [
-    "windows_logo",
-    "textures/leaf_icons/windows_logo"
+    "textures/azalea_icons/other/widget_width"
   ],
   [
     "window_compact_off",
-    "textures/leaf_icons/window_compact_off"
+    "textures/azalea_icons/other/window_compact_off"
   ],
   [
     "window_compact_on",
-    "textures/leaf_icons/window_compact_on"
+    "textures/azalea_icons/other/window_compact_on"
   ],
   [
     "window_dialogue",
-    "textures/leaf_icons/window_dialogue"
+    "textures/azalea_icons/other/window_dialogue"
   ],
   [
     "window_expand_down",
-    "textures/leaf_icons/window_expand_down"
+    "textures/azalea_icons/other/window_expand_down"
   ],
   [
     "window_expand_up",
-    "textures/leaf_icons/window_expand_up"
+    "textures/azalea_icons/other/window_expand_up"
   ],
   [
     "window_frame_show",
-    "textures/leaf_icons/window_frame_show"
+    "textures/azalea_icons/other/window_frame_show"
   ],
   [
     "window_free",
-    "textures/leaf_icons/window_free"
+    "textures/azalea_icons/other/window_free"
   ],
   [
     "window_title_show",
-    "textures/leaf_icons/window_title_show"
+    "textures/azalea_icons/other/window_title_show"
   ],
   [
     "window_width",
-    "textures/leaf_icons/window_width"
+    "textures/azalea_icons/other/window_width"
+  ],
+  [
+    "windows_logo",
+    "textures/azalea_icons/other/windows_logo"
   ],
   [
     "wizard",
-    "textures/leaf_icons/wizard"
+    "textures/azalea_icons/other/wizard"
   ],
   [
     "world",
-    "textures/leaf_icons/world"
+    "textures/azalea_icons/other/world"
   ],
   [
     "world_disable",
-    "textures/leaf_icons/world_disable"
+    "textures/azalea_icons/other/world_disable"
   ],
   [
     "world_disk",
-    "textures/leaf_icons/world_disk"
+    "textures/azalea_icons/other/world_disk"
   ],
   [
     "world_enable",
-    "textures/leaf_icons/world_enable"
+    "textures/azalea_icons/other/world_enable"
   ],
   [
     "world_hand",
-    "textures/leaf_icons/world_hand"
+    "textures/azalea_icons/other/world_hand"
   ],
   [
     "world_page",
-    "textures/leaf_icons/world_page"
+    "textures/azalea_icons/other/world_page"
   ],
   [
     "xp",
-    "textures/leaf_icons/xp"
+    "textures/azalea_icons/other/xp"
   ],
   [
     "yield",
-    "textures/leaf_icons/yield"
+    "textures/azalea_icons/other/yield"
   ],
   [
     "yield_add",
-    "textures/leaf_icons/yield_add"
+    "textures/azalea_icons/other/yield_add"
   ]
 ])]
 ]);

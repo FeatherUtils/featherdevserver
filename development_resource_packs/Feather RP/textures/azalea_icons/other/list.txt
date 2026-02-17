@@ -122,11 +122,11 @@ leaf/exit, <categories>, <name>, <common>
 leaf/expand, <categories>, <name>, <common>
 leaf/expression, <categories>, <name>, <common>
 leaf/eye, <categories>, <name>, <common>
-leaf/eyedropper, <categories>, <name>, <common>
 leaf/eye_height, <categories>, <name>, <common>
 leaf/eye_hide, <categories>, <name>, <common>
 leaf/eye_lock, <categories>, <name>, <common>
 leaf/eye_show, <categories>, <name>, <common>
+leaf/eyedropper, <categories>, <name>, <common>
 leaf/fade_in, <categories>, <name>, <common>
 leaf/fade_out, <categories>, <name>, <common>
 leaf/flag_blue, <categories>, <name>, <common>
@@ -184,9 +184,9 @@ leaf/item_drop, <categories>, <name>, <common>
 leaf/item_stack, <categories>, <name>, <common>
 leaf/joystick, <categories>, <name>, <common>
 leaf/jump, <categories>, <name>, <common>
-leaf/keyboard, <categories>, <name>, <common>
 leaf/key_c, <categories>, <name>, <common>
 leaf/key_t, <categories>, <name>, <common>
+leaf/keyboard, <categories>, <name>, <common>
 leaf/ladder, <categories>, <name>, <common>
 leaf/ladder_character, <categories>, <name>, <common>
 leaf/ladder_down, <categories>, <name>, <common>
@@ -317,7 +317,6 @@ leaf/stop_sign, <categories>, <name>, <common>
 leaf/string, <categories>, <name>, <common>
 leaf/surface_edges, <categories>, <name>, <common>
 leaf/sword, <categories>, <name>, <common>
-leaf/swords, <categories>, <name>, <common>
 leaf/sword_blood, <categories>, <name>, <common>
 leaf/sword_eye, <categories>, <name>, <common>
 leaf/sword_hit, <categories>, <name>, <common>
@@ -325,6 +324,7 @@ leaf/sword_link, <categories>, <name>, <common>
 leaf/sword_reset, <categories>, <name>, <common>
 leaf/sword_start, <categories>, <name>, <common>
 leaf/sword_stop, <categories>, <name>, <common>
+leaf/swords, <categories>, <name>, <common>
 leaf/tab, <categories>, <name>, <common>
 leaf/tag_blue, <categories>, <name>, <common>
 leaf/tag_id, <categories>, <name>, <common>
@@ -348,8 +348,8 @@ leaf/tile_exit, <categories>, <name>, <common>
 leaf/tile_impassable, <categories>, <name>, <common>
 leaf/tile_passable, <categories>, <name>, <common>
 leaf/tile_stop, <categories>, <name>, <common>
-leaf/tools, <categories>, <name>, <common>
 leaf/tool_items, <categories>, <name>, <common>
+leaf/tools, <categories>, <name>, <common>
 leaf/transparency, <categories>, <name>, <common>
 leaf/tree_collapse, <categories>, <name>, <common>
 leaf/tree_expand, <categories>, <name>, <common>
@@ -378,7 +378,6 @@ leaf/widget_lock, <categories>, <name>, <common>
 leaf/widget_save, <categories>, <name>, <common>
 leaf/widget_show, <categories>, <name>, <common>
 leaf/widget_width, <categories>, <name>, <common>
-leaf/windows_logo, <categories>, <name>, <common>
 leaf/window_compact_off, <categories>, <name>, <common>
 leaf/window_compact_on, <categories>, <name>, <common>
 leaf/window_dialogue, <categories>, <name>, <common>
@@ -388,6 +387,7 @@ leaf/window_frame_show, <categories>, <name>, <common>
 leaf/window_free, <categories>, <name>, <common>
 leaf/window_title_show, <categories>, <name>, <common>
 leaf/window_width, <categories>, <name>, <common>
+leaf/windows_logo, <categories>, <name>, <common>
 leaf/wizard, <categories>, <name>, <common>
 leaf/world, <categories>, <name>, <common>
 leaf/world_disable, <categories>, <name>, <common>

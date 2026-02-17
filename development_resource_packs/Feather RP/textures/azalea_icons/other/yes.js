@@ -5,7 +5,7 @@ fs.readdir('./', (err, files)=>{
     for(const file of files) {
         if(!file.endsWith('.png')) continue;
         let extensionRemoved = file.slice(0,-4);
-        data.push([extensionRemoved, `textures/leaf_icons/${extensionRemoved}`])
+        data.push([extensionRemoved, `textures/azalea_icons/other/${extensionRemoved}`])
         let code = `let rpgiabIconPack = new Map([
     ["pack_name", "RPGIAB Icon Pack"],
     ["pack_icon", "textures/azalea_icons/other/rpgiab_logo"],
