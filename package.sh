@@ -13,16 +13,16 @@ fi
 
 mkdir -p build
 
-cp -r development_behavior_packs/Feather\ BP build/
+cp -r development_behavior_packs/FeatherBehavior build/
 cp -r development_resource_packs/Feather\ RP build/
 
-rm -rf build/Feather\ BP/.git
+rm -rf build/FeatherBehavior/.git
 
 cd build
 
-zip -r Feather.mcaddon Feather\ BP Feather\ RP
+zip -r Feather.mcaddon FeatherBehavior Feather\ RP
 
-cd /root/featherdevserver/development_behavior_packs/Feather\ BP
+cd /root/featherdevserver/development_behavior_packs/FeatherBehavior
 git add .
 git commit -m "Build_$timestamp"
 git push
